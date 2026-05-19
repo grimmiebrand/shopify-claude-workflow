@@ -1,0 +1,23 @@
+# Render Blueprint — deploys this Express webhook server.
+# Apply with: Render dashboard → New + → Blueprint → pick this repo.
+
+services:
+  - type: web
+    name: shopify-claude-workflow
+    runtime: node
+    plan: free
+    region: oregon
+    branch: main
+    buildCommand: npm install --include=dev
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: LOG_LEVEL
+        value: info
+      - key: SHOPIFY_WEBHOOK_SECRET
+        sync: false        # set manually in Render; do NOT commit secrets
+      - key: SHOPIFY_SHOP_DOMAIN
+        value: grimmie.myshopify.com

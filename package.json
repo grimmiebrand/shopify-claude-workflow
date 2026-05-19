@@ -1,0 +1,20 @@
+{
+  "name": "shopify-claude-workflow",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Lightweight Express webhook server bridging Shopify with a Claude Code workflow.",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "lint": "echo \"no linter configured\" && exit 0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1"
+  }
+}
