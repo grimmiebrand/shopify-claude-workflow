@@ -4,6 +4,8 @@
   assign text_color = section.settings.text_color
   assign accent_color = section.settings.accent_color
   assign divider_color = section.settings.divider_color
+  assign arrow_bg_color = section.settings.arrow_background_color
+  assign arrow_icon_color = section.settings.arrow_icon_color
   assign show_dividers = section.settings.show_dividers
   assign desktop_columns = section.settings.desktop_columns
   assign mobile_columns = section.settings.mobile_columns
@@ -18,6 +20,8 @@
     --gbs-text: {{ text_color }};
     --gbs-accent: {{ accent_color }};
     --gbs-divider: {{ divider_color }};
+    --gbs-arrow-bg: {{ arrow_bg_color }};
+    --gbs-arrow-icon: {{ arrow_icon_color }};
     --gbs-desktop-cols: {{ desktop_columns }};
     --gbs-tablet-cols: {{ tablet_columns }};
     --gbs-mobile-cols: {{ mobile_columns }};
@@ -138,27 +142,27 @@
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.92);
-    border: 1px solid var(--gbs-divider);
-    color: var(--gbs-text);
+    background-color: var(--gbs-arrow-bg);
+    border: none;
+    color: var(--gbs-arrow-icon);
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 3;
     padding: 0;
-    box-shadow: 0 2px 10px rgba(110, 95, 89, 0.08);
-    transition: background-color 0.2s ease, opacity 0.2s ease, transform 0.15s ease;
+    box-shadow: 0 2px 10px rgba(110, 95, 89, 0.12);
+    transition: filter 0.2s ease, opacity 0.2s ease, transform 0.15s ease;
     -webkit-appearance: none;
     appearance: none;
   }
 
   .grimmie-benefits-{{ section_id }}__nav:hover {
-    background-color: rgba(255, 255, 255, 1);
-    transform: translateY(-50%) scale(1.05);
+    filter: brightness(0.94);
+    transform: translateY(-50%) scale(1.06);
   }
 
   .grimmie-benefits-{{ section_id }}__nav:focus-visible {
-    outline: 2px solid var(--gbs-accent);
+    outline: 2px solid var(--gbs-text);
     outline-offset: 2px;
   }
 
@@ -170,8 +174,8 @@
   .grimmie-benefits-{{ section_id }}__nav svg {
     width: 14px;
     height: 14px;
-    stroke: var(--gbs-text);
-    stroke-width: 1.6;
+    stroke: var(--gbs-arrow-icon);
+    stroke-width: 1.8;
     fill: none;
   }
 
@@ -461,6 +465,18 @@
       "default": "#DDD2CA"
     },
     {
+      "type": "color",
+      "id": "arrow_background_color",
+      "label": "Arrow background color (carousel)",
+      "default": "#EACBC8"
+    },
+    {
+      "type": "color",
+      "id": "arrow_icon_color",
+      "label": "Arrow icon color (carousel)",
+      "default": "#F1EBE6"
+    },
+    {
       "type": "header",
       "content": "Layout"
     },
@@ -495,7 +511,7 @@
         { "value": "2", "label": "2 items" },
         { "value": "3", "label": "3 items" }
       ],
-      "default": "2"
+      "default": "3"
     },
     {
       "type": "checkbox",
@@ -620,9 +636,11 @@
         "text_color": "#6E5F59",
         "accent_color": "#EACBC8",
         "divider_color": "#DDD2CA",
+        "arrow_background_color": "#EACBC8",
+        "arrow_icon_color": "#F1EBE6",
         "desktop_columns": 6,
         "tablet_columns": 3,
-        "mobile_columns": "2",
+        "mobile_columns": "3",
         "show_dividers": true,
         "title_letter_spacing": 0.2,
         "padding_top": 64,
