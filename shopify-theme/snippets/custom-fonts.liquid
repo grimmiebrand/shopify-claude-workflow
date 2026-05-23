@@ -1,0 +1,57 @@
+{%- comment -%}
+  ============================================================
+  Custom self-hosted fonts
+  ============================================================
+
+  Boston Angel (Pangram Pangram, commercial font)
+
+  Upload the font files as theme assets:
+    Online Store → Themes → Tinker → ⋯ → Edit code → Assets → Add a new asset
+    Required:  boston-angel.woff2
+    Optional:  boston-angel.woff           (better legacy support)
+               boston-angel-italic.woff2   (italic style)
+               boston-angel-bold.woff2     (bold weight)
+
+  Filenames must match exactly (case-sensitive, no spaces).
+  If a file is missing the browser silently falls back to the next
+  font in the CSS font-family stack — nothing visibly breaks.
+{%- endcomment -%}
+
+<style>
+  @font-face {
+    font-family: 'Boston Angel';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('{{ "boston-angel.woff2" | asset_url }}') format('woff2'),
+         url('{{ "boston-angel.woff"  | asset_url }}') format('woff');
+  }
+
+  @font-face {
+    font-family: 'Boston Angel';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url('{{ "boston-angel-italic.woff2" | asset_url }}') format('woff2'),
+         url('{{ "boston-angel-italic.woff"  | asset_url }}') format('woff');
+  }
+
+  @font-face {
+    font-family: 'Boston Angel';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('{{ "boston-angel-bold.woff2" | asset_url }}') format('woff2'),
+         url('{{ "boston-angel-bold.woff"  | asset_url }}') format('woff');
+  }
+</style>
+
+{%- comment -%} Preload regular for faster first paint of the heading {%- endcomment -%}
+<link
+  rel="preload"
+  as="font"
+  href="{{ 'boston-angel.woff2' | asset_url }}"
+  type="font/woff2"
+  crossorigin
+  fetchpriority="low"
+>
