@@ -487,6 +487,8 @@
         "divider_color": "#DDD2CA",
         "arrow_background_color": "#EACBC8",
         "arrow_icon_color": "#F1EBE6",
+        "dot_active_color": "#EACBC8",
+        "dot_inactive_color": "#6E5F59",
         "desktop_columns": 6,
         "tablet_columns": 3,
         "mobile_columns": "3",

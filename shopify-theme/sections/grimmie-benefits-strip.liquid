@@ -6,6 +6,8 @@
   assign divider_color = section.settings.divider_color
   assign arrow_bg_color = section.settings.arrow_background_color
   assign arrow_icon_color = section.settings.arrow_icon_color
+  assign dot_active_color = section.settings.dot_active_color
+  assign dot_inactive_color = section.settings.dot_inactive_color
   assign show_dividers = section.settings.show_dividers
   assign desktop_columns = section.settings.desktop_columns
   assign mobile_columns = section.settings.mobile_columns
@@ -22,6 +24,8 @@
     --gbs-divider: {{ divider_color }};
     --gbs-arrow-bg: {{ arrow_bg_color }};
     --gbs-arrow-icon: {{ arrow_icon_color }};
+    --gbs-dot-active: {{ dot_active_color }};
+    --gbs-dot-inactive: {{ dot_inactive_color }};
     --gbs-desktop-cols: {{ desktop_columns }};
     --gbs-tablet-cols: {{ tablet_columns }};
     --gbs-mobile-cols: {{ mobile_columns }};
@@ -187,6 +191,47 @@
     right: 8px;
   }
 
+  /* Pagination dots (only shown on tablet & mobile) */
+  .grimmie-benefits-{{ section_id }}__dots {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding-top: 24px;
+    padding-bottom: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .grimmie-benefits-{{ section_id }}__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--gbs-dot-inactive);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0.55;
+    transition: background-color 0.25s ease, opacity 0.25s ease, transform 0.25s ease, width 0.25s ease;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .grimmie-benefits-{{ section_id }}__dot:hover {
+    opacity: 0.85;
+  }
+
+  .grimmie-benefits-{{ section_id }}__dot[aria-current="true"] {
+    background-color: var(--gbs-dot-active);
+    opacity: 1;
+    transform: scale(1.35);
+  }
+
+  .grimmie-benefits-{{ section_id }}__dot:focus-visible {
+    outline: 2px solid var(--gbs-text);
+    outline-offset: 3px;
+  }
+
   /* Tablet — switch to horizontal scroll carousel */
   @media (max-width: 1024px) {
     .grimmie-benefits-{{ section_id }}__inner {
@@ -226,6 +271,10 @@
     {% endif %}
 
     .grimmie-benefits-{{ section_id }}__nav {
+      display: flex;
+    }
+
+    .grimmie-benefits-{{ section_id }}__dots {
       display: flex;
     }
   }
@@ -272,6 +321,16 @@
     .grimmie-benefits-{{ section_id }}__nav--next {
       left: auto;
       right: 4px;
+    }
+
+    .grimmie-benefits-{{ section_id }}__dots {
+      padding-top: 18px;
+      gap: 8px;
+    }
+
+    .grimmie-benefits-{{ section_id }}__dot {
+      width: 6px;
+      height: 6px;
     }
   }
 
@@ -379,6 +438,13 @@
         </li>
       {%- endfor -%}
     </ul>
+
+    <div
+      class="grimmie-benefits-{{ section_id }}__dots"
+      data-gbs-dots
+      role="tablist"
+      aria-label="{{ section.settings.dots_label | default: 'Carousel pagination' | escape }}"
+    ></div>
   </div>
 
   <button
@@ -401,11 +467,80 @@
     var track = root.querySelector('[data-gbs-track="' + sectionId + '"]');
     var prevBtn = root.querySelector('.grimmie-benefits-' + sectionId + '__nav--prev');
     var nextBtn = root.querySelector('.grimmie-benefits-' + sectionId + '__nav--next');
+    var dots = root.querySelector('[data-gbs-dots]');
     if (!track || !prevBtn || !nextBtn) return;
 
     function itemWidth() {
       var first = track.firstElementChild;
       return first ? first.getBoundingClientRect().width : 0;
+    }
+
+    function itemsPerView() {
+      var w = itemWidth();
+      if (!w) return 1;
+      return Math.max(1, Math.round(track.clientWidth / w));
+    }
+
+    function pageCount() {
+      return Math.max(1, track.children.length);
+    }
+
+    function currentPage() {
+      var w = itemWidth();
+      if (!w) return 0;
+      var idx = Math.round(track.scrollLeft / w);
+      var max = pageCount() - 1;
+      if (idx < 0) idx = 0;
+      if (idx > max) idx = max;
+      return idx;
+    }
+
+    function scrollToPage(idx) {
+      var w = itemWidth();
+      if (!w) return;
+      track.scrollTo({ left: idx * w, behavior: 'smooth' });
+    }
+
+    function renderDots() {
+      if (!dots) return;
+      var count = pageCount();
+      if (count <= 1) {
+        dots.style.display = 'none';
+        dots.innerHTML = '';
+        return;
+      }
+      dots.style.removeProperty('display');
+      if (dots.children.length !== count) {
+        dots.innerHTML = '';
+        for (var i = 0; i < count; i++) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'grimmie-benefits-' + sectionId + '__dot';
+          btn.setAttribute('role', 'tab');
+          btn.setAttribute('aria-label', 'Page ' + (i + 1));
+          btn.dataset.gbsPage = String(i);
+          btn.addEventListener('click', function () {
+            scrollToPage(parseInt(this.dataset.gbsPage, 10));
+          });
+          dots.appendChild(btn);
+        }
+      }
+      updateActiveDot();
+    }
+
+    function updateActiveDot() {
+      if (!dots) return;
+      var cur = currentPage();
+      var children = dots.children;
+      for (var i = 0; i < children.length; i++) {
+        if (i === cur) {
+          children[i].setAttribute('aria-current', 'true');
+          children[i].setAttribute('aria-selected', 'true');
+        } else {
+          children[i].removeAttribute('aria-current');
+          children[i].setAttribute('aria-selected', 'false');
+        }
+      }
     }
 
     function update() {
@@ -414,6 +549,7 @@
       var atEnd = track.scrollLeft >= max - 1;
       if (atStart) { prevBtn.setAttribute('disabled', ''); } else { prevBtn.removeAttribute('disabled'); }
       if (atEnd) { nextBtn.setAttribute('disabled', ''); } else { nextBtn.removeAttribute('disabled'); }
+      updateActiveDot();
     }
 
     function go(direction) {
@@ -425,7 +561,11 @@
     prevBtn.addEventListener('click', function () { go(-1); });
     nextBtn.addEventListener('click', function () { go(1); });
     track.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
+    window.addEventListener('resize', function () {
+      renderDots();
+      update();
+    });
+    renderDots();
     update();
   })();
 </script>
@@ -475,6 +615,18 @@
       "id": "arrow_icon_color",
       "label": "Arrow icon color (carousel)",
       "default": "#F1EBE6"
+    },
+    {
+      "type": "color",
+      "id": "dot_active_color",
+      "label": "Active dot color (carousel)",
+      "default": "#EACBC8"
+    },
+    {
+      "type": "color",
+      "id": "dot_inactive_color",
+      "label": "Inactive dots color (carousel)",
+      "default": "#6E5F59"
     },
     {
       "type": "header",
@@ -574,6 +726,12 @@
       "id": "next_label",
       "label": "Next button aria-label",
       "default": "Next"
+    },
+    {
+      "type": "text",
+      "id": "dots_label",
+      "label": "Dots container aria-label",
+      "default": "Carousel pagination"
     }
   ],
   "blocks": [
@@ -638,6 +796,8 @@
         "divider_color": "#DDD2CA",
         "arrow_background_color": "#EACBC8",
         "arrow_icon_color": "#F1EBE6",
+        "dot_active_color": "#EACBC8",
+        "dot_inactive_color": "#6E5F59",
         "desktop_columns": 6,
         "tablet_columns": 3,
         "mobile_columns": "3",
