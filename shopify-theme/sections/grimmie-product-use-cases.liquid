@@ -1,0 +1,1001 @@
+{%- liquid
+  assign section_id = section.id
+  assign heading = section.settings.heading
+  assign subtitle = section.settings.subtitle
+  assign show_divider = section.settings.show_divider
+  assign bg_color = section.settings.background_color
+  assign heading_color = section.settings.heading_color
+  assign text_color = section.settings.text_color
+  assign card_bg_color = section.settings.card_background_color
+  assign card_title_color = section.settings.card_title_color
+  assign accent_color = section.settings.accent_color
+  assign border_color = section.settings.border_color
+  assign divider_color = section.settings.divider_color
+  assign tag_border_color = section.settings.tag_border_color
+  assign tag_text_color = section.settings.tag_text_color
+  assign cta_text = section.settings.cta_text
+  assign cta_link = section.settings.cta_link
+  assign cta_bg_color = section.settings.cta_background_color
+  assign cta_text_color = section.settings.cta_text_color
+  assign card_gap = section.settings.desktop_card_gap
+  assign mobile_card_w = section.settings.mobile_card_width
+  assign show_arrows = section.settings.show_mobile_arrows
+  assign arrow_bg = section.settings.arrow_background_color
+  assign arrow_icon = section.settings.arrow_icon_color
+  assign body_font = "'Avenir Next', 'Avenir', 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif"
+  assign heading_font = "'Boston Angel', 'Cormorant Garamond', 'Playfair Display', Georgia, 'Times New Roman', serif"
+-%}
+
+<style>
+  .grimmie-uc-{{ section_id }} {
+    --uc-bg: {{ bg_color }};
+    --uc-heading: {{ heading_color }};
+    --uc-text: {{ text_color }};
+    --uc-card-bg: {{ card_bg_color }};
+    --uc-card-title: {{ card_title_color }};
+    --uc-accent: {{ accent_color }};
+    --uc-border: {{ border_color }};
+    --uc-divider: {{ divider_color }};
+    --uc-tag-border: {{ tag_border_color }};
+    --uc-tag-text: {{ tag_text_color }};
+    --uc-cta-bg: {{ cta_bg_color }};
+    --uc-cta-text: {{ cta_text_color }};
+    --uc-card-gap: {{ card_gap }}px;
+    --uc-mobile-card-w: {{ mobile_card_w }}vw;
+    --uc-arrow-bg: {{ arrow_bg }};
+    --uc-arrow-icon: {{ arrow_icon }};
+    --uc-body-font: {{ body_font }};
+    --uc-heading-font: {{ heading_font }};
+
+    position: relative;
+    background-color: var(--uc-bg);
+    color: var(--uc-text);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .grimmie-uc-{{ section_id }} * {
+    box-sizing: border-box;
+  }
+
+  .grimmie-uc-{{ section_id }}__header {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 56px;
+    padding: 0 clamp(16px, 4vw, 32px);
+  }
+
+  .grimmie-uc-{{ section_id }}__heading {
+    font-family: var(--uc-heading-font);
+    font-weight: 400;
+    font-size: clamp(30px, 4.2vw, 56px);
+    line-height: 1.12;
+    letter-spacing: -0.005em;
+    color: var(--uc-heading);
+    margin: 0 0 20px;
+  }
+
+  .grimmie-uc-{{ section_id }}__divider {
+    display: block;
+    width: 56px;
+    height: 1.5px;
+    background-color: var(--uc-divider);
+    border: none;
+    margin: 18px auto 22px;
+  }
+
+  .grimmie-uc-{{ section_id }}__subtitle {
+    font-family: var(--uc-body-font);
+    font-size: clamp(13px, 0.95vw, 15px);
+    line-height: 1.65;
+    color: var(--uc-text);
+    margin: 0 auto;
+    max-width: 58ch;
+    opacity: 0.92;
+  }
+
+  .grimmie-uc-{{ section_id }}__viewport {
+    position: relative;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding-left: clamp(16px, 4vw, 48px);
+    padding-right: clamp(16px, 4vw, 48px);
+  }
+
+  .grimmie-uc-{{ section_id }}__grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: var(--uc-card-gap);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .grimmie-uc-{{ section_id }}__card {
+    background-color: var(--uc-card-bg);
+    border: 1px solid var(--uc-border);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+  }
+
+  .grimmie-uc-{{ section_id }}__image-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background-color: var(--uc-bg);
+  }
+
+  .grimmie-uc-{{ section_id }}__image-wrap img,
+  .grimmie-uc-{{ section_id }}__image-wrap svg.placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .grimmie-uc-{{ section_id }}__image-wrap .placeholder {
+    background-color: var(--uc-card-bg);
+    color: var(--uc-border);
+    padding: 24%;
+  }
+
+  .grimmie-uc-{{ section_id }}__badge {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, 50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: var(--uc-card-bg);
+    border: 1px solid var(--uc-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    color: var(--uc-accent);
+  }
+
+  .grimmie-uc-{{ section_id }}__badge svg,
+  .grimmie-uc-{{ section_id }}__badge img {
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
+
+  .grimmie-uc-{{ section_id }}__badge svg {
+    stroke: var(--uc-accent);
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  .grimmie-uc-{{ section_id }}__body {
+    padding: 34px 14px 22px;
+    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+  }
+
+  .grimmie-uc-{{ section_id }}__title {
+    font-family: var(--uc-body-font);
+    font-size: clamp(11px, 0.82vw, 13px);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--uc-card-title);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .grimmie-uc-{{ section_id }}__description {
+    font-family: var(--uc-body-font);
+    font-size: clamp(11px, 0.78vw, 13px);
+    line-height: 1.5;
+    color: var(--uc-text);
+    margin: 0 0 10px;
+    opacity: 0.95;
+    max-width: 22ch;
+  }
+
+  .grimmie-uc-{{ section_id }}__tag {
+    display: inline-block;
+    font-family: var(--uc-body-font);
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--uc-tag-text);
+    border: 1px solid var(--uc-tag-border);
+    padding: 9px 18px;
+    text-decoration: none;
+    background-color: transparent;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    margin-top: auto;
+    cursor: pointer;
+  }
+
+  .grimmie-uc-{{ section_id }}__tag:hover {
+    background-color: var(--uc-accent);
+    color: var(--uc-card-bg);
+  }
+
+  .grimmie-uc-{{ section_id }}__cta-wrap {
+    text-align: center;
+    margin-top: clamp(40px, 5vw, 56px);
+    padding: 0 16px;
+  }
+
+  .grimmie-uc-{{ section_id }}__cta {
+    display: inline-block;
+    background-color: var(--uc-cta-bg);
+    color: var(--uc-cta-text);
+    font-family: var(--uc-body-font);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 18px clamp(40px, 6vw, 64px);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    min-height: 52px;
+    line-height: 1;
+    transition: filter 0.2s ease, transform 0.15s ease;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .grimmie-uc-{{ section_id }}__cta:hover {
+    filter: brightness(0.95);
+  }
+
+  .grimmie-uc-{{ section_id }}__cta:focus-visible {
+    outline: 2px solid var(--uc-cta-bg);
+    outline-offset: 3px;
+  }
+
+  /* Mobile carousel arrows */
+  .grimmie-uc-{{ section_id }}__nav {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--uc-arrow-bg);
+    border: 1px solid var(--uc-border);
+    color: var(--uc-arrow-icon);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 3;
+    padding: 0;
+    box-shadow: 0 2px 12px rgba(110, 95, 89, 0.10);
+    transition: filter 0.2s ease, opacity 0.2s ease, transform 0.15s ease;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .grimmie-uc-{{ section_id }}__nav:hover {
+    filter: brightness(0.97);
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  .grimmie-uc-{{ section_id }}__nav:focus-visible {
+    outline: 2px solid var(--uc-accent);
+    outline-offset: 2px;
+  }
+
+  .grimmie-uc-{{ section_id }}__nav[disabled] {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .grimmie-uc-{{ section_id }}__nav svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--uc-arrow-icon);
+    stroke-width: 1.6;
+    fill: none;
+  }
+
+  .grimmie-uc-{{ section_id }}__nav--prev {
+    left: 6px;
+  }
+
+  .grimmie-uc-{{ section_id }}__nav--next {
+    right: 6px;
+  }
+
+  /* Tablet: 3 columns × 2 rows */
+  @media (max-width: 1180px) {
+    .grimmie-uc-{{ section_id }}__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grimmie-uc-{{ section_id }}__body {
+      padding: 36px 16px 24px;
+    }
+  }
+
+  /* Mobile: horizontal scroll carousel */
+  @media (max-width: 640px) {
+    .grimmie-uc-{{ section_id }} {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round }}px;
+    }
+
+    .grimmie-uc-{{ section_id }}__header {
+      margin-bottom: 36px;
+    }
+
+    .grimmie-uc-{{ section_id }}__viewport {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .grimmie-uc-{{ section_id }}__grid {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 14px;
+      padding: 4px clamp(16px, 8vw, 48px);
+    }
+
+    .grimmie-uc-{{ section_id }}__grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .grimmie-uc-{{ section_id }}__card {
+      flex: 0 0 var(--uc-mobile-card-w);
+      scroll-snap-align: center;
+    }
+
+    .grimmie-uc-{{ section_id }}__body {
+      padding: 32px 14px 22px;
+    }
+
+    {% if show_arrows %}
+      .grimmie-uc-{{ section_id }}__nav {
+        display: flex;
+      }
+    {% endif %}
+
+    .grimmie-uc-{{ section_id }}__nav--prev {
+      left: 8px;
+    }
+
+    .grimmie-uc-{{ section_id }}__nav--next {
+      right: 8px;
+    }
+
+    .grimmie-uc-{{ section_id }}__cta-wrap {
+      margin-top: 36px;
+    }
+
+    .grimmie-uc-{{ section_id }}__cta {
+      padding: 16px 40px;
+      font-size: 11.5px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .grimmie-uc-{{ section_id }}__grid {
+      scroll-behavior: auto;
+    }
+  }
+</style>
+
+<section
+  class="grimmie-uc grimmie-uc-{{ section_id }}"
+  aria-label="{{ section.settings.aria_label | default: 'Product use cases' | escape }}"
+  data-guc-root="{{ section_id }}"
+  {{ section.shopify_attributes }}
+>
+  <header class="grimmie-uc-{{ section_id }}__header">
+    {%- if heading != blank -%}
+      <h2 class="grimmie-uc-{{ section_id }}__heading">{{ heading | escape }}</h2>
+    {%- endif -%}
+    {%- if show_divider -%}
+      <span class="grimmie-uc-{{ section_id }}__divider" aria-hidden="true"></span>
+    {%- endif -%}
+    {%- if subtitle != blank -%}
+      <p class="grimmie-uc-{{ section_id }}__subtitle">{{ subtitle | escape | newline_to_br }}</p>
+    {%- endif -%}
+  </header>
+
+  <div class="grimmie-uc-{{ section_id }}__viewport">
+    <button
+      type="button"
+      class="grimmie-uc-{{ section_id }}__nav grimmie-uc-{{ section_id }}__nav--prev"
+      aria-label="{{ section.settings.prev_label | default: 'Previous' | escape }}"
+      data-guc-direction="prev"
+    >
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path d="M15 18 L9 12 L15 6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <ul
+      class="grimmie-uc-{{ section_id }}__grid"
+      role="list"
+      data-guc-track="{{ section_id }}"
+    >
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign product = block.settings.product
+          assign card_link = block.settings.tag_link
+          if card_link == blank and product != blank
+            assign card_link = product.url
+          endif
+          assign image = block.settings.image
+          if image == blank and product != blank
+            assign image = product.featured_image
+          endif
+          assign alt_text = block.settings.image_alt_text | default: block.settings.title
+        -%}
+        <li class="grimmie-uc-{{ section_id }}__card" {{ block.shopify_attributes }}>
+          <div class="grimmie-uc-{{ section_id }}__image-wrap">
+            {%- if image != blank -%}
+              {{ image | image_url: width: 800 | image_tag: alt: alt_text, loading: 'lazy', widths: '300,500,700,900', sizes: '(max-width: 640px) 84vw, (max-width: 1180px) 33vw, 16vw' }}
+            {%- else -%}
+              <svg class="placeholder" viewBox="0 0 100 125" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                <rect width="100" height="125" fill="currentColor" opacity="0.25"/>
+                <path d="M30 80 L48 60 L62 72 L78 52" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+                <circle cx="70" cy="46" r="5" fill="currentColor" opacity="0.5"/>
+              </svg>
+            {%- endif -%}
+
+            <div class="grimmie-uc-{{ section_id }}__badge" aria-hidden="{% if block.settings.icon_alt_text == blank %}true{% else %}false{% endif %}">
+              {%- if block.settings.icon != blank -%}
+                {{ block.settings.icon | image_url: width: 80 | image_tag: alt: block.settings.icon_alt_text, loading: 'lazy', widths: '40,80', class: 'guc-icon-img' }}
+              {%- else -%}
+                {%- case block.settings.fallback_icon -%}
+                  {%- when 'home' -%}
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt_text | default: 'Home' | escape }}">
+                      <path d="M4 11 L12 4 L20 11 V20 a1 1 0 0 1 -1 1 H15 V14 H9 V21 H5 a1 1 0 0 1 -1 -1 Z" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  {%- when 'briefcase' -%}
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt_text | default: 'Briefcase' | escape }}">
+                      <rect x="3" y="7" width="18" height="13" rx="1.5"/>
+                      <path d="M9 7 V5 a1 1 0 0 1 1 -1 h4 a1 1 0 0 1 1 1 V7" stroke-linecap="round"/>
+                      <path d="M3 12 H21" stroke-linecap="round"/>
+                    </svg>
+                  {%- when 'sparkle' -%}
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt_text | default: 'Sparkle' | escape }}">
+                      <path d="M12 3 L13.5 9 L19 10.5 L13.5 12 L12 18 L10.5 12 L5 10.5 L10.5 9 Z" stroke-linejoin="round"/>
+                      <path d="M19 4 L19.7 6 L21.5 6.7 L19.7 7.5 L19 9.5 L18.3 7.5 L16.5 6.7 L18.3 6 Z" stroke-width="1" stroke-linejoin="round"/>
+                    </svg>
+                  {%- when 'luggage' -%}
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt_text | default: 'Luggage' | escape }}">
+                      <rect x="5" y="7" width="14" height="13" rx="2"/>
+                      <path d="M9 7 V4 H15 V7" stroke-linecap="round"/>
+                      <path d="M9 11 H15 M9 15 H15" stroke-linecap="round" stroke-width="1.2"/>
+                      <path d="M8 20 V22 M16 20 V22" stroke-linecap="round"/>
+                    </svg>
+                  {%- when 'pouch' -%}
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt_text | default: 'Pouch' | escape }}">
+                      <path d="M5 9 H19 a1 1 0 0 1 1 1 V19 a1 1 0 0 1 -1 1 H5 a1 1 0 0 1 -1 -1 V10 a1 1 0 0 1 1 -1 Z" stroke-linejoin="round"/>
+                      <path d="M8 9 V7 a4 4 0 0 1 8 0 V9" stroke-linecap="round"/>
+                    </svg>
+                  {%- when 'dumbbell' -%}
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt_text | default: 'Dumbbell' | escape }}">
+                      <rect x="2" y="9" width="3" height="6" rx="0.7"/>
+                      <rect x="5" y="10.5" width="2" height="3" rx="0.5"/>
+                      <path d="M7 12 H17" stroke-linecap="round" stroke-width="1.6"/>
+                      <rect x="17" y="10.5" width="2" height="3" rx="0.5"/>
+                      <rect x="19" y="9" width="3" height="6" rx="0.7"/>
+                    </svg>
+                  {%- when 'heart' -%}
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt_text | default: 'Heart' | escape }}">
+                      <path d="M12 20 C 5 14.5 3 11 3 8 a4 4 0 0 1 9 -2 a4 4 0 0 1 9 2 c 0 3 -2 6.5 -9 12 Z" stroke-linejoin="round"/>
+                    </svg>
+                  {%- when 'leaf' -%}
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt_text | default: 'Leaf' | escape }}">
+                      <path d="M19 5 C 9 6 4 11 4 20 C 14 20 19 14 20 6 C 20 5.4 19.6 5 19 5 Z" stroke-linejoin="round"/>
+                      <path d="M19 6 L7 18" stroke-linecap="round"/>
+                    </svg>
+                  {%- else -%}
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt_text | default: 'Icon' | escape }}">
+                      <circle cx="12" cy="12" r="7"/>
+                    </svg>
+                {%- endcase -%}
+              {%- endif -%}
+            </div>
+          </div>
+
+          <div class="grimmie-uc-{{ section_id }}__body">
+            {%- if block.settings.title != blank -%}
+              <h3 class="grimmie-uc-{{ section_id }}__title">{{ block.settings.title | escape }}</h3>
+            {%- endif -%}
+
+            {%- if block.settings.description != blank -%}
+              <p class="grimmie-uc-{{ section_id }}__description">{{ block.settings.description | escape | newline_to_br }}</p>
+            {%- endif -%}
+
+            {%- if block.settings.tag_text != blank -%}
+              {%- if card_link != blank -%}
+                <a class="grimmie-uc-{{ section_id }}__tag" href="{{ card_link }}">{{ block.settings.tag_text | escape }}</a>
+              {%- else -%}
+                <span class="grimmie-uc-{{ section_id }}__tag">{{ block.settings.tag_text | escape }}</span>
+              {%- endif -%}
+            {%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    <button
+      type="button"
+      class="grimmie-uc-{{ section_id }}__nav grimmie-uc-{{ section_id }}__nav--next"
+      aria-label="{{ section.settings.next_label | default: 'Next' | escape }}"
+      data-guc-direction="next"
+    >
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path d="M9 6 L15 12 L9 18" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+  {%- if cta_text != blank -%}
+    <div class="grimmie-uc-{{ section_id }}__cta-wrap">
+      {%- if cta_link != blank -%}
+        <a class="grimmie-uc-{{ section_id }}__cta" href="{{ cta_link }}">{{ cta_text | escape }}</a>
+      {%- else -%}
+        <span class="grimmie-uc-{{ section_id }}__cta">{{ cta_text | escape }}</span>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</section>
+
+<script>
+  (function () {
+    var sectionId = {{ section_id | json }};
+    var root = document.querySelector('[data-guc-root="' + sectionId + '"]');
+    if (!root) return;
+    var track = root.querySelector('[data-guc-track="' + sectionId + '"]');
+    var prevBtn = root.querySelector('.grimmie-uc-' + sectionId + '__nav--prev');
+    var nextBtn = root.querySelector('.grimmie-uc-' + sectionId + '__nav--next');
+    if (!track || !prevBtn || !nextBtn) return;
+
+    function cardWidth() {
+      var first = track.firstElementChild;
+      if (!first) return 0;
+      var style = window.getComputedStyle(track);
+      var gap = parseFloat(style.columnGap || style.gap || '0') || 0;
+      return first.getBoundingClientRect().width + gap;
+    }
+
+    function update() {
+      var max = track.scrollWidth - track.clientWidth;
+      var atStart = track.scrollLeft <= 1;
+      var atEnd = track.scrollLeft >= max - 1;
+      if (atStart) { prevBtn.setAttribute('disabled', ''); } else { prevBtn.removeAttribute('disabled'); }
+      if (atEnd) { nextBtn.setAttribute('disabled', ''); } else { nextBtn.removeAttribute('disabled'); }
+    }
+
+    function go(direction) {
+      var w = cardWidth();
+      if (!w) return;
+      track.scrollBy({ left: direction * w, behavior: 'smooth' });
+    }
+
+    prevBtn.addEventListener('click', function () { go(-1); });
+    nextBtn.addEventListener('click', function () { go(1); });
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+
+    // Keyboard support
+    track.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+    });
+
+    update();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Grimmie Product Use Cases",
+  "tag": "section",
+  "class": "grimmie-product-use-cases-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Alma, in ogni momento della tua giornata"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Dalla casa al lavoro, dal weekend ai tuoi essential kit: scopri tutti i modi in cui Alma si adatta alla tua routine."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_divider",
+      "label": "Show blush divider line",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#F7F1EE"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#3B2A22"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Body text color",
+      "default": "#6E5F59"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider color",
+      "default": "#EACBC8"
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "Card background",
+      "default": "#F6F1ED"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Card title color",
+      "default": "#2F2621"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color (blush)",
+      "default": "#EACBC8"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Soft border color",
+      "default": "#E5D8D2"
+    },
+    {
+      "type": "color",
+      "id": "tag_border_color",
+      "label": "Tag button border",
+      "default": "#EACBC8"
+    },
+    {
+      "type": "color",
+      "id": "tag_text_color",
+      "label": "Tag button text",
+      "default": "#8A6E68"
+    },
+    {
+      "type": "header",
+      "content": "CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA button text",
+      "default": "SCOPRI ALMA"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA button link"
+    },
+    {
+      "type": "color",
+      "id": "cta_background_color",
+      "label": "CTA background color",
+      "default": "#D98A95"
+    },
+    {
+      "type": "color",
+      "id": "cta_text_color",
+      "label": "CTA text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "desktop_card_gap",
+      "label": "Desktop card gap",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "mobile_card_width",
+      "label": "Mobile card width",
+      "min": 60,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 84
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_arrows",
+      "label": "Show carousel arrows on mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Arrows (mobile carousel)"
+    },
+    {
+      "type": "color",
+      "id": "arrow_background_color",
+      "label": "Arrow background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "arrow_icon_color",
+      "label": "Arrow icon color",
+      "default": "#6E5F59"
+    },
+    {
+      "type": "header",
+      "content": "Accessibility"
+    },
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Section aria-label",
+      "default": "Product use cases"
+    },
+    {
+      "type": "text",
+      "id": "prev_label",
+      "label": "Previous button aria-label",
+      "default": "Previous"
+    },
+    {
+      "type": "text",
+      "id": "next_label",
+      "label": "Next button aria-label",
+      "default": "Next"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "use_case_card",
+      "name": "Use case card",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Linked product",
+          "info": "Optional. Used for the card link and as image fallback."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card image",
+          "info": "Overrides the product image. If empty, the linked product image is used."
+        },
+        {
+          "type": "text",
+          "id": "image_alt_text",
+          "label": "Image alt text"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Badge icon (SVG or PNG)",
+          "info": "Optional. Leave empty to use a fallback icon below."
+        },
+        {
+          "type": "select",
+          "id": "fallback_icon",
+          "label": "Fallback badge icon",
+          "options": [
+            { "value": "home", "label": "Home" },
+            { "value": "briefcase", "label": "Briefcase" },
+            { "value": "sparkle", "label": "Sparkle" },
+            { "value": "luggage", "label": "Luggage" },
+            { "value": "pouch", "label": "Pouch / bag" },
+            { "value": "dumbbell", "label": "Dumbbell" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "none", "label": "None (circle)" }
+          ],
+          "default": "home"
+        },
+        {
+          "type": "text",
+          "id": "icon_alt_text",
+          "label": "Badge icon alt text",
+          "info": "Leave blank if decorative."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "A CASA"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "organizer quotidiano"
+        },
+        {
+          "type": "text",
+          "id": "tag_text",
+          "label": "Tag / button label",
+          "default": "CLASSIC"
+        },
+        {
+          "type": "url",
+          "id": "tag_link",
+          "label": "Tag / button link",
+          "info": "Optional. Overrides the linked product URL."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Grimmie Product Use Cases",
+      "category": "Grimmie",
+      "settings": {
+        "heading": "Alma, in ogni momento della tua giornata",
+        "subtitle": "Dalla casa al lavoro, dal weekend ai tuoi essential kit: scopri tutti i modi in cui Alma si adatta alla tua routine.",
+        "show_divider": true,
+        "background_color": "#F7F1EE",
+        "heading_color": "#3B2A22",
+        "text_color": "#6E5F59",
+        "divider_color": "#EACBC8",
+        "card_background_color": "#F6F1ED",
+        "card_title_color": "#2F2621",
+        "accent_color": "#EACBC8",
+        "border_color": "#E5D8D2",
+        "tag_border_color": "#EACBC8",
+        "tag_text_color": "#8A6E68",
+        "cta_text": "SCOPRI ALMA",
+        "cta_background_color": "#D98A95",
+        "cta_text_color": "#FFFFFF",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "desktop_card_gap": 20,
+        "mobile_card_width": 84,
+        "show_mobile_arrows": true,
+        "arrow_background_color": "#FFFFFF",
+        "arrow_icon_color": "#6E5F59"
+      },
+      "blocks": [
+        {
+          "type": "use_case_card",
+          "settings": {
+            "fallback_icon": "home",
+            "title": "A CASA",
+            "description": "organizer quotidiano",
+            "tag_text": "CLASSIC",
+            "icon_alt_text": "Casa",
+            "image_alt_text": "Alma Classic a casa, su un comodino con accessori beauty"
+          }
+        },
+        {
+          "type": "use_case_card",
+          "settings": {
+            "fallback_icon": "briefcase",
+            "title": "WORKDAY ESSENTIALS",
+            "description": "tutto l'essenziale sempre con te",
+            "tag_text": "CLASSIC",
+            "icon_alt_text": "Lavoro",
+            "image_alt_text": "Alma Classic con accessori da lavoro su una scrivania"
+          }
+        },
+        {
+          "type": "use_case_card",
+          "settings": {
+            "fallback_icon": "sparkle",
+            "title": "HAIR TOOLS",
+            "description": "per dyson, piastre e strumenti hair",
+            "tag_text": "LARGE",
+            "icon_alt_text": "Strumenti hair",
+            "image_alt_text": "Alma Large che contiene phon, piastra e accessori hair"
+          }
+        },
+        {
+          "type": "use_case_card",
+          "settings": {
+            "fallback_icon": "luggage",
+            "title": "TRAVEL ESSENTIALS",
+            "description": "la routine in valigia, senza rinunce",
+            "tag_text": "DUO",
+            "icon_alt_text": "Viaggio",
+            "image_alt_text": "Alma Duo dentro una valigia da viaggio"
+          }
+        },
+        {
+          "type": "use_case_card",
+          "settings": {
+            "fallback_icon": "pouch",
+            "title": "GO-TO BAG",
+            "description": "pronta a seguirti ovunque",
+            "tag_text": "CLASSIC",
+            "icon_alt_text": "Borsa quotidiana",
+            "image_alt_text": "Alma Classic appoggiata su un tavolino da bar con cappuccino e occhiali"
+          }
+        },
+        {
+          "type": "use_case_card",
+          "settings": {
+            "fallback_icon": "dumbbell",
+            "title": "GYM & PILATES",
+            "description": "tutto il necessario per i tuoi workout",
+            "tag_text": "CLASSIC",
+            "icon_alt_text": "Palestra e pilates",
+            "image_alt_text": "Alma Classic con accessori workout, borraccia e tappetino"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
