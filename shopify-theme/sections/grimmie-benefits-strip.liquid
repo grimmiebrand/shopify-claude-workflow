@@ -1,0 +1,502 @@
+{%- liquid
+  assign section_id = section.id
+  assign bg_color = section.settings.background_color
+  assign text_color = section.settings.text_color
+  assign accent_color = section.settings.accent_color
+  assign divider_color = section.settings.divider_color
+  assign show_dividers = section.settings.show_dividers
+  assign desktop_columns = section.settings.desktop_columns
+  assign mobile_columns = section.settings.mobile_columns
+  assign tablet_columns = section.settings.tablet_columns
+  assign title_letter_spacing = section.settings.title_letter_spacing
+  assign font_stack = "'Avenir Next', 'Avenir', 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif"
+-%}
+
+<style>
+  .grimmie-benefits-{{ section_id }} {
+    --gbs-bg: {{ bg_color }};
+    --gbs-text: {{ text_color }};
+    --gbs-accent: {{ accent_color }};
+    --gbs-divider: {{ divider_color }};
+    --gbs-desktop-cols: {{ desktop_columns }};
+    --gbs-tablet-cols: {{ tablet_columns }};
+    --gbs-mobile-cols: {{ mobile_columns }};
+    --gbs-title-tracking: {{ title_letter_spacing }}em;
+    --gbs-font: {{ font_stack }};
+
+    background-color: var(--gbs-bg);
+    color: var(--gbs-text);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .grimmie-benefits-{{ section_id }} * {
+    box-sizing: border-box;
+  }
+
+  .grimmie-benefits-{{ section_id }}__inner {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding-left: clamp(16px, 4vw, 64px);
+    padding-right: clamp(16px, 4vw, 64px);
+  }
+
+  .grimmie-benefits-{{ section_id }}__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--gbs-desktop-cols), minmax(0, 1fr));
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .grimmie-benefits-{{ section_id }}__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    padding: 8px clamp(12px, 2vw, 28px);
+    position: relative;
+  }
+
+  .grimmie-benefits-{{ section_id }}__item + .grimmie-benefits-{{ section_id }}__item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 12%;
+    bottom: 12%;
+    width: 1px;
+    background-color: var(--gbs-divider);
+    display: {% if show_dividers %}block{% else %}none{% endif %};
+  }
+
+  .grimmie-benefits-{{ section_id }}__icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+    color: var(--gbs-text);
+  }
+
+  .grimmie-benefits-{{ section_id }}__icon img,
+  .grimmie-benefits-{{ section_id }}__icon svg {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+  }
+
+  .grimmie-benefits-{{ section_id }}__icon svg {
+    stroke: var(--gbs-text);
+    fill: none;
+  }
+
+  .grimmie-benefits-{{ section_id }}__icon .gbs-accent {
+    fill: var(--gbs-accent);
+    stroke: none;
+  }
+
+  .grimmie-benefits-{{ section_id }}__title {
+    font-family: var(--gbs-font);
+    font-size: clamp(11px, 0.78vw, 13px);
+    font-weight: 500;
+    letter-spacing: var(--gbs-title-tracking);
+    text-transform: uppercase;
+    color: var(--gbs-text);
+    margin: 0 0 14px 0;
+    line-height: 1.3;
+  }
+
+  .grimmie-benefits-{{ section_id }}__description {
+    font-family: var(--gbs-font);
+    font-size: clamp(12px, 0.85vw, 14px);
+    font-weight: 400;
+    color: var(--gbs-text);
+    margin: 0;
+    line-height: 1.65;
+    max-width: 22ch;
+    opacity: 0.92;
+  }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .grimmie-benefits-{{ section_id }}__grid {
+      grid-template-columns: repeat(var(--gbs-tablet-cols), minmax(0, 1fr));
+    }
+
+    .grimmie-benefits-{{ section_id }}__item + .grimmie-benefits-{{ section_id }}__item::before {
+      display: none;
+    }
+
+    .grimmie-benefits-{{ section_id }}__item {
+      padding-top: 28px;
+      padding-bottom: 28px;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .grimmie-benefits-{{ section_id }} {
+      padding-top: {{ section.settings.padding_top | times: 0.7 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.7 | round }}px;
+    }
+
+    .grimmie-benefits-{{ section_id }}__grid {
+      grid-template-columns: repeat(var(--gbs-mobile-cols), minmax(0, 1fr));
+      row-gap: 8px;
+    }
+
+    .grimmie-benefits-{{ section_id }}__icon {
+      width: 44px;
+      height: 44px;
+      margin-bottom: 16px;
+    }
+
+    .grimmie-benefits-{{ section_id }}__title {
+      font-size: 11px;
+      margin-bottom: 10px;
+    }
+
+    .grimmie-benefits-{{ section_id }}__description {
+      font-size: 12.5px;
+      max-width: 24ch;
+    }
+
+    .grimmie-benefits-{{ section_id }}__item {
+      padding: 24px 12px;
+    }
+  }
+</style>
+
+<section
+  class="grimmie-benefits grimmie-benefits-{{ section_id }}"
+  aria-label="{{ section.settings.aria_label | default: 'Benefits' | escape }}"
+  {{ section.shopify_attributes }}
+>
+  <div class="grimmie-benefits-{{ section_id }}__inner">
+    <ul class="grimmie-benefits-{{ section_id }}__grid" role="list">
+      {%- for block in section.blocks -%}
+        <li class="grimmie-benefits-{{ section_id }}__item" {{ block.shopify_attributes }}>
+          <div class="grimmie-benefits-{{ section_id }}__icon" aria-hidden="{% if block.settings.alt_text == blank %}true{% else %}false{% endif %}">
+            {%- if block.settings.icon != blank -%}
+              {{ block.settings.icon | image_url: width: 160 | image_tag: alt: block.settings.alt_text, loading: 'lazy', widths: '56,112,160', class: 'gbs-icon-img' }}
+            {%- else -%}
+              {%- case block.settings.fallback_icon -%}
+                {%- when 'bag' -%}
+                  <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.alt_text | default: 'Structured bag' | escape }}">
+                    <rect x="10" y="22" width="44" height="28" rx="3" stroke-width="1.6"/>
+                    <path d="M22 22 V18 a10 10 0 0 1 20 0 V22" stroke-width="1.6" stroke-linecap="round"/>
+                    <path d="M16 30 H30" stroke-width="1.4" stroke-linecap="round"/>
+                    <path d="M54 16 l2 -2 M58 14 l-1.5 1.5 M55 13 l1 2" stroke-width="1.2" stroke-linecap="round"/>
+                  </svg>
+                {%- when 'droplet' -%}
+                  <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.alt_text | default: 'Droplet' | escape }}">
+                    <path d="M32 8 C 20 24 16 34 16 42 a16 16 0 0 0 32 0 C 48 34 44 24 32 8 Z" stroke-width="1.6" stroke-linejoin="round"/>
+                    <ellipse class="gbs-accent" cx="44" cy="44" rx="6" ry="8"/>
+                  </svg>
+                {%- when 'feather' -%}
+                  <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.alt_text | default: 'Feather' | escape }}">
+                    <path d="M44 14 C 22 18 14 32 16 50 C 34 52 48 44 52 22 C 52 16 50 14 44 14 Z" stroke-width="1.6" stroke-linejoin="round"/>
+                    <path d="M48 18 L 20 46" stroke-width="1.4" stroke-linecap="round"/>
+                    <path d="M28 42 H 40 M32 36 H 42 M36 30 H 44" stroke-width="1.2" stroke-linecap="round"/>
+                  </svg>
+                {%- when 'pouch' -%}
+                  <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.alt_text | default: 'Organizer pouch' | escape }}">
+                    <rect x="8" y="20" width="48" height="26" rx="4" stroke-width="1.6"/>
+                    <rect class="gbs-accent" x="14" y="30" width="20" height="8" rx="1"/>
+                    <path d="M40 26 L48 26" stroke-width="1.4" stroke-linecap="round"/>
+                    <circle cx="50" cy="26" r="1.4" fill="currentColor" stroke="none"/>
+                  </svg>
+                {%- when 'shield' -%}
+                  <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.alt_text | default: 'Shield' | escape }}">
+                    <path d="M32 8 L 52 16 V32 C 52 44 42 52 32 56 C 22 52 12 44 12 32 V16 Z" stroke-width="1.6" stroke-linejoin="round"/>
+                    <path d="M24 32 L 30 38 L 42 24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--gbs-accent);"/>
+                  </svg>
+                {%- when 'airplane' -%}
+                  <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.alt_text | default: 'Airplane' | escape }}">
+                    <path d="M8 36 L 56 18 L 50 30 L 28 36 L 22 50 L 18 50 L 20 38 L 8 38 Z" stroke-width="1.6" stroke-linejoin="round"/>
+                    <path d="M54 12 l2 -2 M58 10 l-1.5 1.5 M55 9 l1 2" stroke-width="1.2" stroke-linecap="round"/>
+                  </svg>
+                {%- when 'heart' -%}
+                  <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.alt_text | default: 'Heart' | escape }}">
+                    <path d="M32 52 C 18 42 10 34 10 24 a10 10 0 0 1 22 -4 a10 10 0 0 1 22 4 C 54 34 46 42 32 52 Z" stroke-width="1.6" stroke-linejoin="round"/>
+                  </svg>
+                {%- when 'star' -%}
+                  <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.alt_text | default: 'Star' | escape }}">
+                    <path d="M32 8 L 39 24 L 56 26 L 43 38 L 47 56 L 32 47 L 17 56 L 21 38 L 8 26 L 25 24 Z" stroke-width="1.6" stroke-linejoin="round"/>
+                  </svg>
+                {%- when 'leaf' -%}
+                  <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.alt_text | default: 'Leaf' | escape }}">
+                    <path d="M48 12 C 24 14 12 28 12 50 C 34 50 50 36 52 16 C 52 14 50 12 48 12 Z" stroke-width="1.6" stroke-linejoin="round"/>
+                    <path d="M48 16 L 18 46" stroke-width="1.4" stroke-linecap="round"/>
+                  </svg>
+                {%- else -%}
+                  <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.alt_text | default: 'Benefit' | escape }}">
+                    <circle cx="32" cy="32" r="20" stroke-width="1.6"/>
+                  </svg>
+              {%- endcase -%}
+            {%- endif -%}
+          </div>
+
+          {%- if block.settings.title != blank -%}
+            <h3 class="grimmie-benefits-{{ section_id }}__title">{{ block.settings.title | escape }}</h3>
+          {%- endif -%}
+
+          {%- if block.settings.description != blank -%}
+            <p class="grimmie-benefits-{{ section_id }}__description">{{ block.settings.description | escape | newline_to_br }}</p>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Grimmie Benefits Strip",
+  "tag": "section",
+  "class": "grimmie-benefits-strip-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#F7F1EE"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text & icon color",
+      "default": "#6E5F59"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent (blush) color",
+      "default": "#EACBC8"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider color",
+      "default": "#DDD2CA"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_columns",
+      "label": "Desktop columns",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "tablet_columns",
+      "label": "Tablet columns",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "mobile_columns",
+      "label": "Mobile columns",
+      "options": [
+        { "value": "1", "label": "1 column (stacked)" },
+        { "value": "2", "label": "2 columns" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dividers",
+      "label": "Show vertical dividers between items",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "title_letter_spacing",
+      "label": "Title letter-spacing",
+      "min": 0,
+      "max": 0.4,
+      "step": 0.1,
+      "unit": "em",
+      "default": 0.2
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "header",
+      "content": "Accessibility"
+    },
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Section aria-label",
+      "default": "Benefits"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon image (SVG or PNG)",
+          "info": "Upload a thin-line icon. Leave empty to use a fallback icon below."
+        },
+        {
+          "type": "select",
+          "id": "fallback_icon",
+          "label": "Fallback icon (if no image uploaded)",
+          "options": [
+            { "value": "bag", "label": "Structured bag" },
+            { "value": "droplet", "label": "Droplet" },
+            { "value": "feather", "label": "Feather" },
+            { "value": "pouch", "label": "Organizer pouch" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "airplane", "label": "Airplane" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "star", "label": "Star" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "none", "label": "None (circle)" }
+          ],
+          "default": "bag"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "STRUTTURATA"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Mantiene la forma con naturale bellezza."
+        },
+        {
+          "type": "text",
+          "id": "alt_text",
+          "label": "Icon alt text (for accessibility)",
+          "info": "Leave blank if the icon is purely decorative."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Grimmie Benefits Strip",
+      "category": "Grimmie",
+      "settings": {
+        "background_color": "#F7F1EE",
+        "text_color": "#6E5F59",
+        "accent_color": "#EACBC8",
+        "divider_color": "#DDD2CA",
+        "desktop_columns": 6,
+        "tablet_columns": 3,
+        "mobile_columns": "2",
+        "show_dividers": true,
+        "title_letter_spacing": 0.2,
+        "padding_top": 64,
+        "padding_bottom": 64
+      },
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "fallback_icon": "bag",
+            "title": "STRUTTURATA",
+            "description": "Mantiene la forma con naturale bellezza.",
+            "alt_text": "Borsa strutturata"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "fallback_icon": "droplet",
+            "title": "FACILE DA PULIRE",
+            "description": "Si pulisce in un attimo, dentro e fuori.",
+            "alt_text": "Goccia d'acqua"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "fallback_icon": "feather",
+            "title": "LEGGERA",
+            "description": "Ti accompagna ogni giorno, senza peso.",
+            "alt_text": "Piuma"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "fallback_icon": "pouch",
+            "title": "INTERNO ORGANIZZATO",
+            "description": "Ogni cosa al suo posto, con semplicità.",
+            "alt_text": "Pochette organizzata"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "fallback_icon": "shield",
+            "title": "DUREVOLE",
+            "description": "Materiali pensati per durare nel tempo.",
+            "alt_text": "Scudo di protezione"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "fallback_icon": "airplane",
+            "title": "PRONTA A SEGUIRTI",
+            "description": "Perfetta tra casa, routine e weekend away.",
+            "alt_text": "Aeroplano"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
