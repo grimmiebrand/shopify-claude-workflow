@@ -22,8 +22,6 @@
   assign show_arrows = section.settings.show_mobile_arrows
   assign arrow_bg = section.settings.arrow_background_color
   assign arrow_icon = section.settings.arrow_icon_color
-  assign body_font = "'Avenir Next', 'Avenir', 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif"
-  assign heading_font = "'Boston Angel', 'Cormorant Garamond', 'Playfair Display', Georgia, 'Times New Roman', serif"
 -%}
 
 <style>
@@ -44,8 +42,6 @@
     --uc-mobile-card-w: {{ mobile_card_w }}vw;
     --uc-arrow-bg: {{ arrow_bg }};
     --uc-arrow-icon: {{ arrow_icon }};
-    --uc-body-font: {{ body_font }};
-    --uc-heading-font: {{ heading_font }};
 
     position: relative;
     background-color: var(--uc-bg);
@@ -69,8 +65,9 @@
   }
 
   .grimmie-uc-{{ section_id }}__heading {
-    font-family: var(--uc-heading-font);
-    font-weight: 400;
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
     font-size: clamp(30px, 4.2vw, 56px);
     line-height: 1.12;
     letter-spacing: -0.005em;
@@ -88,7 +85,7 @@
   }
 
   .grimmie-uc-{{ section_id }}__subtitle {
-    font-family: var(--uc-body-font);
+    font-family: var(--font-body--family);
     font-size: clamp(13px, 0.95vw, 15px);
     line-height: 1.65;
     color: var(--uc-text);
@@ -188,7 +185,7 @@
   }
 
   .grimmie-uc-{{ section_id }}__title {
-    font-family: var(--uc-body-font);
+    font-family: var(--font-body--family);
     font-size: clamp(11px, 0.82vw, 13px);
     font-weight: 600;
     letter-spacing: 0.12em;
@@ -199,7 +196,7 @@
   }
 
   .grimmie-uc-{{ section_id }}__description {
-    font-family: var(--uc-body-font);
+    font-family: var(--font-body--family);
     font-size: clamp(11px, 0.78vw, 13px);
     line-height: 1.5;
     color: var(--uc-text);
@@ -210,7 +207,7 @@
 
   .grimmie-uc-{{ section_id }}__tag {
     display: inline-block;
-    font-family: var(--uc-body-font);
+    font-family: var(--font-body--family);
     font-size: 10.5px;
     font-weight: 500;
     letter-spacing: 0.16em;
@@ -240,7 +237,7 @@
     display: inline-block;
     background-color: var(--uc-cta-bg);
     color: var(--uc-cta-text);
-    font-family: var(--uc-body-font);
+    font-family: var(--font-body--family);
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.2em;
