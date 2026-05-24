@@ -1,9 +1,11 @@
 {%- liquid
   assign section_id = section.id
   assign heading = section.settings.heading
+  assign subtitle = section.settings.subtitle
   assign bg_color = section.settings.background_color
   assign text_color = section.settings.text_color
   assign heading_color = section.settings.heading_color
+  assign subtitle_color = section.settings.subtitle_color
   assign description_color = section.settings.description_color
   assign divider_color = section.settings.divider_color
   assign btn_bg = section.settings.button_background_color
@@ -17,6 +19,7 @@
     --pd-bg: {{ bg_color }};
     --pd-text: {{ text_color }};
     --pd-heading: {{ heading_color }};
+    --pd-subtitle: {{ subtitle_color }};
     --pd-description: {{ description_color }};
     --pd-divider: {{ divider_color }};
     --pd-btn-bg: {{ btn_bg }};
@@ -42,17 +45,37 @@
     padding: 0 clamp(20px, 5vw, 56px);
   }
 
+  .grimmie-pd-{{ section_id }}__header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto clamp(40px, 5vw, 64px);
+    padding: 0 16px;
+  }
+
   .grimmie-pd-{{ section_id }}__heading {
-    font-family: var(--font-heading--family);
-    font-style: var(--font-heading--style);
-    font-weight: var(--font-heading--weight);
+    font-family: var(--font-body--family);
+    font-weight: 600;
     font-size: clamp(12px, 0.95vw, 14px);
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    text-align: center;
     color: var(--pd-heading);
-    margin: 0 0 clamp(40px, 5vw, 64px);
+    margin: 0;
     line-height: 1.4;
+  }
+
+  .grimmie-pd-{{ section_id }}__subtitle {
+    font-family: var(--font-body--family);
+    font-weight: 400;
+    font-size: clamp(13px, 1vw, 15px);
+    line-height: 1.6;
+    color: var(--pd-subtitle);
+    margin: 14px auto 0;
+    max-width: 52ch;
+    opacity: 0.92;
+  }
+
+  .grimmie-pd-{{ section_id }}__heading + .grimmie-pd-{{ section_id }}__subtitle {
+    margin-top: 16px;
   }
 
   .grimmie-pd-{{ section_id }}__grid {
@@ -186,7 +209,7 @@
       padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round }}px;
     }
 
-    .grimmie-pd-{{ section_id }}__heading {
+    .grimmie-pd-{{ section_id }}__header {
       margin-bottom: 36px;
     }
 
@@ -225,8 +248,15 @@
   {{ section.shopify_attributes }}
 >
   <div class="grimmie-pd-{{ section_id }}__inner">
-    {%- if heading != blank -%}
-      <h2 class="grimmie-pd-{{ section_id }}__heading">{{ heading | escape }}</h2>
+    {%- if heading != blank or subtitle != blank -%}
+      <header class="grimmie-pd-{{ section_id }}__header">
+        {%- if heading != blank -%}
+          <h2 class="grimmie-pd-{{ section_id }}__heading">{{ heading | escape }}</h2>
+        {%- endif -%}
+        {%- if subtitle != blank -%}
+          <p class="grimmie-pd-{{ section_id }}__subtitle">{{ subtitle | escape | newline_to_br }}</p>
+        {%- endif -%}
+      </header>
     {%- endif -%}
 
     <ul class="grimmie-pd-{{ section_id }}__grid" role="list">
@@ -293,6 +323,13 @@
       "default": "SCOPRI ALMA, IVORY"
     },
     {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "info": "Optional. Shown below the heading.",
+      "default": "qui scrivere sottotitolo"
+    },
+    {
       "type": "header",
       "content": "Colors"
     },
@@ -306,6 +343,12 @@
       "type": "color",
       "id": "heading_color",
       "label": "Heading color",
+      "default": "#6E5F59"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
       "default": "#6E5F59"
     },
     {
@@ -445,8 +488,10 @@
       "category": "Grimmie",
       "settings": {
         "heading": "SCOPRI ALMA, IVORY",
+        "subtitle": "qui scrivere sottotitolo",
         "background_color": "#F7F1EE",
         "heading_color": "#6E5F59",
+        "subtitle_color": "#6E5F59",
         "text_color": "#6E5F59",
         "description_color": "#6E5F59",
         "divider_color": "#DDD2CA",
