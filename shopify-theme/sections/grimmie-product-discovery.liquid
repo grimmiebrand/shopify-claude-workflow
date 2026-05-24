@@ -1,0 +1,491 @@
+{%- liquid
+  assign section_id = section.id
+  assign heading = section.settings.heading
+  assign bg_color = section.settings.background_color
+  assign text_color = section.settings.text_color
+  assign heading_color = section.settings.heading_color
+  assign description_color = section.settings.description_color
+  assign divider_color = section.settings.divider_color
+  assign btn_bg = section.settings.button_background_color
+  assign btn_text = section.settings.button_text_color
+  assign show_dividers = section.settings.show_dividers
+  assign card_gap = section.settings.desktop_card_gap
+-%}
+
+<style>
+  .grimmie-pd-{{ section_id }} {
+    --pd-bg: {{ bg_color }};
+    --pd-text: {{ text_color }};
+    --pd-heading: {{ heading_color }};
+    --pd-description: {{ description_color }};
+    --pd-divider: {{ divider_color }};
+    --pd-btn-bg: {{ btn_bg }};
+    --pd-btn-text: {{ btn_text }};
+    --pd-card-gap: {{ card_gap }}px;
+
+    background-color: var(--pd-bg);
+    color: var(--pd-text);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .grimmie-pd-{{ section_id }} * {
+    box-sizing: border-box;
+  }
+
+  .grimmie-pd-{{ section_id }}__inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 56px);
+  }
+
+  .grimmie-pd-{{ section_id }}__heading {
+    font-family: var(--font-body--family);
+    font-weight: 600;
+    font-size: clamp(12px, 0.95vw, 14px);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--pd-heading);
+    margin: 0 0 clamp(40px, 5vw, 64px);
+    line-height: 1.4;
+  }
+
+  .grimmie-pd-{{ section_id }}__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  .grimmie-pd-{{ section_id }}__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 clamp(16px, 2.5vw, 36px);
+    position: relative;
+    list-style: none;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  {% if show_dividers %}
+    .grimmie-pd-{{ section_id }}__card + .grimmie-pd-{{ section_id }}__card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8%;
+      bottom: 8%;
+      width: 1px;
+      background-color: var(--pd-divider);
+    }
+  {% endif %}
+
+  .grimmie-pd-{{ section_id }}__image-wrap {
+    width: 100%;
+    height: clamp(200px, 22vw, 280px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: clamp(28px, 3.5vw, 44px);
+  }
+
+  .grimmie-pd-{{ section_id }}__image-wrap img,
+  .grimmie-pd-{{ section_id }}__image-wrap svg.placeholder {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  .grimmie-pd-{{ section_id }}__image-wrap .placeholder {
+    width: 60%;
+    height: 80%;
+    color: var(--pd-divider);
+    opacity: 0.55;
+  }
+
+  .grimmie-pd-{{ section_id }}__title {
+    font-family: var(--font-body--family);
+    font-weight: 600;
+    font-size: clamp(14px, 1.1vw, 16px);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--pd-text);
+    margin: 0 0 14px;
+    line-height: 1.3;
+  }
+
+  .grimmie-pd-{{ section_id }}__description {
+    font-family: var(--font-body--family);
+    font-weight: 400;
+    font-size: clamp(13px, 0.95vw, 14.5px);
+    line-height: 1.55;
+    color: var(--pd-description);
+    margin: 0 0 clamp(22px, 2.5vw, 32px);
+    max-width: 28ch;
+  }
+
+  .grimmie-pd-{{ section_id }}__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--pd-btn-bg);
+    color: var(--pd-btn-text);
+    font-family: var(--font-body--family);
+    font-weight: 500;
+    font-size: 11.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 13px 32px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    min-height: 42px;
+    line-height: 1;
+    transition: filter 0.2s ease, transform 0.15s ease;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .grimmie-pd-{{ section_id }}__button:hover {
+    filter: brightness(0.96);
+  }
+
+  .grimmie-pd-{{ section_id }}__button:focus-visible {
+    outline: 2px solid var(--pd-btn-bg);
+    outline-offset: 3px;
+  }
+
+  /* Tablet */
+  @media (max-width: 900px) {
+    .grimmie-pd-{{ section_id }}__image-wrap {
+      height: clamp(180px, 28vw, 240px);
+    }
+
+    .grimmie-pd-{{ section_id }}__card {
+      padding: 0 clamp(12px, 2vw, 24px);
+    }
+  }
+
+  /* Mobile: stack vertically */
+  @media (max-width: 640px) {
+    .grimmie-pd-{{ section_id }} {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round }}px;
+    }
+
+    .grimmie-pd-{{ section_id }}__heading {
+      margin-bottom: 36px;
+    }
+
+    .grimmie-pd-{{ section_id }}__grid {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .grimmie-pd-{{ section_id }}__card {
+      padding: 36px 16px;
+    }
+
+    .grimmie-pd-{{ section_id }}__card + .grimmie-pd-{{ section_id }}__card::before {
+      {% if show_dividers %}
+        left: 15%;
+        right: 15%;
+        top: 0;
+        bottom: auto;
+        width: auto;
+        height: 1px;
+      {% else %}
+        content: none;
+      {% endif %}
+    }
+
+    .grimmie-pd-{{ section_id }}__image-wrap {
+      height: clamp(180px, 50vw, 240px);
+      margin-bottom: 28px;
+    }
+  }
+</style>
+
+<section
+  class="grimmie-pd grimmie-pd-{{ section_id }}"
+  aria-label="{{ section.settings.aria_label | default: heading | escape }}"
+  {{ section.shopify_attributes }}
+>
+  <div class="grimmie-pd-{{ section_id }}__inner">
+    {%- if heading != blank -%}
+      <h2 class="grimmie-pd-{{ section_id }}__heading">{{ heading | escape }}</h2>
+    {%- endif -%}
+
+    <ul class="grimmie-pd-{{ section_id }}__grid" role="list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign product = block.settings.product
+          assign card_link = block.settings.button_link
+          if card_link == blank and product != blank
+            assign card_link = product.url
+          endif
+          assign image = block.settings.image
+          if image == blank and product != blank
+            assign image = product.featured_image
+          endif
+          assign alt_text = block.settings.image_alt_text | default: block.settings.title
+        -%}
+        <li class="grimmie-pd-{{ section_id }}__card" {{ block.shopify_attributes }}>
+          <div class="grimmie-pd-{{ section_id }}__image-wrap">
+            {%- if image != blank -%}
+              {{ image | image_url: width: 800 | image_tag: alt: alt_text, loading: 'lazy', widths: '300,500,700,900', sizes: '(max-width: 640px) 80vw, (max-width: 900px) 33vw, 28vw' }}
+            {%- else -%}
+              <svg class="placeholder" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                <rect x="20" y="35" width="80" height="50" rx="10" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M40 35 V28 a4 4 0 0 1 4 -4 h32 a4 4 0 0 1 4 4 V35" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+            {%- endif -%}
+          </div>
+
+          {%- if block.settings.title != blank -%}
+            <h3 class="grimmie-pd-{{ section_id }}__title">{{ block.settings.title | escape }}</h3>
+          {%- endif -%}
+
+          {%- if block.settings.description != blank -%}
+            <p class="grimmie-pd-{{ section_id }}__description">{{ block.settings.description | escape | newline_to_br }}</p>
+          {%- endif -%}
+
+          {%- if block.settings.button_text != blank -%}
+            {%- if card_link != blank -%}
+              <a class="grimmie-pd-{{ section_id }}__button" href="{{ card_link }}">{{ block.settings.button_text | escape }}</a>
+            {%- else -%}
+              <span class="grimmie-pd-{{ section_id }}__button" role="button" aria-disabled="true">{{ block.settings.button_text | escape }}</span>
+            {%- endif -%}
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Grimmie Product Discovery",
+  "tag": "section",
+  "class": "grimmie-product-discovery-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "SCOPRI ALMA, IVORY"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#F7F1EE"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#6E5F59"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Title color",
+      "default": "#6E5F59"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#6E5F59"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider color",
+      "default": "#DDD2CA"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Button background",
+      "default": "#EACBC8"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#6E5F59"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dividers",
+      "label": "Show vertical dividers between cards",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "desktop_card_gap",
+      "label": "Desktop card gap",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Accessibility"
+    },
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Section aria-label",
+      "default": "Product discovery"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "discovery_card",
+      "name": "Product card",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Linked product",
+          "info": "Optional. Used for the button link and as image fallback."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card image",
+          "info": "Overrides the product image. If empty, the linked product image is used."
+        },
+        {
+          "type": "text",
+          "id": "image_alt_text",
+          "label": "Image alt text"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "CLASSIC"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Compatto, leggero, ideale per l'essenziale quotidiano."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "SCOPRI"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link",
+          "info": "Optional. Overrides the linked product URL."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Grimmie Product Discovery",
+      "category": "Grimmie",
+      "settings": {
+        "heading": "SCOPRI ALMA, IVORY",
+        "background_color": "#F7F1EE",
+        "heading_color": "#6E5F59",
+        "text_color": "#6E5F59",
+        "description_color": "#6E5F59",
+        "divider_color": "#DDD2CA",
+        "button_background_color": "#EACBC8",
+        "button_text_color": "#6E5F59",
+        "show_dividers": true,
+        "desktop_card_gap": 0,
+        "padding_top": 80,
+        "padding_bottom": 80
+      },
+      "blocks": [
+        {
+          "type": "discovery_card",
+          "settings": {
+            "title": "CLASSIC",
+            "description": "Compatto, leggero, ideale per l'essenziale quotidiano.",
+            "button_text": "SCOPRI",
+            "image_alt_text": "Alma Classic ivory"
+          }
+        },
+        {
+          "type": "discovery_card",
+          "settings": {
+            "title": "LARGE",
+            "description": "Più spazio, stessa eleganza. Perfetto per la tua routine completa.",
+            "button_text": "SCOPRI",
+            "image_alt_text": "Alma Large ivory"
+          }
+        },
+        {
+          "type": "discovery_card",
+          "settings": {
+            "title": "DUO",
+            "description": "Il duo perfetto, insieme ancora meglio.",
+            "button_text": "SCOPRI",
+            "image_alt_text": "Alma Duo ivory"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
