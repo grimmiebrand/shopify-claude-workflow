@@ -66,7 +66,8 @@
   .grimmie-faq-{{ section_id }}__hero {
     position: relative;
     width: 100%;
-    aspect-ratio: 12 / 5;
+    aspect-ratio: 16 / 5;
+    margin-top: -{{ section.settings.padding_top }}px;
     margin-bottom: clamp(48px, 6vw, 80px);
     overflow: hidden;
     background-color: var(--faq-bg);
@@ -440,6 +441,11 @@
     .grimmie-faq-{{ section_id }} {
       padding-top: {{ section.settings.padding_top | times: 0.7 | round }}px;
       padding-bottom: {{ section.settings.padding_bottom | times: 0.7 | round }}px;
+    }
+
+    .grimmie-faq-{{ section_id }}__hero {
+      aspect-ratio: 12 / 5;
+      margin-top: -{{ section.settings.padding_top | times: 0.7 | round }}px;
     }
 
     .grimmie-faq-{{ section_id }}__hero-content {
