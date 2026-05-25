@@ -1,8 +1,83 @@
 {
   "sections": {
     "main": {
-      "type": "grimmie-faq-page"
+      "type": "grimmie-faq-page",
+      "blocks": {
+        "cat_prodotti": {
+          "type": "faq_category",
+          "settings": {
+            "fallback_icon": "pouch",
+            "title": "Prodotti e misure",
+            "icon_alt": "Prodotti e misure",
+            "q1": "Quali misure sono disponibili?",
+            "a1": "Alma è disponibile in due formati: Classic, pensata per gli essenziali quotidiani, e Large, ideale per routine più complete, prodotti skincare, hair tools e accessori più voluminosi. È disponibile anche il Duo, che include entrambi i formati.",
+            "q2": "Cosa entra nella pouch Classic?",
+            "a2": "La Classic è pensata per make-up, skincare essenziale, piccoli accessori, prodotti da borsa e tutto ciò che vuoi avere sempre a portata di mano durante la giornata.",
+            "q3": "Cosa entra nella pouch Large?",
+            "a3": "La Large offre più spazio ed è ideale per prodotti skincare in formato più grande, accessori beauty, piastre, strumenti per capelli e tutto ciò che ti serve per una routine completa, a casa o in viaggio.",
+            "q4": "Posso acquistare le pouch singolarmente o in set?",
+            "a4": "Sì, puoi scegliere il formato Classic, il formato Large oppure il Duo, che unisce entrambi i formati per organizzare la routine in modo più completo.",
+            "q5": "In quale colore è disponibile Alma?",
+            "a5": "Al lancio Alma è disponibile nella variante Ivory, una tonalità chiara, elegante e versatile, pensata per adattarsi a ogni routine e ambiente."
+          }
+        },
+        "cat_materiali": {
+          "type": "faq_category",
+          "settings": {
+            "fallback_icon": "care",
+            "title": "Materiali e cura",
+            "icon_alt": "Materiali e cura",
+            "q1": "Di che materiale sono fatte le pouch?",
+            "a1": "Le pouch Grimmie sono pensate per essere strutturate, eleganti e pratiche. Inserire qui il materiale definitivo: [INSERIRE MATERIALE DEFINITIVO]. Il design è studiato per mantenere la forma e proteggere meglio gli essenziali della tua routine.",
+            "q2": "Le pouch sono lavabili?",
+            "a2": "La modalità di pulizia dipende dal materiale definitivo. In generale, consigliamo di pulire la pouch delicatamente con un panno morbido e leggermente umido, evitando lavaggi aggressivi o prodotti abrasivi. Aggiornare questa risposta dopo conferma del materiale.",
+            "q3": "Come pulisco la mia pouch?",
+            "a3": "Per mantenerla bella nel tempo, rimuovi eventuali residui con un panno morbido e pulisci delicatamente la superficie. Evita candeggina, solventi, immersione in acqua e fonti di calore diretto."
+          }
+        },
+        "cat_spedizioni": {
+          "type": "faq_category",
+          "settings": {
+            "fallback_icon": "truck",
+            "title": "Spedizioni e resi",
+            "icon_alt": "Spedizioni e resi",
+            "q1": "Quanto costa la spedizione?",
+            "a1": "La spedizione è gratuita per ordini superiori a 65€. Per ordini inferiori a questa soglia, il costo della spedizione verrà indicato al checkout prima della conferma dell'ordine.",
+            "q2": "Quanto tempo impiegherà il mio ordine?",
+            "a2": "I tempi di preparazione e consegna possono variare in base alla destinazione e al corriere. Le tempistiche stimate vengono indicate durante l'acquisto e nella comunicazione di conferma ordine.",
+            "q3": "Qual è la vostra politica di reso?",
+            "a3": "Puoi richiedere un reso entro 30 giorni dalla consegna scrivendo a info@grimmie.co. Dopo la richiesta riceverai via email tutte le istruzioni per procedere con il reso.",
+            "q4": "Come richiedo un reso?",
+            "a4": "Scrivi a info@grimmie.co indicando il numero d'ordine e il motivo della richiesta. Il nostro team ti risponderà con le istruzioni necessarie per completare la procedura."
+          }
+        },
+        "cat_ordini": {
+          "type": "faq_category",
+          "settings": {
+            "fallback_icon": "gift",
+            "title": "Ordini e gifting",
+            "icon_alt": "Ordini e gifting",
+            "q1": "Posso tracciare il mio ordine?",
+            "a1": "Sì, quando l'ordine verrà spedito riceverai una comunicazione con le informazioni disponibili per seguire la consegna, se il servizio di tracking è previsto dal corriere utilizzato.",
+            "q2": "Posso inviare Alma come regalo?",
+            "a2": "Sì, puoi inserire direttamente l'indirizzo della persona a cui vuoi inviare l'ordine durante il checkout.",
+            "q3": "Offrite confezioni regalo o messaggi personalizzati?",
+            "a3": "Al momento questa opzione potrebbe non essere sempre disponibile. Se hai esigenze particolari, scrivici a info@grimmie.co prima di effettuare l'ordine e faremo il possibile per aiutarti."
+          }
+        }
+      },
+      "block_order": [
+        "cat_prodotti",
+        "cat_materiali",
+        "cat_spedizioni",
+        "cat_ordini"
+      ],
+      "settings": {
+        "banner_button_link": "mailto:info@grimmie.co"
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
