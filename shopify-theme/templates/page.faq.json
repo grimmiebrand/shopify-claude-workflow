@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "main": {
+      "type": "grimmie-faq-page"
+    }
+  },
+  "order": ["main"]
+}

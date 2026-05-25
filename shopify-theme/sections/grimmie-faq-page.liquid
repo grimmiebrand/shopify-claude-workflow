@@ -1,0 +1,905 @@
+{%- liquid
+  assign section_id = section.id
+  assign hero_heading = section.settings.hero_heading
+  assign hero_text = section.settings.hero_text
+  assign hero_button_text = section.settings.hero_button_text
+  assign hero_button_link = section.settings.hero_button_link
+  assign hero_image = section.settings.hero_image
+  assign hero_image_alt = section.settings.hero_image_alt
+
+  assign bg_color = section.settings.background_color
+  assign heading_color = section.settings.heading_color
+  assign text_color = section.settings.text_color
+  assign accent_color = section.settings.accent_color
+  assign border_color = section.settings.border_color
+  assign btn_bg = section.settings.button_background_color
+  assign btn_text = section.settings.button_text_color
+  assign btn_hover_bg = section.settings.button_hover_background_color
+  assign banner_bg = section.settings.banner_background_color
+
+  assign banner_title = section.settings.banner_title
+  assign banner_text = section.settings.banner_text
+  assign banner_button_text = section.settings.banner_button_text
+  assign banner_button_link = section.settings.banner_button_link
+  assign banner_divider_text = section.settings.banner_divider_text
+  assign banner_right_text = section.settings.banner_right_text
+  assign banner_right_button_text = section.settings.banner_right_button_text
+  assign banner_right_button_link = section.settings.banner_right_button_link
+  assign banner_product_image = section.settings.banner_product_image
+  assign banner_product_image_alt = section.settings.banner_product_image_alt
+-%}
+
+<style>
+  .grimmie-faq-{{ section_id }} {
+    --faq-bg: {{ bg_color }};
+    --faq-heading: {{ heading_color }};
+    --faq-text: {{ text_color }};
+    --faq-accent: {{ accent_color }};
+    --faq-border: {{ border_color }};
+    --faq-btn-bg: {{ btn_bg }};
+    --faq-btn-text: {{ btn_text }};
+    --faq-btn-hover-bg: {{ btn_hover_bg }};
+    --faq-banner-bg: {{ banner_bg }};
+
+    background-color: var(--faq-bg);
+    color: var(--faq-text);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .grimmie-faq-{{ section_id }} * { box-sizing: border-box; }
+
+  .grimmie-faq-{{ section_id }}__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 56px);
+  }
+
+  /* Trust bar */
+  .grimmie-faq-{{ section_id }}__trust {
+    background-color: var(--faq-bg);
+    border-bottom: 1px solid var(--faq-border);
+    margin-bottom: clamp(28px, 4vw, 56px);
+  }
+
+  .grimmie-faq-{{ section_id }}__trust-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 22px clamp(20px, 5vw, 56px);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    align-items: center;
+  }
+
+  .grimmie-faq-{{ section_id }}__trust-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    text-align: left;
+    position: relative;
+    font-family: var(--font-body--family);
+  }
+
+  .grimmie-faq-{{ section_id }}__trust-item + .grimmie-faq-{{ section_id }}__trust-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10%;
+    bottom: 10%;
+    width: 1px;
+    background-color: var(--faq-border);
+  }
+
+  .grimmie-faq-{{ section_id }}__trust-icon {
+    width: 36px;
+    height: 36px;
+    color: var(--faq-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .grimmie-faq-{{ section_id }}__trust-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--faq-text);
+    fill: none;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .grimmie-faq-{{ section_id }}__trust-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--faq-text);
+    margin: 0 0 4px;
+    line-height: 1.2;
+  }
+
+  .grimmie-faq-{{ section_id }}__trust-sub {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--faq-text);
+    margin: 0;
+    line-height: 1.4;
+    opacity: 0.85;
+  }
+
+  /* Hero */
+  .grimmie-faq-{{ section_id }}__hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    align-items: stretch;
+    margin-bottom: clamp(60px, 7vw, 100px);
+    min-height: clamp(360px, 42vw, 520px);
+  }
+
+  .grimmie-faq-{{ section_id }}__hero-text {
+    padding: clamp(40px, 5vw, 72px) clamp(20px, 4vw, 56px);
+    max-width: 600px;
+    justify-self: end;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .grimmie-faq-{{ section_id }}__hero-title {
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    font-size: clamp(34px, 4.6vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--faq-heading);
+    margin: 0 0 clamp(18px, 2vw, 28px);
+  }
+
+  .grimmie-faq-{{ section_id }}__hero-body {
+    font-family: var(--font-body--family);
+    font-weight: 400;
+    font-size: clamp(14px, 1vw, 16px);
+    line-height: 1.65;
+    color: var(--faq-text);
+    margin: 0 0 clamp(28px, 3vw, 40px);
+    max-width: 44ch;
+  }
+
+  .grimmie-faq-{{ section_id }}__hero-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--faq-btn-bg);
+    color: var(--faq-btn-text);
+    font-family: var(--font-body--family);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 16px clamp(32px, 4vw, 48px);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    min-height: 50px;
+    line-height: 1;
+    transition: background-color 0.2s ease;
+    width: fit-content;
+  }
+
+  .grimmie-faq-{{ section_id }}__hero-cta:hover { background-color: var(--faq-btn-hover-bg); }
+
+  .grimmie-faq-{{ section_id }}__hero-image {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+  }
+
+  .grimmie-faq-{{ section_id }}__hero-image img,
+  .grimmie-faq-{{ section_id }}__hero-image svg.placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .grimmie-faq-{{ section_id }}__hero-image .placeholder {
+    color: var(--faq-border);
+    background-color: var(--faq-banner-bg);
+    padding: 12%;
+  }
+
+  /* FAQ categories */
+  .grimmie-faq-{{ section_id }}__categories {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(48px, 6vw, 80px);
+    margin-bottom: clamp(56px, 7vw, 96px);
+  }
+
+  .grimmie-faq-{{ section_id }}__category {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 56px);
+    padding-bottom: clamp(40px, 5vw, 64px);
+    border-bottom: 1px solid var(--faq-border);
+  }
+
+  .grimmie-faq-{{ section_id }}__category:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .grimmie-faq-{{ section_id }}__category-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    padding-top: 4px;
+  }
+
+  .grimmie-faq-{{ section_id }}__category-icon {
+    width: 56px;
+    height: 56px;
+    border: 1px solid var(--faq-border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--faq-text);
+  }
+
+  .grimmie-faq-{{ section_id }}__category-icon svg {
+    width: 48%;
+    height: 48%;
+    stroke: var(--faq-text);
+    fill: none;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .grimmie-faq-{{ section_id }}__category-icon img { width: 56%; height: 56%; }
+
+  .grimmie-faq-{{ section_id }}__category-title {
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    font-size: clamp(22px, 2.4vw, 30px);
+    line-height: 1.2;
+    color: var(--faq-heading);
+    margin: 12px 0 0;
+    letter-spacing: -0.005em;
+  }
+
+  .grimmie-faq-{{ section_id }}__accordion {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .grimmie-faq-{{ section_id }}__item {
+    border-bottom: 1px solid var(--faq-border);
+    padding: 0;
+  }
+
+  .grimmie-faq-{{ section_id }}__item:first-child { border-top: 1px solid var(--faq-border); }
+
+  .grimmie-faq-{{ section_id }}__item summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 20px 8px 20px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-family: var(--font-body--family);
+    font-weight: 400;
+    font-size: clamp(13px, 0.95vw, 15px);
+    color: var(--faq-text);
+    line-height: 1.4;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .grimmie-faq-{{ section_id }}__item summary::-webkit-details-marker,
+  .grimmie-faq-{{ section_id }}__item summary::marker { display: none; content: ''; }
+
+  .grimmie-faq-{{ section_id }}__item summary:focus-visible {
+    outline: 2px solid var(--faq-accent);
+    outline-offset: -2px;
+  }
+
+  .grimmie-faq-{{ section_id }}__plus {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    position: relative;
+    transition: transform 0.25s ease;
+  }
+
+  .grimmie-faq-{{ section_id }}__plus::before,
+  .grimmie-faq-{{ section_id }}__plus::after {
+    content: '';
+    position: absolute;
+    background-color: var(--faq-text);
+    border-radius: 1px;
+  }
+
+  .grimmie-faq-{{ section_id }}__plus::before {
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1.2px;
+    transform: translateY(-50%);
+  }
+
+  .grimmie-faq-{{ section_id }}__plus::after {
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1.2px;
+    transform: translateX(-50%);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .grimmie-faq-{{ section_id }}__item[open] .grimmie-faq-{{ section_id }}__plus::after {
+    transform: translateX(-50%) rotate(90deg);
+    opacity: 0;
+  }
+
+  .grimmie-faq-{{ section_id }}__answer {
+    padding: 0 16px 22px;
+    font-family: var(--font-body--family);
+    font-weight: 400;
+    font-size: clamp(13px, 0.9vw, 14.5px);
+    line-height: 1.65;
+    color: var(--faq-text);
+    opacity: 0.92;
+    max-width: 64ch;
+  }
+
+  /* Support banner */
+  .grimmie-faq-{{ section_id }}__banner {
+    background-color: var(--faq-banner-bg);
+    border: 1px solid var(--faq-border);
+    border-radius: 6px;
+    padding: clamp(28px, 3.6vw, 44px) clamp(24px, 3.5vw, 56px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 56px);
+    align-items: center;
+  }
+
+  .grimmie-faq-{{ section_id }}__banner-side {
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 2vw, 28px);
+  }
+
+  .grimmie-faq-{{ section_id }}__banner-side--left .grimmie-faq-{{ section_id }}__banner-icon {
+    width: 56px;
+    height: 56px;
+    border: 1px solid var(--faq-border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background-color: var(--faq-bg);
+  }
+
+  .grimmie-faq-{{ section_id }}__banner-icon svg {
+    width: 50%;
+    height: 50%;
+    stroke: var(--faq-text);
+    fill: none;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .grimmie-faq-{{ section_id }}__banner-content { display: flex; flex-direction: column; gap: 4px; }
+
+  .grimmie-faq-{{ section_id }}__banner-title {
+    font-family: var(--font-body--family);
+    font-weight: 600;
+    font-size: clamp(14px, 1.05vw, 16px);
+    color: var(--faq-heading);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .grimmie-faq-{{ section_id }}__banner-text {
+    font-family: var(--font-body--family);
+    font-weight: 400;
+    font-size: clamp(13px, 0.9vw, 14.5px);
+    color: var(--faq-text);
+    margin: 0 0 12px;
+    line-height: 1.5;
+    opacity: 0.92;
+  }
+
+  .grimmie-faq-{{ section_id }}__banner-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--faq-btn-bg);
+    color: var(--faq-btn-text);
+    font-family: var(--font-body--family);
+    font-weight: 500;
+    font-size: 11.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    min-height: 42px;
+    line-height: 1;
+    transition: background-color 0.2s ease;
+    width: fit-content;
+  }
+
+  .grimmie-faq-{{ section_id }}__banner-btn:hover { background-color: var(--faq-btn-hover-bg); }
+
+  .grimmie-faq-{{ section_id }}__banner-divider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body--family);
+    font-size: 12px;
+    color: var(--faq-text);
+    opacity: 0.75;
+    text-transform: lowercase;
+  }
+
+  .grimmie-faq-{{ section_id }}__banner-divider::before,
+  .grimmie-faq-{{ section_id }}__banner-divider::after {
+    content: '';
+    width: 1px;
+    flex: 1;
+    background-color: var(--faq-border);
+    min-height: 28px;
+  }
+
+  .grimmie-faq-{{ section_id }}__banner-product {
+    width: 96px;
+    height: 72px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .grimmie-faq-{{ section_id }}__banner-product img,
+  .grimmie-faq-{{ section_id }}__banner-product svg.placeholder {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .grimmie-faq-{{ section_id }}__banner-product .placeholder {
+    color: var(--faq-border);
+    opacity: 0.6;
+  }
+
+  /* Tablet */
+  @media (max-width: 980px) {
+    .grimmie-faq-{{ section_id }}__hero {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .grimmie-faq-{{ section_id }}__hero-text {
+      justify-self: stretch;
+      max-width: none;
+      padding: clamp(36px, 6vw, 56px) clamp(20px, 5vw, 40px);
+    }
+
+    .grimmie-faq-{{ section_id }}__hero-image {
+      min-height: 280px;
+      max-height: 420px;
+    }
+
+    .grimmie-faq-{{ section_id }}__category {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .grimmie-faq-{{ section_id }} {
+      padding-top: {{ section.settings.padding_top | times: 0.7 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.7 | round }}px;
+    }
+
+    .grimmie-faq-{{ section_id }}__trust-inner {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding: 18px 20px;
+    }
+
+    .grimmie-faq-{{ section_id }}__trust-item + .grimmie-faq-{{ section_id }}__trust-item::before {
+      left: 10%;
+      right: 10%;
+      top: 0;
+      bottom: auto;
+      width: auto;
+      height: 1px;
+    }
+
+    .grimmie-faq-{{ section_id }}__trust-item { padding: 10px 0; justify-content: flex-start; }
+
+    .grimmie-faq-{{ section_id }}__banner {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 28px;
+    }
+
+    .grimmie-faq-{{ section_id }}__banner-side {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .grimmie-faq-{{ section_id }}__banner-divider {
+      flex-direction: row;
+      width: 100%;
+    }
+
+    .grimmie-faq-{{ section_id }}__banner-divider::before,
+    .grimmie-faq-{{ section_id }}__banner-divider::after {
+      width: auto;
+      height: 1px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .grimmie-faq-{{ section_id }}__item summary { font-size: 14px; padding: 18px 8px 18px 12px; }
+    .grimmie-faq-{{ section_id }}__answer { padding: 0 12px 18px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .grimmie-faq-{{ section_id }}__plus,
+    .grimmie-faq-{{ section_id }}__plus::after { transition: none; }
+  }
+</style>
+
+<section
+  class="grimmie-faq grimmie-faq-{{ section_id }}"
+  aria-label="{{ section.settings.aria_label | default: 'FAQ' | escape }}"
+  {{ section.shopify_attributes }}
+>
+  <div class="grimmie-faq-{{ section_id }}__trust">
+    <div class="grimmie-faq-{{ section_id }}__trust-inner">
+      {%- for i in (1..3) -%}
+        {%- assign label_key = 'trust' | append: i | append: '_label' -%}
+        {%- assign sub_key = 'trust' | append: i | append: '_subtitle' -%}
+        {%- assign icon_key = 'trust' | append: i | append: '_icon' -%}
+        {%- assign trust_label = section.settings[label_key] -%}
+        {%- assign trust_sub = section.settings[sub_key] -%}
+        {%- assign trust_icon = section.settings[icon_key] -%}
+        <div class="grimmie-faq-{{ section_id }}__trust-item">
+          <div class="grimmie-faq-{{ section_id }}__trust-icon">
+            {%- case trust_icon -%}
+              {%- when 'truck' -%}
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3" y="9" width="16" height="13" rx="1.5"/><path d="M19 13 H25 L29 17 V22 H19 Z"/><circle cx="9" cy="24" r="2.2"/><circle cx="24" cy="24" r="2.2"/></svg>
+              {%- when 'returns' -%}
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 16 a10 10 0 0 1 17 -7"/><path d="M23 5 V11 H17"/><path d="M26 16 a10 10 0 0 1 -17 7"/><path d="M9 27 V21 H15"/></svg>
+              {%- when 'lock' -%}
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="7" y="14" width="18" height="13" rx="1.5"/><path d="M11 14 V10 a5 5 0 0 1 10 0 V14"/></svg>
+              {%- else -%}
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="16" cy="16" r="8"/></svg>
+            {%- endcase -%}
+          </div>
+          <div>
+            {%- if trust_label != blank -%}<p class="grimmie-faq-{{ section_id }}__trust-label">{{ trust_label | escape }}</p>{%- endif -%}
+            {%- if trust_sub != blank -%}<p class="grimmie-faq-{{ section_id }}__trust-sub">{{ trust_sub | escape }}</p>{%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <div class="grimmie-faq-{{ section_id }}__hero">
+    <div class="grimmie-faq-{{ section_id }}__hero-text">
+      {%- if hero_heading != blank -%}
+        <h1 class="grimmie-faq-{{ section_id }}__hero-title">{{ hero_heading | escape | newline_to_br }}</h1>
+      {%- endif -%}
+      {%- if hero_text != blank -%}
+        <p class="grimmie-faq-{{ section_id }}__hero-body">{{ hero_text | escape | newline_to_br }}</p>
+      {%- endif -%}
+      {%- if hero_button_text != blank -%}
+        {%- if hero_button_link != blank -%}
+          <a class="grimmie-faq-{{ section_id }}__hero-cta" href="{{ hero_button_link }}">{{ hero_button_text | escape }}</a>
+        {%- else -%}
+          <span class="grimmie-faq-{{ section_id }}__hero-cta" role="button" aria-disabled="true">{{ hero_button_text | escape }}</span>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+    <div class="grimmie-faq-{{ section_id }}__hero-image">
+      {%- if hero_image != blank -%}
+        {{ hero_image | image_url: width: 1600 | image_tag: alt: hero_image_alt, loading: 'eager', widths: '600,900,1200,1600', sizes: '(max-width: 980px) 100vw, 50vw' }}
+      {%- else -%}
+        <svg class="placeholder" viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <rect x="40" y="40" width="60" height="40" rx="8" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="95" y="50" width="40" height="32" rx="8" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="grimmie-faq-{{ section_id }}__inner">
+    <div class="grimmie-faq-{{ section_id }}__categories">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'faq_category' -%}
+          <div class="grimmie-faq-{{ section_id }}__category" {{ block.shopify_attributes }}>
+            <div class="grimmie-faq-{{ section_id }}__category-head">
+              <div class="grimmie-faq-{{ section_id }}__category-icon" aria-hidden="{% if block.settings.icon_alt == blank %}true{% else %}false{% endif %}">
+                {%- if block.settings.icon != blank -%}
+                  {{ block.settings.icon | image_url: width: 120 | image_tag: alt: block.settings.icon_alt, loading: 'lazy' }}
+                {%- else -%}
+                  {%- case block.settings.fallback_icon -%}
+                    {%- when 'pouch' -%}
+                      <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt | default: 'Pouch' | escape }}">
+                        <rect x="5" y="12" width="22" height="14" rx="2"/>
+                        <path d="M10 12 V9 a4 4 0 0 1 4 -4 h4 a4 4 0 0 1 4 4 V12"/>
+                      </svg>
+                    {%- when 'care' -%}
+                      <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt | default: 'Care' | escape }}">
+                        <path d="M13 6 H19 V10 L22 14 V25 a2 2 0 0 1 -2 2 H12 a2 2 0 0 1 -2 -2 V14 L13 10 Z"/>
+                        <path d="M10 18 H22"/>
+                      </svg>
+                    {%- when 'truck' -%}
+                      <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt | default: 'Shipping' | escape }}">
+                        <rect x="3" y="9" width="16" height="13" rx="1.5"/>
+                        <path d="M19 13 H25 L29 17 V22 H19 Z"/>
+                        <circle cx="9" cy="24" r="2.2"/>
+                        <circle cx="24" cy="24" r="2.2"/>
+                      </svg>
+                    {%- when 'gift' -%}
+                      <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt | default: 'Gift' | escape }}">
+                        <rect x="5" y="12" width="22" height="15" rx="1.5"/>
+                        <path d="M3 9 H29 V13 H3 Z"/>
+                        <path d="M16 9 V27"/>
+                        <path d="M16 9 C 13 5 9 7 11 11 C 13 13 16 12 16 9 Z"/>
+                        <path d="M16 9 C 19 5 23 7 21 11 C 19 13 16 12 16 9 Z"/>
+                      </svg>
+                    {%- else -%}
+                      <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt | default: 'Icon' | escape }}"><circle cx="16" cy="16" r="8"/></svg>
+                  {%- endcase -%}
+                {%- endif -%}
+              </div>
+              {%- if block.settings.title != blank -%}
+                <h2 class="grimmie-faq-{{ section_id }}__category-title">{{ block.settings.title | escape }}</h2>
+              {%- endif -%}
+            </div>
+            <div class="grimmie-faq-{{ section_id }}__accordion">
+              {%- for i in (1..6) -%}
+                {%- assign q_key = 'q' | append: i -%}
+                {%- assign a_key = 'a' | append: i -%}
+                {%- assign question = block.settings[q_key] -%}
+                {%- assign answer = block.settings[a_key] -%}
+                {%- if question != blank -%}
+                  <details class="grimmie-faq-{{ section_id }}__item">
+                    <summary>
+                      <span>{{ question | escape }}</span>
+                      <span class="grimmie-faq-{{ section_id }}__plus" aria-hidden="true"></span>
+                    </summary>
+                    {%- if answer != blank -%}
+                      <div class="grimmie-faq-{{ section_id }}__answer">{{ answer | escape | newline_to_br }}</div>
+                    {%- endif -%}
+                  </details>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="grimmie-faq-{{ section_id }}__banner">
+      <div class="grimmie-faq-{{ section_id }}__banner-side grimmie-faq-{{ section_id }}__banner-side--left">
+        <div class="grimmie-faq-{{ section_id }}__banner-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M6 18 V14 a10 10 0 0 1 20 0 V18"/><rect x="4" y="18" width="6" height="8" rx="1.5"/><rect x="22" y="18" width="6" height="8" rx="1.5"/></svg>
+        </div>
+        <div class="grimmie-faq-{{ section_id }}__banner-content">
+          {%- if banner_title != blank -%}<p class="grimmie-faq-{{ section_id }}__banner-title">{{ banner_title | escape }}</p>{%- endif -%}
+          {%- if banner_text != blank -%}<p class="grimmie-faq-{{ section_id }}__banner-text">{{ banner_text | escape }}</p>{%- endif -%}
+          {%- if banner_button_text != blank -%}
+            <a class="grimmie-faq-{{ section_id }}__banner-btn" href="{{ banner_button_link | default: '#' }}">{{ banner_button_text | escape }}</a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="grimmie-faq-{{ section_id }}__banner-divider" aria-hidden="true">
+        <span>{{ banner_divider_text | default: 'oppure' | escape }}</span>
+      </div>
+
+      <div class="grimmie-faq-{{ section_id }}__banner-side">
+        <div class="grimmie-faq-{{ section_id }}__banner-product">
+          {%- if banner_product_image != blank -%}
+            {{ banner_product_image | image_url: width: 240 | image_tag: alt: banner_product_image_alt, loading: 'lazy', widths: '120,240', sizes: '120px' }}
+          {%- else -%}
+            <svg class="placeholder" viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <rect x="20" y="40" width="80" height="50" rx="10" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="92" y="52" width="50" height="38" rx="8" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          {%- endif -%}
+        </div>
+        <div class="grimmie-faq-{{ section_id }}__banner-content">
+          {%- if banner_right_text != blank -%}<p class="grimmie-faq-{{ section_id }}__banner-text" style="margin-bottom:14px">{{ banner_right_text | escape }}</p>{%- endif -%}
+          {%- if banner_right_button_text != blank -%}
+            <a class="grimmie-faq-{{ section_id }}__banner-btn" href="{{ banner_right_button_link | default: '#' }}">{{ banner_right_button_text | escape }}</a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Grimmie FAQ Page",
+  "tag": "section",
+  "class": "grimmie-faq-section",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "textarea", "id": "hero_heading", "label": "Hero title", "info": "Line breaks preserved.", "default": "Domande,\nrisposte con cura." },
+    { "type": "textarea", "id": "hero_text", "label": "Hero text", "default": "Siamo qui per aiutarti a scegliere la pouch più adatta alla tua routine. Trova qui le risposte alle domande più frequenti su prodotti, spedizioni, resi e cura." },
+    { "type": "text", "id": "hero_button_text", "label": "Hero button text", "default": "SCOPRI IL SET" },
+    { "type": "url", "id": "hero_button_link", "label": "Hero button link" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "text", "id": "hero_image_alt", "label": "Hero image alt text", "default": "Grimmie Alma pouches" },
+
+    { "type": "header", "content": "Trust bar" },
+    { "type": "select", "id": "trust1_icon", "label": "Item 1 icon", "options": [{"value":"truck","label":"Truck"},{"value":"returns","label":"Returns"},{"value":"lock","label":"Lock"}], "default": "truck" },
+    { "type": "text", "id": "trust1_label", "label": "Item 1 label", "default": "SPEDIZIONE GRATUITA" },
+    { "type": "text", "id": "trust1_subtitle", "label": "Item 1 subtitle", "default": "Sopra i 65€" },
+    { "type": "select", "id": "trust2_icon", "label": "Item 2 icon", "options": [{"value":"truck","label":"Truck"},{"value":"returns","label":"Returns"},{"value":"lock","label":"Lock"}], "default": "returns" },
+    { "type": "text", "id": "trust2_label", "label": "Item 2 label", "default": "RESI FACILI" },
+    { "type": "text", "id": "trust2_subtitle", "label": "Item 2 subtitle", "default": "30 giorni, senza complicazioni" },
+    { "type": "select", "id": "trust3_icon", "label": "Item 3 icon", "options": [{"value":"truck","label":"Truck"},{"value":"returns","label":"Returns"},{"value":"lock","label":"Lock"}], "default": "lock" },
+    { "type": "text", "id": "trust3_label", "label": "Item 3 label", "default": "PAGAMENTI SICURI" },
+    { "type": "text", "id": "trust3_subtitle", "label": "Item 3 subtitle", "default": "I tuoi dati sono protetti" },
+
+    { "type": "header", "content": "Support banner" },
+    { "type": "text", "id": "banner_title", "label": "Left title", "default": "Hai ancora domande?" },
+    { "type": "text", "id": "banner_text", "label": "Left text", "default": "Il nostro customer care è qui per aiutarti." },
+    { "type": "text", "id": "banner_button_text", "label": "Left button text", "default": "CONTATTA IL SUPPORTO" },
+    { "type": "url", "id": "banner_button_link", "label": "Left button link" },
+    { "type": "text", "id": "banner_divider_text", "label": "Divider text", "default": "oppure" },
+    { "type": "image_picker", "id": "banner_product_image", "label": "Right product image" },
+    { "type": "text", "id": "banner_product_image_alt", "label": "Right product image alt", "default": "Alma Duo" },
+    { "type": "text", "id": "banner_right_text", "label": "Right text", "default": "Il duo perfetto per ogni parte della tua routine." },
+    { "type": "text", "id": "banner_right_button_text", "label": "Right button text", "default": "SCOPRI IL SET" },
+    { "type": "url", "id": "banner_right_button_link", "label": "Right button link" },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#F7F1EE" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#3B2A22" },
+    { "type": "color", "id": "text_color", "label": "Body text color", "default": "#6E5F59" },
+    { "type": "color", "id": "accent_color", "label": "Accent (blush)", "default": "#EACBC8" },
+    { "type": "color", "id": "border_color", "label": "Border / divider", "default": "#DDD2CA" },
+    { "type": "color", "id": "banner_background_color", "label": "Banner background", "default": "#F7EDEB" },
+    { "type": "color", "id": "button_background_color", "label": "Button background", "default": "#EACBC8" },
+    { "type": "color", "id": "button_text_color", "label": "Button text", "default": "#6E5F59" },
+    { "type": "color", "id": "button_hover_background_color", "label": "Button hover", "default": "#DFAFB3" },
+
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 100 },
+
+    { "type": "header", "content": "Accessibility" },
+    { "type": "text", "id": "aria_label", "label": "Section aria-label", "default": "FAQ" }
+  ],
+  "blocks": [
+    {
+      "type": "faq_category",
+      "name": "FAQ category",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Custom icon", "info": "Optional. Overrides fallback." },
+        { "type": "select", "id": "fallback_icon", "label": "Fallback icon", "options": [
+          { "value": "pouch", "label": "Pouch / product" },
+          { "value": "care", "label": "Care / bottle" },
+          { "value": "truck", "label": "Truck / shipping" },
+          { "value": "gift", "label": "Gift" },
+          { "value": "none", "label": "None (circle)" }
+        ], "default": "pouch" },
+        { "type": "text", "id": "icon_alt", "label": "Icon alt text" },
+        { "type": "text", "id": "title", "label": "Category title", "default": "Prodotti e misure" },
+        { "type": "header", "content": "FAQ items" },
+        { "type": "text", "id": "q1", "label": "Question 1" },
+        { "type": "textarea", "id": "a1", "label": "Answer 1" },
+        { "type": "text", "id": "q2", "label": "Question 2" },
+        { "type": "textarea", "id": "a2", "label": "Answer 2" },
+        { "type": "text", "id": "q3", "label": "Question 3" },
+        { "type": "textarea", "id": "a3", "label": "Answer 3" },
+        { "type": "text", "id": "q4", "label": "Question 4" },
+        { "type": "textarea", "id": "a4", "label": "Answer 4" },
+        { "type": "text", "id": "q5", "label": "Question 5" },
+        { "type": "textarea", "id": "a5", "label": "Answer 5" },
+        { "type": "text", "id": "q6", "label": "Question 6" },
+        { "type": "textarea", "id": "a6", "label": "Answer 6" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Grimmie FAQ Page",
+      "category": "Grimmie",
+      "blocks": [
+        {
+          "type": "faq_category",
+          "settings": {
+            "fallback_icon": "pouch",
+            "title": "Prodotti e misure",
+            "q1": "Quali misure sono disponibili?",
+            "a1": "Alma è disponibile in due formati: Classic, pensata per gli essenziali quotidiani, e Large, ideale per routine più complete, prodotti skincare, hair tools e accessori più voluminosi. È disponibile anche il Duo, che include entrambi i formati.",
+            "q2": "Cosa entra nella pouch Classic?",
+            "a2": "La Classic è pensata per make-up, skincare essenziale, piccoli accessori, prodotti da borsa e tutto ciò che vuoi avere sempre a portata di mano durante la giornata.",
+            "q3": "Cosa entra nella pouch Large?",
+            "a3": "La Large offre più spazio ed è ideale per prodotti skincare in formato più grande, accessori beauty, piastre, strumenti per capelli e tutto ciò che ti serve per una routine completa, a casa o in viaggio.",
+            "q4": "Posso acquistare le pouch singolarmente o in set?",
+            "a4": "Sì, puoi scegliere il formato Classic, il formato Large oppure il Duo, che unisce entrambi i formati per organizzare la routine in modo più completo.",
+            "q5": "In quale colore è disponibile Alma?",
+            "a5": "Al lancio Alma è disponibile nella variante Ivory, una tonalità chiara, elegante e versatile, pensata per adattarsi a ogni routine e ambiente."
+          }
+        },
+        {
+          "type": "faq_category",
+          "settings": {
+            "fallback_icon": "care",
+            "title": "Materiali e cura",
+            "q1": "Di che materiale sono fatte le pouch?",
+            "a1": "Le pouch Grimmie sono pensate per essere strutturate, eleganti e pratiche. Inserire qui il materiale definitivo: [INSERIRE MATERIALE DEFINITIVO]. Il design è studiato per mantenere la forma e proteggere meglio gli essenziali della tua routine.",
+            "q2": "Le pouch sono lavabili?",
+            "a2": "La modalità di pulizia dipende dal materiale definitivo. In generale, consigliamo di pulire la pouch delicatamente con un panno morbido e leggermente umido, evitando lavaggi aggressivi o prodotti abrasivi. Aggiornare questa risposta dopo conferma del materiale.",
+            "q3": "Come pulisco la mia pouch?",
+            "a3": "Per mantenerla bella nel tempo, rimuovi eventuali residui con un panno morbido e pulisci delicatamente la superficie. Evita candeggina, solventi, immersione in acqua e fonti di calore diretto."
+          }
+        },
+        {
+          "type": "faq_category",
+          "settings": {
+            "fallback_icon": "truck",
+            "title": "Spedizioni e resi",
+            "q1": "Quanto costa la spedizione?",
+            "a1": "La spedizione è gratuita per ordini superiori a 65€. Per ordini inferiori a questa soglia, il costo della spedizione verrà indicato al checkout prima della conferma dell'ordine.",
+            "q2": "Quanto tempo impiegherà il mio ordine?",
+            "a2": "I tempi di preparazione e consegna possono variare in base alla destinazione e al corriere. Le tempistiche stimate vengono indicate durante l'acquisto e nella comunicazione di conferma ordine.",
+            "q3": "Qual è la vostra politica di reso?",
+            "a3": "Puoi richiedere un reso entro 30 giorni dalla consegna scrivendo a info@grimmie.co. Dopo la richiesta riceverai via email tutte le istruzioni per procedere con il reso.",
+            "q4": "Come richiedo un reso?",
+            "a4": "Scrivi a info@grimmie.co indicando il numero d'ordine e il motivo della richiesta. Il nostro team ti risponderà con le istruzioni necessarie per completare la procedura."
+          }
+        },
+        {
+          "type": "faq_category",
+          "settings": {
+            "fallback_icon": "gift",
+            "title": "Ordini e gifting",
+            "q1": "Posso tracciare il mio ordine?",
+            "a1": "Sì, quando l'ordine verrà spedito riceverai una comunicazione con le informazioni disponibili per seguire la consegna, se il servizio di tracking è previsto dal corriere utilizzato.",
+            "q2": "Posso inviare Alma come regalo?",
+            "a2": "Sì, puoi inserire direttamente l'indirizzo della persona a cui vuoi inviare l'ordine durante il checkout.",
+            "q3": "Offrite confezioni regalo o messaggi personalizzati?",
+            "a3": "Al momento questa opzione potrebbe non essere sempre disponibile. Se hai esigenze particolari, scrivici a info@grimmie.co prima di effettuare l'ordine e faremo il possibile per aiutarti."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
