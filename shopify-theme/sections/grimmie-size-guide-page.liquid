@@ -1,0 +1,1100 @@
+{%- liquid
+  assign section_id = section.id
+
+  assign hero_heading = section.settings.hero_heading
+  assign hero_text = section.settings.hero_text
+  assign hero_image = section.settings.hero_image
+  assign hero_image_alt = section.settings.hero_image_alt
+
+  assign choice_title = section.settings.choice_title
+  assign visual_title = section.settings.visual_title
+  assign fits_title = section.settings.fits_title
+  assign table_title = section.settings.table_title
+  assign table_col_1 = section.settings.table_col_1
+  assign table_col_2 = section.settings.table_col_2
+  assign table_col_3 = section.settings.table_col_3
+  assign rhythm_title = section.settings.rhythm_title
+  assign rhythm_subtitle = section.settings.rhythm_subtitle
+
+  assign bottom_image = section.settings.bottom_image
+  assign bottom_image_alt = section.settings.bottom_image_alt
+  assign cta_text = section.settings.cta_text
+  assign cta_link = section.settings.cta_link
+
+  assign bg_color = section.settings.background_color
+  assign secondary_bg = section.settings.secondary_background_color
+  assign heading_color = section.settings.heading_color
+  assign text_color = section.settings.text_color
+  assign accent_color = section.settings.accent_color
+  assign border_color = section.settings.border_color
+  assign card_bg = section.settings.card_background_color
+  assign btn_bg = section.settings.button_background_color
+  assign btn_text = section.settings.button_text_color
+  assign btn_hover_bg = section.settings.button_hover_background_color
+-%}
+
+<style>
+  .grimmie-size-{{ section_id }} {
+    --sg-bg: {{ bg_color }};
+    --sg-bg-2: {{ secondary_bg }};
+    --sg-heading: {{ heading_color }};
+    --sg-text: {{ text_color }};
+    --sg-accent: {{ accent_color }};
+    --sg-border: {{ border_color }};
+    --sg-card-bg: {{ card_bg }};
+    --sg-btn-bg: {{ btn_bg }};
+    --sg-btn-text: {{ btn_text }};
+    --sg-btn-hover-bg: {{ btn_hover_bg }};
+
+    background-color: var(--sg-bg);
+    color: var(--sg-text);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .grimmie-size-{{ section_id }} * { box-sizing: border-box; }
+
+  .grimmie-size-{{ section_id }}__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 56px);
+  }
+
+  /* Hero */
+  .grimmie-size-{{ section_id }}__hero {
+    position: relative;
+    width: 100%;
+    margin-top: -{{ section.settings.padding_top }}px;
+    margin-bottom: clamp(48px, 6vw, 80px);
+    background-color: var(--sg-bg-2);
+    overflow: hidden;
+  }
+
+  .grimmie-size-{{ section_id }}__hero-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: clamp(36px, 6vw, 80px) clamp(20px, 5vw, 56px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(24px, 4vw, 56px);
+    align-items: center;
+    min-height: clamp(280px, 32vw, 380px);
+  }
+
+  .grimmie-size-{{ section_id }}__hero-text {
+    max-width: 460px;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 2vw, 18px);
+  }
+
+  .grimmie-size-{{ section_id }}__hero-title {
+    font-family: var(--font-heading--family, 'Gloock', serif);
+    color: var(--sg-heading);
+    font-size: clamp(36px, 5.5vw, 64px);
+    line-height: 1.05;
+    margin: 0;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  .grimmie-size-{{ section_id }}__hero-subtitle {
+    font-family: var(--font-body--family, sans-serif);
+    color: var(--sg-text);
+    font-size: clamp(15px, 1.4vw, 17px);
+    line-height: 1.55;
+    margin: 0;
+    max-width: 380px;
+  }
+
+  .grimmie-size-{{ section_id }}__hero-image {
+    width: 100%;
+    height: 100%;
+    min-height: clamp(220px, 28vw, 360px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .grimmie-size-{{ section_id }}__hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 4px;
+  }
+
+  .grimmie-size-{{ section_id }}__hero-image svg.placeholder {
+    width: 100%;
+    height: 100%;
+    color: var(--sg-accent);
+    opacity: 0.4;
+  }
+
+  /* Section headings (lined eyebrow style) */
+  .grimmie-size-{{ section_id }}__section-eyebrow {
+    text-align: center;
+    font-family: var(--font-body--family, sans-serif);
+    color: var(--sg-text);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 clamp(24px, 3vw, 36px);
+    font-weight: 500;
+  }
+
+  .grimmie-size-{{ section_id }}__section-heading {
+    text-align: center;
+    font-family: var(--font-heading--family, 'Gloock', serif);
+    color: var(--sg-heading);
+    font-size: clamp(28px, 3.6vw, 42px);
+    line-height: 1.15;
+    margin: 0 0 12px;
+    font-weight: 400;
+    letter-spacing: -0.005em;
+  }
+
+  .grimmie-size-{{ section_id }}__section-sub {
+    text-align: center;
+    font-family: var(--font-body--family, sans-serif);
+    color: var(--sg-text);
+    font-size: clamp(14px, 1.2vw, 16px);
+    line-height: 1.55;
+    margin: 0 auto clamp(32px, 4vw, 48px);
+    max-width: 640px;
+  }
+
+  /* Section spacing */
+  .grimmie-size-{{ section_id }}__section {
+    margin-bottom: clamp(48px, 6vw, 80px);
+  }
+
+  /* Choice cards (3 horizontal cards) */
+  .grimmie-size-{{ section_id }}__choice-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(16px, 2vw, 24px);
+  }
+
+  .grimmie-size-{{ section_id }}__choice-card {
+    background-color: var(--sg-card-bg);
+    border: 1px solid var(--sg-border);
+    border-radius: 6px;
+    padding: clamp(20px, 2.4vw, 28px);
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 1.8vw, 22px);
+  }
+
+  .grimmie-size-{{ section_id }}__choice-icon {
+    flex-shrink: 0;
+    width: clamp(56px, 7vw, 84px);
+    height: clamp(56px, 7vw, 84px);
+    border-radius: 50%;
+    background-color: var(--sg-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sg-heading);
+  }
+
+  .grimmie-size-{{ section_id }}__choice-icon svg {
+    width: 52%;
+    height: 52%;
+    stroke: currentColor;
+    stroke-width: 1.4;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .grimmie-size-{{ section_id }}__choice-icon img {
+    width: 56%;
+    height: 56%;
+    object-fit: contain;
+  }
+
+  .grimmie-size-{{ section_id }}__choice-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .grimmie-size-{{ section_id }}__choice-title {
+    font-family: var(--font-body--family, sans-serif);
+    color: var(--sg-heading);
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+
+  .grimmie-size-{{ section_id }}__choice-desc {
+    font-family: var(--font-body--family, sans-serif);
+    color: var(--sg-text);
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Visual size comparison (3 columns w/ dividers) */
+  .grimmie-size-{{ section_id }}__visual-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--sg-border);
+    border-bottom: 1px solid var(--sg-border);
+  }
+
+  .grimmie-size-{{ section_id }}__visual-col {
+    padding: clamp(24px, 3vw, 40px) clamp(16px, 2vw, 24px);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid var(--sg-border);
+  }
+
+  .grimmie-size-{{ section_id }}__visual-col:last-child {
+    border-right: none;
+  }
+
+  .grimmie-size-{{ section_id }}__visual-image {
+    width: 100%;
+    max-width: 260px;
+    aspect-ratio: 4 / 3;
+    margin-bottom: clamp(16px, 2vw, 24px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .grimmie-size-{{ section_id }}__visual-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .grimmie-size-{{ section_id }}__visual-image svg.placeholder {
+    width: 70%;
+    height: 70%;
+    color: var(--sg-accent);
+    opacity: 0.5;
+  }
+
+  .grimmie-size-{{ section_id }}__visual-title {
+    font-family: var(--font-body--family, sans-serif);
+    color: var(--sg-heading);
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+
+  .grimmie-size-{{ section_id }}__visual-size {
+    font-family: var(--font-body--family, sans-serif);
+    color: var(--sg-text);
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .grimmie-size-{{ section_id }}__visual-link {
+    text-decoration: none;
+    color: inherit;
+    display: contents;
+  }
+
+  /* What fits inside (3 photo cards) */
+  .grimmie-size-{{ section_id }}__fits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(16px, 2vw, 24px);
+  }
+
+  .grimmie-size-{{ section_id }}__fits-card {
+    background-color: var(--sg-card-bg);
+    border: 1px solid var(--sg-border);
+    border-radius: 6px;
+    padding: clamp(18px, 2vw, 24px);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .grimmie-size-{{ section_id }}__fits-title {
+    font-family: var(--font-body--family, sans-serif);
+    color: var(--sg-heading);
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .grimmie-size-{{ section_id }}__fits-image {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 4px;
+    background-color: var(--sg-bg-2);
+  }
+
+  .grimmie-size-{{ section_id }}__fits-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .grimmie-size-{{ section_id }}__fits-image svg.placeholder {
+    width: 60%;
+    height: 60%;
+    color: var(--sg-accent);
+    opacity: 0.45;
+  }
+
+  .grimmie-size-{{ section_id }}__fits-desc {
+    font-family: var(--font-body--family, sans-serif);
+    color: var(--sg-text);
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+    text-align: center;
+  }
+
+  /* Comparison table */
+  .grimmie-size-{{ section_id }}__table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .grimmie-size-{{ section_id }}__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-body--family, sans-serif);
+    color: var(--sg-text);
+    background-color: var(--sg-bg);
+    min-width: 560px;
+  }
+
+  .grimmie-size-{{ section_id }}__table th,
+  .grimmie-size-{{ section_id }}__table td {
+    border: 1px solid var(--sg-border);
+    padding: clamp(12px, 1.6vw, 18px) clamp(10px, 1.4vw, 18px);
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.4;
+    vertical-align: middle;
+  }
+
+  .grimmie-size-{{ section_id }}__table th {
+    background-color: var(--sg-bg-2);
+    color: var(--sg-heading);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 13px;
+  }
+
+  .grimmie-size-{{ section_id }}__table th:first-child,
+  .grimmie-size-{{ section_id }}__table td:first-child {
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: var(--sg-heading);
+    background-color: var(--sg-bg-2);
+  }
+
+  .grimmie-size-{{ section_id }}__dots {
+    letter-spacing: 0.18em;
+    font-size: 13px;
+    color: var(--sg-heading);
+  }
+
+  /* Rhythm cards (4 small cards w/ arrow dividers) */
+  .grimmie-size-{{ section_id }}__rhythm-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: clamp(8px, 1.2vw, 16px);
+    align-items: stretch;
+  }
+
+  .grimmie-size-{{ section_id }}__rhythm-card {
+    background-color: var(--sg-card-bg);
+    border: 1px solid var(--sg-border);
+    border-radius: 6px;
+    padding: clamp(18px, 2vw, 24px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .grimmie-size-{{ section_id }}__rhythm-icon {
+    width: 36px;
+    height: 36px;
+    color: var(--sg-heading);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2px;
+  }
+
+  .grimmie-size-{{ section_id }}__rhythm-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: currentColor;
+    stroke-width: 1.4;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .grimmie-size-{{ section_id }}__rhythm-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .grimmie-size-{{ section_id }}__rhythm-title {
+    font-family: var(--font-body--family, sans-serif);
+    color: var(--sg-heading);
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .grimmie-size-{{ section_id }}__rhythm-desc {
+    font-family: var(--font-body--family, sans-serif);
+    color: var(--sg-text);
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0 0 6px;
+  }
+
+  .grimmie-size-{{ section_id }}__rhythm-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--sg-accent);
+    color: var(--sg-heading);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    margin-top: auto;
+  }
+
+  .grimmie-size-{{ section_id }}__rhythm-sep {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sg-border);
+  }
+
+  .grimmie-size-{{ section_id }}__rhythm-sep svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    stroke-width: 1.2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Bottom image + CTA */
+  .grimmie-size-{{ section_id }}__bottom {
+    text-align: center;
+    margin-top: clamp(40px, 5vw, 64px);
+  }
+
+  .grimmie-size-{{ section_id }}__bottom-image {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto clamp(28px, 3.5vw, 44px);
+    aspect-ratio: 16 / 7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .grimmie-size-{{ section_id }}__bottom-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .grimmie-size-{{ section_id }}__bottom-image svg.placeholder {
+    width: 60%;
+    height: 60%;
+    color: var(--sg-accent);
+    opacity: 0.45;
+  }
+
+  .grimmie-size-{{ section_id }}__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--sg-btn-bg);
+    color: var(--sg-btn-text);
+    font-family: var(--font-body--family, sans-serif);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border-radius: 999px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 200ms ease;
+  }
+
+  .grimmie-size-{{ section_id }}__cta:hover,
+  .grimmie-size-{{ section_id }}__cta:focus-visible {
+    background-color: var(--sg-btn-hover-bg);
+  }
+
+  /* Tablet */
+  @media (max-width: 900px) {
+    .grimmie-size-{{ section_id }}__choice-grid,
+    .grimmie-size-{{ section_id }}__fits-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .grimmie-size-{{ section_id }}__visual-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .grimmie-size-{{ section_id }}__visual-col {
+      border-right: none;
+      border-bottom: 1px solid var(--sg-border);
+    }
+
+    .grimmie-size-{{ section_id }}__visual-col:last-child {
+      border-bottom: none;
+    }
+
+    .grimmie-size-{{ section_id }}__rhythm-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .grimmie-size-{{ section_id }}__rhythm-sep {
+      display: none;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .grimmie-size-{{ section_id }} {
+      padding-top: {{ section.settings.padding_top | times: 0.7 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.7 | round }}px;
+    }
+
+    .grimmie-size-{{ section_id }}__hero {
+      margin-top: -{{ section.settings.padding_top | times: 0.7 | round }}px;
+    }
+
+    .grimmie-size-{{ section_id }}__hero-inner {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      min-height: 0;
+    }
+
+    .grimmie-size-{{ section_id }}__hero-image {
+      min-height: 220px;
+      order: 2;
+    }
+
+    .grimmie-size-{{ section_id }}__rhythm-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .grimmie-size-{{ section_id }}__table th,
+    .grimmie-size-{{ section_id }}__table td {
+      padding: 10px 8px;
+      font-size: 12px;
+    }
+  }
+</style>
+
+<section
+  class="grimmie-size-{{ section_id }}"
+  aria-label="{{ section.settings.aria_label | default: 'Size guide' | escape }}"
+>
+  {%- comment -%} HERO {%- endcomment -%}
+  <div class="grimmie-size-{{ section_id }}__hero">
+    <div class="grimmie-size-{{ section_id }}__hero-inner">
+      <div class="grimmie-size-{{ section_id }}__hero-text">
+        {%- if hero_heading != blank -%}
+          <h1 class="grimmie-size-{{ section_id }}__hero-title">{{ hero_heading | newline_to_br }}</h1>
+        {%- endif -%}
+        {%- if hero_text != blank -%}
+          <p class="grimmie-size-{{ section_id }}__hero-subtitle">{{ hero_text | escape }}</p>
+        {%- endif -%}
+      </div>
+      <div class="grimmie-size-{{ section_id }}__hero-image">
+        {%- if hero_image != blank -%}
+          {{ hero_image | image_url: width: 1200 | image_tag: alt: hero_image_alt, loading: 'eager', widths: '480,720,960,1200,1600', sizes: '(max-width: 900px) 90vw, 560px' }}
+        {%- else -%}
+          <svg class="placeholder" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <rect x="40" y="60" width="120" height="70" rx="10" fill="currentColor" opacity="0.5"/>
+            <rect x="70" y="40" width="60" height="30" rx="8" fill="none" stroke="currentColor" stroke-width="3"/>
+          </svg>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <div class="grimmie-size-{{ section_id }}__inner">
+
+    {%- comment -%} 1. CHOICE CARDS {%- endcomment -%}
+    {%- assign choice_blocks = section.blocks | where: 'type', 'choice_card' -%}
+    {%- if choice_title != blank or choice_blocks.size > 0 -%}
+      <div class="grimmie-size-{{ section_id }}__section">
+        {%- if choice_title != blank -%}
+          <p class="grimmie-size-{{ section_id }}__section-eyebrow">{{ choice_title | escape }}</p>
+        {%- endif -%}
+        {%- if choice_blocks.size > 0 -%}
+          <div class="grimmie-size-{{ section_id }}__choice-grid">
+            {%- for block in choice_blocks -%}
+              <div class="grimmie-size-{{ section_id }}__choice-card" {{ block.shopify_attributes }}>
+                <div class="grimmie-size-{{ section_id }}__choice-icon" aria-hidden="{% if block.settings.icon_alt == blank %}true{% else %}false{% endif %}">
+                  {%- if block.settings.icon != blank -%}
+                    {{ block.settings.icon | image_url: width: 120 | image_tag: alt: block.settings.icon_alt, loading: 'lazy' }}
+                  {%- else -%}
+                    {%- case block.settings.fallback_icon -%}
+                      {%- when 'classic' -%}
+                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt | default: 'Classic' | escape }}">
+                          <rect x="5" y="12" width="22" height="12" rx="2"/>
+                          <path d="M10 12 V10 a3 3 0 0 1 3 -3 h6 a3 3 0 0 1 3 3 V12"/>
+                        </svg>
+                      {%- when 'large' -%}
+                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt | default: 'Large' | escape }}">
+                          <rect x="3" y="10" width="26" height="16" rx="2.5"/>
+                          <path d="M9 10 V8 a3 3 0 0 1 3 -3 h8 a3 3 0 0 1 3 3 V10"/>
+                        </svg>
+                      {%- when 'duo' -%}
+                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt | default: 'Duo' | escape }}">
+                          <rect x="2" y="12" width="14" height="12" rx="2"/>
+                          <rect x="17" y="14" width="13" height="10" rx="2"/>
+                          <path d="M5 12 V10 a2.5 2.5 0 0 1 2.5 -2.5 h3 a2.5 2.5 0 0 1 2.5 2.5 V12"/>
+                        </svg>
+                      {%- else -%}
+                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt | default: 'Icon' | escape }}"><circle cx="16" cy="16" r="8"/></svg>
+                    {%- endcase -%}
+                  {%- endif -%}
+                </div>
+                <div class="grimmie-size-{{ section_id }}__choice-body">
+                  {%- if block.settings.title != blank -%}
+                    <h3 class="grimmie-size-{{ section_id }}__choice-title">{{ block.settings.title | escape }}</h3>
+                  {%- endif -%}
+                  {%- if block.settings.description != blank -%}
+                    <p class="grimmie-size-{{ section_id }}__choice-desc">{{ block.settings.description | escape }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} 2. VISUAL SIZE COMPARISON {%- endcomment -%}
+    {%- assign visual_blocks = section.blocks | where: 'type', 'size_visual' -%}
+    {%- if visual_title != blank or visual_blocks.size > 0 -%}
+      <div class="grimmie-size-{{ section_id }}__section">
+        {%- if visual_title != blank -%}
+          <p class="grimmie-size-{{ section_id }}__section-eyebrow">{{ visual_title | escape }}</p>
+        {%- endif -%}
+        {%- if visual_blocks.size > 0 -%}
+          <div class="grimmie-size-{{ section_id }}__visual-grid">
+            {%- for block in visual_blocks -%}
+              {%- assign visual_link = block.settings.link -%}
+              {%- capture visual_inner -%}
+                <div class="grimmie-size-{{ section_id }}__visual-image">
+                  {%- if block.settings.image != blank -%}
+                    {{ block.settings.image | image_url: width: 520 | image_tag: alt: block.settings.image_alt, loading: 'lazy', widths: '260,360,520', sizes: '(max-width: 900px) 80vw, 320px' }}
+                  {%- else -%}
+                    <svg class="placeholder" viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                      <rect x="30" y="45" width="100" height="55" rx="8" fill="currentColor" opacity="0.5"/>
+                      <rect x="55" y="30" width="50" height="22" rx="6" fill="none" stroke="currentColor" stroke-width="2.5"/>
+                    </svg>
+                  {%- endif -%}
+                </div>
+                {%- if block.settings.title != blank -%}
+                  <h3 class="grimmie-size-{{ section_id }}__visual-title">{{ block.settings.title | escape }}</h3>
+                {%- endif -%}
+                {%- if block.settings.size_text != blank -%}
+                  <p class="grimmie-size-{{ section_id }}__visual-size">{{ block.settings.size_text | escape }}</p>
+                {%- endif -%}
+              {%- endcapture -%}
+              <div class="grimmie-size-{{ section_id }}__visual-col" {{ block.shopify_attributes }}>
+                {%- if visual_link != blank -%}
+                  <a class="grimmie-size-{{ section_id }}__visual-link" href="{{ visual_link }}">{{ visual_inner }}</a>
+                {%- else -%}
+                  {{ visual_inner }}
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} 3. WHAT FITS INSIDE {%- endcomment -%}
+    {%- assign fits_blocks = section.blocks | where: 'type', 'fits_card' -%}
+    {%- if fits_title != blank or fits_blocks.size > 0 -%}
+      <div class="grimmie-size-{{ section_id }}__section">
+        {%- if fits_title != blank -%}
+          <p class="grimmie-size-{{ section_id }}__section-eyebrow">{{ fits_title | escape }}</p>
+        {%- endif -%}
+        {%- if fits_blocks.size > 0 -%}
+          <div class="grimmie-size-{{ section_id }}__fits-grid">
+            {%- for block in fits_blocks -%}
+              <div class="grimmie-size-{{ section_id }}__fits-card" {{ block.shopify_attributes }}>
+                {%- if block.settings.title != blank -%}
+                  <h3 class="grimmie-size-{{ section_id }}__fits-title">{{ block.settings.title | escape }}</h3>
+                {%- endif -%}
+                <div class="grimmie-size-{{ section_id }}__fits-image">
+                  {%- if block.settings.image != blank -%}
+                    {{ block.settings.image | image_url: width: 720 | image_tag: alt: block.settings.image_alt, loading: 'lazy', widths: '360,540,720', sizes: '(max-width: 900px) 90vw, 380px' }}
+                  {%- else -%}
+                    <svg class="placeholder" viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                      <rect x="40" y="55" width="120" height="60" rx="8" fill="currentColor" opacity="0.5"/>
+                      <circle cx="70" cy="40" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                      <rect x="100" y="32" width="20" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                  {%- endif -%}
+                </div>
+                {%- if block.settings.description != blank -%}
+                  <p class="grimmie-size-{{ section_id }}__fits-desc">{{ block.settings.description | escape }}</p>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} 4. COMPARISON TABLE {%- endcomment -%}
+    {%- assign table_blocks = section.blocks | where: 'type', 'table_row' -%}
+    {%- if table_title != blank or table_blocks.size > 0 -%}
+      <div class="grimmie-size-{{ section_id }}__section">
+        {%- if table_title != blank -%}
+          <p class="grimmie-size-{{ section_id }}__section-eyebrow">{{ table_title | escape }}</p>
+        {%- endif -%}
+        {%- if table_blocks.size > 0 -%}
+          <div class="grimmie-size-{{ section_id }}__table-wrap">
+            <table class="grimmie-size-{{ section_id }}__table">
+              <thead>
+                <tr>
+                  <th scope="col"><span class="visually-hidden">&nbsp;</span></th>
+                  <th scope="col">{{ table_col_1 | escape }}</th>
+                  <th scope="col">{{ table_col_2 | escape }}</th>
+                  <th scope="col">{{ table_col_3 | escape }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%- for block in table_blocks -%}
+                  <tr {{ block.shopify_attributes }}>
+                    <th scope="row">{{ block.settings.row_label | escape }}</th>
+                    {%- if block.settings.value_type == 'dots' -%}
+                      {%- assign dots_classic = '' -%}
+                      {%- for i in (1..block.settings.classic_level) -%}{%- assign dots_classic = dots_classic | append: '●' -%}{%- endfor -%}
+                      {%- assign dots_large = '' -%}
+                      {%- for i in (1..block.settings.large_level) -%}{%- assign dots_large = dots_large | append: '●' -%}{%- endfor -%}
+                      {%- assign dots_duo = '' -%}
+                      {%- for i in (1..block.settings.duo_level) -%}{%- assign dots_duo = dots_duo | append: '●' -%}{%- endfor -%}
+                      <td><span class="grimmie-size-{{ section_id }}__dots" aria-label="{{ block.settings.classic_level }} su 5">{{ dots_classic }}</span></td>
+                      <td><span class="grimmie-size-{{ section_id }}__dots" aria-label="{{ block.settings.large_level }} su 5">{{ dots_large }}</span></td>
+                      <td><span class="grimmie-size-{{ section_id }}__dots" aria-label="{{ block.settings.duo_level }} su 5">{{ dots_duo }}</span></td>
+                    {%- else -%}
+                      <td>{{ block.settings.classic_text | escape }}</td>
+                      <td>{{ block.settings.large_text | escape }}</td>
+                      <td>{{ block.settings.duo_text | escape }}</td>
+                    {%- endif -%}
+                  </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} 5. RHYTHM CARDS {%- endcomment -%}
+    {%- assign rhythm_blocks = section.blocks | where: 'type', 'rhythm_card' -%}
+    {%- if rhythm_title != blank or rhythm_blocks.size > 0 -%}
+      <div class="grimmie-size-{{ section_id }}__section">
+        {%- if rhythm_title != blank -%}
+          <h2 class="grimmie-size-{{ section_id }}__section-heading">{{ rhythm_title | escape }}</h2>
+        {%- endif -%}
+        {%- if rhythm_subtitle != blank -%}
+          <p class="grimmie-size-{{ section_id }}__section-sub">{{ rhythm_subtitle | escape }}</p>
+        {%- endif -%}
+        {%- if rhythm_blocks.size > 0 -%}
+          <div class="grimmie-size-{{ section_id }}__rhythm-grid">
+            {%- for block in rhythm_blocks -%}
+              <div class="grimmie-size-{{ section_id }}__rhythm-card" {{ block.shopify_attributes }}>
+                <div class="grimmie-size-{{ section_id }}__rhythm-icon" aria-hidden="true">
+                  {%- if block.settings.icon != blank -%}
+                    {{ block.settings.icon | image_url: width: 80 | image_tag: alt: '', loading: 'lazy' }}
+                  {%- else -%}
+                    {%- case block.settings.fallback_icon -%}
+                      {%- when 'sun' -%}
+                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                          <circle cx="16" cy="16" r="5.5"/>
+                          <path d="M16 3 V6.5 M16 25.5 V29 M3 16 H6.5 M25.5 16 H29 M6.5 6.5 L9 9 M23 23 L25.5 25.5 M25.5 6.5 L23 9 M9 23 L6.5 25.5"/>
+                        </svg>
+                      {%- when 'mirror' -%}
+                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                          <circle cx="16" cy="12" r="7"/>
+                          <path d="M16 19 V26"/>
+                          <path d="M11 28 H21"/>
+                        </svg>
+                      {%- when 'brush' -%}
+                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                          <ellipse cx="13" cy="13" rx="8" ry="6" transform="rotate(-30 13 13)"/>
+                          <path d="M18.5 16.5 L26 24"/>
+                          <path d="M9 9 L11 11 M12 7 L14 9 M15 8 L17 10"/>
+                        </svg>
+                      {%- when 'plane' -%}
+                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                          <path d="M3 17 L29 9 L24 16 L13 18 L9 26 L7 19 Z"/>
+                        </svg>
+                      {%- else -%}
+                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="16" cy="16" r="8"/></svg>
+                    {%- endcase -%}
+                  {%- endif -%}
+                </div>
+                {%- if block.settings.title != blank -%}
+                  <h3 class="grimmie-size-{{ section_id }}__rhythm-title">{{ block.settings.title | escape }}</h3>
+                {%- endif -%}
+                {%- if block.settings.description != blank -%}
+                  <p class="grimmie-size-{{ section_id }}__rhythm-desc">{{ block.settings.description | escape }}</p>
+                {%- endif -%}
+                {%- if block.settings.tag_text != blank -%}
+                  {%- if block.settings.tag_link != blank -%}
+                    <a class="grimmie-size-{{ section_id }}__rhythm-tag" href="{{ block.settings.tag_link }}">{{ block.settings.tag_text | escape }}</a>
+                  {%- else -%}
+                    <span class="grimmie-size-{{ section_id }}__rhythm-tag">{{ block.settings.tag_text | escape }}</span>
+                  {%- endif -%}
+                {%- endif -%}
+              </div>
+              {%- unless forloop.last -%}
+                <div class="grimmie-size-{{ section_id }}__rhythm-sep" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 12 H19 M14 7 L19 12 L14 17"/></svg>
+                </div>
+              {%- endunless -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} 6. BOTTOM IMAGE + CTA {%- endcomment -%}
+    {%- if bottom_image != blank or cta_text != blank -%}
+      <div class="grimmie-size-{{ section_id }}__bottom">
+        <div class="grimmie-size-{{ section_id }}__bottom-image">
+          {%- if bottom_image != blank -%}
+            {{ bottom_image | image_url: width: 1600 | image_tag: alt: bottom_image_alt, loading: 'lazy', widths: '600,900,1200,1600', sizes: '(max-width: 900px) 90vw, 900px' }}
+          {%- else -%}
+            <svg class="placeholder" viewBox="0 0 320 140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <rect x="60" y="65" width="90" height="55" rx="8" fill="currentColor" opacity="0.5"/>
+              <rect x="160" y="65" width="120" height="55" rx="8" fill="currentColor" opacity="0.5"/>
+            </svg>
+          {%- endif -%}
+        </div>
+        {%- if cta_text != blank -%}
+          {%- if cta_link != blank -%}
+            <a class="grimmie-size-{{ section_id }}__cta" href="{{ cta_link }}">{{ cta_text | escape }}</a>
+          {%- else -%}
+            <span class="grimmie-size-{{ section_id }}__cta" role="button">{{ cta_text | escape }}</span>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Grimmie Size Guide",
+  "tag": "section",
+  "class": "grimmie-size-guide-section",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "textarea", "id": "hero_heading", "label": "Hero title", "info": "Line breaks preserved.", "default": "Guida alle misure" },
+    { "type": "textarea", "id": "hero_text", "label": "Hero subtitle", "default": "Scegli la misura giusta di Alma per la tua routine, ogni giorno." },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image (right)" },
+    { "type": "text", "id": "hero_image_alt", "label": "Hero image alt text", "default": "Grimmie Alma pouches" },
+
+    { "type": "header", "content": "Section titles" },
+    { "type": "text", "id": "choice_title", "label": "Choice section eyebrow", "default": "Scegli in base a ciò che vuoi organizzare" },
+    { "type": "text", "id": "visual_title", "label": "Visual sizes eyebrow", "default": "Le misure, a colpo d'occhio" },
+    { "type": "text", "id": "fits_title", "label": "What fits eyebrow", "default": "Cosa ci sta dentro" },
+    { "type": "text", "id": "table_title", "label": "Comparison table eyebrow", "default": "Confronto rapido" },
+
+    { "type": "header", "content": "Comparison table columns" },
+    { "type": "text", "id": "table_col_1", "label": "Column 1 label", "default": "Classic" },
+    { "type": "text", "id": "table_col_2", "label": "Column 2 label", "default": "Large" },
+    { "type": "text", "id": "table_col_3", "label": "Column 3 label", "default": "Duo" },
+
+    { "type": "header", "content": "Rhythm section" },
+    { "type": "text", "id": "rhythm_title", "label": "Title", "default": "Scegli in base al tuo ritmo" },
+    { "type": "textarea", "id": "rhythm_subtitle", "label": "Subtitle", "default": "Ogni routine ha il suo equilibrio: ecco quale misura segue meglio il tuo modo di organizzarti." },
+
+    { "type": "header", "content": "Bottom image + CTA" },
+    { "type": "image_picker", "id": "bottom_image", "label": "Bottom image" },
+    { "type": "text", "id": "bottom_image_alt", "label": "Bottom image alt text", "default": "Grimmie Alma collection" },
+    { "type": "text", "id": "cta_text", "label": "CTA button text", "default": "SCEGLI LA TUA MISURA" },
+    { "type": "url", "id": "cta_link", "label": "CTA button link" },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#F7F1EE" },
+    { "type": "color", "id": "secondary_background_color", "label": "Secondary background (hero, table header)", "default": "#F1EBE6" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#6E5F59" },
+    { "type": "color", "id": "text_color", "label": "Body text color", "default": "#6E5F59" },
+    { "type": "color", "id": "accent_color", "label": "Accent (blush)", "default": "#EACBC8" },
+    { "type": "color", "id": "border_color", "label": "Border / divider", "default": "#DDD2CA" },
+    { "type": "color", "id": "card_background_color", "label": "Card background", "default": "#F7EDEB" },
+    { "type": "color", "id": "button_background_color", "label": "Button background", "default": "#EACBC8" },
+    { "type": "color", "id": "button_text_color", "label": "Button text", "default": "#6E5F59" },
+    { "type": "color", "id": "button_hover_background_color", "label": "Button hover", "default": "#DFAFB3" },
+
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 100 },
+
+    { "type": "header", "content": "Accessibility" },
+    { "type": "text", "id": "aria_label", "label": "Section aria-label", "default": "Guida alle misure" }
+  ],
+  "blocks": [
+    {
+      "type": "choice_card",
+      "name": "Choice card",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Custom icon", "info": "Optional. Overrides fallback." },
+        { "type": "select", "id": "fallback_icon", "label": "Fallback icon", "options": [
+          { "value": "classic", "label": "Classic (small pouch)" },
+          { "value": "large", "label": "Large (wide pouch)" },
+          { "value": "duo", "label": "Duo (two pouches)" },
+          { "value": "none", "label": "None (circle)" }
+        ], "default": "classic" },
+        { "type": "text", "id": "icon_alt", "label": "Icon alt text" },
+        { "type": "text", "id": "title", "label": "Title", "default": "CLASSIC" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "Essenziale e compatta, perfetta per i must-have di ogni giorno." }
+      ]
+    },
+    {
+      "type": "size_visual",
+      "name": "Size visual",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Product image" },
+        { "type": "text", "id": "image_alt", "label": "Image alt text" },
+        { "type": "text", "id": "title", "label": "Product title", "default": "CLASSIC" },
+        { "type": "text", "id": "size_text", "label": "Size text", "default": "22 x 11 x 8 cm" },
+        { "type": "url", "id": "link", "label": "Link (optional)" }
+      ]
+    },
+    {
+      "type": "fits_card",
+      "name": "What-fits card",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "CLASSIC" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_alt", "label": "Image alt text" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "I tuoi indispensabili quotidiani, sempre con te." }
+      ]
+    },
+    {
+      "type": "table_row",
+      "name": "Comparison row",
+      "settings": [
+        { "type": "text", "id": "row_label", "label": "Row label", "default": "DIMENSIONI" },
+        { "type": "select", "id": "value_type", "label": "Value type", "options": [
+          { "value": "text", "label": "Text" },
+          { "value": "dots", "label": "Rating dots (0-5)" }
+        ], "default": "text" },
+        { "type": "header", "content": "Text values (used if Value type = Text)" },
+        { "type": "text", "id": "classic_text", "label": "Classic value", "default": "22 x 11 x 8 cm" },
+        { "type": "text", "id": "large_text", "label": "Large value", "default": "28 x 15 x 10 cm" },
+        { "type": "text", "id": "duo_text", "label": "Duo value", "default": "Large + Classic" },
+        { "type": "header", "content": "Dot levels (used if Value type = Rating dots)" },
+        { "type": "range", "id": "classic_level", "label": "Classic dots", "min": 0, "max": 5, "step": 1, "default": 2 },
+        { "type": "range", "id": "large_level", "label": "Large dots", "min": 0, "max": 5, "step": 1, "default": 4 },
+        { "type": "range", "id": "duo_level", "label": "Duo dots", "min": 0, "max": 5, "step": 1, "default": 5 }
+      ]
+    },
+    {
+      "type": "rhythm_card",
+      "name": "Rhythm card",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Custom icon", "info": "Optional. Overrides fallback." },
+        { "type": "select", "id": "fallback_icon", "label": "Fallback icon", "options": [
+          { "value": "sun", "label": "Sun (daily)" },
+          { "value": "mirror", "label": "Mirror (beauty)" },
+          { "value": "brush", "label": "Brush (hair)" },
+          { "value": "plane", "label": "Plane (travel)" },
+          { "value": "none", "label": "None (circle)" }
+        ], "default": "sun" },
+        { "type": "text", "id": "title", "label": "Title", "default": "QUOTIDIANO" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "L'essenziale con te, sempre a portata di mano." },
+        { "type": "text", "id": "tag_text", "label": "Tag/button text", "default": "CLASSIC" },
+        { "type": "url", "id": "tag_link", "label": "Tag/button link (optional)" }
+      ]
+    }
+  ],
+  "max_blocks": 30,
+  "presets": [
+    {
+      "name": "Grimmie Size Guide",
+      "category": "Grimmie",
+      "blocks": [
+        { "type": "choice_card", "settings": { "fallback_icon": "classic", "title": "CLASSIC", "description": "Essenziale e compatta, perfetta per i must-have di ogni giorno." } },
+        { "type": "choice_card", "settings": { "fallback_icon": "large", "title": "LARGE", "description": "Piu spazio per la tua routine completa, a casa o in viaggio." } },
+        { "type": "choice_card", "settings": { "fallback_icon": "duo", "title": "DUO", "description": "Il set perfetto per organizzare l'intera routine, con armonia." } },
+
+        { "type": "size_visual", "settings": { "title": "CLASSIC", "size_text": "22 x 11 x 8 cm" } },
+        { "type": "size_visual", "settings": { "title": "LARGE", "size_text": "28 x 15 x 10 cm" } },
+        { "type": "size_visual", "settings": { "title": "DUO", "size_text": "Large + Classic" } },
+
+        { "type": "fits_card", "settings": { "title": "CLASSIC", "description": "I tuoi indispensabili quotidiani, sempre con te." } },
+        { "type": "fits_card", "settings": { "title": "LARGE", "description": "Tutto cio che ti serve, per una routine completa." } },
+        { "type": "fits_card", "settings": { "title": "DUO", "description": "La combinazione perfetta per ogni momento." } },
+
+        { "type": "table_row", "settings": { "row_label": "DIMENSIONI", "value_type": "text", "classic_text": "22 x 11 x 8 cm", "large_text": "28 x 15 x 10 cm", "duo_text": "Large + Classic" } },
+        { "type": "table_row", "settings": { "row_label": "IDEALE PER", "value_type": "text", "classic_text": "Essenziali quotidiani", "large_text": "Routine completa", "duo_text": "Routine completa, organizzata" } },
+        { "type": "table_row", "settings": { "row_label": "BEAUTY ESSENTIALS", "value_type": "dots", "classic_level": 2, "large_level": 4, "duo_level": 5 } },
+        { "type": "table_row", "settings": { "row_label": "HAIR TOOLS", "value_type": "dots", "classic_level": 1, "large_level": 3, "duo_level": 4 } },
+        { "type": "table_row", "settings": { "row_label": "VIAGGIO", "value_type": "dots", "classic_level": 2, "large_level": 4, "duo_level": 4 } },
+        { "type": "table_row", "settings": { "row_label": "DA TENERE A VISTA", "value_type": "dots", "classic_level": 3, "large_level": 4, "duo_level": 5 } },
+
+        { "type": "rhythm_card", "settings": { "fallback_icon": "sun", "title": "QUOTIDIANO", "description": "L'essenziale con te, sempre a portata di mano.", "tag_text": "CLASSIC" } },
+        { "type": "rhythm_card", "settings": { "fallback_icon": "mirror", "title": "POSTAZIONE BEAUTY", "description": "Piu spazio per i tuoi must-have, a casa.", "tag_text": "LARGE" } },
+        { "type": "rhythm_card", "settings": { "fallback_icon": "brush", "title": "HAIR TOOLS", "description": "Pensata per spazio, accessori e styling.", "tag_text": "LARGE" } },
+        { "type": "rhythm_card", "settings": { "fallback_icon": "plane", "title": "WEEKEND & VIAGGIO", "description": "La combinazione perfetta per ogni destinazione.", "tag_text": "DUO" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

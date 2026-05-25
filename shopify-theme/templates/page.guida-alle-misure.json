@@ -1,0 +1,226 @@
+{
+  "sections": {
+    "main": {
+      "type": "grimmie-size-guide-page",
+      "blocks": {
+        "choice_classic": {
+          "type": "choice_card",
+          "settings": {
+            "fallback_icon": "classic",
+            "icon_alt": "Classic",
+            "title": "CLASSIC",
+            "description": "Essenziale e compatta, perfetta per i must-have di ogni giorno."
+          }
+        },
+        "choice_large": {
+          "type": "choice_card",
+          "settings": {
+            "fallback_icon": "large",
+            "icon_alt": "Large",
+            "title": "LARGE",
+            "description": "Più spazio per la tua routine completa, a casa o in viaggio."
+          }
+        },
+        "choice_duo": {
+          "type": "choice_card",
+          "settings": {
+            "fallback_icon": "duo",
+            "icon_alt": "Duo",
+            "title": "DUO",
+            "description": "Il set perfetto per organizzare l'intera routine, con armonia."
+          }
+        },
+
+        "visual_classic": {
+          "type": "size_visual",
+          "settings": {
+            "image_alt": "Alma Classic",
+            "title": "CLASSIC",
+            "size_text": "22 × 11 × 8 cm"
+          }
+        },
+        "visual_large": {
+          "type": "size_visual",
+          "settings": {
+            "image_alt": "Alma Large",
+            "title": "LARGE",
+            "size_text": "28 × 15 × 10 cm"
+          }
+        },
+        "visual_duo": {
+          "type": "size_visual",
+          "settings": {
+            "image_alt": "Alma Duo",
+            "title": "DUO",
+            "size_text": "Large + Classic"
+          }
+        },
+
+        "fits_classic": {
+          "type": "fits_card",
+          "settings": {
+            "title": "CLASSIC",
+            "image_alt": "Cosa entra nella Classic",
+            "description": "I tuoi indispensabili quotidiani, sempre con te."
+          }
+        },
+        "fits_large": {
+          "type": "fits_card",
+          "settings": {
+            "title": "LARGE",
+            "image_alt": "Cosa entra nella Large",
+            "description": "Tutto ciò che ti serve, per una routine completa."
+          }
+        },
+        "fits_duo": {
+          "type": "fits_card",
+          "settings": {
+            "title": "DUO",
+            "image_alt": "Cosa entra nel Duo",
+            "description": "La combinazione perfetta per ogni momento."
+          }
+        },
+
+        "row_dim": {
+          "type": "table_row",
+          "settings": {
+            "row_label": "DIMENSIONI",
+            "value_type": "text",
+            "classic_text": "22 × 11 × 8 cm",
+            "large_text": "28 × 15 × 10 cm",
+            "duo_text": "Large + Classic"
+          }
+        },
+        "row_ideal": {
+          "type": "table_row",
+          "settings": {
+            "row_label": "IDEALE PER",
+            "value_type": "text",
+            "classic_text": "Essenziali quotidiani",
+            "large_text": "Routine completa",
+            "duo_text": "Routine completa, organizzata"
+          }
+        },
+        "row_beauty": {
+          "type": "table_row",
+          "settings": {
+            "row_label": "BEAUTY ESSENTIALS",
+            "value_type": "dots",
+            "classic_level": 2,
+            "large_level": 4,
+            "duo_level": 5
+          }
+        },
+        "row_hair": {
+          "type": "table_row",
+          "settings": {
+            "row_label": "HAIR TOOLS",
+            "value_type": "dots",
+            "classic_level": 1,
+            "large_level": 3,
+            "duo_level": 4
+          }
+        },
+        "row_travel": {
+          "type": "table_row",
+          "settings": {
+            "row_label": "VIAGGIO",
+            "value_type": "dots",
+            "classic_level": 2,
+            "large_level": 4,
+            "duo_level": 4
+          }
+        },
+        "row_visible": {
+          "type": "table_row",
+          "settings": {
+            "row_label": "DA TENERE A VISTA",
+            "value_type": "dots",
+            "classic_level": 3,
+            "large_level": 4,
+            "duo_level": 5
+          }
+        },
+
+        "rhythm_daily": {
+          "type": "rhythm_card",
+          "settings": {
+            "fallback_icon": "sun",
+            "title": "QUOTIDIANO",
+            "description": "L'essenziale con te, sempre a portata di mano.",
+            "tag_text": "CLASSIC"
+          }
+        },
+        "rhythm_beauty": {
+          "type": "rhythm_card",
+          "settings": {
+            "fallback_icon": "mirror",
+            "title": "POSTAZIONE BEAUTY",
+            "description": "Più spazio per i tuoi must-have, a casa.",
+            "tag_text": "LARGE"
+          }
+        },
+        "rhythm_hair": {
+          "type": "rhythm_card",
+          "settings": {
+            "fallback_icon": "brush",
+            "title": "HAIR TOOLS",
+            "description": "Pensata per spazio, accessori e styling.",
+            "tag_text": "LARGE"
+          }
+        },
+        "rhythm_travel": {
+          "type": "rhythm_card",
+          "settings": {
+            "fallback_icon": "plane",
+            "title": "WEEKEND & VIAGGIO",
+            "description": "La combinazione perfetta per ogni destinazione.",
+            "tag_text": "DUO"
+          }
+        }
+      },
+      "block_order": [
+        "choice_classic",
+        "choice_large",
+        "choice_duo",
+        "visual_classic",
+        "visual_large",
+        "visual_duo",
+        "fits_classic",
+        "fits_large",
+        "fits_duo",
+        "row_dim",
+        "row_ideal",
+        "row_beauty",
+        "row_hair",
+        "row_travel",
+        "row_visible",
+        "rhythm_daily",
+        "rhythm_beauty",
+        "rhythm_hair",
+        "rhythm_travel"
+      ],
+      "settings": {
+        "hero_heading": "Guida alle misure",
+        "hero_text": "Scegli la misura giusta di Alma per la tua routine, ogni giorno.",
+        "hero_image_alt": "Grimmie Alma pouches",
+        "choice_title": "Scegli in base a ciò che vuoi organizzare",
+        "visual_title": "Le misure, a colpo d'occhio",
+        "fits_title": "Cosa ci sta dentro",
+        "table_title": "Confronto rapido",
+        "table_col_1": "CLASSIC",
+        "table_col_2": "LARGE",
+        "table_col_3": "DUO",
+        "rhythm_title": "Scegli in base al tuo ritmo",
+        "rhythm_subtitle": "Ogni routine ha il suo equilibrio: ecco quale misura segue meglio il tuo modo di organizzarti.",
+        "bottom_image_alt": "Grimmie Alma collection",
+        "cta_text": "SCEGLI LA TUA MISURA",
+        "heading_color": "#6E5F59",
+        "text_color": "#6E5F59"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
