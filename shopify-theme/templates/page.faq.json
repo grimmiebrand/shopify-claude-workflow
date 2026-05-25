@@ -73,7 +73,9 @@
         "cat_ordini"
       ],
       "settings": {
-        "banner_button_link": "mailto:info@grimmie.co"
+        "banner_button_link": "mailto:info@grimmie.co",
+        "heading_color": "#6E5F59",
+        "text_color": "#6E5F59"
       }
     }
   },
