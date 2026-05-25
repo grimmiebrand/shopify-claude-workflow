@@ -176,250 +176,77 @@
         "padding-block-end": 0
       }
     },
-    "product_list_EDUBdR": {
-      "type": "product-list",
+    "grimmie_product_discovery_7JDeAn": {
+      "type": "grimmie-product-discovery",
       "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "static": true,
+        "discovery_card_EVQqQi": {
+          "type": "discovery_card",
           "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "center",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_list_text_qK4EWG": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h1>Scopri Alma Ivory</h1>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "center",
-                "type_preset": "h2",
-                "font": "var(--font-primary--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_qK4EWG"
-          ]
+            "product": "",
+            "image": "shopify://shop_images/1.png",
+            "image_alt_text": "Alma Classic ivory",
+            "title": "CLASSIC",
+            "description": "24 x 12 x 12 cm\nCompatta, leggera, ideale per l'essenziale quotidiano.",
+            "button_text": "SCOPRI",
+            "button_link": "shopify://products/almaclassic"
+          }
         },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
+        "discovery_card_jhcV4C": {
+          "type": "discovery_card",
           "settings": {
-            "product_card_gap": 0,
-            "inherit_color_scheme": false,
-            "color_scheme": "scheme-2",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 10,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_hpki3q": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "square",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "group_jHUdWN": {
-              "type": "_product-card-group",
-              "name": "t:names.group",
-              "settings": {
-                "content_direction": "column",
-                "vertical_on_mobile": true,
-                "horizontal_alignment": "flex-start",
-                "vertical_alignment": "center",
-                "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
-                "vertical_alignment_flex_direction_column": "center",
-                "gap": 4,
-                "width": "fill",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "custom_height": 100,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
-                "background_media": "none",
-                "video_position": "cover",
-                "background_image_position": "cover",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "link": "",
-                "open_in_new_tab": false,
-                "padding-block-start": 24,
-                "padding-block-end": 24,
-                "padding-inline-start": 24,
-                "padding-inline-end": 24
-              },
-              "blocks": {
-                "product_title_gH3cpy": {
-                  "type": "product-title",
-                  "name": "t:names.product_title",
-                  "settings": {
-                    "width": "fit-content",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "paragraph",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "var(--color-foreground)",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
-                "price_anAima": {
-                  "type": "price",
-                  "name": "t:names.product_price",
-                  "settings": {
-                    "show_sale_price_first": true,
-                    "show_installments": false,
-                    "show_tax_info": false,
-                    "type_preset": "paragraph",
-                    "width": "100%",
-                    "alignment": "left",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "color": "var(--color-foreground)",
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
-                "swatches_eYcKAz": {
-                  "type": "swatches",
-                  "name": "t:names.swatches",
-                  "settings": {
-                    "product_swatches_alignment": "flex-start",
-                    "product_swatches_alignment_mobile": "flex-start",
-                    "hide_padding": false,
-                    "product_swatches_padding_top": 4,
-                    "product_swatches_padding_bottom": 0,
-                    "product_swatches_padding_left": 0,
-                    "product_swatches_padding_right": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "product_title_gH3cpy",
-                "price_anAima",
-                "swatches_eYcKAz"
-              ]
-            }
-          },
-          "block_order": [
-            "product_card_gallery_hpki3q",
-            "group_jHUdWN"
-          ]
+            "product": "",
+            "image": "shopify://shop_images/3_d3652861-3407-4029-83f9-cb83fbf38c1a.png",
+            "image_alt_text": "Alma Large ivory",
+            "title": "LARGE",
+            "description": "37 x 12x 12 cm\nPiù spazio, stessa eleganza. L'organizer perfetto per i tuoi hair tools.",
+            "button_text": "SCOPRI",
+            "button_link": "shopify://products/almalarge"
+          }
+        },
+        "discovery_card_TdktQr": {
+          "type": "discovery_card",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/2_2e67881c-0a46-421f-b62f-e7b4d88306ad.png",
+            "image_alt_text": "Alma Duo ivory",
+            "title": "DUO",
+            "description": "CLASSIC + LARGE\nIl duo perfetto, insieme ancora meglio: Perfette per la tua routine completa.",
+            "button_text": "SCOPRI",
+            "button_link": "shopify://products/almaduo"
+          }
         }
       },
-      "name": "Featured collection",
+      "block_order": [
+        "discovery_card_EVQqQi",
+        "discovery_card_jhcV4C",
+        "discovery_card_TdktQr"
+      ],
+      "name": "Grimmie Product Discovery",
       "settings": {
-        "collection": "all",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 3,
-        "columns": 3,
-        "mobile_columns": "1",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 31,
-        "rows_gap": 12,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "horizontal_alignment": "center",
-        "gap": 28,
-        "color_scheme": "scheme-1",
-        "padding-block-start": 48,
-        "padding-block-end": 64
+        "heading": "Scopri Alma Ivory",
+        "subtitle": "Scegli la misura che segue il tuo ritmo, ogni giorno.",
+        "background_color": "#f7f1ee",
+        "heading_color": "#6e5f59",
+        "subtitle_color": "#6e5f59",
+        "text_color": "#6e5f59",
+        "description_color": "#6e5f59",
+        "divider_color": "#f1ebe6",
+        "button_background_color": "#eacbc8",
+        "button_text_color": "#6e5f59",
+        "show_dividers": true,
+        "desktop_card_gap": 0,
+        "padding_top": 40,
+        "padding_bottom": 44,
+        "aria_label": "Product discovery"
       }
     },
     "grimmie_benefits_strip_Gr1Mm1": {
       "type": "grimmie-benefits-strip",
-      "name": "Grimmie Benefits Strip",
       "blocks": {
         "benefit_strutturata": {
           "type": "benefit",
           "settings": {
+            "icon": "shopify://shop_images/2_0d1e0029-7b57-4c1d-ab5d-5cbaa0cf80fe.png",
             "fallback_icon": "bag",
             "title": "STRUTTURATA",
             "description": "Mantiene la forma con naturale bellezza.",
@@ -429,6 +256,7 @@
         "benefit_pulire": {
           "type": "benefit",
           "settings": {
+            "icon": "shopify://shop_images/3_e5f7b0be-c938-4c30-9696-1ad4b88f6bfd.png",
             "fallback_icon": "droplet",
             "title": "FACILE DA PULIRE",
             "description": "Si pulisce in un attimo, dentro e fuori.",
@@ -438,6 +266,7 @@
         "benefit_leggera": {
           "type": "benefit",
           "settings": {
+            "icon": "shopify://shop_images/4_ab8cb3ca-ae15-4feb-af3c-a1c27fa5c96d.png",
             "fallback_icon": "feather",
             "title": "LEGGERA",
             "description": "Ti accompagna ogni giorno, senza peso.",
@@ -447,6 +276,7 @@
         "benefit_organizzato": {
           "type": "benefit",
           "settings": {
+            "icon": "shopify://shop_images/5_ec9c6b27-13ff-4f1a-bbbb-41853019cc52.png",
             "fallback_icon": "pouch",
             "title": "INTERNO ORGANIZZATO",
             "description": "Ogni cosa al suo posto, con semplicità.",
@@ -456,6 +286,7 @@
         "benefit_durevole": {
           "type": "benefit",
           "settings": {
+            "icon": "shopify://shop_images/6_0a30f81e-aa1f-432c-aae4-246b5991ccc9.png",
             "fallback_icon": "shield",
             "title": "DUREVOLE",
             "description": "Materiali pensati per durare nel tempo.",
@@ -465,6 +296,7 @@
         "benefit_seguirti": {
           "type": "benefit",
           "settings": {
+            "icon": "shopify://shop_images/7_73dc92f8-7b8b-4662-bf33-85fdeaba6e1b.png",
             "fallback_icon": "airplane",
             "title": "PRONTA A SEGUIRTI",
             "description": "Perfetta tra casa, routine e weekend away.",
@@ -480,29 +312,225 @@
         "benefit_durevole",
         "benefit_seguirti"
       ],
+      "name": "Grimmie Benefits Strip",
       "settings": {
-        "background_color": "#F7F1EE",
-        "text_color": "#6E5F59",
-        "accent_color": "#EACBC8",
-        "divider_color": "#DDD2CA",
-        "arrow_background_color": "#EACBC8",
-        "arrow_icon_color": "#F1EBE6",
-        "dot_active_color": "#EACBC8",
-        "dot_inactive_color": "#6E5F59",
+        "background_color": "#f1ebe6",
+        "text_color": "#6e5f59",
+        "accent_color": "#eacbc8",
+        "divider_color": "#f7f1ee",
+        "arrow_background_color": "#eacbc8",
+        "arrow_icon_color": "#f7f1ee",
+        "dot_active_color": "#eacbc8",
+        "dot_inactive_color": "#6e5f59",
         "desktop_columns": 6,
         "tablet_columns": 3,
         "mobile_columns": "3",
         "show_dividers": true,
-        "title_letter_spacing": 0.2,
-        "padding_top": 64,
-        "padding_bottom": 64,
-        "aria_label": "Benefits"
+        "title_letter_spacing": 0,
+        "padding_top": 8,
+        "padding_bottom": 32,
+        "aria_label": "Benefits",
+        "prev_label": "Previous",
+        "next_label": "Next",
+        "dots_label": "Carousel pagination"
+      }
+    },
+    "grimmie_product_use_cases_fnJmt6": {
+      "type": "grimmie-product-use-cases",
+      "blocks": {
+        "use_case_card_mEkftw": {
+          "type": "use_case_card",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/8E2D6492-2D38-4E9C-B025-9BF6BC7C855F_a710809b-1fc7-4058-ac6d-9e30443f7de2.png",
+            "image_alt_text": "Alma Classic a casa, su un comodino con accessori beauty",
+            "fallback_icon": "home",
+            "icon_alt_text": "Casa",
+            "title": "A CASA",
+            "description": "organizer quotidiano",
+            "tag_text": "DUO",
+            "tag_link": "shopify://products/almaduo"
+          }
+        },
+        "use_case_card_7LUC3g": {
+          "type": "use_case_card",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/E85E2317-BB1A-40FB-B7D5-DEA3FC6271D4_7b36b282-74b2-4ea2-a460-99240556898b.png",
+            "image_alt_text": "Alma Classic con accessori da lavoro su una scrivania",
+            "fallback_icon": "briefcase",
+            "icon_alt_text": "Lavoro",
+            "title": "WORKDAY ESSENTIALS",
+            "description": "tutto l'essenziale sempre con te",
+            "tag_text": "CLASSIC",
+            "tag_link": "shopify://products/almaclassic"
+          }
+        },
+        "use_case_card_tYLTiY": {
+          "type": "use_case_card",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/454A8C1F-71D9-42D2-AEC8-FF26A1E18CD9.png",
+            "image_alt_text": "Alma Large che contiene phon, piastra e accessori hair",
+            "fallback_icon": "sparkle",
+            "icon_alt_text": "Strumenti hair",
+            "title": "HAIR TOOLS",
+            "description": "per dyson, piastre e strumenti hair",
+            "tag_text": "LARGE",
+            "tag_link": "shopify://products/almalarge"
+          }
+        },
+        "use_case_card_Kz3Kgp": {
+          "type": "use_case_card",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/5E4E03A1-0B9B-4396-8727-09E93850FC04.png",
+            "image_alt_text": "Alma Duo dentro una valigia da viaggio",
+            "fallback_icon": "luggage",
+            "icon_alt_text": "Viaggio",
+            "title": "TRAVEL ESSENTIALS",
+            "description": "la routine in valigia, senza rinunce",
+            "tag_text": "DUO",
+            "tag_link": "shopify://products/almaduo"
+          }
+        },
+        "use_case_card_BFVk9x": {
+          "type": "use_case_card",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/D92413A8-B4A6-4B1B-9BDD-4E4C9ABCF8CF.png",
+            "image_alt_text": "Alma Classic appoggiata su un tavolino da bar con cappuccino e occhiali",
+            "fallback_icon": "pouch",
+            "icon_alt_text": "Borsa quotidiana",
+            "title": "GO-TO BAG",
+            "description": "pronta a seguirti ovunque",
+            "tag_text": "CLASSIC",
+            "tag_link": "shopify://products/almaclassic"
+          }
+        },
+        "use_case_card_mxDBER": {
+          "type": "use_case_card",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/208678C1-63A1-419B-A384-1936EE8497E2.png",
+            "image_alt_text": "Alma Classic con accessori workout, borraccia e tappetino",
+            "fallback_icon": "dumbbell",
+            "icon_alt_text": "Palestra e pilates",
+            "title": "GYM & PILATES",
+            "description": "tutto il necessario per i tuoi workout",
+            "tag_text": "CLASSIC",
+            "tag_link": "shopify://products/almaclassic"
+          }
+        }
+      },
+      "block_order": [
+        "use_case_card_mEkftw",
+        "use_case_card_7LUC3g",
+        "use_case_card_tYLTiY",
+        "use_case_card_Kz3Kgp",
+        "use_case_card_BFVk9x",
+        "use_case_card_mxDBER"
+      ],
+      "name": "Grimmie Product Use Cases",
+      "settings": {
+        "heading": "Alma, in ogni momento della tua giornata",
+        "subtitle": "Dalla casa al lavoro, dal weekend ai tuoi essential kit: scopri tutti i modi in cui Alma si adatta alla tua routine.",
+        "show_divider": false,
+        "background_color": "#f7f1ee",
+        "heading_color": "#6e5f59",
+        "text_color": "#6e5f59",
+        "divider_color": "#eacbc8",
+        "card_background_color": "#f1ebe6",
+        "card_title_color": "#6e5f59",
+        "accent_color": "#eacbc8",
+        "border_color": "#eacbc8",
+        "tag_border_color": "#eacbc8",
+        "tag_text_color": "#6e5f59",
+        "cta_text": "SCOPRI ALMA",
+        "cta_link": "shopify://products/almaduo",
+        "cta_background_color": "#eacbc8",
+        "cta_text_color": "#6e5f59",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "desktop_card_gap": 20,
+        "mobile_card_width": 60,
+        "show_mobile_arrows": false,
+        "arrow_background_color": "#eacbc8",
+        "arrow_icon_color": "#f7f1ee",
+        "aria_label": "Product use cases",
+        "prev_label": "Previous",
+        "next_label": "Next"
+      }
+    },
+    "grimmie_duo_benefits_DuoBn1": {
+      "type": "grimmie-duo-benefits",
+      "blocks": {
+        "benefit_card_quotidiano": {
+          "type": "benefit_card",
+          "settings": {
+            "fallback_icon": "pouch",
+            "title": "UNA PER IL QUOTIDIANO",
+            "description": "Classic è perfetta per gli essenziali di ogni giorno: make-up, skincare e piccoli prodotti sempre a portata di mano.",
+            "icon_alt_text": "Pouch quotidiano"
+          }
+        },
+        "benefit_card_routine": {
+          "type": "benefit_card",
+          "settings": {
+            "fallback_icon": "hairdryer",
+            "title": "UNA PER LA ROUTINE COMPLETA",
+            "description": "Large è pensata per tutto ciò che richiede più spazio: hair tools, skincare, formati più grandi e trattamenti per ogni esigenza.",
+            "icon_alt_text": "Routine completa"
+          }
+        },
+        "benefit_card_smart": {
+          "type": "benefit_card",
+          "settings": {
+            "fallback_icon": "sparkle",
+            "title": "UNA SCELTA PIÙ INTELLIGENTE",
+            "description": "Insieme organizzano ogni fase della tua routine, ottimizzando lo spazio e aggiungendo un tocco di bellezza al tuo bagno o alla tua vanity.",
+            "icon_alt_text": "Scelta intelligente"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_card_quotidiano",
+        "benefit_card_routine",
+        "benefit_card_smart"
+      ],
+      "name": "Grimmie Duo Benefits",
+      "settings": {
+        "heading": "Perché insieme\nfunzionano meglio",
+        "subtitle": "Organizza tutta la tua routine con stile. Insieme, tengono tutto in ordine e sono bellissimi da esporre sul piano del bagno o sulla tua postazione make-up e skincare.",
+        "product_image_alt_text": "Alma Duo - Classic and Large pouches",
+        "image_width_desktop": 720,
+        "image_width_mobile": 92,
+        "cta_text": "SCOPRI IL DUO",
+        "cta_link": "shopify://products/almaduo",
+        "background_color": "#f7f1ee",
+        "heading_color": "#3b2a22",
+        "subtitle_color": "#6e5f59",
+        "text_color": "#6e5f59",
+        "card_background_color": "#f1ebe6",
+        "card_border_color": "#e7ddd6",
+        "card_title_color": "#3b2a22",
+        "accent_color": "#eacbc8",
+        "icon_color": "#3b2a22",
+        "button_background_color": "#eacbc8",
+        "button_hover_background_color": "#dfafb3",
+        "button_text_color": "#6e5f59",
+        "card_gap": 32,
+        "padding_top": 100,
+        "padding_bottom": 88,
+        "aria_label": "Duo benefits"
       }
     }
   },
   "order": [
     "hero_iLBwPd",
-    "product_list_EDUBdR",
-    "grimmie_benefits_strip_Gr1Mm1"
+    "grimmie_product_discovery_7JDeAn",
+    "grimmie_benefits_strip_Gr1Mm1",
+    "grimmie_product_use_cases_fnJmt6",
+    "grimmie_duo_benefits_DuoBn1"
   ]
 }
