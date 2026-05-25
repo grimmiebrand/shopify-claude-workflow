@@ -542,18 +542,12 @@
     margin-top: clamp(40px, 5vw, 64px);
   }
 
-  .grimmie-size-{{ section_id }}__bottom-cta-wrap {
-    margin-bottom: clamp(28px, 3.5vw, 44px);
-  }
-
   .grimmie-size-{{ section_id }}__bottom-image {
+    position: relative;
     width: 100vw;
     max-width: none;
     margin: 0 calc(50% - 50vw);
     aspect-ratio: 16 / 5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
   }
 
@@ -572,6 +566,11 @@
   }
 
   .grimmie-size-{{ section_id }}__cta {
+    position: absolute;
+    bottom: clamp(20px, 4vw, 56px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -933,18 +932,9 @@
       </div>
     {%- endif -%}
 
-    {%- comment -%} 6. CTA + BOTTOM IMAGE {%- endcomment -%}
+    {%- comment -%} 6. BOTTOM IMAGE WITH OVERLAID CTA {%- endcomment -%}
     {%- if bottom_image != blank or cta_text != blank -%}
       <div class="grimmie-size-{{ section_id }}__bottom">
-        {%- if cta_text != blank -%}
-          <div class="grimmie-size-{{ section_id }}__bottom-cta-wrap">
-            {%- if cta_link != blank -%}
-              <a class="grimmie-size-{{ section_id }}__cta" href="{{ cta_link }}">{{ cta_text | escape }}</a>
-            {%- else -%}
-              <span class="grimmie-size-{{ section_id }}__cta" role="button">{{ cta_text | escape }}</span>
-            {%- endif -%}
-          </div>
-        {%- endif -%}
         <div class="grimmie-size-{{ section_id }}__bottom-image">
           {%- if bottom_image != blank -%}
             {{ bottom_image | image_url: width: 2400 | image_tag: alt: bottom_image_alt, loading: 'lazy', widths: '720,960,1200,1600,2000,2400', sizes: '100vw' }}
@@ -952,6 +942,13 @@
             <svg class="placeholder" viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
               <rect x="0" y="0" width="320" height="100" fill="currentColor" opacity="0.4"/>
             </svg>
+          {%- endif -%}
+          {%- if cta_text != blank -%}
+            {%- if cta_link != blank -%}
+              <a class="grimmie-size-{{ section_id }}__cta" href="{{ cta_link }}">{{ cta_text | escape }}</a>
+            {%- else -%}
+              <span class="grimmie-size-{{ section_id }}__cta" role="button">{{ cta_text | escape }}</span>
+            {%- endif -%}
           {%- endif -%}
         </div>
       </div>
