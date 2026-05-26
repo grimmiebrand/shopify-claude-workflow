@@ -154,50 +154,6 @@
             "large_level": 3,
             "duo_level": 4
           }
-        },
-        "rhythm_daily": {
-          "type": "rhythm_card",
-          "settings": {
-            "icon": "shopify://shop_images/9D70805E-1CC1-4D84-A4F1-B9F743BDA93B.png",
-            "fallback_icon": "sun",
-            "title": "QUOTIDIANO",
-            "description": "L'essenziale con te, sempre a portata di mano.",
-            "tag_text": "CLASSIC",
-            "tag_link": ""
-          }
-        },
-        "rhythm_beauty": {
-          "type": "rhythm_card",
-          "settings": {
-            "icon": "shopify://shop_images/D602760D-34FD-45F8-8661-F27F24A70E10.png",
-            "fallback_icon": "mirror",
-            "title": "POSTAZIONE BEAUTY",
-            "description": "Più spazio per i tuoi must-have, a casa.",
-            "tag_text": "LARGE",
-            "tag_link": ""
-          }
-        },
-        "rhythm_hair": {
-          "type": "rhythm_card",
-          "settings": {
-            "icon": "shopify://shop_images/9F70A960-9E47-420E-B276-0ABB19D65B95.png",
-            "fallback_icon": "brush",
-            "title": "HAIR TOOLS",
-            "description": "Pensata per spazio, accessori e styling.",
-            "tag_text": "LARGE",
-            "tag_link": ""
-          }
-        },
-        "rhythm_travel": {
-          "type": "rhythm_card",
-          "settings": {
-            "icon": "shopify://shop_images/C803C90C-22FC-444F-88CF-93B8DB197A53.png",
-            "fallback_icon": "plane",
-            "title": "WEEKEND & VIAGGIO",
-            "description": "La combinazione perfetta per ogni destinazione.",
-            "tag_text": "DUO",
-            "tag_link": ""
-          }
         }
       },
       "block_order": [
@@ -212,11 +168,7 @@
         "row_beauty",
         "row_hair",
         "row_travel",
-        "row_visible",
-        "rhythm_daily",
-        "rhythm_beauty",
-        "rhythm_hair",
-        "rhythm_travel"
+        "row_visible"
       ],
       "settings": {
         "hero_heading": "Guida alle misure",
@@ -226,7 +178,8 @@
         "choice_title": "Scegli in base a ciò che vuoi organizzare",
         "visual_title": "",
         "fits_title": "",
-        "table_title": "Confronto rapido",
+        "table_title": "Confronto misure",
+        "table_subtitle": "tre formati, infinite possibilità.",
         "table_col_1": "CLASSIC",
         "table_col_2": "LARGE",
         "table_col_3": "DUO",
@@ -236,8 +189,13 @@
         "large_badge": "37 × 12 × 12 cm",
         "duo_image": "shopify://shop_images/2_2e67881c-0a46-421f-b62f-e7b4d88306ad.png",
         "duo_badge": "Classic + Large",
-        "rhythm_title": "Scegli in base al tuo ritmo",
-        "rhythm_subtitle": "Ogni routine ha il suo equilibrio: ecco quale misura segue meglio il tuo modo di organizzarti.",
+        "cta_banner_show": true,
+        "cta_banner_title": "Hai dubbi tra due misure?",
+        "cta_banner_desc": "Scegli quella più grande: avrai sempre spazio in più per ciò che ami.",
+        "cta_banner_button_text": "ACQUISTA ALMA",
+        "cta_banner_button_link": "",
+        "rhythm_title": "",
+        "rhythm_subtitle": "",
         "bottom_image": "shopify://shop_images/73C90E0C-AAA1-4D03-9DE5-02C7F7904762.png",
         "bottom_image_alt": "Grimmie Alma collection",
         "cta_text": "SCEGLI LA TUA MISURA",

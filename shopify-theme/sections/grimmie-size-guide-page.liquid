@@ -691,6 +691,142 @@
     stroke-linejoin: round;
   }
 
+  /* Table header (title + subtitle) */
+  .grimmie-size-{{ section_id }}__table-header {
+    text-align: center;
+    margin: 0 auto clamp(24px, 3vw, 36px);
+    max-width: 640px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .grimmie-size-{{ section_id }}__table-title {
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    color: var(--sg-heading);
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    margin: 0;
+    text-transform: none;
+  }
+
+  .grimmie-size-{{ section_id }}__table-subtitle {
+    font-family: var(--font-body--family);
+    color: var(--sg-text);
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Mobile carousel */
+  .grimmie-size-{{ section_id }}__mobile-carousel {
+    display: none;
+  }
+
+  /* CTA banner (under table) */
+  .grimmie-size-{{ section_id }}__cta-banner {
+    background-color: var(--sg-card-bg);
+    border-radius: 14px;
+    padding: clamp(18px, 2.4vw, 24px) clamp(20px, 3vw, 32px);
+    margin: clamp(32px, 4vw, 48px) auto 0;
+    max-width: 900px;
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 2.5vw, 28px);
+  }
+
+  .grimmie-size-{{ section_id }}__cta-banner-icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    color: var(--sg-heading);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .grimmie-size-{{ section_id }}__cta-banner-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+    stroke: currentColor;
+    stroke-width: 1.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .grimmie-size-{{ section_id }}__cta-banner-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .grimmie-size-{{ section_id }}__cta-banner-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .grimmie-size-{{ section_id }}__cta-banner-title {
+    font-family: var(--font-body--family);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--sg-heading);
+    margin: 0 0 4px;
+  }
+
+  .grimmie-size-{{ section_id }}__cta-banner-desc {
+    font-family: var(--font-body--family);
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--sg-text);
+    margin: 0;
+  }
+
+  .grimmie-size-{{ section_id }}__cta-banner-button {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: var(--sg-btn-bg);
+    color: var(--sg-btn-text);
+    font-family: var(--font-body--family);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 16px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    min-height: 48px;
+    line-height: 1;
+    transition: background-color 200ms ease;
+  }
+
+  .grimmie-size-{{ section_id }}__cta-banner-button:hover,
+  .grimmie-size-{{ section_id }}__cta-banner-button:focus-visible {
+    background-color: var(--sg-btn-hover-bg);
+  }
+
+  .grimmie-size-{{ section_id }}__cta-banner-button svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
   /* Bottom image + CTA */
   .grimmie-size-{{ section_id }}__bottom {
     text-align: center;
@@ -805,12 +941,182 @@
       grid-template-columns: 1fr;
     }
 
+    /* Hide desktop table, show carousel */
     .grimmie-size-{{ section_id }}__table-wrap {
-      border-radius: 14px;
+      display: none;
     }
 
-    .grimmie-size-{{ section_id }}__table-scroll {
+    .grimmie-size-{{ section_id }}__mobile-carousel {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .grimmie-size-{{ section_id }}__mobile-carousel-track {
+      display: flex;
+      gap: 12px;
       overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 4px 10vw;
+      scroll-padding-inline: 10vw;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .grimmie-size-{{ section_id }}__mobile-carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .grimmie-size-{{ section_id }}__mobile-card {
+      flex: 0 0 80vw;
+      scroll-snap-align: center;
+      background-color: var(--sg-card-bg);
+      border: 1px solid var(--sg-border);
+      border-radius: 16px;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      box-sizing: border-box;
+    }
+
+    .grimmie-size-{{ section_id }}__mobile-card-name {
+      font-family: var(--font-body--family);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sg-heading);
+      line-height: 1.3;
+    }
+
+    .grimmie-size-{{ section_id }}__mobile-card-image {
+      width: 100%;
+      max-width: 180px;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .grimmie-size-{{ section_id }}__mobile-card-image img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .grimmie-size-{{ section_id }}__mobile-card-badge {
+      display: inline-flex;
+      align-items: center;
+      background-color: var(--sg-accent);
+      color: var(--sg-heading);
+      font-family: var(--font-body--family);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 999px;
+      white-space: nowrap;
+      margin: 0 0 8px;
+    }
+
+    .grimmie-size-{{ section_id }}__mobile-card-rows {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .grimmie-size-{{ section_id }}__mobile-card-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 0;
+      border-top: 1px solid var(--sg-border);
+    }
+
+    .grimmie-size-{{ section_id }}__mobile-card-row:first-child {
+      border-top: none;
+    }
+
+    .grimmie-size-{{ section_id }}__mobile-card-row-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body--family);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sg-heading);
+      line-height: 1.3;
+      flex: 0 0 auto;
+    }
+
+    .grimmie-size-{{ section_id }}__mobile-card-row-label .grimmie-size-{{ section_id }}__row-icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    .grimmie-size-{{ section_id }}__mobile-card-row-value {
+      font-family: var(--font-body--family);
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--sg-text);
+      text-align: right;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .grimmie-size-{{ section_id }}__mobile-card-row-value .grimmie-size-{{ section_id }}__cell-image {
+      justify-content: flex-end;
+      margin-bottom: 6px;
+    }
+
+    .grimmie-size-{{ section_id }}__mobile-card-row-value .grimmie-size-{{ section_id }}__cell-image img {
+      max-height: 60px;
+    }
+
+    .grimmie-size-{{ section_id }}__mobile-carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 16px 0 0;
+    }
+
+    .grimmie-size-{{ section_id }}__mobile-carousel-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      border: 0;
+      padding: 0;
+      background-color: var(--sg-border);
+      cursor: pointer;
+      transition: background-color 200ms ease;
+    }
+
+    .grimmie-size-{{ section_id }}__mobile-carousel-dot[aria-current="true"] {
+      background-color: var(--sg-heading);
+    }
+
+    /* CTA banner stacks on mobile */
+    .grimmie-size-{{ section_id }}__cta-banner {
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+      gap: 12px;
+      padding: 20px;
+    }
+
+    .grimmie-size-{{ section_id }}__cta-banner-icon {
+      margin: 0 auto;
+    }
+
+    .grimmie-size-{{ section_id }}__cta-banner-button {
+      width: 100%;
     }
 
     .grimmie-size-{{ section_id }}__table tbody th,
@@ -1004,10 +1310,18 @@
 
     {%- comment -%} 4. COMPARISON TABLE - premium grid {%- endcomment -%}
     {%- assign table_blocks = section.blocks | where: 'type', 'table_row' -%}
+    {%- assign table_subtitle = section.settings.table_subtitle -%}
     {%- if table_title != blank or table_blocks.size > 0 -%}
       <div class="grimmie-size-{{ section_id }}__section">
-        {%- if table_title != blank -%}
-          <p class="grimmie-size-{{ section_id }}__section-eyebrow">{{ table_title | escape }}</p>
+        {%- if table_title != blank or table_subtitle != blank -%}
+          <div class="grimmie-size-{{ section_id }}__table-header">
+            {%- if table_title != blank -%}
+              <h2 class="grimmie-size-{{ section_id }}__table-title">{{ table_title | escape }}</h2>
+            {%- endif -%}
+            {%- if table_subtitle != blank -%}
+              <p class="grimmie-size-{{ section_id }}__table-subtitle">{{ table_subtitle | escape }}</p>
+            {%- endif -%}
+          </div>
         {%- endif -%}
         {%- if table_blocks.size > 0 -%}
           <div class="grimmie-size-{{ section_id }}__table-wrap">
@@ -1136,6 +1450,153 @@
               </table>
             </div>
           </div>
+
+          {%- comment -%} Mobile carousel - hidden on desktop, replaces table on mobile {%- endcomment -%}
+          <div class="grimmie-size-{{ section_id }}__mobile-carousel" data-sg-carousel>
+            <div class="grimmie-size-{{ section_id }}__mobile-carousel-track" data-sg-track>
+              {%- for col_index in (1..3) -%}
+                {%- case col_index -%}
+                  {%- when 1 -%}
+                    {%- assign mc_name = table_col_1 -%}
+                    {%- assign mc_image = section.settings.classic_image -%}
+                    {%- assign mc_badge = section.settings.classic_badge -%}
+                  {%- when 2 -%}
+                    {%- assign mc_name = table_col_2 -%}
+                    {%- assign mc_image = section.settings.large_image -%}
+                    {%- assign mc_badge = section.settings.large_badge -%}
+                  {%- when 3 -%}
+                    {%- assign mc_name = table_col_3 -%}
+                    {%- assign mc_image = section.settings.duo_image -%}
+                    {%- assign mc_badge = section.settings.duo_badge -%}
+                {%- endcase -%}
+                <div class="grimmie-size-{{ section_id }}__mobile-card" data-sg-card data-sg-card-index="{{ forloop.index0 }}" data-sg-card-name="{{ mc_name | escape }}">
+                  {%- if mc_name != blank -%}
+                    <span class="grimmie-size-{{ section_id }}__mobile-card-name">{{ mc_name | escape }}</span>
+                  {%- endif -%}
+                  <div class="grimmie-size-{{ section_id }}__mobile-card-image">
+                    {%- if mc_image != blank -%}
+                      {{ mc_image | image_url: width: 400 | image_tag: alt: mc_name, loading: 'lazy', widths: '160,240,360,400' }}
+                    {%- else -%}
+                      <svg class="placeholder" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <rect x="20" y="42" width="60" height="38" rx="6" fill="currentColor" opacity="0.5"/>
+                      </svg>
+                    {%- endif -%}
+                  </div>
+                  {%- if mc_badge != blank -%}
+                    <span class="grimmie-size-{{ section_id }}__mobile-card-badge">{{ mc_badge | escape }}</span>
+                  {%- endif -%}
+                  <div class="grimmie-size-{{ section_id }}__mobile-card-rows">
+                    {%- for block in table_blocks -%}
+                      {%- case col_index -%}
+                        {%- when 1 -%}
+                          {%- assign cell_text = block.settings.classic_text -%}
+                          {%- assign cell_image = block.settings.classic_cell_image -%}
+                          {%- assign cell_image_alt = block.settings.classic_cell_image_alt -%}
+                          {%- assign cell_level = block.settings.classic_level -%}
+                        {%- when 2 -%}
+                          {%- assign cell_text = block.settings.large_text -%}
+                          {%- assign cell_image = block.settings.large_cell_image -%}
+                          {%- assign cell_image_alt = block.settings.large_cell_image_alt -%}
+                          {%- assign cell_level = block.settings.large_level -%}
+                        {%- when 3 -%}
+                          {%- assign cell_text = block.settings.duo_text -%}
+                          {%- assign cell_image = block.settings.duo_cell_image -%}
+                          {%- assign cell_image_alt = block.settings.duo_cell_image_alt -%}
+                          {%- assign cell_level = block.settings.duo_level -%}
+                      {%- endcase -%}
+                      <div class="grimmie-size-{{ section_id }}__mobile-card-row">
+                        <div class="grimmie-size-{{ section_id }}__mobile-card-row-label">
+                          <span class="grimmie-size-{{ section_id }}__row-icon" aria-hidden="true">
+                            {%- if block.settings.icon != blank -%}
+                              {{ block.settings.icon | image_url: width: 60 | image_tag: alt: '', loading: 'lazy' }}
+                            {%- else -%}
+                              {%- case block.settings.fallback_icon -%}
+                                {%- when 'ruler' -%}
+                                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 16 L21 16 M3 16 L3 9 M21 16 L21 9 M6 16 V13 M9 16 V12 M12 16 V11 M15 16 V12 M18 16 V13"/></svg>
+                                {%- when 'target' -%}
+                                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg>
+                                {%- when 'lipstick' -%}
+                                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="13" width="8" height="8" rx="1"/><path d="M9 13 V9 L11 6 L13 6 L15 9 V13"/></svg>
+                                {%- when 'hairdryer' -%}
+                                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 10 a4 4 0 0 1 4 -4 h9 a3 3 0 0 1 3 3 v4 a3 3 0 0 1 -3 3 h-7 v3 l-2 3 h-2 l2 -3 v-3 a4 4 0 0 1 -4 -4 z"/></svg>
+                                {%- when 'suitcase' -%}
+                                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="8" width="18" height="13" rx="1.5"/><path d="M9 8 V5 a1 1 0 0 1 1 -1 h4 a1 1 0 0 1 1 1 V8"/><path d="M9 12 V18 M15 12 V18"/></svg>
+                                {%- when 'eye' -%}
+                                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2 12 C 5 6 9 5 12 5 C 15 5 19 6 22 12 C 19 18 15 19 12 19 C 9 19 5 18 2 12 Z"/><circle cx="12" cy="12" r="3"/></svg>
+                                {%- else -%}
+                                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="6"/></svg>
+                              {%- endcase -%}
+                            {%- endif -%}
+                          </span>
+                          <span>{{ block.settings.row_label | escape }}</span>
+                        </div>
+                        <div class="grimmie-size-{{ section_id }}__mobile-card-row-value">
+                          {%- if block.settings.value_type == 'dots' -%}
+                            <span class="grimmie-size-{{ section_id }}__dots" aria-label="{{ cell_level }} su 5">
+                              {%- for i in (1..5) -%}
+                                {%- if i <= cell_level -%}
+                                  <span class="grimmie-size-{{ section_id }}__dot grimmie-size-{{ section_id }}__dot--filled" aria-hidden="true"></span>
+                                {%- else -%}
+                                  <span class="grimmie-size-{{ section_id }}__dot grimmie-size-{{ section_id }}__dot--empty" aria-hidden="true"></span>
+                                {%- endif -%}
+                              {%- endfor -%}
+                            </span>
+                          {%- else -%}
+                            {%- if cell_image != blank -%}
+                              <div class="grimmie-size-{{ section_id }}__cell-image">
+                                {{ cell_image | image_url: width: 300 | image_tag: alt: cell_image_alt, loading: 'lazy', widths: '120,180,240,300' }}
+                              </div>
+                            {%- endif -%}
+                            {{ cell_text | escape }}
+                          {%- endif -%}
+                        </div>
+                      </div>
+                    {%- endfor -%}
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+            <div class="grimmie-size-{{ section_id }}__mobile-carousel-dots" data-sg-dots>
+              <button type="button" class="grimmie-size-{{ section_id }}__mobile-carousel-dot" data-sg-dot="0" aria-label="{{ table_col_1 | escape }}" aria-current="true"></button>
+              <button type="button" class="grimmie-size-{{ section_id }}__mobile-carousel-dot" data-sg-dot="1" aria-label="{{ table_col_2 | escape }}"></button>
+              <button type="button" class="grimmie-size-{{ section_id }}__mobile-carousel-dot" data-sg-dot="2" aria-label="{{ table_col_3 | escape }}"></button>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} CTA banner under the table {%- endcomment -%}
+        {%- if section.settings.cta_banner_show -%}
+          <div class="grimmie-size-{{ section_id }}__cta-banner">
+            <div class="grimmie-size-{{ section_id }}__cta-banner-icon" aria-hidden="true">
+              {%- if section.settings.cta_banner_icon != blank -%}
+                {{ section.settings.cta_banner_icon | image_url: width: 80 | image_tag: alt: '', loading: 'lazy' }}
+              {%- else -%}
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 3 L13.5 9 L19 10.5 L13.5 12 L12 18 L10.5 12 L5 10.5 L10.5 9 Z" fill="currentColor" stroke="none"/>
+                  <path d="M18 4 L18.7 6 L20.5 6.7 L18.7 7.3 L18 9 L17.3 7.3 L15.5 6.7 L17.3 6 Z" fill="currentColor" stroke="none"/>
+                  <path d="M5 16 L5.5 17.5 L7 18 L5.5 18.5 L5 20 L4.5 18.5 L3 18 L4.5 17.5 Z" fill="currentColor" stroke="none"/>
+                </svg>
+              {%- endif -%}
+            </div>
+            <div class="grimmie-size-{{ section_id }}__cta-banner-text">
+              {%- if section.settings.cta_banner_title != blank -%}
+                <p class="grimmie-size-{{ section_id }}__cta-banner-title">{{ section.settings.cta_banner_title | escape }}</p>
+              {%- endif -%}
+              {%- if section.settings.cta_banner_desc != blank -%}
+                <p class="grimmie-size-{{ section_id }}__cta-banner-desc">{{ section.settings.cta_banner_desc | escape }}</p>
+              {%- endif -%}
+            </div>
+            {%- if section.settings.cta_banner_button_text != blank -%}
+              {%- assign cta_btn_tag = 'span' -%}
+              {%- if section.settings.cta_banner_button_link != blank -%}
+                {%- assign cta_btn_tag = 'a' -%}
+              {%- endif -%}
+              <{{ cta_btn_tag }} class="grimmie-size-{{ section_id }}__cta-banner-button"{% if section.settings.cta_banner_button_link != blank %} href="{{ section.settings.cta_banner_button_link }}"{% endif %} data-sg-cta-button data-sg-cta-base="{{ section.settings.cta_banner_button_text | escape }}">
+                <span data-sg-cta-label>{{ section.settings.cta_banner_button_text | escape }}</span>
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 12 H19 M14 7 L19 12 L14 17"/></svg>
+              </{{ cta_btn_tag }}>
+            {%- endif -%}
+          </div>
         {%- endif -%}
       </div>
     {%- endif -%}
@@ -1235,6 +1696,58 @@
   </div>
 </section>
 
+<script>
+  (function() {
+    var root = document.querySelector('.grimmie-size-{{ section_id }}');
+    if (!root) return;
+    var track = root.querySelector('[data-sg-track]');
+    var cards = root.querySelectorAll('[data-sg-card]');
+    var dots = root.querySelectorAll('[data-sg-dot]');
+    var ctaLabel = root.querySelector('[data-sg-cta-label]');
+    var ctaButton = root.querySelector('[data-sg-cta-button]');
+    if (!track || !cards.length || !dots.length) return;
+
+    var ctaBase = ctaButton ? ctaButton.getAttribute('data-sg-cta-base') : '';
+    var ctaIsAcquista = /^ACQUISTA\s+/i.test(ctaBase);
+
+    function setActive(idx) {
+      for (var i = 0; i < dots.length; i++) {
+        dots[i].setAttribute('aria-current', i === idx ? 'true' : 'false');
+      }
+      if (ctaLabel && ctaIsAcquista && cards[idx]) {
+        var name = cards[idx].getAttribute('data-sg-card-name') || '';
+        if (name) ctaLabel.textContent = 'ACQUISTA ' + name.toUpperCase();
+      }
+    }
+
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function(entries) {
+        var best = null;
+        entries.forEach(function(e) {
+          if (e.isIntersecting && (!best || e.intersectionRatio > best.intersectionRatio)) {
+            best = e;
+          }
+        });
+        if (best) {
+          var idx = parseInt(best.target.getAttribute('data-sg-card-index'), 10);
+          if (!isNaN(idx)) setActive(idx);
+        }
+      }, { root: track, threshold: [0.5, 0.7, 0.9] });
+      for (var i = 0; i < cards.length; i++) obs.observe(cards[i]);
+    }
+
+    for (var j = 0; j < dots.length; j++) {
+      (function(idx) {
+        dots[idx].addEventListener('click', function() {
+          if (cards[idx]) {
+            cards[idx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          }
+        });
+      })(j);
+    }
+  })();
+</script>
+
 {% schema %}
 {
   "name": "Grimmie Size Guide",
@@ -1251,7 +1764,8 @@
     { "type": "text", "id": "choice_title", "label": "Choice section eyebrow", "default": "Scegli in base a ciò che vuoi organizzare" },
     { "type": "text", "id": "visual_title", "label": "Visual sizes eyebrow", "default": "Le misure, a colpo d'occhio" },
     { "type": "text", "id": "fits_title", "label": "What fits eyebrow", "default": "Cosa ci sta dentro" },
-    { "type": "text", "id": "table_title", "label": "Comparison table eyebrow", "default": "Confronto rapido" },
+    { "type": "text", "id": "table_title", "label": "Comparison table title", "default": "Confronto misure" },
+    { "type": "text", "id": "table_subtitle", "label": "Comparison table subtitle", "default": "tre formati, infinite possibilità." },
 
     { "type": "header", "content": "Comparison table columns" },
     { "type": "text", "id": "table_col_1", "label": "Column 1 label", "default": "Classic" },
@@ -1263,6 +1777,14 @@
     { "type": "text", "id": "large_badge", "label": "Large size badge", "default": "37 x 12 x 12 cm" },
     { "type": "image_picker", "id": "duo_image", "label": "Duo product image" },
     { "type": "text", "id": "duo_badge", "label": "Duo size badge", "default": "Classic + Large" },
+
+    { "type": "header", "content": "CTA banner (under table)" },
+    { "type": "checkbox", "id": "cta_banner_show", "label": "Show CTA banner", "default": true },
+    { "type": "image_picker", "id": "cta_banner_icon", "label": "CTA icon (optional)", "info": "Optional. Falls back to a sparkle icon." },
+    { "type": "text", "id": "cta_banner_title", "label": "CTA title", "default": "Hai dubbi tra due misure?" },
+    { "type": "textarea", "id": "cta_banner_desc", "label": "CTA description", "default": "Scegli quella più grande: avrai sempre spazio in più per ciò che ami." },
+    { "type": "text", "id": "cta_banner_button_text", "label": "CTA button text", "info": "Start with 'ACQUISTA ' on mobile to enable dynamic product name swap (e.g. ACQUISTA CLASSIC).", "default": "ACQUISTA ALMA" },
+    { "type": "url", "id": "cta_banner_button_link", "label": "CTA button link" },
 
     { "type": "header", "content": "Rhythm section" },
     { "type": "text", "id": "rhythm_title", "label": "Title", "default": "Scegli in base al tuo ritmo" },
