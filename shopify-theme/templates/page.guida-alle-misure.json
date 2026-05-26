@@ -85,29 +85,32 @@
           "type": "table_row",
           "settings": {
             "row_label": "DIMENSIONI",
+            "fallback_icon": "ruler",
             "value_type": "text",
-            "classic_text": "22 × 11 × 8 cm",
-            "large_text": "28 × 15 × 10 cm",
-            "duo_text": "Large + Classic"
+            "classic_text": "24 × 12 × 12 cm",
+            "large_text": "37 × 12 × 12 cm",
+            "duo_text": "Classic + Large"
           }
         },
         "row_ideal": {
           "type": "table_row",
           "settings": {
             "row_label": "IDEALE PER",
+            "fallback_icon": "target",
             "value_type": "text",
-            "classic_text": "Essenziali quotidiani",
-            "large_text": "Routine completa",
-            "duo_text": "Routine completa, organizzata"
+            "classic_text": "Make-up routine",
+            "large_text": "Hair care routine",
+            "duo_text": "Routine completa e organizzata"
           }
         },
         "row_beauty": {
           "type": "table_row",
           "settings": {
             "row_label": "BEAUTY ESSENTIALS",
+            "fallback_icon": "lipstick",
             "value_type": "dots",
             "classic_level": 2,
-            "large_level": 4,
+            "large_level": 3,
             "duo_level": 5
           }
         },
@@ -115,30 +118,33 @@
           "type": "table_row",
           "settings": {
             "row_label": "HAIR TOOLS",
+            "fallback_icon": "hairdryer",
             "value_type": "dots",
             "classic_level": 1,
-            "large_level": 3,
-            "duo_level": 4
+            "large_level": 4,
+            "duo_level": 5
           }
         },
         "row_travel": {
           "type": "table_row",
           "settings": {
             "row_label": "VIAGGIO",
+            "fallback_icon": "suitcase",
             "value_type": "dots",
             "classic_level": 2,
-            "large_level": 4,
-            "duo_level": 4
+            "large_level": 3,
+            "duo_level": 5
           }
         },
         "row_visible": {
           "type": "table_row",
           "settings": {
-            "row_label": "DA TENERE A VISTA",
+            "row_label": "DA TENERE IN VISTA",
+            "fallback_icon": "eye",
             "value_type": "dots",
-            "classic_level": 3,
-            "large_level": 4,
-            "duo_level": 5
+            "classic_level": 2,
+            "large_level": 3,
+            "duo_level": 4
           }
         },
 
@@ -211,6 +217,9 @@
         "table_col_1": "CLASSIC",
         "table_col_2": "LARGE",
         "table_col_3": "DUO",
+        "classic_badge": "24 × 12 × 12 cm",
+        "large_badge": "37 × 12 × 12 cm",
+        "duo_badge": "Classic + Large",
         "rhythm_title": "Scegli in base al tuo ritmo",
         "rhythm_subtitle": "Ogni routine ha il suo equilibrio: ecco quale misura segue meglio il tuo modo di organizzarti.",
         "bottom_image_alt": "Grimmie Alma collection",
