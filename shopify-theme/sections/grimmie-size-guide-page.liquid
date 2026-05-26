@@ -1523,16 +1523,19 @@
                     {%- assign mc_name = table_col_1 -%}
                     {%- assign mc_image = section.settings.classic_image -%}
                     {%- assign mc_badge = section.settings.classic_badge -%}
+                    {%- assign mc_link = section.settings.classic_product_link -%}
                   {%- when 2 -%}
                     {%- assign mc_name = table_col_2 -%}
                     {%- assign mc_image = section.settings.large_image -%}
                     {%- assign mc_badge = section.settings.large_badge -%}
+                    {%- assign mc_link = section.settings.large_product_link -%}
                   {%- when 3 -%}
                     {%- assign mc_name = table_col_3 -%}
                     {%- assign mc_image = section.settings.duo_image -%}
                     {%- assign mc_badge = section.settings.duo_badge -%}
+                    {%- assign mc_link = section.settings.duo_product_link -%}
                 {%- endcase -%}
-                <div class="grimmie-size-{{ section_id }}__mobile-card" data-sg-card data-sg-card-index="{{ forloop.index0 }}" data-sg-card-name="{{ mc_name | escape }}">
+                <div class="grimmie-size-{{ section_id }}__mobile-card" data-sg-card data-sg-card-index="{{ forloop.index0 }}" data-sg-card-name="{{ mc_name | escape }}" data-sg-card-link="{{ mc_link }}">
                   {%- if mc_name != blank -%}
                     <span class="grimmie-size-{{ section_id }}__mobile-card-name">{{ mc_name | escape }}</span>
                   {%- endif -%}
@@ -1779,6 +1782,8 @@
 
     var ctaBase = ctaButton ? ctaButton.getAttribute('data-sg-cta-base') : '';
     var ctaIsAcquista = /^ACQUISTA\s+/i.test(ctaBase);
+    var ctaDefaultHref = (ctaButton && ctaButton.tagName === 'A') ? ctaButton.getAttribute('href') : '';
+    var mobileQuery = window.matchMedia ? window.matchMedia('(max-width: 640px)') : null;
 
     function setActive(idx) {
       for (var i = 0; i < dots.length; i++) {
@@ -1788,6 +1793,20 @@
         var name = cards[idx].getAttribute('data-sg-card-name') || '';
         if (name) ctaLabel.textContent = 'ACQUISTA ' + name.toUpperCase();
       }
+      // Mobile only: swap CTA href to the active card's product link
+      if (ctaButton && ctaButton.tagName === 'A' && cards[idx] && mobileQuery && mobileQuery.matches) {
+        var cardLink = cards[idx].getAttribute('data-sg-card-link') || '';
+        ctaButton.setAttribute('href', cardLink || ctaDefaultHref);
+      }
+    }
+
+    // Restore desktop default href when viewport leaves mobile range
+    if (mobileQuery && typeof mobileQuery.addEventListener === 'function') {
+      mobileQuery.addEventListener('change', function(e) {
+        if (!e.matches && ctaButton && ctaButton.tagName === 'A' && ctaDefaultHref) {
+          ctaButton.setAttribute('href', ctaDefaultHref);
+        }
+      });
     }
 
     if ('IntersectionObserver' in window) {
@@ -1847,6 +1866,9 @@
     { "type": "text", "id": "large_badge", "label": "Large size badge", "default": "37 x 12 x 12 cm" },
     { "type": "image_picker", "id": "duo_image", "label": "Duo product image" },
     { "type": "text", "id": "duo_badge", "label": "Duo size badge", "default": "Classic + Large" },
+    { "type": "url", "id": "classic_product_link", "label": "Classic product link", "info": "Used by the mobile CTA when the Classic card is active." },
+    { "type": "url", "id": "large_product_link", "label": "Large product link", "info": "Used by the mobile CTA when the Large card is active." },
+    { "type": "url", "id": "duo_product_link", "label": "Duo product link", "info": "Used by the mobile CTA when the Duo card is active." },
 
     { "type": "header", "content": "CTA banner (under table)" },
     { "type": "checkbox", "id": "cta_banner_show", "label": "Show CTA banner", "default": true },
