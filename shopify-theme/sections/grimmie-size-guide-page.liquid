@@ -972,12 +972,16 @@
       background-color: var(--sg-card-bg);
       border: 1px solid var(--sg-border);
       border-radius: 16px;
-      padding: 20px 16px;
+      padding: 20px 14px;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 14px;
       box-sizing: border-box;
+      /* Shared row-height tokens so Classic/Large/Duo cards line up perfectly */
+      --sg-mc-row-h: 56px;
+      --sg-mc-stacked-h: 280px;
+      --sg-mc-stacked-img-h: 200px;
     }
 
     .grimmie-size-{{ section_id }}__mobile-card-name {
@@ -1033,9 +1037,11 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      padding: 12px 0;
+      gap: 10px;
+      padding: 10px 0;
       border-top: 1px solid var(--sg-border);
+      min-height: var(--sg-mc-row-h);
+      box-sizing: border-box;
     }
 
     .grimmie-size-{{ section_id }}__mobile-card-row:first-child {
@@ -1049,25 +1055,30 @@
       font-family: var(--font-body--family);
       font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--sg-heading);
-      line-height: 1.3;
-      flex: 0 0 auto;
+      line-height: 1.25;
+      flex: 0 1 auto;
+      min-width: 0;
+      max-width: 60%;
+      word-break: break-word;
+      overflow-wrap: anywhere;
     }
 
     .grimmie-size-{{ section_id }}__mobile-card-row-label .grimmie-size-{{ section_id }}__row-icon {
       width: 18px;
       height: 18px;
+      flex: 0 0 auto;
     }
 
     .grimmie-size-{{ section_id }}__mobile-card-row-value {
       font-family: var(--font-body--family);
       font-size: 12px;
-      line-height: 1.5;
+      line-height: 1.4;
       color: var(--sg-text);
       text-align: right;
-      flex: 1;
+      flex: 1 1 auto;
       min-width: 0;
     }
 
@@ -1080,17 +1091,22 @@
       max-height: 60px;
     }
 
-    /* Stacked row: used when a text-type row has a cell image (e.g. "COSA CI STA DENTRO") */
+    /* Stacked row: used when a text-type row has a cell image (e.g. "COSA CI STA DENTRO").
+       Fixed min-height ensures Classic/Large/Duo cards stay aligned even if some cells
+       have no image — the image area is reserved either way. */
     .grimmie-size-{{ section_id }}__mobile-card-row--stacked {
       flex-direction: column;
+      justify-content: flex-start;
       align-items: center;
       text-align: center;
       gap: 12px;
       padding: 16px 0;
+      min-height: var(--sg-mc-stacked-h);
     }
 
     .grimmie-size-{{ section_id }}__mobile-card-row--stacked .grimmie-size-{{ section_id }}__mobile-card-row-label {
       width: 100%;
+      max-width: 100%;
       justify-content: center;
       flex: 0 0 auto;
     }
@@ -1101,19 +1117,30 @@
 
     .grimmie-size-{{ section_id }}__mobile-card-row--stacked .grimmie-size-{{ section_id }}__mobile-card-row-value {
       width: 100%;
+      flex: 1 1 auto;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
     }
 
     .grimmie-size-{{ section_id }}__mobile-card-row--stacked .grimmie-size-{{ section_id }}__cell-image {
       justify-content: center;
       margin: 0 auto;
       width: 100%;
+      height: var(--sg-mc-stacked-img-h);
+      display: flex;
+      align-items: center;
     }
 
     .grimmie-size-{{ section_id }}__mobile-card-row--stacked .grimmie-size-{{ section_id }}__cell-image img {
       max-width: 92%;
-      max-height: 240px;
+      max-height: 100%;
       width: auto;
+      height: auto;
+      object-fit: contain;
     }
 
     .grimmie-size-{{ section_id }}__mobile-carousel-dots {
@@ -1540,7 +1567,12 @@
                           {%- assign cell_image_alt = block.settings.duo_cell_image_alt -%}
                           {%- assign cell_level = block.settings.duo_level -%}
                       {%- endcase -%}
-                      <div class="grimmie-size-{{ section_id }}__mobile-card-row{% if block.settings.value_type == 'text' and cell_image != blank %} grimmie-size-{{ section_id }}__mobile-card-row--stacked{% endif %}">
+                      {%- comment -%} Row-level: stacked layout applies to all 3 cards if ANY card has a cell image. Keeps row heights aligned across Classic/Large/Duo. {%- endcomment -%}
+                      {%- assign row_has_cell_image = false -%}
+                      {%- if block.settings.classic_cell_image != blank or block.settings.large_cell_image != blank or block.settings.duo_cell_image != blank -%}
+                        {%- assign row_has_cell_image = true -%}
+                      {%- endif -%}
+                      <div class="grimmie-size-{{ section_id }}__mobile-card-row{% if block.settings.value_type == 'text' and row_has_cell_image %} grimmie-size-{{ section_id }}__mobile-card-row--stacked{% endif %}">
                         <div class="grimmie-size-{{ section_id }}__mobile-card-row-label">
                           <span class="grimmie-size-{{ section_id }}__row-icon" aria-hidden="true">
                             {%- if block.settings.icon != blank -%}
@@ -1578,9 +1610,11 @@
                               {%- endfor -%}
                             </span>
                           {%- else -%}
-                            {%- if cell_image != blank -%}
+                            {%- if row_has_cell_image -%}
                               <div class="grimmie-size-{{ section_id }}__cell-image">
-                                {{ cell_image | image_url: width: 300 | image_tag: alt: cell_image_alt, loading: 'lazy', widths: '120,180,240,300' }}
+                                {%- if cell_image != blank -%}
+                                  {{ cell_image | image_url: width: 300 | image_tag: alt: cell_image_alt, loading: 'lazy', widths: '120,180,240,300' }}
+                                {%- endif -%}
                               </div>
                             {%- endif -%}
                             {{ cell_text | escape }}
