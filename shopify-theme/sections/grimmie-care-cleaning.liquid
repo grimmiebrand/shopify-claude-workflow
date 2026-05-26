@@ -1,0 +1,336 @@
+{%- liquid
+  assign section_id = section.id
+  assign section_title = section.settings.section_title
+
+  assign bg_color = section.settings.background_color
+  assign card_bg = section.settings.card_background_color
+  assign heading_color = section.settings.heading_color
+  assign text_color = section.settings.text_color
+  assign accent_color = section.settings.accent_color
+  assign border_color = section.settings.border_color
+-%}
+
+<style>
+  .grimmie-care-clean-{{ section_id }} {
+    --gcc-bg: {{ bg_color }};
+    --gcc-card-bg: {{ card_bg }};
+    --gcc-heading: {{ heading_color }};
+    --gcc-text: {{ text_color }};
+    --gcc-accent: {{ accent_color }};
+    --gcc-border: {{ border_color }};
+
+    background-color: var(--gcc-bg);
+    color: var(--gcc-text);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .grimmie-care-clean-{{ section_id }} * { box-sizing: border-box; }
+
+  .grimmie-care-clean-{{ section_id }}__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 56px);
+  }
+
+  .grimmie-care-clean-{{ section_id }}__title-wrap {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 2vw, 28px);
+    margin: 0 0 clamp(28px, 3.5vw, 44px);
+  }
+
+  .grimmie-care-clean-{{ section_id }}__title-line {
+    flex: 1;
+    height: 1px;
+    background-color: var(--gcc-border);
+  }
+
+  .grimmie-care-clean-{{ section_id }}__title {
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    color: var(--gcc-heading);
+    font-size: clamp(22px, 2.6vw, 32px);
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    margin: 0;
+    text-transform: none;
+    flex: 0 0 auto;
+  }
+
+  .grimmie-care-clean-{{ section_id }}__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(16px, 2vw, 28px);
+  }
+
+  .grimmie-care-clean-{{ section_id }}__card {
+    background-color: var(--gcc-card-bg);
+    border: 1px solid var(--gcc-border);
+    border-radius: 16px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    position: relative;
+  }
+
+  .grimmie-care-clean-{{ section_id }}__media {
+    background-color: var(--gcc-border);
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .grimmie-care-clean-{{ section_id }}__media img,
+  .grimmie-care-clean-{{ section_id }}__media video,
+  .grimmie-care-clean-{{ section_id }}__media iframe {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border: 0;
+  }
+
+  .grimmie-care-clean-{{ section_id }}__media svg.placeholder {
+    width: 50%;
+    height: 50%;
+    color: var(--gcc-card-bg);
+    opacity: 0.6;
+  }
+
+  .grimmie-care-clean-{{ section_id }}__body {
+    padding: clamp(20px, 2.4vw, 32px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+  }
+
+  .grimmie-care-clean-{{ section_id }}__icon {
+    position: absolute;
+    top: clamp(14px, 1.6vw, 22px);
+    left: calc(-1 * clamp(18px, 2vw, 26px));
+    width: clamp(36px, 4vw, 48px);
+    height: clamp(36px, 4vw, 48px);
+    border-radius: 50%;
+    background-color: var(--gcc-accent);
+    color: var(--gcc-heading);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(110, 95, 89, 0.08);
+  }
+
+  .grimmie-care-clean-{{ section_id }}__icon svg {
+    width: 52%;
+    height: 52%;
+    fill: currentColor;
+    stroke: currentColor;
+    stroke-width: 1.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .grimmie-care-clean-{{ section_id }}__icon img {
+    width: 56%;
+    height: 56%;
+    object-fit: contain;
+  }
+
+  .grimmie-care-clean-{{ section_id }}__card-title {
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    color: var(--gcc-heading);
+    font-size: clamp(20px, 2vw, 28px);
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    margin: 0 0 4px;
+    text-transform: none;
+  }
+
+  .grimmie-care-clean-{{ section_id }}__card-text {
+    font-family: var(--font-body--family);
+    color: var(--gcc-text);
+    font-weight: 400;
+    font-size: clamp(13px, 0.95vw, 14.5px);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .grimmie-care-clean-{{ section_id }}__card-text + .grimmie-care-clean-{{ section_id }}__card-text {
+    margin-top: 8px;
+  }
+
+  @media (max-width: 900px) {
+    .grimmie-care-clean-{{ section_id }}__grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .grimmie-care-clean-{{ section_id }} {
+      padding-top: {{ section.settings.padding_top | times: 0.7 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.7 | round }}px;
+    }
+    .grimmie-care-clean-{{ section_id }}__card {
+      grid-template-columns: 1fr;
+    }
+    .grimmie-care-clean-{{ section_id }}__media {
+      aspect-ratio: 16 / 10;
+    }
+    .grimmie-care-clean-{{ section_id }}__icon {
+      left: auto;
+      right: clamp(14px, 4vw, 22px);
+      top: calc(-1 * clamp(18px, 4vw, 24px));
+    }
+    .grimmie-care-clean-{{ section_id }}__title-line { display: none; }
+    .grimmie-care-clean-{{ section_id }}__title-wrap { justify-content: center; }
+  }
+</style>
+
+<section
+  class="grimmie-care-clean-{{ section_id }}"
+  aria-label="{{ section.settings.section_title | default: 'Come pulirla' | escape }}"
+>
+  <div class="grimmie-care-clean-{{ section_id }}__inner">
+    {%- if section_title != blank -%}
+      <div class="grimmie-care-clean-{{ section_id }}__title-wrap">
+        <span class="grimmie-care-clean-{{ section_id }}__title-line" aria-hidden="true"></span>
+        <h2 class="grimmie-care-clean-{{ section_id }}__title">{{ section_title | escape }}</h2>
+        <span class="grimmie-care-clean-{{ section_id }}__title-line" aria-hidden="true"></span>
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="grimmie-care-clean-{{ section_id }}__grid">
+        {%- for block in section.blocks -%}
+          <article class="grimmie-care-clean-{{ section_id }}__card" {{ block.shopify_attributes }}>
+            <div class="grimmie-care-clean-{{ section_id }}__media">
+              {%- assign media_type = block.settings.media_type -%}
+              {%- assign video_url = block.settings.video_url -%}
+              {%- assign uploaded_video = block.settings.video -%}
+              {%- if media_type == 'video' and uploaded_video != blank -%}
+                {{ uploaded_video | video_tag: image_size: '1200x', autoplay: true, loop: true, muted: true, controls: false, playsinline: true }}
+              {%- elsif media_type == 'video' and video_url != blank -%}
+                {{ video_url | external_video_tag: image_size: '1200x', loading: 'lazy' }}
+              {%- elsif block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 1200 | image_tag: alt: block.settings.image_alt, loading: 'lazy', widths: '480,720,960,1200', sizes: '(max-width: 900px) 100vw, 50vw' }}
+              {%- else -%}
+                <svg class="placeholder" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                  <rect x="20" y="30" width="60" height="40" rx="4" fill="currentColor" opacity="0.6"/>
+                </svg>
+              {%- endif -%}
+            </div>
+
+            <div class="grimmie-care-clean-{{ section_id }}__body">
+              <div class="grimmie-care-clean-{{ section_id }}__icon" aria-hidden="{% if block.settings.icon_alt == blank %}true{% else %}false{% endif %}">
+                {%- if block.settings.icon != blank -%}
+                  {{ block.settings.icon | image_url: width: 80 | image_tag: alt: block.settings.icon_alt, loading: 'lazy' }}
+                {%- else -%}
+                  {%- case block.settings.fallback_icon -%}
+                    {%- when 'sparkle' -%}
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt | default: 'Sparkle' | escape }}">
+                        <path d="M12 3 L13.5 9 L19 10.5 L13.5 12 L12 18 L10.5 12 L5 10.5 L10.5 9 Z" fill="currentColor" stroke="none"/>
+                        <path d="M18 4 L18.7 6 L20.5 6.7 L18.7 7.3 L18 9 L17.3 7.3 L15.5 6.7 L17.3 6 Z" fill="currentColor" stroke="none"/>
+                        <path d="M5 16 L5.5 17.5 L7 18 L5.5 18.5 L5 20 L4.5 18.5 L3 18 L4.5 17.5 Z" fill="currentColor" stroke="none"/>
+                      </svg>
+                    {%- when 'heart' -%}
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt | default: 'Heart' | escape }}"><path d="M12 21 C 6 16 3 13 3 9 a 4 4 0 0 1 8 -1 a 4 4 0 0 1 8 1 c 0 4 -3 7 -7 12 Z" fill="currentColor" stroke="none"/></svg>
+                    {%- when 'leaf' -%}
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt | default: 'Leaf' | escape }}"><path d="M5 19 C 5 11 11 5 19 5 C 19 13 13 19 5 19 Z" fill="currentColor" stroke="none"/><path d="M5 19 L 14 10" stroke="#fff" stroke-width="1.2" fill="none"/></svg>
+                    {%- else -%}
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt | default: 'Icon' | escape }}"><circle cx="12" cy="12" r="6" fill="currentColor"/></svg>
+                  {%- endcase -%}
+                {%- endif -%}
+              </div>
+
+              {%- if block.settings.title != blank -%}
+                <h3 class="grimmie-care-clean-{{ section_id }}__card-title">{{ block.settings.title | escape }}</h3>
+              {%- endif -%}
+              {%- if block.settings.text_1 != blank -%}
+                <p class="grimmie-care-clean-{{ section_id }}__card-text">{{ block.settings.text_1 | newline_to_br }}</p>
+              {%- endif -%}
+              {%- if block.settings.text_2 != blank -%}
+                <p class="grimmie-care-clean-{{ section_id }}__card-text">{{ block.settings.text_2 | newline_to_br }}</p>
+              {%- endif -%}
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Grimmie Care Cleaning",
+  "tag": "section",
+  "class": "grimmie-care-cleaning-section",
+  "settings": [
+    { "type": "header", "content": "Section" },
+    { "type": "text", "id": "section_title", "label": "Section title", "default": "Come pulirla" },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#F7F1EE" },
+    { "type": "color", "id": "card_background_color", "label": "Card background", "default": "#F7EDEB" },
+    { "type": "color", "id": "heading_color", "label": "Heading", "default": "#6E5F59" },
+    { "type": "color", "id": "text_color", "label": "Body text", "default": "#6E5F59" },
+    { "type": "color", "id": "accent_color", "label": "Icon background (blush)", "default": "#EACBC8" },
+    { "type": "color", "id": "border_color", "label": "Card border / divider", "default": "#DDD2CA" },
+
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 48 }
+  ],
+  "blocks": [
+    {
+      "type": "cleaning_card",
+      "name": "Cleaning card",
+      "settings": [
+        { "type": "header", "content": "Media" },
+        { "type": "select", "id": "media_type", "label": "Media type", "options": [
+          { "value": "image", "label": "Image" },
+          { "value": "video", "label": "Video" }
+        ], "default": "image", "info": "Choose Image or Video. If Video, upload a video below or paste a YouTube/Vimeo URL." },
+        { "type": "image_picker", "id": "image", "label": "Image (or video fallback)" },
+        { "type": "text", "id": "image_alt", "label": "Image alt text" },
+        { "type": "video", "id": "video", "label": "Uploaded video", "info": "Upload an MP4. Used when Media type = Video." },
+        { "type": "video_url", "id": "video_url", "label": "Video URL", "accept": ["youtube", "vimeo"], "info": "YouTube or Vimeo URL. Used when no video is uploaded and Media type = Video." },
+
+        { "type": "header", "content": "Content" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Interno" },
+        { "type": "textarea", "id": "text_1", "label": "Paragraph 1", "default": "Pulisci le eventuali tracce di make-up con un dischetto di cotone imbevuto di acqua micellare senza oli." },
+        { "type": "textarea", "id": "text_2", "label": "Paragraph 2 (optional)", "default": "Lascia asciugare completamente prima di reinserire i tuoi accessori." },
+
+        { "type": "header", "content": "Icon" },
+        { "type": "image_picker", "id": "icon", "label": "Custom icon (optional)", "info": "Overrides fallback icon if uploaded." },
+        { "type": "text", "id": "icon_alt", "label": "Icon alt text" },
+        { "type": "select", "id": "fallback_icon", "label": "Fallback icon", "options": [
+          { "value": "sparkle", "label": "Sparkle" },
+          { "value": "heart", "label": "Heart" },
+          { "value": "leaf", "label": "Leaf" },
+          { "value": "none", "label": "None (dot)" }
+        ], "default": "sparkle" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Grimmie Care Cleaning",
+      "category": "Grimmie",
+      "blocks": [
+        { "type": "cleaning_card", "settings": { "title": "Interno", "text_1": "Pulisci le eventuali tracce di make-up con un dischetto di cotone imbevuto di acqua micellare senza oli.", "text_2": "Lascia asciugare completamente prima di reinserire i tuoi accessori.", "fallback_icon": "sparkle", "media_type": "image" } },
+        { "type": "cleaning_card", "settings": { "title": "Esterno", "text_1": "Pulisci la superficie esterna con un panno in microfibra umido e delicato.", "text_2": "Lascia asciugare all'aria prima di riporre Alma nella tua routine bag.", "fallback_icon": "sparkle", "media_type": "image" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
