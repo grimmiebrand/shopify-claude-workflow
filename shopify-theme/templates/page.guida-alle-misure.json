@@ -12,63 +12,6 @@
     "main": {
       "type": "grimmie-size-guide-page",
       "blocks": {
-        "choice_classic": {
-          "type": "choice_card",
-          "settings": {
-            "icon": "shopify://shop_images/C39B878D-4A90-42F1-AB3B-097664131851.png",
-            "fallback_icon": "classic",
-            "icon_alt": "Classic",
-            "title": "CLASSIC",
-            "description": "Essenziale e compatta, perfetta per i must-have di ogni giorno."
-          }
-        },
-        "choice_large": {
-          "type": "choice_card",
-          "settings": {
-            "icon": "shopify://shop_images/28B5DA73-3808-45C1-8C56-42DF075C57C5.png",
-            "fallback_icon": "large",
-            "icon_alt": "Large",
-            "title": "LARGE",
-            "description": "Più spazio per la tua routine completa, a casa o in viaggio."
-          }
-        },
-        "choice_duo": {
-          "type": "choice_card",
-          "settings": {
-            "icon": "shopify://shop_images/C2B87F14-7FB5-4C67-ABAB-483D3951295F.png",
-            "fallback_icon": "duo",
-            "icon_alt": "Duo",
-            "title": "DUO",
-            "description": "Il set perfetto per organizzare l'intera routine, con armonia."
-          }
-        },
-        "fits_classic": {
-          "type": "fits_card",
-          "settings": {
-            "title": "CLASSIC",
-            "image": "shopify://shop_images/5525CCF4-EC4C-4934-BDF4-2D54F44B436E.png",
-            "image_alt": "Cosa entra nella Classic",
-            "description": "I tuoi indispensabili quotidiani, sempre con te."
-          }
-        },
-        "fits_large": {
-          "type": "fits_card",
-          "settings": {
-            "title": "LARGE",
-            "image": "shopify://shop_images/1F9B1F3A-2C2A-4CC4-AC1C-57E6F1AE2D18.png",
-            "image_alt": "Cosa entra nella Large",
-            "description": "Tutto ciò che ti serve, per una routine completa."
-          }
-        },
-        "fits_duo": {
-          "type": "fits_card",
-          "settings": {
-            "title": "DUO",
-            "image": "shopify://shop_images/068DEE1F-C8A4-49FF-B1F5-F8EE274B5F21.png",
-            "image_alt": "Cosa entra nel Duo",
-            "description": "La combinazione perfetta per ogni momento."
-          }
-        },
         "row_inside": {
           "type": "table_row",
           "settings": {
@@ -157,12 +100,6 @@
         }
       },
       "block_order": [
-        "choice_classic",
-        "choice_large",
-        "choice_duo",
-        "fits_classic",
-        "fits_large",
-        "fits_duo",
         "row_inside",
         "row_ideal",
         "row_beauty",
@@ -175,7 +112,7 @@
         "hero_text": "Scegli la misura giusta di Alma per la tua routine, ogni giorno.",
         "hero_image": "shopify://shop_images/F7EBC4D2-B727-49EB-AC65-0F879E7FFBC9_copia.png",
         "hero_image_alt": "Grimmie Alma pouches",
-        "choice_title": "Scegli in base a ciò che vuoi organizzare",
+        "choice_title": "",
         "visual_title": "",
         "fits_title": "",
         "table_title": "Confronto misure",
