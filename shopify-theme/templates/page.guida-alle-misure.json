@@ -148,7 +148,7 @@
         "button_text_color": "#6e5f59",
         "button_hover_background_color": "#dfafb3",
         "padding_top": 24,
-        "padding_bottom": 100,
+        "padding_bottom": 48,
         "aria_label": "Guida alle misure"
       }
     }
