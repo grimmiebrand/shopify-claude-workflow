@@ -554,6 +554,20 @@
     color: var(--sg-text);
   }
 
+  .grimmie-size-{{ section_id }}__cell-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .grimmie-size-{{ section_id }}__cell-image img {
+    max-width: 100%;
+    max-height: 120px;
+    object-fit: contain;
+    display: block;
+  }
+
   .grimmie-size-{{ section_id }}__dots {
     display: inline-flex;
     gap: 6px;
@@ -823,6 +837,10 @@
       padding: 5px 10px;
       letter-spacing: 0.1em;
     }
+
+    .grimmie-size-{{ section_id }}__cell-image img {
+      max-height: 80px;
+    }
   }
 </style>
 
@@ -1087,9 +1105,30 @@
                           </td>
                         {%- endfor -%}
                       {%- else -%}
-                        <td>{{ block.settings.classic_text | escape }}</td>
-                        <td>{{ block.settings.large_text | escape }}</td>
-                        <td>{{ block.settings.duo_text | escape }}</td>
+                        <td>
+                          {%- if block.settings.classic_cell_image != blank -%}
+                            <div class="grimmie-size-{{ section_id }}__cell-image">
+                              {{ block.settings.classic_cell_image | image_url: width: 400 | image_tag: alt: block.settings.classic_cell_image_alt, loading: 'lazy', widths: '160,240,360,400' }}
+                            </div>
+                          {%- endif -%}
+                          {{ block.settings.classic_text | escape }}
+                        </td>
+                        <td>
+                          {%- if block.settings.large_cell_image != blank -%}
+                            <div class="grimmie-size-{{ section_id }}__cell-image">
+                              {{ block.settings.large_cell_image | image_url: width: 400 | image_tag: alt: block.settings.large_cell_image_alt, loading: 'lazy', widths: '160,240,360,400' }}
+                            </div>
+                          {%- endif -%}
+                          {{ block.settings.large_text | escape }}
+                        </td>
+                        <td>
+                          {%- if block.settings.duo_cell_image != blank -%}
+                            <div class="grimmie-size-{{ section_id }}__cell-image">
+                              {{ block.settings.duo_cell_image | image_url: width: 400 | image_tag: alt: block.settings.duo_cell_image_alt, loading: 'lazy', widths: '160,240,360,400' }}
+                            </div>
+                          {%- endif -%}
+                          {{ block.settings.duo_text | escape }}
+                        </td>
                       {%- endif -%}
                     </tr>
                   {%- endfor -%}
@@ -1318,7 +1357,14 @@
         { "type": "header", "content": "Dot levels (used if Value type = Rating dots)" },
         { "type": "range", "id": "classic_level", "label": "Classic dots", "min": 0, "max": 5, "step": 1, "default": 2 },
         { "type": "range", "id": "large_level", "label": "Large dots", "min": 0, "max": 5, "step": 1, "default": 4 },
-        { "type": "range", "id": "duo_level", "label": "Duo dots", "min": 0, "max": 5, "step": 1, "default": 5 }
+        { "type": "range", "id": "duo_level", "label": "Duo dots", "min": 0, "max": 5, "step": 1, "default": 5 },
+        { "type": "header", "content": "Cell images (optional, used if Value type = Text)" },
+        { "type": "image_picker", "id": "classic_cell_image", "label": "Classic cell image" },
+        { "type": "text", "id": "classic_cell_image_alt", "label": "Classic cell image alt text" },
+        { "type": "image_picker", "id": "large_cell_image", "label": "Large cell image" },
+        { "type": "text", "id": "large_cell_image_alt", "label": "Large cell image alt text" },
+        { "type": "image_picker", "id": "duo_cell_image", "label": "Duo cell image" },
+        { "type": "text", "id": "duo_cell_image_alt", "label": "Duo cell image alt text" }
       ]
     },
     {
