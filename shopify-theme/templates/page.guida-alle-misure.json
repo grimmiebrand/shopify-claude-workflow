@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -6,6 +15,7 @@
         "choice_classic": {
           "type": "choice_card",
           "settings": {
+            "icon": "shopify://shop_images/C39B878D-4A90-42F1-AB3B-097664131851.png",
             "fallback_icon": "classic",
             "icon_alt": "Classic",
             "title": "CLASSIC",
@@ -15,6 +25,7 @@
         "choice_large": {
           "type": "choice_card",
           "settings": {
+            "icon": "shopify://shop_images/28B5DA73-3808-45C1-8C56-42DF075C57C5.png",
             "fallback_icon": "large",
             "icon_alt": "Large",
             "title": "LARGE",
@@ -24,42 +35,18 @@
         "choice_duo": {
           "type": "choice_card",
           "settings": {
+            "icon": "shopify://shop_images/C2B87F14-7FB5-4C67-ABAB-483D3951295F.png",
             "fallback_icon": "duo",
             "icon_alt": "Duo",
             "title": "DUO",
             "description": "Il set perfetto per organizzare l'intera routine, con armonia."
           }
         },
-
-        "visual_classic": {
-          "type": "size_visual",
-          "settings": {
-            "image_alt": "Alma Classic",
-            "title": "CLASSIC",
-            "size_text": "22 × 11 × 8 cm"
-          }
-        },
-        "visual_large": {
-          "type": "size_visual",
-          "settings": {
-            "image_alt": "Alma Large",
-            "title": "LARGE",
-            "size_text": "28 × 15 × 10 cm"
-          }
-        },
-        "visual_duo": {
-          "type": "size_visual",
-          "settings": {
-            "image_alt": "Alma Duo",
-            "title": "DUO",
-            "size_text": "Large + Classic"
-          }
-        },
-
         "fits_classic": {
           "type": "fits_card",
           "settings": {
             "title": "CLASSIC",
+            "image": "shopify://shop_images/5525CCF4-EC4C-4934-BDF4-2D54F44B436E.png",
             "image_alt": "Cosa entra nella Classic",
             "description": "I tuoi indispensabili quotidiani, sempre con te."
           }
@@ -68,6 +55,7 @@
           "type": "fits_card",
           "settings": {
             "title": "LARGE",
+            "image": "shopify://shop_images/1F9B1F3A-2C2A-4CC4-AC1C-57E6F1AE2D18.png",
             "image_alt": "Cosa entra nella Large",
             "description": "Tutto ciò che ti serve, per una routine completa."
           }
@@ -76,39 +64,47 @@
           "type": "fits_card",
           "settings": {
             "title": "DUO",
+            "image": "shopify://shop_images/068DEE1F-C8A4-49FF-B1F5-F8EE274B5F21.png",
             "image_alt": "Cosa entra nel Duo",
             "description": "La combinazione perfetta per ogni momento."
           }
         },
-
-        "row_dim": {
+        "row_inside": {
           "type": "table_row",
           "settings": {
-            "row_label": "DIMENSIONI",
-            "fallback_icon": "ruler",
+            "row_label": "COSA CI STA DENTRO",
+            "fallback_icon": "none",
             "value_type": "text",
-            "classic_text": "24 × 12 × 12 cm",
-            "large_text": "37 × 12 × 12 cm",
-            "duo_text": "Classic + Large"
+            "classic_text": "Make-up, skincare essenziale e piccoli accessori quotidiani.",
+            "large_text": "Hair tools, skincare completa, formati grandi e accessori beauty.",
+            "duo_text": "La combinazione completa per organizzare ogni fase della routine."
           }
         },
         "row_ideal": {
           "type": "table_row",
           "settings": {
             "row_label": "IDEALE PER",
+            "icon": "shopify://shop_images/ChatGPT_Image_26_mag_2026_11_47_18_1.png",
             "fallback_icon": "target",
             "value_type": "text",
             "classic_text": "Make-up routine",
             "large_text": "Hair care routine",
-            "duo_text": "Routine completa e organizzata"
+            "duo_text": "Routine completa e organizzata",
+            "classic_level": 2,
+            "large_level": 4,
+            "duo_level": 5
           }
         },
         "row_beauty": {
           "type": "table_row",
           "settings": {
             "row_label": "BEAUTY ESSENTIALS",
+            "icon": "shopify://shop_images/ChatGPT_Image_26_mag_2026_11_47_19_2.png",
             "fallback_icon": "lipstick",
             "value_type": "dots",
+            "classic_text": "22 x 11 x 8 cm",
+            "large_text": "28 x 15 x 10 cm",
+            "duo_text": "Large + Classic",
             "classic_level": 2,
             "large_level": 3,
             "duo_level": 5
@@ -118,8 +114,12 @@
           "type": "table_row",
           "settings": {
             "row_label": "HAIR TOOLS",
+            "icon": "shopify://shop_images/ChatGPT_Image_26_mag_2026_11_47_19_3.png",
             "fallback_icon": "hairdryer",
             "value_type": "dots",
+            "classic_text": "22 x 11 x 8 cm",
+            "large_text": "28 x 15 x 10 cm",
+            "duo_text": "Large + Classic",
             "classic_level": 1,
             "large_level": 4,
             "duo_level": 5
@@ -129,8 +129,12 @@
           "type": "table_row",
           "settings": {
             "row_label": "VIAGGIO",
+            "icon": "shopify://shop_images/ChatGPT_Image_26_mag_2026_11_47_19_4.png",
             "fallback_icon": "suitcase",
             "value_type": "dots",
+            "classic_text": "22 x 11 x 8 cm",
+            "large_text": "28 x 15 x 10 cm",
+            "duo_text": "Large + Classic",
             "classic_level": 2,
             "large_level": 3,
             "duo_level": 5
@@ -140,48 +144,59 @@
           "type": "table_row",
           "settings": {
             "row_label": "DA TENERE IN VISTA",
+            "icon": "shopify://shop_images/ChatGPT_Image_26_mag_2026_11_47_20_5.png",
             "fallback_icon": "eye",
             "value_type": "dots",
+            "classic_text": "22 x 11 x 8 cm",
+            "large_text": "28 x 15 x 10 cm",
+            "duo_text": "Large + Classic",
             "classic_level": 2,
             "large_level": 3,
             "duo_level": 4
           }
         },
-
         "rhythm_daily": {
           "type": "rhythm_card",
           "settings": {
+            "icon": "shopify://shop_images/9D70805E-1CC1-4D84-A4F1-B9F743BDA93B.png",
             "fallback_icon": "sun",
             "title": "QUOTIDIANO",
             "description": "L'essenziale con te, sempre a portata di mano.",
-            "tag_text": "CLASSIC"
+            "tag_text": "CLASSIC",
+            "tag_link": ""
           }
         },
         "rhythm_beauty": {
           "type": "rhythm_card",
           "settings": {
+            "icon": "shopify://shop_images/D602760D-34FD-45F8-8661-F27F24A70E10.png",
             "fallback_icon": "mirror",
             "title": "POSTAZIONE BEAUTY",
             "description": "Più spazio per i tuoi must-have, a casa.",
-            "tag_text": "LARGE"
+            "tag_text": "LARGE",
+            "tag_link": ""
           }
         },
         "rhythm_hair": {
           "type": "rhythm_card",
           "settings": {
+            "icon": "shopify://shop_images/9F70A960-9E47-420E-B276-0ABB19D65B95.png",
             "fallback_icon": "brush",
             "title": "HAIR TOOLS",
             "description": "Pensata per spazio, accessori e styling.",
-            "tag_text": "LARGE"
+            "tag_text": "LARGE",
+            "tag_link": ""
           }
         },
         "rhythm_travel": {
           "type": "rhythm_card",
           "settings": {
+            "icon": "shopify://shop_images/C803C90C-22FC-444F-88CF-93B8DB197A53.png",
             "fallback_icon": "plane",
             "title": "WEEKEND & VIAGGIO",
             "description": "La combinazione perfetta per ogni destinazione.",
-            "tag_text": "DUO"
+            "tag_text": "DUO",
+            "tag_link": ""
           }
         }
       },
@@ -189,13 +204,10 @@
         "choice_classic",
         "choice_large",
         "choice_duo",
-        "visual_classic",
-        "visual_large",
-        "visual_duo",
         "fits_classic",
         "fits_large",
         "fits_duo",
-        "row_dim",
+        "row_inside",
         "row_ideal",
         "row_beauty",
         "row_hair",
@@ -209,23 +221,40 @@
       "settings": {
         "hero_heading": "Guida alle misure",
         "hero_text": "Scegli la misura giusta di Alma per la tua routine, ogni giorno.",
+        "hero_image": "shopify://shop_images/F7EBC4D2-B727-49EB-AC65-0F879E7FFBC9_copia.png",
         "hero_image_alt": "Grimmie Alma pouches",
         "choice_title": "Scegli in base a ciò che vuoi organizzare",
-        "visual_title": "Le misure, a colpo d'occhio",
-        "fits_title": "Cosa ci sta dentro",
+        "visual_title": "",
+        "fits_title": "",
         "table_title": "Confronto rapido",
         "table_col_1": "CLASSIC",
         "table_col_2": "LARGE",
         "table_col_3": "DUO",
+        "classic_image": "shopify://shop_images/1.png",
         "classic_badge": "24 × 12 × 12 cm",
+        "large_image": "shopify://shop_images/3_d3652861-3407-4029-83f9-cb83fbf38c1a.png",
         "large_badge": "37 × 12 × 12 cm",
+        "duo_image": "shopify://shop_images/2_2e67881c-0a46-421f-b62f-e7b4d88306ad.png",
         "duo_badge": "Classic + Large",
         "rhythm_title": "Scegli in base al tuo ritmo",
         "rhythm_subtitle": "Ogni routine ha il suo equilibrio: ecco quale misura segue meglio il tuo modo di organizzarti.",
+        "bottom_image": "shopify://shop_images/73C90E0C-AAA1-4D03-9DE5-02C7F7904762.png",
         "bottom_image_alt": "Grimmie Alma collection",
         "cta_text": "SCEGLI LA TUA MISURA",
-        "heading_color": "#6E5F59",
-        "text_color": "#6E5F59"
+        "cta_link": "",
+        "background_color": "#f7f1ee",
+        "secondary_background_color": "#f1ebe6",
+        "heading_color": "#6e5f59",
+        "text_color": "#6e5f59",
+        "accent_color": "#eacbc8",
+        "border_color": "#ddd2ca",
+        "card_background_color": "#f7edeb",
+        "button_background_color": "#eacbc8",
+        "button_text_color": "#6e5f59",
+        "button_hover_background_color": "#dfafb3",
+        "padding_top": 24,
+        "padding_bottom": 100,
+        "aria_label": "Guida alle misure"
       }
     }
   },
