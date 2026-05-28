@@ -125,19 +125,19 @@
   .grimmie-am-{{ sid }}__q-title { font-family: var(--font-heading--family); font-style: var(--font-heading--style); font-weight: var(--font-heading--weight); color: var(--am-heading); font-size: clamp(22px, 2.8vw, 34px); line-height: 1.2; margin: 0 0 8px; }
   .grimmie-am-{{ sid }}__q-sub { font-size: clamp(13px, 0.95vw, 14.5px); margin: 0 auto clamp(24px, 3vw, 36px); color: var(--am-text); }
 
-  .grimmie-am-{{ sid }}__cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(12px, 1.4vw, 18px); margin-bottom: clamp(24px, 3vw, 36px); }
+  .grimmie-am-{{ sid }}__cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(10px, 1.1vw, 14px); margin: 0 auto clamp(20px, 2.4vw, 28px); max-width: 840px; }
   .grimmie-am-{{ sid }}__card {
-    background-color: var(--am-bg); border: 1px solid var(--am-border); border-radius: 14px;
-    padding: clamp(18px, 2vw, 26px) clamp(12px, 1.4vw, 18px); display: flex; flex-direction: column; align-items: center; gap: 12px;
+    background-color: var(--am-bg); border: 1px solid var(--am-border); border-radius: 12px;
+    padding: clamp(14px, 1.4vw, 18px) clamp(10px, 1vw, 14px); display: flex; flex-direction: column; align-items: center; gap: 8px;
     cursor: pointer; text-align: center; transition: border-color 0.2s ease, background-color 0.2s ease; font-family: inherit; color: inherit;
   }
   .grimmie-am-{{ sid }}__card:hover { border-color: var(--am-blush); }
   .grimmie-am-{{ sid }}__card.is-selected { border-color: var(--am-blush); background-color: var(--am-blush-light); }
-  .grimmie-am-{{ sid }}__card-icon { width: clamp(54px, 5vw, 64px); height: clamp(54px, 5vw, 64px); border-radius: 50%; background-color: var(--am-blush-light); color: var(--am-heading); display: flex; align-items: center; justify-content: center; }
+  .grimmie-am-{{ sid }}__card-icon { width: clamp(40px, 3.4vw, 46px); height: clamp(40px, 3.4vw, 46px); border-radius: 50%; background-color: var(--am-blush-light); color: var(--am-heading); display: flex; align-items: center; justify-content: center; }
   .grimmie-am-{{ sid }}__card.is-selected .grimmie-am-{{ sid }}__card-icon { background-color: var(--am-blush); }
   .grimmie-am-{{ sid }}__card-icon svg { width: 46%; height: 46%; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-  .grimmie-am-{{ sid }}__card-label { font-family: var(--font-heading--family); font-style: var(--font-heading--style); font-weight: var(--font-heading--weight); color: var(--am-heading); font-size: clamp(15px, 1.3vw, 18px); line-height: 1.25; }
-  .grimmie-am-{{ sid }}__card-radio { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--am-border); margin-top: auto; transition: border-color 0.2s ease, background-color 0.2s ease; }
+  .grimmie-am-{{ sid }}__card-label { font-family: var(--font-heading--family); font-style: var(--font-heading--style); font-weight: var(--font-heading--weight); color: var(--am-heading); font-size: clamp(13px, 1vw, 15px); line-height: 1.25; }
+  .grimmie-am-{{ sid }}__card-radio { width: 15px; height: 15px; border-radius: 50%; border: 1.5px solid var(--am-border); margin-top: auto; transition: border-color 0.2s ease, background-color 0.2s ease; }
   .grimmie-am-{{ sid }}__card.is-selected .grimmie-am-{{ sid }}__card-radio { border-color: var(--am-blush); background-color: var(--am-blush); box-shadow: inset 0 0 0 3px var(--am-blush-light); }
 
   .grimmie-am-{{ sid }}__reassure { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 16px; font-size: 12.5px; color: var(--am-text); }
@@ -205,14 +205,24 @@
   /* Mobile */
   @media (max-width: 640px) {
     .grimmie-am-{{ sid }}__hero { min-height: clamp(360px, 80vw, 480px); align-items: flex-end; }
-    .grimmie-am-{{ sid }}__hero--short { min-height: clamp(240px, 56vw, 320px); }
-    .grimmie-am-{{ sid }}__hero-content { padding: 24px 20px; }
-    .grimmie-am-{{ sid }}__cards { grid-template-columns: 1fr; }
+    .grimmie-am-{{ sid }}__hero--short { min-height: clamp(120px, 26vw, 170px); }
+    .grimmie-am-{{ sid }}__hero-content { padding: 18px 20px; }
     .grimmie-am-{{ sid }}__discount { flex-direction: column; text-align: center; }
     .grimmie-am-{{ sid }}__discount-text { max-width: none; }
     .grimmie-am-{{ sid }}__discount .grimmie-am-{{ sid }}__btn { width: 100%; }
     .grimmie-am-{{ sid }}__btn { width: 100%; }
     .grimmie-am-{{ sid }}__archetype-row { flex-direction: row; }
+
+    /* Quiz: keep one question + 4 answers on a single screen */
+    .grimmie-am-{{ sid }}__quiz .grimmie-am-{{ sid }}__section { padding-top: 18px; padding-bottom: 18px; }
+    .grimmie-am-{{ sid }}__q-title { font-size: clamp(19px, 5.6vw, 24px); margin-bottom: 4px; }
+    .grimmie-am-{{ sid }}__q-sub { margin-bottom: 14px; }
+    .grimmie-am-{{ sid }}__cards { grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+    .grimmie-am-{{ sid }}__card { padding: 12px 8px; gap: 6px; border-radius: 10px; }
+    .grimmie-am-{{ sid }}__card-icon { width: 34px; height: 34px; }
+    .grimmie-am-{{ sid }}__card-label { font-size: 12.5px; }
+    .grimmie-am-{{ sid }}__card-radio { width: 13px; height: 13px; }
+    .grimmie-am-{{ sid }}__reassure { margin-top: 12px; font-size: 11.5px; }
   }
 </style>
 
