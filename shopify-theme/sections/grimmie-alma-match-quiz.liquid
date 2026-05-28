@@ -1,0 +1,673 @@
+{%- liquid
+  assign sid = section.id
+  assign s = section.settings
+-%}
+
+<style>
+  .grimmie-am-{{ sid }} {
+    --am-bg: {{ s.background_color }};
+    --am-bg2: {{ s.secondary_background_color }};
+    --am-blush: {{ s.blush_color }};
+    --am-blush-light: {{ s.light_blush_color }};
+    --am-heading: {{ s.heading_color }};
+    --am-text: {{ s.text_color }};
+    --am-border: {{ s.border_color }};
+    --am-accent: {{ s.accent_color }};
+    --am-btn-bg: {{ s.button_background_color }};
+    --am-btn-text: {{ s.button_text_color }};
+    --am-btn-hover: {{ s.button_hover_background_color }};
+
+    background-color: var(--am-bg);
+    color: var(--am-text);
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    font-family: var(--font-body--family);
+  }
+  .grimmie-am-{{ sid }} * { box-sizing: border-box; }
+  .grimmie-am-{{ sid }} [hidden] { display: none !important; }
+
+  .grimmie-am-{{ sid }}__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 56px);
+  }
+
+  /* Shared hero band (intro / quiz / result) */
+  .grimmie-am-{{ sid }}__hero {
+    position: relative;
+    width: 100%;
+    min-height: clamp(420px, 44vw, 600px);
+    background-color: var(--am-bg2);
+    overflow: hidden;
+    display: flex;
+  }
+  .grimmie-am-{{ sid }}__hero--short { min-height: clamp(300px, 30vw, 420px); }
+  .grimmie-am-{{ sid }}__hero-image { position: absolute; inset: 0; z-index: 0; }
+  .grimmie-am-{{ sid }}__hero-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .grimmie-am-{{ sid }}__hero-image svg.placeholder { width: 100%; height: 100%; color: var(--am-blush); opacity: 0.4; }
+  .grimmie-am-{{ sid }}__hero-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: clamp(36px, 6vw, 80px) clamp(20px, 5vw, 56px);
+    display: flex;
+    align-items: center;
+  }
+  .grimmie-am-{{ sid }}__hero-text { max-width: 460px; display: flex; flex-direction: column; gap: clamp(12px, 1.6vw, 18px); }
+
+  .grimmie-am-{{ sid }}__eyebrow {
+    font-size: clamp(11px, 0.85vw, 13px); font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--am-accent); margin: 0; line-height: 1.3;
+  }
+  .grimmie-am-{{ sid }}__title {
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    color: var(--am-heading);
+    font-size: clamp(30px, 4vw, 52px);
+    line-height: 1.1; letter-spacing: -0.01em; margin: 0; text-transform: none;
+  }
+  .grimmie-am-{{ sid }}__lead {
+    font-size: clamp(13px, 1vw, 15px); line-height: 1.65; color: var(--am-text); margin: 0; max-width: 40ch;
+  }
+
+  .grimmie-am-{{ sid }}__bullets { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .grimmie-am-{{ sid }}__bullets li { display: flex; align-items: flex-start; gap: 10px; font-size: clamp(13px, 0.95vw, 14.5px); line-height: 1.5; }
+  .grimmie-am-{{ sid }}__bullets svg { flex: 0 0 auto; width: 18px; height: 18px; margin-top: 1px; color: var(--am-accent); fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Buttons */
+  .grimmie-am-{{ sid }}__btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    background-color: var(--am-btn-bg); color: var(--am-btn-text);
+    font-family: var(--font-body--family); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase; padding: 16px clamp(28px, 4vw, 44px);
+    border-radius: 8px; text-decoration: none; border: none; cursor: pointer;
+    min-height: 50px; line-height: 1; transition: background-color 0.2s ease; width: fit-content;
+  }
+  .grimmie-am-{{ sid }}__btn:hover:not(:disabled) { background-color: var(--am-btn-hover); }
+  .grimmie-am-{{ sid }}__btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  /* Progress */
+  .grimmie-am-{{ sid }}__progress { margin-top: 6px; max-width: 320px; width: 100%; }
+  .grimmie-am-{{ sid }}__progress-label { font-size: 12px; letter-spacing: 0.12em; color: var(--am-accent); margin: 0 0 8px; font-weight: 600; }
+  .grimmie-am-{{ sid }}__bar { width: 100%; height: 4px; border-radius: 999px; background-color: var(--am-border); overflow: hidden; }
+  .grimmie-am-{{ sid }}__bar span { display: block; height: 100%; width: 10%; background-color: var(--am-btn-bg); border-radius: 999px; transition: width 0.35s ease; }
+
+  /* Section spacing */
+  .grimmie-am-{{ sid }}__section { padding-top: clamp(40px, 5vw, 72px); padding-bottom: clamp(40px, 5vw, 72px); }
+  .grimmie-am-{{ sid }}__section-eyebrow { text-align: center; font-size: clamp(11px, 0.85vw, 13px); font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--am-accent); margin: 0 0 clamp(28px, 3.5vw, 44px); }
+
+  /* How it works */
+  .grimmie-am-{{ sid }}__steps { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: clamp(10px, 1.6vw, 24px); align-items: start; }
+  .grimmie-am-{{ sid }}__step { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 0 clamp(4px, 1vw, 16px); }
+  .grimmie-am-{{ sid }}__step-icon { position: relative; width: clamp(56px, 6vw, 72px); height: clamp(56px, 6vw, 72px); border-radius: 50%; background-color: var(--am-blush-light); color: var(--am-heading); display: flex; align-items: center; justify-content: center; }
+  .grimmie-am-{{ sid }}__step-icon svg { width: 44%; height: 44%; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .grimmie-am-{{ sid }}__step-icon img { width: 48%; height: 48%; object-fit: contain; }
+  .grimmie-am-{{ sid }}__step-num { position: absolute; right: -2px; bottom: -2px; width: 22px; height: 22px; border-radius: 50%; background-color: var(--am-blush); color: var(--am-heading); font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+  .grimmie-am-{{ sid }}__step-title { font-family: var(--font-heading--family); font-style: var(--font-heading--style); font-weight: var(--font-heading--weight); color: var(--am-heading); font-size: clamp(17px, 1.6vw, 21px); margin: 6px 0 0; }
+  .grimmie-am-{{ sid }}__step-text { font-size: clamp(13px, 0.92vw, 14px); line-height: 1.55; margin: 0; max-width: 30ch; }
+  .grimmie-am-{{ sid }}__step-arrow { align-self: center; color: var(--am-blush); display: flex; padding-top: 24px; }
+  .grimmie-am-{{ sid }}__step-arrow svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Brand strip */
+  .grimmie-am-{{ sid }}__strip { background-color: var(--am-blush-light); text-align: center; padding: clamp(28px, 4vw, 48px) clamp(20px, 5vw, 56px); }
+  .grimmie-am-{{ sid }}__strip-icon { color: var(--am-blush); width: 26px; height: 26px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; }
+  .grimmie-am-{{ sid }}__strip-icon svg { width: 100%; height: 100%; fill: currentColor; }
+  .grimmie-am-{{ sid }}__strip-title { font-family: var(--font-heading--family); font-style: var(--font-heading--style); font-weight: var(--font-heading--weight); color: var(--am-heading); font-size: clamp(20px, 2.2vw, 30px); margin: 0 0 8px; }
+  .grimmie-am-{{ sid }}__strip-text { font-size: clamp(13px, 0.95vw, 14.5px); line-height: 1.6; margin: 0 auto; max-width: 620px; }
+
+  /* Quiz body */
+  .grimmie-am-{{ sid }}__qbody { text-align: center; }
+  .grimmie-am-{{ sid }}__q-progress { color: var(--am-accent); font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; margin: 0 0 14px; }
+  .grimmie-am-{{ sid }}__q-title { font-family: var(--font-heading--family); font-style: var(--font-heading--style); font-weight: var(--font-heading--weight); color: var(--am-heading); font-size: clamp(22px, 2.8vw, 34px); line-height: 1.2; margin: 0 0 8px; }
+  .grimmie-am-{{ sid }}__q-sub { font-size: clamp(13px, 0.95vw, 14.5px); margin: 0 auto clamp(24px, 3vw, 36px); color: var(--am-text); }
+
+  .grimmie-am-{{ sid }}__cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(12px, 1.4vw, 18px); margin-bottom: clamp(24px, 3vw, 36px); }
+  .grimmie-am-{{ sid }}__card {
+    background-color: var(--am-bg); border: 1px solid var(--am-border); border-radius: 14px;
+    padding: clamp(18px, 2vw, 26px) clamp(12px, 1.4vw, 18px); display: flex; flex-direction: column; align-items: center; gap: 12px;
+    cursor: pointer; text-align: center; transition: border-color 0.2s ease, background-color 0.2s ease; font-family: inherit; color: inherit;
+  }
+  .grimmie-am-{{ sid }}__card:hover { border-color: var(--am-blush); }
+  .grimmie-am-{{ sid }}__card.is-selected { border-color: var(--am-blush); background-color: var(--am-blush-light); }
+  .grimmie-am-{{ sid }}__card-icon { width: clamp(54px, 5vw, 64px); height: clamp(54px, 5vw, 64px); border-radius: 50%; background-color: var(--am-blush-light); color: var(--am-heading); display: flex; align-items: center; justify-content: center; }
+  .grimmie-am-{{ sid }}__card.is-selected .grimmie-am-{{ sid }}__card-icon { background-color: var(--am-blush); }
+  .grimmie-am-{{ sid }}__card-icon svg { width: 46%; height: 46%; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .grimmie-am-{{ sid }}__card-label { font-family: var(--font-heading--family); font-style: var(--font-heading--style); font-weight: var(--font-heading--weight); color: var(--am-heading); font-size: clamp(15px, 1.3vw, 18px); line-height: 1.25; }
+  .grimmie-am-{{ sid }}__card-radio { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--am-border); margin-top: auto; transition: border-color 0.2s ease, background-color 0.2s ease; }
+  .grimmie-am-{{ sid }}__card.is-selected .grimmie-am-{{ sid }}__card-radio { border-color: var(--am-blush); background-color: var(--am-blush); box-shadow: inset 0 0 0 3px var(--am-blush-light); }
+
+  .grimmie-am-{{ sid }}__reassure { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 16px; font-size: 12.5px; color: var(--am-text); }
+  .grimmie-am-{{ sid }}__reassure svg { width: 15px; height: 15px; color: var(--am-blush); fill: currentColor; }
+
+  /* Loading */
+  .grimmie-am-{{ sid }}__loading { min-height: clamp(360px, 40vw, 520px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 22px; padding: 60px 20px; }
+  .grimmie-am-{{ sid }}__spinner { width: 46px; height: 46px; border-radius: 50%; border: 3px solid var(--am-border); border-top-color: var(--am-blush); animation: grimmie-am-spin-{{ sid }} 0.9s linear infinite; }
+  @keyframes grimmie-am-spin-{{ sid }} { to { transform: rotate(360deg); } }
+  .grimmie-am-{{ sid }}__loading-title { font-family: var(--font-heading--family); font-style: var(--font-heading--style); font-weight: var(--font-heading--weight); color: var(--am-heading); font-size: clamp(20px, 2.2vw, 28px); margin: 0; }
+
+  /* Result */
+  .grimmie-am-{{ sid }}__rcard { background-color: var(--am-blush-light); border-radius: 22px; padding: clamp(26px, 3.4vw, 48px); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 56px); margin-top: clamp(28px, 3.5vw, 44px); }
+  .grimmie-am-{{ sid }}__rcard-eyebrow { font-size: clamp(13px, 1vw, 15px); color: var(--am-text); margin: 0 0 2px; }
+  .grimmie-am-{{ sid }}__archetype-row { display: flex; align-items: center; gap: 14px; margin-bottom: clamp(14px, 1.8vw, 20px); }
+  .grimmie-am-{{ sid }}__archetype-badge { flex: 0 0 auto; width: clamp(48px, 5vw, 60px); height: clamp(48px, 5vw, 60px); border-radius: 50%; background-color: var(--am-blush); color: var(--am-heading); display: flex; align-items: center; justify-content: center; }
+  .grimmie-am-{{ sid }}__archetype-badge svg { width: 46%; height: 46%; fill: currentColor; }
+  .grimmie-am-{{ sid }}__archetype-name { font-family: var(--font-heading--family); font-style: var(--font-heading--style); font-weight: var(--font-heading--weight); color: var(--am-heading); font-size: clamp(26px, 3vw, 40px); line-height: 1.1; margin: 0; }
+  .grimmie-am-{{ sid }}__rdesc { font-size: clamp(13px, 0.95vw, 14.5px); line-height: 1.6; margin: 0 0 clamp(20px, 2.4vw, 28px); }
+  .grimmie-am-{{ sid }}__why-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .grimmie-am-{{ sid }}__why-item { display: flex; align-items: flex-start; gap: 14px; padding: clamp(12px, 1.4vw, 16px) 0; border-top: 1px solid var(--am-border); }
+  .grimmie-am-{{ sid }}__why-item:first-child { border-top: none; }
+  .grimmie-am-{{ sid }}__why-icon { flex: 0 0 auto; width: 30px; height: 30px; color: var(--am-blush); display: flex; align-items: center; justify-content: center; }
+  .grimmie-am-{{ sid }}__why-icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .grimmie-am-{{ sid }}__why-title { font-size: clamp(12px, 0.9vw, 13.5px); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--am-heading); margin: 0 0 3px; line-height: 1.3; }
+  .grimmie-am-{{ sid }}__why-text { font-size: clamp(12.5px, 0.92vw, 14px); line-height: 1.5; margin: 0; }
+
+  .grimmie-am-{{ sid }}__combo-divider { width: 40px; height: 2px; background-color: var(--am-blush); margin: 0 0 14px; border: none; }
+  .grimmie-am-{{ sid }}__combo-name { font-family: var(--font-heading--family); font-style: var(--font-heading--style); font-weight: var(--font-heading--weight); color: var(--am-heading); font-size: clamp(28px, 3.4vw, 44px); line-height: 1.1; margin: 0 0 clamp(16px, 2vw, 24px); }
+  .grimmie-am-{{ sid }}__combo-image { width: 100%; border-radius: 14px; overflow: hidden; margin-bottom: clamp(14px, 1.8vw, 20px); background-color: var(--am-bg2); aspect-ratio: 16 / 11; display: flex; align-items: center; justify-content: center; }
+  .grimmie-am-{{ sid }}__combo-image img { width: 100%; height: 100%; object-fit: contain; }
+  .grimmie-am-{{ sid }}__combo-image svg.placeholder { width: 45%; height: 45%; color: var(--am-blush); opacity: 0.5; }
+  .grimmie-am-{{ sid }}__combo-sub { font-size: clamp(13px, 0.95vw, 14.5px); line-height: 1.6; margin: 0; }
+
+  /* Discount */
+  .grimmie-am-{{ sid }}__discount { background-color: var(--am-blush-light); border-radius: 18px; padding: clamp(22px, 2.6vw, 32px); margin-top: clamp(24px, 3vw, 40px); display: flex; align-items: center; gap: clamp(20px, 3vw, 40px); flex-wrap: wrap; }
+  .grimmie-am-{{ sid }}__timer-ring { flex: 0 0 auto; width: clamp(84px, 9vw, 104px); height: clamp(84px, 9vw, 104px); border-radius: 50%; border: 3px solid var(--am-blush); display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--am-heading); background-color: var(--am-bg); }
+  .grimmie-am-{{ sid }}__timer { font-family: var(--font-heading--family); font-style: var(--font-heading--style); font-weight: var(--font-heading--weight); font-size: clamp(22px, 2.4vw, 30px); line-height: 1; }
+  .grimmie-am-{{ sid }}__timer-label { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 4px; color: var(--am-text); }
+  .grimmie-am-{{ sid }}__discount-body { flex: 1; min-width: 200px; }
+  .grimmie-am-{{ sid }}__discount-title { font-family: var(--font-heading--family); font-style: var(--font-heading--style); font-weight: var(--font-heading--weight); color: var(--am-heading); font-size: clamp(18px, 2vw, 26px); margin: 0 0 6px; }
+  .grimmie-am-{{ sid }}__discount-text { font-size: clamp(13px, 0.95vw, 14.5px); line-height: 1.55; margin: 0; max-width: 46ch; }
+  .grimmie-am-{{ sid }}__discount .grimmie-am-{{ sid }}__btn { flex: 0 0 auto; }
+
+  /* Reassurance icons strip */
+  .grimmie-am-{{ sid }}__trust { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(14px, 2vw, 28px); margin-top: clamp(28px, 3.5vw, 48px); padding-top: clamp(24px, 3vw, 36px); border-top: 1px solid var(--am-border); }
+  .grimmie-am-{{ sid }}__trust-item { display: flex; align-items: center; gap: 12px; }
+  .grimmie-am-{{ sid }}__trust-icon { flex: 0 0 auto; width: 34px; height: 34px; color: var(--am-heading); display: flex; align-items: center; justify-content: center; }
+  .grimmie-am-{{ sid }}__trust-icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+  .grimmie-am-{{ sid }}__trust-title { font-size: clamp(11px, 0.85vw, 12.5px); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--am-heading); margin: 0; line-height: 1.3; }
+  .grimmie-am-{{ sid }}__trust-sub { font-size: clamp(11px, 0.85vw, 12.5px); margin: 2px 0 0; line-height: 1.3; }
+
+  .grimmie-am-{{ sid }}__restart-wrap { text-align: center; margin-top: clamp(28px, 3.5vw, 44px); }
+  .grimmie-am-{{ sid }}__restart { background: none; border: none; cursor: pointer; font-family: var(--font-body--family); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--am-accent); text-decoration: underline; text-underline-offset: 4px; }
+
+  /* Tablet */
+  @media (max-width: 900px) {
+    .grimmie-am-{{ sid }}__cards { grid-template-columns: repeat(2, 1fr); }
+    .grimmie-am-{{ sid }}__steps { grid-template-columns: 1fr; gap: 24px; }
+    .grimmie-am-{{ sid }}__step-arrow { display: none; }
+    .grimmie-am-{{ sid }}__rcard { grid-template-columns: 1fr; }
+    .grimmie-am-{{ sid }}__trust { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .grimmie-am-{{ sid }}__hero { min-height: clamp(360px, 80vw, 480px); align-items: flex-end; }
+    .grimmie-am-{{ sid }}__hero--short { min-height: clamp(240px, 56vw, 320px); }
+    .grimmie-am-{{ sid }}__hero-content { padding: 24px 20px; }
+    .grimmie-am-{{ sid }}__cards { grid-template-columns: 1fr; }
+    .grimmie-am-{{ sid }}__discount { flex-direction: column; text-align: center; }
+    .grimmie-am-{{ sid }}__discount-text { max-width: none; }
+    .grimmie-am-{{ sid }}__discount .grimmie-am-{{ sid }}__btn { width: 100%; }
+    .grimmie-am-{{ sid }}__btn { width: 100%; }
+    .grimmie-am-{{ sid }}__archetype-row { flex-direction: row; }
+  }
+</style>
+
+<section class="grimmie-am-{{ sid }}" data-am-root aria-label="Alma Match">
+  <script type="application/json" data-am-config>
+    {
+      "timerMinutes": {{ s.timer_minutes | default: 10 }},
+      "discountCode": {{ s.discount_code | json }},
+      "discountLabel": {{ s.discount_label | default: '10%' | json }},
+      "fallbackLink": {{ s.fallback_link | default: '/collections/all' | json }},
+      "bundleLinks": {
+        "1 Classic + 2 Large": {{ s.link_1c2l | json }},
+        "2 Classic + 1 Large": {{ s.link_2c1l | json }},
+        "3 Classic + 1 Large": {{ s.link_3c1l | json }},
+        "2 Classic + 2 Large": {{ s.link_2c2l | json }},
+        "1 Classic + 3 Large": {{ s.link_1c3l | json }},
+        "3 Classic + 2 Large": {{ s.link_3c2l | json }},
+        "2 Classic + 3 Large": {{ s.link_2c3l | json }},
+        "4 Classic + 1 Large": {{ s.link_4c1l | json }},
+        "4 Classic + 2 Large": {{ s.link_4c2l | json }},
+        "3 Classic + 3 Large": {{ s.link_3c3l | json }},
+        "1 Classic + 4 Large": {{ s.link_1c4l | json }},
+        "2 Classic + 4 Large": {{ s.link_2c4l | json }}
+      }
+    }
+  </script>
+
+  {%- comment -%} ===================== INTRO ===================== {%- endcomment -%}
+  <div data-am-intro>
+    <div class="grimmie-am-{{ sid }}__hero">
+      <div class="grimmie-am-{{ sid }}__hero-image">
+        {%- if s.intro_image != blank -%}
+          {{ s.intro_image | image_url: width: 2400 | image_tag: alt: s.intro_image_alt, loading: 'eager', widths: '720,960,1200,1600,2000,2400', sizes: '100vw' }}
+        {%- else -%}
+          <svg class="placeholder" viewBox="0 0 160 60" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="160" height="60" fill="currentColor" opacity="0.4"/></svg>
+        {%- endif -%}
+      </div>
+      <div class="grimmie-am-{{ sid }}__hero-content">
+        <div class="grimmie-am-{{ sid }}__hero-text">
+          {%- if s.intro_eyebrow != blank -%}<p class="grimmie-am-{{ sid }}__eyebrow">{{ s.intro_eyebrow | escape }}</p>{%- endif -%}
+          {%- if s.intro_title != blank -%}<h1 class="grimmie-am-{{ sid }}__title">{{ s.intro_title | newline_to_br }}</h1>{%- endif -%}
+          {%- if s.intro_text != blank -%}<p class="grimmie-am-{{ sid }}__lead">{{ s.intro_text | escape }}</p>{%- endif -%}
+          {%- if s.intro_bullet_1 != blank or s.intro_bullet_2 != blank or s.intro_bullet_3 != blank -%}
+            <ul class="grimmie-am-{{ sid }}__bullets">
+              {%- if s.intro_bullet_1 != blank -%}<li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5 L11 15 L16 9.5"/></svg><span>{{ s.intro_bullet_1 | escape }}</span></li>{%- endif -%}
+              {%- if s.intro_bullet_2 != blank -%}<li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5 L11 15 L16 9.5"/></svg><span>{{ s.intro_bullet_2 | escape }}</span></li>{%- endif -%}
+              {%- if s.intro_bullet_3 != blank -%}<li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5 L11 15 L16 9.5"/></svg><span>{{ s.intro_bullet_3 | escape }}</span></li>{%- endif -%}
+            </ul>
+          {%- endif -%}
+          <button type="button" class="grimmie-am-{{ sid }}__btn" data-am-start style="margin-top: clamp(8px,1.4vw,16px);">{{ s.intro_button_text | default: 'INIZIA IL TEST' | escape }}</button>
+          <div class="grimmie-am-{{ sid }}__progress" aria-hidden="true">
+            <p class="grimmie-am-{{ sid }}__progress-label">1 / 10</p>
+            <div class="grimmie-am-{{ sid }}__bar"><span style="width:10%;"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} How it works {%- endcomment -%}
+    <div class="grimmie-am-{{ sid }}__section grimmie-am-{{ sid }}__inner">
+      {%- if s.how_title != blank -%}<p class="grimmie-am-{{ sid }}__section-eyebrow">{{ s.how_title | escape }}</p>{%- endif -%}
+      <div class="grimmie-am-{{ sid }}__steps">
+        {%- for i in (1..3) -%}
+          {%- liquid
+            case i
+              when 1
+                assign st_title = s.step_1_title
+                assign st_text = s.step_1_text
+                assign st_icon = s.step_1_icon
+              when 2
+                assign st_title = s.step_2_title
+                assign st_text = s.step_2_text
+                assign st_icon = s.step_2_icon
+              when 3
+                assign st_title = s.step_3_title
+                assign st_text = s.step_3_text
+                assign st_icon = s.step_3_icon
+            endcase
+          -%}
+          <div class="grimmie-am-{{ sid }}__step">
+            <div class="grimmie-am-{{ sid }}__step-icon">
+              {%- if st_icon != blank -%}
+                {{ st_icon | image_url: width: 120 | image_tag: alt: '', loading: 'lazy' }}
+              {%- else -%}
+                {%- if i == 1 -%}
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5 h16 v10 h-9 l-4 3 v-3 h-3 z"/><path d="M8 9 h8 M8 12 h5"/></svg>
+                {%- elsif i == 2 -%}
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="3.5"/><path d="M5 20 a7 7 0 0 1 14 0"/></svg>
+                {%- else -%}
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4 L13.5 9.5 L19 11 L13.5 12.5 L12 18 L10.5 12.5 L5 11 L10.5 9.5 Z"/></svg>
+                {%- endif -%}
+              {%- endif -%}
+              <span class="grimmie-am-{{ sid }}__step-num">{{ i }}</span>
+            </div>
+            {%- if st_title != blank -%}<h3 class="grimmie-am-{{ sid }}__step-title">{{ st_title | escape }}</h3>{%- endif -%}
+            {%- if st_text != blank -%}<p class="grimmie-am-{{ sid }}__step-text">{{ st_text | escape }}</p>{%- endif -%}
+          </div>
+          {%- unless i == 3 -%}
+            <div class="grimmie-am-{{ sid }}__step-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12 H19 M14 7 L19 12 L14 17"/></svg></div>
+          {%- endunless -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- comment -%} Brand strip {%- endcomment -%}
+    {%- if s.strip_title != blank or s.strip_text != blank -%}
+      <div class="grimmie-am-{{ sid }}__strip">
+        <div class="grimmie-am-{{ sid }}__strip-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21 C 6 16 3 13 3 9 a 4 4 0 0 1 8 -1 a 4 4 0 0 1 8 1 c 0 4 -3 7 -7 12 Z"/></svg></div>
+        {%- if s.strip_title != blank -%}<h2 class="grimmie-am-{{ sid }}__strip-title">{{ s.strip_title | escape }}</h2>{%- endif -%}
+        {%- if s.strip_text != blank -%}<p class="grimmie-am-{{ sid }}__strip-text">{{ s.strip_text | escape }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- comment -%} ===================== QUIZ ===================== {%- endcomment -%}
+  <div data-am-quiz hidden>
+    <div class="grimmie-am-{{ sid }}__hero grimmie-am-{{ sid }}__hero--short">
+      <div class="grimmie-am-{{ sid }}__hero-image">
+        {%- if s.question_image != blank -%}
+          {{ s.question_image | image_url: width: 2400 | image_tag: alt: s.question_image_alt, loading: 'lazy', widths: '720,960,1200,1600,2000,2400', sizes: '100vw' }}
+        {%- elsif s.intro_image != blank -%}
+          {{ s.intro_image | image_url: width: 2400 | image_tag: alt: s.intro_image_alt, loading: 'lazy', widths: '720,960,1200,1600,2000,2400', sizes: '100vw' }}
+        {%- else -%}
+          <svg class="placeholder" viewBox="0 0 160 60" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="160" height="60" fill="currentColor" opacity="0.4"/></svg>
+        {%- endif -%}
+      </div>
+      <div class="grimmie-am-{{ sid }}__hero-content">
+        <div class="grimmie-am-{{ sid }}__hero-text">
+          {%- if s.question_eyebrow != blank -%}<p class="grimmie-am-{{ sid }}__eyebrow">{{ s.question_eyebrow | escape }}</p>{%- endif -%}
+          <h2 class="grimmie-am-{{ sid }}__title" data-am-q-herotitle></h2>
+          <div class="grimmie-am-{{ sid }}__progress">
+            <p class="grimmie-am-{{ sid }}__progress-label" data-am-q-progress-label>DOMANDA 1 DI 10</p>
+            <div class="grimmie-am-{{ sid }}__bar"><span data-am-q-bar style="width:10%;"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grimmie-am-{{ sid }}__section grimmie-am-{{ sid }}__inner">
+      <div class="grimmie-am-{{ sid }}__qbody">
+        <h3 class="grimmie-am-{{ sid }}__q-title" data-am-q-title></h3>
+        {%- if s.question_sub != blank -%}<p class="grimmie-am-{{ sid }}__q-sub">{{ s.question_sub | escape }}</p>{%- endif -%}
+        <div class="grimmie-am-{{ sid }}__cards" data-am-q-cards role="radiogroup" aria-label="Risposte"></div>
+        <button type="button" class="grimmie-am-{{ sid }}__btn" data-am-q-continue disabled style="margin: 0 auto;">CONTINUA</button>
+        {%- if s.question_reassure != blank -%}
+          <p class="grimmie-am-{{ sid }}__reassure"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 L19 6 V11 C 19 16 16 19 12 21 C 8 19 5 16 5 11 V6 Z"/></svg>{{ s.question_reassure | escape }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if s.strip_title != blank -%}
+      <div class="grimmie-am-{{ sid }}__strip">
+        <div class="grimmie-am-{{ sid }}__strip-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21 C 6 16 3 13 3 9 a 4 4 0 0 1 8 -1 a 4 4 0 0 1 8 1 c 0 4 -3 7 -7 12 Z"/></svg></div>
+        <h2 class="grimmie-am-{{ sid }}__strip-title">{{ s.strip_title | escape }}</h2>
+        {%- if s.strip_text != blank -%}<p class="grimmie-am-{{ sid }}__strip-text">{{ s.strip_text | escape }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- comment -%} ===================== LOADING ===================== {%- endcomment -%}
+  <div data-am-loading hidden>
+    <div class="grimmie-am-{{ sid }}__loading">
+      <div class="grimmie-am-{{ sid }}__spinner" aria-hidden="true"></div>
+      <p class="grimmie-am-{{ sid }}__loading-title" data-am-loading-title
+        data-step1="{{ s.loading_text_1 | default: 'Stiamo creando la tua combo Alma…' | escape }}"
+        data-step2="{{ s.loading_text_2 | default: 'Abbiamo trovato il tuo profilo.' | escape }}">{{ s.loading_text_1 | default: 'Stiamo creando la tua combo Alma…' | escape }}</p>
+    </div>
+  </div>
+
+  {%- comment -%} ===================== RESULT ===================== {%- endcomment -%}
+  <div data-am-result hidden>
+    <div class="grimmie-am-{{ sid }}__hero">
+      <div class="grimmie-am-{{ sid }}__hero-image">
+        {%- if s.result_image != blank -%}
+          {{ s.result_image | image_url: width: 2400 | image_tag: alt: s.result_image_alt, loading: 'lazy', widths: '720,960,1200,1600,2000,2400', sizes: '100vw' }}
+        {%- elsif s.intro_image != blank -%}
+          {{ s.intro_image | image_url: width: 2400 | image_tag: alt: s.intro_image_alt, loading: 'lazy', widths: '720,960,1200,1600,2000,2400', sizes: '100vw' }}
+        {%- else -%}
+          <svg class="placeholder" viewBox="0 0 160 60" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="160" height="60" fill="currentColor" opacity="0.4"/></svg>
+        {%- endif -%}
+      </div>
+      <div class="grimmie-am-{{ sid }}__hero-content">
+        <div class="grimmie-am-{{ sid }}__hero-text">
+          {%- if s.result_eyebrow != blank -%}<p class="grimmie-am-{{ sid }}__eyebrow">{{ s.result_eyebrow | escape }}</p>{%- endif -%}
+          {%- if s.result_title != blank -%}<h2 class="grimmie-am-{{ sid }}__title">{{ s.result_title | newline_to_br }}</h2>{%- endif -%}
+          {%- if s.result_text != blank -%}<p class="grimmie-am-{{ sid }}__lead">{{ s.result_text | escape }}</p>{%- endif -%}
+          {%- if s.result_text_2 != blank -%}<p class="grimmie-am-{{ sid }}__lead">{{ s.result_text_2 | escape }}</p>{%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    <div class="grimmie-am-{{ sid }}__inner">
+      <div class="grimmie-am-{{ sid }}__rcard">
+        <div class="grimmie-am-{{ sid }}__rcard-left">
+          <div class="grimmie-am-{{ sid }}__archetype-row">
+            <span class="grimmie-am-{{ sid }}__archetype-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 L13.5 9 L19 10.5 L13.5 12 L12 18 L10.5 12 L5 10.5 L10.5 9 Z"/></svg></span>
+            <div>
+              <p class="grimmie-am-{{ sid }}__rcard-eyebrow">{{ s.archetype_label | default: 'Il tuo archetipo è' | escape }}</p>
+              <p class="grimmie-am-{{ sid }}__archetype-name" data-am-r-archetype></p>
+            </div>
+          </div>
+          <p class="grimmie-am-{{ sid }}__rdesc" data-am-r-desc></p>
+          {%- if s.why_title != blank -%}<p class="grimmie-am-{{ sid }}__rcard-eyebrow" style="font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px;">{{ s.why_title | escape }}</p>{%- endif -%}
+          <ul class="grimmie-am-{{ sid }}__why-list">
+            {%- for i in (1..4) -%}
+              {%- liquid
+                case i
+                  when 1
+                    assign w_title = s.why_1_title
+                    assign w_text = s.why_1_text
+                    assign w_icon = s.why_1_icon
+                  when 2
+                    assign w_title = s.why_2_title
+                    assign w_text = s.why_2_text
+                    assign w_icon = s.why_2_icon
+                  when 3
+                    assign w_title = s.why_3_title
+                    assign w_text = s.why_3_text
+                    assign w_icon = s.why_3_icon
+                  when 4
+                    assign w_title = s.why_4_title
+                    assign w_text = s.why_4_text
+                    assign w_icon = s.why_4_icon
+                endcase
+              -%}
+              {%- if w_title != blank or w_text != blank -%}
+                <li class="grimmie-am-{{ sid }}__why-item">
+                  <span class="grimmie-am-{{ sid }}__why-icon" aria-hidden="true">
+                    {%- case w_icon -%}
+                      {%- when 'skincare' -%}<svg viewBox="0 0 24 24"><path d="M10 3 h4 v3 h-4 z"/><path d="M9 6 h6 v13 a2 2 0 0 1 -2 2 h-2 a2 2 0 0 1 -2 -2 z"/><path d="M9 12 h6"/></svg>
+                      {%- when 'hair' -%}<svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="5"/><path d="M9 14 V21 M6 21 H12"/><path d="M16 4 l4 4 M16 8 l4 -4"/></svg>
+                      {%- when 'gym' -%}<svg viewBox="0 0 24 24"><path d="M4 9 v6 M7 7 v10 M17 7 v10 M20 9 v6 M7 12 h10"/></svg>
+                      {%- when 'travel' -%}<svg viewBox="0 0 24 24"><path d="M3 14 L21 7 L17 13 L11 15 L8 21 L6 15 Z"/></svg>
+                      {%- when 'sparkle' -%}<svg viewBox="0 0 24 24"><path d="M12 3 L13.5 9 L19 10.5 L13.5 12 L12 18 L10.5 12 L5 10.5 L10.5 9 Z"/></svg>
+                      {%- when 'heart' -%}<svg viewBox="0 0 24 24"><path d="M12 20 C 7 16 4 13 4 9 a 3.5 3.5 0 0 1 7 -1 a 3.5 3.5 0 0 1 7 1 c 0 4 -3 7 -8 11 Z"/></svg>
+                      {%- else -%}<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>
+                    {%- endcase -%}
+                  </span>
+                  <div>
+                    {%- if w_title != blank -%}<p class="grimmie-am-{{ sid }}__why-title">{{ w_title | escape }}</p>{%- endif -%}
+                    {%- if w_text != blank -%}<p class="grimmie-am-{{ sid }}__why-text">{{ w_text | escape }}</p>{%- endif -%}
+                  </div>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+
+        <div class="grimmie-am-{{ sid }}__rcard-right">
+          <p class="grimmie-am-{{ sid }}__rcard-eyebrow">{{ s.combo_label | default: 'La combo che ti rappresenta' | escape }}</p>
+          <hr class="grimmie-am-{{ sid }}__combo-divider">
+          <p class="grimmie-am-{{ sid }}__combo-name" data-am-r-combo></p>
+          <div class="grimmie-am-{{ sid }}__combo-image">
+            {%- if s.combo_image != blank -%}
+              {{ s.combo_image | image_url: width: 900 | image_tag: alt: s.combo_image_alt, loading: 'lazy', widths: '360,540,720,900' }}
+            {%- else -%}
+              <svg class="placeholder" viewBox="0 0 100 70" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect x="14" y="26" width="40" height="30" rx="5" fill="currentColor" opacity="0.55"/><rect x="58" y="34" width="28" height="22" rx="4" fill="currentColor" opacity="0.4"/></svg>
+            {%- endif -%}
+          </div>
+          {%- if s.combo_sub != blank -%}<p class="grimmie-am-{{ sid }}__combo-sub">{{ s.combo_sub | escape }}</p>{%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%} Discount / timer {%- endcomment -%}
+      <div class="grimmie-am-{{ sid }}__discount">
+        <div class="grimmie-am-{{ sid }}__timer-ring" aria-hidden="true">
+          <span class="grimmie-am-{{ sid }}__timer" data-am-timer>10:00</span>
+          <span class="grimmie-am-{{ sid }}__timer-label">{{ s.timer_label | default: 'Minuti restanti' | escape }}</span>
+        </div>
+        <div class="grimmie-am-{{ sid }}__discount-body">
+          {%- if s.discount_title != blank -%}<h3 class="grimmie-am-{{ sid }}__discount-title">{{ s.discount_title | escape }}</h3>{%- endif -%}
+          {%- if s.discount_text != blank -%}<p class="grimmie-am-{{ sid }}__discount-text">{{ s.discount_text | escape }}</p>{%- endif -%}
+        </div>
+        <a href="{{ s.fallback_link | default: '/collections/all' }}" class="grimmie-am-{{ sid }}__btn" data-am-cta>{{ s.cta_text | default: 'ACQUISTA LA TUA COMBO' | escape }}</a>
+      </div>
+
+      {%- comment -%} Trust strip {%- endcomment -%}
+      <div class="grimmie-am-{{ sid }}__trust">
+        {%- for i in (1..4) -%}
+          {%- liquid
+            case i
+              when 1
+                assign tr_title = s.trust_1_title
+                assign tr_sub = s.trust_1_sub
+              when 2
+                assign tr_title = s.trust_2_title
+                assign tr_sub = s.trust_2_sub
+              when 3
+                assign tr_title = s.trust_3_title
+                assign tr_sub = s.trust_3_sub
+              when 4
+                assign tr_title = s.trust_4_title
+                assign tr_sub = s.trust_4_sub
+            endcase
+          -%}
+          {%- if tr_title != blank -%}
+            <div class="grimmie-am-{{ sid }}__trust-item">
+              <span class="grimmie-am-{{ sid }}__trust-icon" aria-hidden="true">
+                {%- if i == 1 -%}<svg viewBox="0 0 24 24"><rect x="2" y="7" width="13" height="10" rx="1"/><path d="M15 10 h4 l2 3 v4 h-6 z"/><circle cx="6" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>
+                {%- elsif i == 2 -%}<svg viewBox="0 0 24 24"><path d="M3 12 a9 9 0 1 1 3 6.7"/><path d="M3 19 V13 H9"/></svg>
+                {%- elsif i == 3 -%}<svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M9 14 L7 21 L12 18 L17 21 L15 14"/></svg>
+                {%- else -%}<svg viewBox="0 0 24 24"><path d="M12 20 C 7 16 4 13 4 9 a 3.5 3.5 0 0 1 7 -1 a 3.5 3.5 0 0 1 7 1 c 0 4 -3 7 -8 11 Z"/></svg>
+                {%- endif -%}
+              </span>
+              <div>
+                <p class="grimmie-am-{{ sid }}__trust-title">{{ tr_title | escape }}</p>
+                {%- if tr_sub != blank -%}<p class="grimmie-am-{{ sid }}__trust-sub">{{ tr_sub | escape }}</p>{%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <div class="grimmie-am-{{ sid }}__restart-wrap">
+        <button type="button" class="grimmie-am-{{ sid }}__restart" data-am-restart>{{ s.restart_text | default: 'Ricomincia il test' | escape }}</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ 'grimmie-alma-match.js' | asset_url | script_tag }}
+
+{% schema %}
+{
+  "name": "Grimmie Alma Match",
+  "tag": "section",
+  "class": "grimmie-alma-match-section",
+  "settings": [
+    { "type": "header", "content": "Intro hero" },
+    { "type": "text", "id": "intro_eyebrow", "label": "Eyebrow", "default": "GUIDA ALLA ROUTINE" },
+    { "type": "textarea", "id": "intro_title", "label": "Title", "default": "Trova la tua combo Alma" },
+    { "type": "textarea", "id": "intro_text", "label": "Description", "default": "Un test di 10 domande per scoprire la combinazione perfetta di Alma per la tua routine, i tuoi spazi e il tuo ritmo di vita." },
+    { "type": "text", "id": "intro_bullet_1", "label": "Bullet 1", "default": "Più spazio, più ordine, più tempo per te." },
+    { "type": "text", "id": "intro_bullet_2", "label": "Bullet 2", "default": "Risultati personalizzati in base al tuo stile di vita." },
+    { "type": "text", "id": "intro_bullet_3", "label": "Bullet 3", "default": "Consigli pratici per organizzare bellezza e benessere." },
+    { "type": "text", "id": "intro_button_text", "label": "Button text", "default": "INIZIA IL TEST" },
+    { "type": "image_picker", "id": "intro_image", "label": "Hero image" },
+    { "type": "text", "id": "intro_image_alt", "label": "Hero image alt text", "default": "Grimmie Alma" },
+
+    { "type": "header", "content": "How it works" },
+    { "type": "text", "id": "how_title", "label": "Section title", "default": "COME FUNZIONA IL TEST" },
+    { "type": "image_picker", "id": "step_1_icon", "label": "Step 1 icon (optional)" },
+    { "type": "text", "id": "step_1_title", "label": "Step 1 title", "default": "Rispondi" },
+    { "type": "textarea", "id": "step_1_text", "label": "Step 1 text", "default": "10 domande semplici sul tuo stile di vita, la tua routine e le tue abitudini quotidiane." },
+    { "type": "image_picker", "id": "step_2_icon", "label": "Step 2 icon (optional)" },
+    { "type": "text", "id": "step_2_title", "label": "Step 2 title", "default": "Scopri il tuo profilo" },
+    { "type": "textarea", "id": "step_2_text", "label": "Step 2 text", "default": "Il nostro algoritmo analizza le tue risposte e identifica le tue reali esigenze di spazio e organizzazione." },
+    { "type": "image_picker", "id": "step_3_icon", "label": "Step 3 icon (optional)" },
+    { "type": "text", "id": "step_3_title", "label": "Step 3 title", "default": "Trova la tua combo" },
+    { "type": "textarea", "id": "step_3_text", "label": "Step 3 text", "default": "Ricevi la combinazione di Alma perfetta per te, con consigli su come organizzare tutto al meglio." },
+
+    { "type": "header", "content": "Brand strip (motto)" },
+    { "type": "text", "id": "strip_title", "label": "Motto", "default": "Qualunque sia il tuo ritmo, Alma è con te." },
+    { "type": "textarea", "id": "strip_text", "label": "Subtext", "default": "Al lavoro, in viaggio, in palestra o a casa: organizza la tua bellezza con eleganza, risparmia tempo e ritrova spazio per ciò che conta." },
+
+    { "type": "header", "content": "Question screens" },
+    { "type": "text", "id": "question_eyebrow", "label": "Question hero eyebrow", "default": "GUIDA ALLA ROUTINE" },
+    { "type": "image_picker", "id": "question_image", "label": "Question hero image (falls back to intro image)" },
+    { "type": "text", "id": "question_image_alt", "label": "Question hero image alt text", "default": "Grimmie Alma" },
+    { "type": "text", "id": "question_sub", "label": "Answer prompt", "default": "Scegli l'opzione che ti rappresenta di più." },
+    { "type": "text", "id": "question_reassure", "label": "Reassurance text", "default": "Le tue risposte sono 100% personali e riservate." },
+
+    { "type": "header", "content": "Loading screen" },
+    { "type": "text", "id": "loading_text_1", "label": "Loading text 1", "default": "Stiamo creando la tua combo Alma…" },
+    { "type": "text", "id": "loading_text_2", "label": "Loading text 2", "default": "Abbiamo trovato il tuo profilo." },
+
+    { "type": "header", "content": "Result hero" },
+    { "type": "text", "id": "result_eyebrow", "label": "Eyebrow", "default": "IL TUO RISULTATO" },
+    { "type": "textarea", "id": "result_title", "label": "Title", "default": "La tua routine,\nil tuo stile." },
+    { "type": "textarea", "id": "result_text", "label": "Text", "default": "Abbiamo creato la combinazione che si adatta al tuo stile di vita, ai tuoi spazi e a tutto ciò che rende unica la tua routine." },
+    { "type": "text", "id": "result_text_2", "label": "Secondary text", "default": "Elegante, funzionale, irresistibilmente Alma." },
+    { "type": "image_picker", "id": "result_image", "label": "Result hero image (falls back to intro image)" },
+    { "type": "text", "id": "result_image_alt", "label": "Result hero image alt text", "default": "Grimmie Alma" },
+
+    { "type": "header", "content": "Result card" },
+    { "type": "text", "id": "archetype_label", "label": "Archetype label", "default": "Il tuo archetipo è" },
+    { "type": "text", "id": "combo_label", "label": "Combo label", "default": "La combo che ti rappresenta" },
+    { "type": "image_picker", "id": "combo_image", "label": "Bundle image (generic)" },
+    { "type": "text", "id": "combo_image_alt", "label": "Bundle image alt text", "default": "Combo Alma" },
+    { "type": "textarea", "id": "combo_sub", "label": "Combo subtext", "default": "Lo spazio giusto per la tua routine. Compatta, raffinata e pensata per accompagnarti con stile, ogni giorno." },
+
+    { "type": "header", "content": "Result - Why perfect for you" },
+    { "type": "text", "id": "why_title", "label": "Title", "default": "Perché è perfetta per te" },
+    { "type": "select", "id": "why_1_icon", "label": "Bullet 1 icon", "options": [
+      { "value": "skincare", "label": "Skincare" }, { "value": "hair", "label": "Hair" }, { "value": "gym", "label": "Gym" }, { "value": "travel", "label": "Travel" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "heart", "label": "Heart" }
+    ], "default": "skincare" },
+    { "type": "text", "id": "why_1_title", "label": "Bullet 1 title", "default": "SKINCARE E MAKE-UP SEMPRE IN ORDINE" },
+    { "type": "textarea", "id": "why_1_text", "label": "Bullet 1 text", "default": "I tuoi prodotti essenziali sono selezionati, amati e sempre a portata di mano." },
+    { "type": "select", "id": "why_2_icon", "label": "Bullet 2 icon", "options": [
+      { "value": "skincare", "label": "Skincare" }, { "value": "hair", "label": "Hair" }, { "value": "gym", "label": "Gym" }, { "value": "travel", "label": "Travel" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "heart", "label": "Heart" }
+    ], "default": "hair" },
+    { "type": "text", "id": "why_2_title", "label": "Bullet 2 title", "default": "CAPELLI CURATI, SPAZI PULITI" },
+    { "type": "textarea", "id": "why_2_text", "label": "Bullet 2 text", "default": "Separa e proteggi i tuoi must-have per capelli: ogni prodotto ha il suo spazio, con eleganza." },
+    { "type": "select", "id": "why_3_icon", "label": "Bullet 3 icon", "options": [
+      { "value": "skincare", "label": "Skincare" }, { "value": "hair", "label": "Hair" }, { "value": "gym", "label": "Gym" }, { "value": "travel", "label": "Travel" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "heart", "label": "Heart" }
+    ], "default": "gym" },
+    { "type": "text", "id": "why_3_title", "label": "Bullet 3 title", "default": "DALLA CASA ALLA PALESTRA" },
+    { "type": "textarea", "id": "why_3_text", "label": "Bullet 3 text", "default": "La tua routine ti segue ovunque: praticità e stile in ogni momento della giornata." },
+    { "type": "select", "id": "why_4_icon", "label": "Bullet 4 icon", "options": [
+      { "value": "skincare", "label": "Skincare" }, { "value": "hair", "label": "Hair" }, { "value": "gym", "label": "Gym" }, { "value": "travel", "label": "Travel" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "heart", "label": "Heart" }
+    ], "default": "travel" },
+    { "type": "text", "id": "why_4_title", "label": "Bullet 4 title", "default": "PRONTA A PARTIRE, SEMPRE" },
+    { "type": "textarea", "id": "why_4_text", "label": "Bullet 4 text", "default": "In viaggio come nella vita di tutti i giorni, hai tutto ciò che ti serve, perfettamente organizzato." },
+
+    { "type": "header", "content": "Discount / timer" },
+    { "type": "text", "id": "discount_title", "label": "Title", "default": "Wow, hai sbloccato anche un vantaggio ✨" },
+    { "type": "textarea", "id": "discount_text", "label": "Subtext", "default": "Per 10 minuti puoi acquistare la tua combo Alma con il 10% di sconto." },
+    { "type": "text", "id": "cta_text", "label": "CTA button text", "default": "ACQUISTA LA TUA COMBO" },
+    { "type": "range", "id": "timer_minutes", "label": "Timer minutes", "min": 1, "max": 60, "step": 1, "default": 10 },
+    { "type": "text", "id": "timer_label", "label": "Timer label", "default": "Minuti restanti" },
+    { "type": "text", "id": "discount_label", "label": "Discount percentage label", "default": "10%" },
+    { "type": "text", "id": "discount_code", "label": "Discount code (created in Shopify Admin)", "info": "Optional. If set, the CTA opens /discount/CODE and redirects to the bundle link, applying the code at checkout. Create the matching code in Shopify Admin > Discounts." },
+
+    { "type": "header", "content": "Result - trust strip" },
+    { "type": "text", "id": "trust_1_title", "label": "Item 1 title", "default": "SPEDIZIONE GRATUITA" },
+    { "type": "text", "id": "trust_1_sub", "label": "Item 1 subtitle", "default": "sopra i 69€" },
+    { "type": "text", "id": "trust_2_title", "label": "Item 2 title", "default": "RESI FACILI" },
+    { "type": "text", "id": "trust_2_sub", "label": "Item 2 subtitle", "default": "entro 14 giorni" },
+    { "type": "text", "id": "trust_3_title", "label": "Item 3 title", "default": "MATERIALI DI QUALITÀ" },
+    { "type": "text", "id": "trust_3_sub", "label": "Item 3 subtitle", "default": "scelti con cura" },
+    { "type": "text", "id": "trust_4_title", "label": "Item 4 title", "default": "SIAMO QUI PER TE" },
+    { "type": "text", "id": "trust_4_sub", "label": "Item 4 subtitle", "default": "sempre" },
+
+    { "type": "text", "id": "restart_text", "label": "Restart link text", "default": "Ricomincia il test" },
+
+    { "type": "header", "content": "Bundle links", "info": "Set the product / bundle URL for each combination. Used by the result CTA. Leave blank to use the fallback link." },
+    { "type": "url", "id": "fallback_link", "label": "Fallback link" },
+    { "type": "url", "id": "link_2c1l", "label": "2 Classic + 1 Large" },
+    { "type": "url", "id": "link_3c1l", "label": "3 Classic + 1 Large" },
+    { "type": "url", "id": "link_2c2l", "label": "2 Classic + 2 Large" },
+    { "type": "url", "id": "link_1c2l", "label": "1 Classic + 2 Large" },
+    { "type": "url", "id": "link_1c3l", "label": "1 Classic + 3 Large" },
+    { "type": "url", "id": "link_3c2l", "label": "3 Classic + 2 Large" },
+    { "type": "url", "id": "link_2c3l", "label": "2 Classic + 3 Large" },
+    { "type": "url", "id": "link_4c1l", "label": "4 Classic + 1 Large" },
+    { "type": "url", "id": "link_4c2l", "label": "4 Classic + 2 Large" },
+    { "type": "url", "id": "link_3c3l", "label": "3 Classic + 3 Large" },
+    { "type": "url", "id": "link_1c4l", "label": "1 Classic + 4 Large" },
+    { "type": "url", "id": "link_2c4l", "label": "2 Classic + 4 Large" },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#F7F1EE" },
+    { "type": "color", "id": "secondary_background_color", "label": "Secondary background (hero)", "default": "#F1EBE6" },
+    { "type": "color", "id": "blush_color", "label": "Blush", "default": "#EACBC8" },
+    { "type": "color", "id": "light_blush_color", "label": "Light blush (cards)", "default": "#F7EDEB" },
+    { "type": "color", "id": "heading_color", "label": "Heading", "default": "#6E5F59" },
+    { "type": "color", "id": "text_color", "label": "Body text", "default": "#6E5F59" },
+    { "type": "color", "id": "border_color", "label": "Border", "default": "#DDD2CA" },
+    { "type": "color", "id": "accent_color", "label": "Accent (eyebrow)", "default": "#C99696" },
+    { "type": "color", "id": "button_background_color", "label": "Button background", "default": "#C98A93" },
+    { "type": "color", "id": "button_text_color", "label": "Button text", "default": "#FFFFFF" },
+    { "type": "color", "id": "button_hover_background_color", "label": "Button hover", "default": "#B97781" }
+  ],
+  "presets": [
+    { "name": "Grimmie Alma Match", "category": "Grimmie" }
+  ]
+}
+{% endschema %}
