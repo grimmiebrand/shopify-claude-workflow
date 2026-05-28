@@ -210,6 +210,8 @@
     var answers = new Array(total).fill(-1);
     var current = 0;
     var timerId = null;
+    // Scoped BEM prefix, e.g. "grimmie-am-<sectionId>" (matches the section CSS).
+    var prefix = (root.classList && root.classList[0]) || 'grimmie-am';
 
     function show(name) {
       Object.keys(screens).forEach(function (k) {
@@ -229,14 +231,14 @@
       data.answers.forEach(function (ans, i) {
         var card = document.createElement('button');
         card.type = 'button';
-        card.className = 'grimmie-am__card';
+        card.className = prefix + '__card';
         card.setAttribute('role', 'radio');
         card.setAttribute('aria-checked', answers[current] === i ? 'true' : 'false');
         if (answers[current] === i) card.classList.add('is-selected');
         card.innerHTML =
-          '<span class="grimmie-am__card-icon" aria-hidden="true">' + (ICONS[ans.icon] || ICONS.sparkle) + '</span>' +
-          '<span class="grimmie-am__card-label">' + ans.label + '</span>' +
-          '<span class="grimmie-am__card-radio" aria-hidden="true"></span>';
+          '<span class="' + prefix + '__card-icon" aria-hidden="true">' + (ICONS[ans.icon] || ICONS.sparkle) + '</span>' +
+          '<span class="' + prefix + '__card-label">' + ans.label + '</span>' +
+          '<span class="' + prefix + '__card-radio" aria-hidden="true"></span>';
         card.addEventListener('click', function () {
           answers[current] = i;
           Array.prototype.forEach.call(els.cards.children, function (c, ci) {
