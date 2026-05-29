@@ -204,6 +204,9 @@
       cta: root.querySelector('[data-am-cta]'),
       timer: root.querySelector('[data-am-timer]'),
       discountBox: root.querySelector('[data-am-discount]'),
+      priceBox: root.querySelector('[data-am-price]'),
+      priceOriginal: root.querySelector('[data-am-price-original]'),
+      priceNow: root.querySelector('[data-am-price-now]'),
       expiredMsg: root.querySelector('[data-am-expired]'),
       restart: root.querySelector('[data-am-restart]'),
       loadingTitle: root.querySelector('[data-am-loading-title]')
@@ -364,6 +367,7 @@
       expired = state;
       if (els.discountBox) els.discountBox.classList.toggle('is-expired', state);
       if (els.expiredMsg) els.expiredMsg.hidden = !state;
+      if (els.priceBox && state) els.priceBox.hidden = true; // offer gone: hide the discounted price
       if (els.cta) {
         els.cta.classList.toggle('is-disabled', state);
         if (state) els.cta.setAttribute('aria-disabled', 'true');
@@ -371,17 +375,23 @@
       }
     }
 
+    function durationSeconds() {
+      var secs = parseInt(config.timerSeconds, 10);
+      if (!isNaN(secs) && secs > 0) return secs;
+      var minutes = parseInt(config.timerMinutes, 10);
+      if (isNaN(minutes) || minutes <= 0) return 600;
+      return minutes * 60;
+    }
+
     function startTimer() {
       if (!els.timer) return;
       setExpired(false);
-      var minutes = parseInt(config.timerMinutes, 10);
-      if (isNaN(minutes) || minutes <= 0) minutes = 10;
       // Persist an absolute deadline so the countdown survives page reloads
       // instead of restarting from the full duration each time.
       var deadline = 0;
       try { deadline = parseInt(sessionStorage.getItem(DEADLINE_KEY), 10); } catch (e) {}
       if (!deadline || isNaN(deadline) || deadline <= Date.now()) {
-        deadline = Date.now() + minutes * 60 * 1000;
+        deadline = Date.now() + durationSeconds() * 1000;
         try { sessionStorage.setItem(DEADLINE_KEY, String(deadline)); } catch (e) {}
       }
       if (timerId) clearInterval(timerId);
@@ -398,12 +408,41 @@
       }, 1000);
     }
 
+    function discountPercent() {
+      var n = parseFloat(String(config.discountLabel || '').replace(/[^0-9.]/g, ''));
+      return isNaN(n) ? 0 : n;
+    }
+
+    function formatMoney(cents) {
+      var amount = (parseInt(cents, 10) || 0) / 100;
+      try {
+        return new Intl.NumberFormat(undefined, { style: 'currency', currency: config.currency || 'EUR' }).format(amount);
+      } catch (e) {
+        return (config.currency || 'EUR') + ' ' + amount.toFixed(2);
+      }
+    }
+
+    // Show the combo's full price struck through next to the discounted price.
+    function renderPrice(bundle) {
+      if (!els.priceBox) return;
+      var cp = parseInt(config.classicPrice, 10) || 0;
+      var lp = parseInt(config.largePrice, 10) || 0;
+      var counts = parseBundleCounts(bundle);
+      var original = counts.classic * cp + counts.large * lp;
+      if (original <= 0) { els.priceBox.hidden = true; return; }
+      var discounted = Math.round(original * (100 - discountPercent()) / 100);
+      if (els.priceOriginal) els.priceOriginal.textContent = formatMoney(original);
+      if (els.priceNow) els.priceNow.textContent = formatMoney(discounted);
+      els.priceBox.hidden = false;
+    }
+
     function renderResult(result) {
       currentBundle = result.bundle;
       if (els.rArchetype) els.rArchetype.textContent = result.name;
       if (els.rDesc) els.rDesc.textContent = result.desc;
       if (els.rCombo) els.rCombo.textContent = result.bundle;
       if (els.cta) els.cta.setAttribute('href', buildCtaUrl(result.bundle));
+      renderPrice(result.bundle);
       show('result');
       startTimer();
       safeEvent('alma_match_result_viewed', result);

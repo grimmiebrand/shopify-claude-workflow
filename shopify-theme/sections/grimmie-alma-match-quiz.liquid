@@ -15,6 +15,15 @@
   elsif s.large_variant_id != blank
     assign large_vid = s.large_variant_id
   endif
+
+  assign classic_price = 0
+  if s.classic_product != blank
+    assign classic_price = s.classic_product.selected_or_first_available_variant.price
+  endif
+  assign large_price = 0
+  if s.large_product != blank
+    assign large_price = s.large_product.selected_or_first_available_variant.price
+  endif
 -%}
 
 <style>
@@ -195,6 +204,9 @@
   .grimmie-am-{{ sid }}__discount-title { font-family: var(--font-heading--family); font-style: var(--font-heading--style); font-weight: var(--font-heading--weight); color: var(--am-heading); font-size: clamp(18px, 2vw, 26px); margin: 0 0 6px; }
   .grimmie-am-{{ sid }}__discount-text { font-size: clamp(13px, 0.95vw, 14.5px); line-height: 1.55; margin: 0; max-width: 46ch; }
   .grimmie-am-{{ sid }}__discount .grimmie-am-{{ sid }}__btn { flex: 0 0 auto; }
+  .grimmie-am-{{ sid }}__price { margin: 12px 0 0; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .grimmie-am-{{ sid }}__price-original { text-decoration: line-through; color: var(--am-text); opacity: 0.55; font-size: clamp(14px, 1.05vw, 16px); }
+  .grimmie-am-{{ sid }}__price-now { color: var(--am-heading); font-weight: 700; font-size: clamp(19px, 1.7vw, 24px); }
   .grimmie-am-{{ sid }}__expired { font-size: clamp(13px, 0.95vw, 14.5px); line-height: 1.5; margin: 8px 0 0; font-weight: 600; color: var(--am-accent); }
   .grimmie-am-{{ sid }}__discount.is-expired .grimmie-am-{{ sid }}__timer-ring { opacity: 0.4; }
   .grimmie-am-{{ sid }}__btn.is-disabled { opacity: 0.4; pointer-events: none; cursor: not-allowed; }
@@ -247,11 +259,15 @@
   <script type="application/json" data-am-config>
     {
       "timerMinutes": {{ s.timer_minutes | default: 10 }},
+      "timerSeconds": {{ s.timer_seconds | default: 0 }},
       "discountCode": {{ s.discount_code | json }},
       "discountLabel": {{ s.discount_label | default: '10%' | json }},
       "fallbackLink": {{ s.fallback_link | default: '/collections/all' | json }},
       "classicVariantId": {{ classic_vid | json }},
       "largeVariantId": {{ large_vid | json }},
+      "classicPrice": {{ classic_price | default: 0 }},
+      "largePrice": {{ large_price | default: 0 }},
+      "currency": {{ shop.currency | json }},
       "bundleLinks": {
         "1 Classic + 2 Large": {{ s.link_1c2l | json }},
         "2 Classic + 1 Large": {{ s.link_2c1l | json }},
@@ -528,6 +544,10 @@
         <div class="grimmie-am-{{ sid }}__discount-body">
           {%- if s.discount_title != blank -%}<h3 class="grimmie-am-{{ sid }}__discount-title">{{ s.discount_title | escape }}</h3>{%- endif -%}
           {%- if s.discount_text != blank -%}<p class="grimmie-am-{{ sid }}__discount-text">{{ s.discount_text | escape }}</p>{%- endif -%}
+          <p class="grimmie-am-{{ sid }}__price" data-am-price hidden>
+            <span class="grimmie-am-{{ sid }}__price-original" data-am-price-original></span>
+            <span class="grimmie-am-{{ sid }}__price-now" data-am-price-now></span>
+          </p>
           <p class="grimmie-am-{{ sid }}__expired" data-am-expired hidden>{{ s.discount_expired_text | default: 'Offerta scaduta' | escape }}</p>
         </div>
         <a href="{{ s.fallback_link | default: '/collections/all' }}" class="grimmie-am-{{ sid }}__btn" data-am-cta>{{ s.cta_text | default: 'ACQUISTA LA TUA COMBO' | escape }}</a>
@@ -663,11 +683,12 @@
 
     { "type": "header", "content": "Discount / timer" },
     { "type": "text", "id": "discount_title", "label": "Title", "default": "Wow, hai sbloccato anche un vantaggio ✨" },
-    { "type": "textarea", "id": "discount_text", "label": "Subtext", "default": "Per 10 minuti puoi acquistare la tua combo Alma con il 10% di sconto." },
+    { "type": "textarea", "id": "discount_text", "label": "Subtext", "default": "Affrettati: hai pochi secondi per acquistare la tua combo Alma con il 10% di sconto." },
     { "type": "text", "id": "discount_expired_text", "label": "Expired message", "default": "Offerta scaduta. Rifai il test per sbloccarla di nuovo." },
     { "type": "text", "id": "cta_text", "label": "CTA button text", "default": "ACQUISTA LA TUA COMBO" },
-    { "type": "range", "id": "timer_minutes", "label": "Timer minutes", "min": 1, "max": 60, "step": 1, "default": 10 },
-    { "type": "text", "id": "timer_label", "label": "Timer label", "default": "Minuti restanti" },
+    { "type": "range", "id": "timer_minutes", "label": "Timer minutes", "min": 0, "max": 60, "step": 1, "default": 10 },
+    { "type": "number", "id": "timer_seconds", "label": "Timer seconds (overrides minutes if > 0)", "default": 0 },
+    { "type": "text", "id": "timer_label", "label": "Timer label", "default": "Tempo restante" },
     { "type": "text", "id": "discount_label", "label": "Discount percentage label", "default": "10%" },
     { "type": "text", "id": "discount_code", "label": "Discount code (created in Shopify Admin)", "info": "Optional. If set, the CTA opens /discount/CODE and redirects to the bundle link, applying the code at checkout. Create the matching code in Shopify Admin > Discounts." },
 
