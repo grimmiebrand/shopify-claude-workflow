@@ -221,14 +221,6 @@
   .grimmie-am-{{ sid }}__discount.is-expired .grimmie-am-{{ sid }}__timer-ring { opacity: 0.4; }
   .grimmie-am-{{ sid }}__btn.is-disabled { opacity: 0.4; pointer-events: none; cursor: not-allowed; }
 
-  /* Reassurance icons strip */
-  .grimmie-am-{{ sid }}__trust { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(14px, 2vw, 28px); margin-top: clamp(28px, 3.5vw, 48px); padding-top: clamp(24px, 3vw, 36px); border-top: 1px solid var(--am-border); }
-  .grimmie-am-{{ sid }}__trust-item { display: flex; align-items: center; gap: 12px; }
-  .grimmie-am-{{ sid }}__trust-icon { flex: 0 0 auto; width: 34px; height: 34px; color: var(--am-heading); display: flex; align-items: center; justify-content: center; }
-  .grimmie-am-{{ sid }}__trust-icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
-  .grimmie-am-{{ sid }}__trust-title { font-size: clamp(11px, 0.85vw, 12.5px); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--am-heading); margin: 0; line-height: 1.3; }
-  .grimmie-am-{{ sid }}__trust-sub { font-size: clamp(11px, 0.85vw, 12.5px); margin: 2px 0 0; line-height: 1.3; }
-
   .grimmie-am-{{ sid }}__restart-wrap { text-align: center; margin-top: clamp(28px, 3.5vw, 44px); }
   .grimmie-am-{{ sid }}__restart { background: none; border: none; cursor: pointer; font-family: var(--font-body--family); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--am-accent); text-decoration: underline; text-underline-offset: 4px; }
 
@@ -238,7 +230,6 @@
     .grimmie-am-{{ sid }}__steps { grid-template-columns: 1fr; gap: 24px; }
     .grimmie-am-{{ sid }}__step-arrow { display: none; }
     .grimmie-am-{{ sid }}__rcard { grid-template-columns: 1fr; }
-    .grimmie-am-{{ sid }}__trust { grid-template-columns: repeat(2, 1fr); }
   }
 
   /* Mobile */
@@ -564,43 +555,6 @@
         <a href="{{ s.fallback_link | default: '/collections/all' }}" class="grimmie-am-{{ sid }}__btn" data-am-cta>{{ s.cta_text | default: 'ACQUISTA LA TUA COMBO' | escape }}</a>
       </div>
 
-      {%- comment -%} Trust strip {%- endcomment -%}
-      <div class="grimmie-am-{{ sid }}__trust">
-        {%- for i in (1..4) -%}
-          {%- liquid
-            case i
-              when 1
-                assign tr_title = s.trust_1_title
-                assign tr_sub = s.trust_1_sub
-              when 2
-                assign tr_title = s.trust_2_title
-                assign tr_sub = s.trust_2_sub
-              when 3
-                assign tr_title = s.trust_3_title
-                assign tr_sub = s.trust_3_sub
-              when 4
-                assign tr_title = s.trust_4_title
-                assign tr_sub = s.trust_4_sub
-            endcase
-          -%}
-          {%- if tr_title != blank -%}
-            <div class="grimmie-am-{{ sid }}__trust-item">
-              <span class="grimmie-am-{{ sid }}__trust-icon" aria-hidden="true">
-                {%- if i == 1 -%}<svg viewBox="0 0 24 24"><rect x="2" y="7" width="13" height="10" rx="1"/><path d="M15 10 h4 l2 3 v4 h-6 z"/><circle cx="6" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>
-                {%- elsif i == 2 -%}<svg viewBox="0 0 24 24"><path d="M3 12 a9 9 0 1 1 3 6.7"/><path d="M3 19 V13 H9"/></svg>
-                {%- elsif i == 3 -%}<svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M9 14 L7 21 L12 18 L17 21 L15 14"/></svg>
-                {%- else -%}<svg viewBox="0 0 24 24"><path d="M12 20 C 7 16 4 13 4 9 a 3.5 3.5 0 0 1 7 -1 a 3.5 3.5 0 0 1 7 1 c 0 4 -3 7 -8 11 Z"/></svg>
-                {%- endif -%}
-              </span>
-              <div>
-                <p class="grimmie-am-{{ sid }}__trust-title">{{ tr_title | escape }}</p>
-                {%- if tr_sub != blank -%}<p class="grimmie-am-{{ sid }}__trust-sub">{{ tr_sub | escape }}</p>{%- endif -%}
-              </div>
-            </div>
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
-
       <div class="grimmie-am-{{ sid }}__restart-wrap">
         <button type="button" class="grimmie-am-{{ sid }}__restart" data-am-restart>{{ s.restart_text | default: 'Ricomincia il test' | escape }}</button>
       </div>
@@ -703,15 +657,6 @@
     { "type": "text", "id": "discount_label", "label": "Discount percentage label", "default": "10%" },
     { "type": "text", "id": "discount_code", "label": "Discount code (created in Shopify Admin)", "info": "Optional. If set, the CTA opens /discount/CODE and redirects to the bundle link, applying the code at checkout. Create the matching code in Shopify Admin > Discounts." },
 
-    { "type": "header", "content": "Result - trust strip" },
-    { "type": "text", "id": "trust_1_title", "label": "Item 1 title", "default": "SPEDIZIONE GRATUITA" },
-    { "type": "text", "id": "trust_1_sub", "label": "Item 1 subtitle", "default": "sopra i 69€" },
-    { "type": "text", "id": "trust_2_title", "label": "Item 2 title", "default": "RESI FACILI" },
-    { "type": "text", "id": "trust_2_sub", "label": "Item 2 subtitle", "default": "entro 14 giorni" },
-    { "type": "text", "id": "trust_3_title", "label": "Item 3 title", "default": "MATERIALI DI QUALITÀ" },
-    { "type": "text", "id": "trust_3_sub", "label": "Item 3 subtitle", "default": "scelti con cura" },
-    { "type": "text", "id": "trust_4_title", "label": "Item 4 title", "default": "SIAMO QUI PER TE" },
-    { "type": "text", "id": "trust_4_sub", "label": "Item 4 subtitle", "default": "sempre" },
 
     { "type": "text", "id": "restart_text", "label": "Restart link text", "default": "Ricomincia il test" },
 
