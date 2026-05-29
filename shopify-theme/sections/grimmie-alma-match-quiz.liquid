@@ -17,12 +17,21 @@
   endif
 
   assign classic_price = 0
-  if s.classic_product != blank
-    assign classic_price = s.classic_product.selected_or_first_available_variant.price
+  assign classic_prod = s.classic_product
+  if classic_prod == blank
+    assign classic_prod = all_products['almaclassic']
   endif
+  if classic_prod != blank
+    assign classic_price = classic_prod.price
+  endif
+
   assign large_price = 0
-  if s.large_product != blank
-    assign large_price = s.large_product.selected_or_first_available_variant.price
+  assign large_prod = s.large_product
+  if large_prod == blank
+    assign large_prod = all_products['almalarge']
+  endif
+  if large_prod != blank
+    assign large_price = large_prod.price
   endif
 -%}
 
@@ -204,9 +213,10 @@
   .grimmie-am-{{ sid }}__discount-title { font-family: var(--font-heading--family); font-style: var(--font-heading--style); font-weight: var(--font-heading--weight); color: var(--am-heading); font-size: clamp(18px, 2vw, 26px); margin: 0 0 6px; }
   .grimmie-am-{{ sid }}__discount-text { font-size: clamp(13px, 0.95vw, 14.5px); line-height: 1.55; margin: 0; max-width: 46ch; }
   .grimmie-am-{{ sid }}__discount .grimmie-am-{{ sid }}__btn { flex: 0 0 auto; }
-  .grimmie-am-{{ sid }}__price { margin: 12px 0 0; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
-  .grimmie-am-{{ sid }}__price-original { text-decoration: line-through; color: var(--am-text); opacity: 0.55; font-size: clamp(14px, 1.05vw, 16px); }
-  .grimmie-am-{{ sid }}__price-now { color: var(--am-heading); font-weight: 700; font-size: clamp(19px, 1.7vw, 24px); }
+  .grimmie-am-{{ sid }}__price { margin: 14px 0 0; display: flex; align-items: baseline; gap: 8px 14px; flex-wrap: wrap; }
+  .grimmie-am-{{ sid }}__price-now { font-family: var(--font-heading--family); font-style: var(--font-heading--style); font-weight: var(--font-heading--weight); color: var(--am-accent); font-size: clamp(26px, 2.6vw, 34px); line-height: 1; }
+  .grimmie-am-{{ sid }}__price-original { text-decoration: line-through; color: var(--am-text); opacity: 0.5; font-size: clamp(15px, 1.1vw, 17px); }
+  .grimmie-am-{{ sid }}__price-save { align-self: center; display: inline-block; background-color: var(--am-accent); color: var(--am-btn-text); font-size: clamp(11px, 0.8vw, 12.5px); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; }
   .grimmie-am-{{ sid }}__expired { font-size: clamp(13px, 0.95vw, 14.5px); line-height: 1.5; margin: 8px 0 0; font-weight: 600; color: var(--am-accent); }
   .grimmie-am-{{ sid }}__discount.is-expired .grimmie-am-{{ sid }}__timer-ring { opacity: 0.4; }
   .grimmie-am-{{ sid }}__btn.is-disabled { opacity: 0.4; pointer-events: none; cursor: not-allowed; }
@@ -544,10 +554,11 @@
         <div class="grimmie-am-{{ sid }}__discount-body">
           {%- if s.discount_title != blank -%}<h3 class="grimmie-am-{{ sid }}__discount-title">{{ s.discount_title | escape }}</h3>{%- endif -%}
           {%- if s.discount_text != blank -%}<p class="grimmie-am-{{ sid }}__discount-text">{{ s.discount_text | escape }}</p>{%- endif -%}
-          <p class="grimmie-am-{{ sid }}__price" data-am-price hidden>
-            <span class="grimmie-am-{{ sid }}__price-original" data-am-price-original></span>
+          <div class="grimmie-am-{{ sid }}__price" data-am-price hidden>
             <span class="grimmie-am-{{ sid }}__price-now" data-am-price-now></span>
-          </p>
+            <span class="grimmie-am-{{ sid }}__price-original" data-am-price-original></span>
+            <span class="grimmie-am-{{ sid }}__price-save" data-am-price-save></span>
+          </div>
           <p class="grimmie-am-{{ sid }}__expired" data-am-expired hidden>{{ s.discount_expired_text | default: 'Offerta scaduta' | escape }}</p>
         </div>
         <a href="{{ s.fallback_link | default: '/collections/all' }}" class="grimmie-am-{{ sid }}__btn" data-am-cta>{{ s.cta_text | default: 'ACQUISTA LA TUA COMBO' | escape }}</a>

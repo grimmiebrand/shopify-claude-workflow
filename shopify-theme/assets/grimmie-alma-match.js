@@ -207,6 +207,7 @@
       priceBox: root.querySelector('[data-am-price]'),
       priceOriginal: root.querySelector('[data-am-price-original]'),
       priceNow: root.querySelector('[data-am-price-now]'),
+      priceSave: root.querySelector('[data-am-price-save]'),
       expiredMsg: root.querySelector('[data-am-expired]'),
       restart: root.querySelector('[data-am-restart]'),
       loadingTitle: root.querySelector('[data-am-loading-title]')
@@ -367,7 +368,6 @@
       expired = state;
       if (els.discountBox) els.discountBox.classList.toggle('is-expired', state);
       if (els.expiredMsg) els.expiredMsg.hidden = !state;
-      if (els.priceBox && state) els.priceBox.hidden = true; // offer gone: hide the discounted price
       if (els.cta) {
         els.cta.classList.toggle('is-disabled', state);
         if (state) els.cta.setAttribute('aria-disabled', 'true');
@@ -431,8 +431,13 @@
       var original = counts.classic * cp + counts.large * lp;
       if (original <= 0) { els.priceBox.hidden = true; return; }
       var discounted = Math.round(original * (100 - discountPercent()) / 100);
-      if (els.priceOriginal) els.priceOriginal.textContent = formatMoney(original);
+      var saved = original - discounted;
       if (els.priceNow) els.priceNow.textContent = formatMoney(discounted);
+      if (els.priceOriginal) els.priceOriginal.textContent = formatMoney(original);
+      if (els.priceSave) {
+        els.priceSave.textContent = 'Risparmi ' + formatMoney(saved);
+        els.priceSave.hidden = saved <= 0;
+      }
       els.priceBox.hidden = false;
     }
 
