@@ -246,6 +246,20 @@
         "3 Classic + 3 Large": {{ s.link_3c3l | json }},
         "1 Classic + 4 Large": {{ s.link_1c4l | json }},
         "2 Classic + 4 Large": {{ s.link_2c4l | json }}
+      },
+      "bundleDiscounts": {
+        "1 Classic + 2 Large": {{ s.disc_1c2l | json }},
+        "2 Classic + 1 Large": {{ s.disc_2c1l | json }},
+        "3 Classic + 1 Large": {{ s.disc_3c1l | json }},
+        "2 Classic + 2 Large": {{ s.disc_2c2l | json }},
+        "1 Classic + 3 Large": {{ s.disc_1c3l | json }},
+        "3 Classic + 2 Large": {{ s.disc_3c2l | json }},
+        "2 Classic + 3 Large": {{ s.disc_2c3l | json }},
+        "4 Classic + 1 Large": {{ s.disc_4c1l | json }},
+        "4 Classic + 2 Large": {{ s.disc_4c2l | json }},
+        "3 Classic + 3 Large": {{ s.disc_3c3l | json }},
+        "1 Classic + 4 Large": {{ s.disc_1c4l | json }},
+        "2 Classic + 4 Large": {{ s.disc_2c4l | json }}
       }
     }
   </script>
@@ -662,6 +676,20 @@
     { "type": "url", "id": "link_3c3l", "label": "3 Classic + 3 Large" },
     { "type": "url", "id": "link_1c4l", "label": "1 Classic + 4 Large" },
     { "type": "url", "id": "link_2c4l", "label": "2 Classic + 4 Large" },
+
+    { "type": "header", "content": "Bundle discount codes", "info": "Optional. One 10% code per bundle. Create the matching codes in Shopify Admin > Discounts. Leave blank to fall back to the global discount code in the Discount / timer section." },
+    { "type": "text", "id": "disc_2c1l", "label": "2 Classic + 1 Large code" },
+    { "type": "text", "id": "disc_3c1l", "label": "3 Classic + 1 Large code" },
+    { "type": "text", "id": "disc_2c2l", "label": "2 Classic + 2 Large code" },
+    { "type": "text", "id": "disc_1c2l", "label": "1 Classic + 2 Large code" },
+    { "type": "text", "id": "disc_1c3l", "label": "1 Classic + 3 Large code" },
+    { "type": "text", "id": "disc_3c2l", "label": "3 Classic + 2 Large code" },
+    { "type": "text", "id": "disc_2c3l", "label": "2 Classic + 3 Large code" },
+    { "type": "text", "id": "disc_4c1l", "label": "4 Classic + 1 Large code" },
+    { "type": "text", "id": "disc_4c2l", "label": "4 Classic + 2 Large code" },
+    { "type": "text", "id": "disc_3c3l", "label": "3 Classic + 3 Large code" },
+    { "type": "text", "id": "disc_1c4l", "label": "1 Classic + 4 Large code" },
+    { "type": "text", "id": "disc_2c4l", "label": "2 Classic + 4 Large code" },
 
     { "type": "header", "content": "Colors" },
     { "type": "color", "id": "background_color", "label": "Background", "default": "#F7F1EE" },

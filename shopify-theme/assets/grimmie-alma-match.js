@@ -287,8 +287,9 @@
 
     function buildCtaUrl(bundle) {
       var links = config.bundleLinks || {};
+      var discounts = config.bundleDiscounts || {};
       var link = links[bundle] || config.fallbackLink || '/collections/all';
-      var code = (config.discountCode || '').trim();
+      var code = ((discounts[bundle] || config.discountCode) || '').trim();
       if (code) {
         return '/discount/' + encodeURIComponent(code) + '?redirect=' + encodeURIComponent(link);
       }
