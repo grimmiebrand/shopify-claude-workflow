@@ -3,13 +3,14 @@
     "main": {
       "type": "grimmie-alma-match-quiz",
       "settings": {
-        "intro_eyebrow": "GUIDA ALLA ROUTINE",
+        "intro_eyebrow": "",
         "intro_title": "Trova la tua combo Alma",
         "intro_text": "Un test di 10 domande per scoprire la combinazione perfetta di Alma per la tua routine, i tuoi spazi e il tuo ritmo di vita.",
         "intro_bullet_1": "Più spazio, più ordine, più tempo per te.",
         "intro_bullet_2": "Risultati personalizzati in base al tuo stile di vita.",
         "intro_bullet_3": "Consigli pratici per organizzare bellezza e benessere.",
         "intro_button_text": "INIZIA IL TEST",
+        "intro_image": "shopify://shop_images/copertina.png",
         "intro_image_alt": "Grimmie Alma pouches",
         "how_title": "COME FUNZIONA IL TEST",
         "step_1_title": "Rispondi",
@@ -64,24 +65,38 @@
         "trust_4_title": "SIAMO QUI PER TE",
         "trust_4_sub": "sempre",
         "restart_text": "Ricomincia il test",
+        "fallback_link": "shopify://products/almaduo",
+        "link_2c1l": "",
+        "link_3c1l": "",
+        "link_2c2l": "",
+        "link_1c2l": "",
+        "link_1c3l": "",
+        "link_3c2l": "",
+        "link_2c3l": "",
+        "link_4c1l": "",
+        "link_4c2l": "",
+        "link_3c3l": "",
+        "link_1c4l": "",
+        "link_2c4l": "",
+        "background_color": "#f7f1ee",
+        "secondary_background_color": "#f1ebe6",
+        "blush_color": "#eacbc8",
+        "light_blush_color": "#f7edeb",
+        "heading_color": "#6e5f59",
+        "text_color": "#6e5f59",
+        "border_color": "#eacbc8",
+        "accent_color": "#c99696",
+        "button_background_color": "#c99696",
+        "button_text_color": "#f7edeb",
+        "button_hover_background_color": "#c99696",
         "classic_product": "shopify://products/almaclassic",
         "large_product": "shopify://products/almalarge",
         "classic_variant_id": "57915894792566",
-        "large_variant_id": "57915894989174",
-        "fallback_link": "shopify://products/almaduo",
-        "background_color": "#F7F1EE",
-        "secondary_background_color": "#F1EBE6",
-        "blush_color": "#EACBC8",
-        "light_blush_color": "#F7EDEB",
-        "heading_color": "#6E5F59",
-        "text_color": "#6E5F59",
-        "border_color": "#DDD2CA",
-        "accent_color": "#C99696",
-        "button_background_color": "#C98A93",
-        "button_text_color": "#FFFFFF",
-        "button_hover_background_color": "#B97781"
+        "large_variant_id": "57915894989174"
       }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
