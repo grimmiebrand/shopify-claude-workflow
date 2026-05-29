@@ -1,6 +1,20 @@
 {%- liquid
   assign sid = section.id
   assign s = section.settings
+
+  assign classic_vid = ''
+  if s.classic_product != blank
+    assign classic_vid = s.classic_product.selected_or_first_available_variant.id
+  elsif s.classic_variant_id != blank
+    assign classic_vid = s.classic_variant_id
+  endif
+
+  assign large_vid = ''
+  if s.large_product != blank
+    assign large_vid = s.large_product.selected_or_first_available_variant.id
+  elsif s.large_variant_id != blank
+    assign large_vid = s.large_variant_id
+  endif
 -%}
 
 <style>
@@ -233,6 +247,8 @@
       "discountCode": {{ s.discount_code | json }},
       "discountLabel": {{ s.discount_label | default: '10%' | json }},
       "fallbackLink": {{ s.fallback_link | default: '/collections/all' | json }},
+      "classicVariantId": {{ classic_vid | json }},
+      "largeVariantId": {{ large_vid | json }},
       "bundleLinks": {
         "1 Classic + 2 Large": {{ s.link_1c2l | json }},
         "2 Classic + 1 Large": {{ s.link_2c1l | json }},
@@ -662,7 +678,13 @@
 
     { "type": "text", "id": "restart_text", "label": "Restart link text", "default": "Ricomincia il test" },
 
-    { "type": "header", "content": "Bundle links", "info": "Set the product / bundle URL for each combination. Used by the result CTA. Leave blank to use the fallback link." },
+    { "type": "header", "content": "Bundle products", "info": "Pick the two base products. The result CTA builds a cart link that adds the right quantity of each for the matched archetype (e.g. 2 Classic + 1 Large), so the customer lands in the cart with the full combo." },
+    { "type": "product", "id": "classic_product", "label": "Classic product" },
+    { "type": "product", "id": "large_product", "label": "Large product" },
+    { "type": "text", "id": "classic_variant_id", "label": "Classic variant ID (fallback)", "info": "Used only when no Classic product is selected above.", "default": "57915894792566" },
+    { "type": "text", "id": "large_variant_id", "label": "Large variant ID (fallback)", "info": "Used only when no Large product is selected above.", "default": "57915894989174" },
+
+    { "type": "header", "content": "Bundle links (optional override)", "info": "Optional. Only used as a fallback when the bundle products above are not set. Leave blank to use the automatic cart link." },
     { "type": "url", "id": "fallback_link", "label": "Fallback link" },
     { "type": "url", "id": "link_2c1l", "label": "2 Classic + 1 Large" },
     { "type": "url", "id": "link_3c1l", "label": "3 Classic + 1 Large" },

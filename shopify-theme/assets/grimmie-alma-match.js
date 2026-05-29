@@ -210,6 +210,7 @@
     var answers = new Array(total).fill(-1);
     var current = 0;
     var timerId = null;
+    var currentBundle = '';
     // Scoped BEM prefix, e.g. "grimmie-am-<sectionId>" (matches the section CSS).
     var prefix = (root.classList && root.classList[0]) || 'grimmie-am';
 
@@ -285,15 +286,72 @@
       return { key: key, name: arch.name, bundle: arch.bundle, desc: arch.desc, mk: mk, sk: sk, hc: hc };
     }
 
-    function buildCtaUrl(bundle) {
-      var links = config.bundleLinks || {};
+    function variantNumericId(val) {
+      if (val == null) return '';
+      var m = /(\d+)\s*$/.exec(String(val));
+      return m ? m[1] : '';
+    }
+
+    function parseBundleCounts(bundle) {
+      var b = String(bundle || '');
+      var mc = b.match(/(\d+)\s*Classic/i);
+      var ml = b.match(/(\d+)\s*Large/i);
+      return {
+        classic: mc ? parseInt(mc[1], 10) : 0,
+        large: ml ? parseInt(ml[1], 10) : 0
+      };
+    }
+
+    function bundleItems(bundle) {
+      var classicId = variantNumericId(config.classicVariantId);
+      var largeId = variantNumericId(config.largeVariantId);
+      var counts = parseBundleCounts(bundle);
+      var items = [];
+      if (classicId && counts.classic > 0) items.push({ id: classicId, quantity: counts.classic });
+      if (largeId && counts.large > 0) items.push({ id: largeId, quantity: counts.large });
+      return items;
+    }
+
+    function bundleDiscountCode(bundle) {
       var discounts = config.bundleDiscounts || {};
+      return ((discounts[bundle] || config.discountCode) || '').trim();
+    }
+
+    // Fallback href (no-JS): a Shopify cart permalink that adds the combo.
+    function buildCtaUrl(bundle) {
+      var items = bundleItems(bundle);
+      var code = bundleDiscountCode(bundle);
+      if (items.length) {
+        var parts = [];
+        for (var i = 0; i < items.length; i++) { parts.push(items[i].id + ':' + items[i].quantity); }
+        var permalink = '/cart/' + parts.join(',');
+        if (code) permalink += '?discount=' + encodeURIComponent(code);
+        return permalink;
+      }
+      var links = config.bundleLinks || {};
       var link = links[bundle] || config.fallbackLink || '/collections/all';
-      var code = ((discounts[bundle] || config.discountCode) || '').trim();
       if (code) {
         return '/discount/' + encodeURIComponent(code) + '?redirect=' + encodeURIComponent(link);
       }
       return link;
+    }
+
+    // On click: add the combo via the Cart API, then land on the cart page
+    // (applying the discount code first when one is set).
+    function goToBundleCart(e, bundle) {
+      var items = bundleItems(bundle);
+      if (!items.length) return; // no base products configured: let the href fallback navigate
+      if (e && e.preventDefault) e.preventDefault();
+      var code = bundleDiscountCode(bundle);
+      var dest = code ? ('/discount/' + encodeURIComponent(code) + '?redirect=' + encodeURIComponent('/cart')) : '/cart';
+      var go = function () { window.location.href = dest; };
+      try {
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ items: items })
+        }).then(go, go);
+      } catch (err) { go(); }
     }
 
     function startTimer() {
@@ -316,6 +374,7 @@
     }
 
     function renderResult(result) {
+      currentBundle = result.bundle;
       if (els.rArchetype) els.rArchetype.textContent = result.name;
       if (els.rDesc) els.rDesc.textContent = result.desc;
       if (els.rCombo) els.rCombo.textContent = result.bundle;
@@ -346,7 +405,10 @@
     if (els.startBtn) els.startBtn.addEventListener('click', startQuiz);
     if (els.continueBtn) els.continueBtn.addEventListener('click', next);
     if (els.restart) els.restart.addEventListener('click', function (e) { e.preventDefault(); restart(); });
-    if (els.cta) els.cta.addEventListener('click', function () { safeEvent('alma_match_cta_clicked', {}); });
+    if (els.cta) els.cta.addEventListener('click', function (e) {
+      safeEvent('alma_match_cta_clicked', { bundle: currentBundle });
+      goToBundleCart(e, currentBundle);
+    });
 
     // Restore a previous result within the same session (skipped in Theme Editor).
     var designMode = window.Shopify && window.Shopify.designMode;
