@@ -163,6 +163,7 @@
   };
 
   var STORAGE_KEY = 'grimmie_alma_match_result';
+  var DEADLINE_KEY = 'grimmie_alma_match_deadline';
 
   function levelOf(score) {
     if (score >= 12) return 'PRO';
@@ -358,18 +359,25 @@
       if (!els.timer) return;
       var minutes = parseInt(config.timerMinutes, 10);
       if (isNaN(minutes) || minutes <= 0) minutes = 10;
-      var remaining = minutes * 60;
+      // Persist an absolute deadline so the countdown survives page reloads
+      // instead of restarting from the full duration each time.
+      var deadline = 0;
+      try { deadline = parseInt(sessionStorage.getItem(DEADLINE_KEY), 10); } catch (e) {}
+      if (!deadline || isNaN(deadline) || deadline <= Date.now()) {
+        deadline = Date.now() + minutes * 60 * 1000;
+        try { sessionStorage.setItem(DEADLINE_KEY, String(deadline)); } catch (e) {}
+      }
       if (timerId) clearInterval(timerId);
       function paint() {
+        var remaining = Math.max(0, Math.round((deadline - Date.now()) / 1000));
         var m = Math.floor(remaining / 60);
         var s = remaining % 60;
         els.timer.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+        return remaining;
       }
-      paint();
+      if (paint() <= 0) return;
       timerId = setInterval(function () {
-        remaining -= 1;
-        if (remaining <= 0) { remaining = 0; paint(); clearInterval(timerId); return; }
-        paint();
+        if (paint() <= 0) clearInterval(timerId);
       }, 1000);
     }
 
@@ -386,7 +394,10 @@
 
     function finish() {
       var result = compute();
-      try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(result)); } catch (e) {}
+      try {
+        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(result));
+        sessionStorage.removeItem(DEADLINE_KEY); // fresh completion starts a new countdown
+      } catch (e) {}
       safeEvent('alma_match_completed', result);
       show('loading');
       var t1 = (els.loadingTitle && els.loadingTitle.getAttribute('data-step1')) || 'Stiamo creando la tua combo Alma…';
@@ -397,7 +408,10 @@
     }
 
     function restart() {
-      try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) {}
+      try {
+        sessionStorage.removeItem(STORAGE_KEY);
+        sessionStorage.removeItem(DEADLINE_KEY);
+      } catch (e) {}
       if (timerId) clearInterval(timerId);
       show('intro');
     }
