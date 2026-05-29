@@ -195,6 +195,9 @@
   .grimmie-am-{{ sid }}__discount-title { font-family: var(--font-heading--family); font-style: var(--font-heading--style); font-weight: var(--font-heading--weight); color: var(--am-heading); font-size: clamp(18px, 2vw, 26px); margin: 0 0 6px; }
   .grimmie-am-{{ sid }}__discount-text { font-size: clamp(13px, 0.95vw, 14.5px); line-height: 1.55; margin: 0; max-width: 46ch; }
   .grimmie-am-{{ sid }}__discount .grimmie-am-{{ sid }}__btn { flex: 0 0 auto; }
+  .grimmie-am-{{ sid }}__expired { font-size: clamp(13px, 0.95vw, 14.5px); line-height: 1.5; margin: 8px 0 0; font-weight: 600; color: var(--am-accent); }
+  .grimmie-am-{{ sid }}__discount.is-expired .grimmie-am-{{ sid }}__timer-ring { opacity: 0.4; }
+  .grimmie-am-{{ sid }}__btn.is-disabled { opacity: 0.4; pointer-events: none; cursor: not-allowed; }
 
   /* Reassurance icons strip */
   .grimmie-am-{{ sid }}__trust { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(14px, 2vw, 28px); margin-top: clamp(28px, 3.5vw, 48px); padding-top: clamp(24px, 3vw, 36px); border-top: 1px solid var(--am-border); }
@@ -517,7 +520,7 @@
       </div>
 
       {%- comment -%} Discount / timer {%- endcomment -%}
-      <div class="grimmie-am-{{ sid }}__discount">
+      <div class="grimmie-am-{{ sid }}__discount" data-am-discount>
         <div class="grimmie-am-{{ sid }}__timer-ring" aria-hidden="true">
           <span class="grimmie-am-{{ sid }}__timer" data-am-timer>10:00</span>
           <span class="grimmie-am-{{ sid }}__timer-label">{{ s.timer_label | default: 'Minuti restanti' | escape }}</span>
@@ -525,6 +528,7 @@
         <div class="grimmie-am-{{ sid }}__discount-body">
           {%- if s.discount_title != blank -%}<h3 class="grimmie-am-{{ sid }}__discount-title">{{ s.discount_title | escape }}</h3>{%- endif -%}
           {%- if s.discount_text != blank -%}<p class="grimmie-am-{{ sid }}__discount-text">{{ s.discount_text | escape }}</p>{%- endif -%}
+          <p class="grimmie-am-{{ sid }}__expired" data-am-expired hidden>{{ s.discount_expired_text | default: 'Offerta scaduta' | escape }}</p>
         </div>
         <a href="{{ s.fallback_link | default: '/collections/all' }}" class="grimmie-am-{{ sid }}__btn" data-am-cta>{{ s.cta_text | default: 'ACQUISTA LA TUA COMBO' | escape }}</a>
       </div>
@@ -660,6 +664,7 @@
     { "type": "header", "content": "Discount / timer" },
     { "type": "text", "id": "discount_title", "label": "Title", "default": "Wow, hai sbloccato anche un vantaggio ✨" },
     { "type": "textarea", "id": "discount_text", "label": "Subtext", "default": "Per 10 minuti puoi acquistare la tua combo Alma con il 10% di sconto." },
+    { "type": "text", "id": "discount_expired_text", "label": "Expired message", "default": "Offerta scaduta. Rifai il test per sbloccarla di nuovo." },
     { "type": "text", "id": "cta_text", "label": "CTA button text", "default": "ACQUISTA LA TUA COMBO" },
     { "type": "range", "id": "timer_minutes", "label": "Timer minutes", "min": 1, "max": 60, "step": 1, "default": 10 },
     { "type": "text", "id": "timer_label", "label": "Timer label", "default": "Minuti restanti" },

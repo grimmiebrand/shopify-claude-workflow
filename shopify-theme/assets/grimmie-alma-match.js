@@ -203,6 +203,8 @@
       rCombo: root.querySelector('[data-am-r-combo]'),
       cta: root.querySelector('[data-am-cta]'),
       timer: root.querySelector('[data-am-timer]'),
+      discountBox: root.querySelector('[data-am-discount]'),
+      expiredMsg: root.querySelector('[data-am-expired]'),
       restart: root.querySelector('[data-am-restart]'),
       loadingTitle: root.querySelector('[data-am-loading-title]')
     };
@@ -212,6 +214,7 @@
     var current = 0;
     var timerId = null;
     var currentBundle = '';
+    var expired = false;
     // Scoped BEM prefix, e.g. "grimmie-am-<sectionId>" (matches the section CSS).
     var prefix = (root.classList && root.classList[0]) || 'grimmie-am';
 
@@ -355,8 +358,22 @@
       } catch (err) { go(); }
     }
 
+    // Lock the offer once the countdown reaches zero: disable the CTA so the
+    // discount is no longer auto-applied, and reveal the "expired" message.
+    function setExpired(state) {
+      expired = state;
+      if (els.discountBox) els.discountBox.classList.toggle('is-expired', state);
+      if (els.expiredMsg) els.expiredMsg.hidden = !state;
+      if (els.cta) {
+        els.cta.classList.toggle('is-disabled', state);
+        if (state) els.cta.setAttribute('aria-disabled', 'true');
+        else els.cta.removeAttribute('aria-disabled');
+      }
+    }
+
     function startTimer() {
       if (!els.timer) return;
+      setExpired(false);
       var minutes = parseInt(config.timerMinutes, 10);
       if (isNaN(minutes) || minutes <= 0) minutes = 10;
       // Persist an absolute deadline so the countdown survives page reloads
@@ -375,9 +392,9 @@
         els.timer.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
         return remaining;
       }
-      if (paint() <= 0) return;
+      if (paint() <= 0) { setExpired(true); return; }
       timerId = setInterval(function () {
-        if (paint() <= 0) clearInterval(timerId);
+        if (paint() <= 0) { clearInterval(timerId); setExpired(true); }
       }, 1000);
     }
 
@@ -420,6 +437,7 @@
     if (els.continueBtn) els.continueBtn.addEventListener('click', next);
     if (els.restart) els.restart.addEventListener('click', function (e) { e.preventDefault(); restart(); });
     if (els.cta) els.cta.addEventListener('click', function (e) {
+      if (expired) { if (e && e.preventDefault) e.preventDefault(); return; }
       safeEvent('alma_match_cta_clicked', { bundle: currentBundle });
       goToBundleCart(e, currentBundle);
     });
