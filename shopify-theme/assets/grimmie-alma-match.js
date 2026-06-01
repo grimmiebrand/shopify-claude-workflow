@@ -7,7 +7,11 @@
  * read from the JSON in [data-am-config] inside the section.
  *
  * Scoring categories: MAKEUP, SKINCARE, HAIRCARE.
- * Level thresholds: 0-5 BASIC, 6-11 MEDIUM, 12+ PRO.
+ * Each scoring question targets one category; its answer's `points`
+ * value is summed into that category only. A final `correction`
+ * question applies a `delta` (-1/0/+1) to the highest-scoring
+ * category, calibrating the bundle recommendation.
+ * Level thresholds (per category): 0-5 BASIC, 6-8 MEDIUM, 9+ PRO.
  * ------------------------------------------------------------
  */
 (function () {
@@ -30,103 +34,113 @@
 
   var QUESTIONS_DEFAULT = [
     {
-      heroTitle: 'Iniziamo da te',
-      q: 'La tua borsa di solito è…',
+      type: 'scoring', category: 'mk',
+      heroTitle: 'Make-up',
+      q: 'Quanto spesso ti trucchi?',
       answers: [
-        { label: 'Super essenziale', icon: 'bag', mk: 0, sk: 0, hc: 0 },
-        { label: 'Ordinata ma piena di mini cose', icon: 'sparkle', mk: 0, sk: 3, hc: 0 },
-        { label: 'Una mini beauty station', icon: 'mirror', mk: 3, sk: 0, hc: 0 },
-        { label: 'Praticamente un kit di sopravvivenza', icon: 'suitcase', mk: 2, sk: 2, hc: 2 }
+        { label: 'Mai o quasi mai', icon: 'sparkle', points: 0 },
+        { label: 'Solo per occasioni speciali', icon: 'heart', points: 1 },
+        { label: 'Quasi ogni giorno, con gli stessi prodotti', icon: 'brush', points: 3 },
+        { label: 'Ogni giorno, anche elaborato con prodotti sempre diversi', icon: 'mirror', points: 4 }
       ]
     },
     {
-      heroTitle: 'Il tuo ritmo',
-      q: 'Quanto tempo impieghi per prepararti?',
+      type: 'scoring', category: 'mk',
+      heroTitle: 'Per le occasioni',
+      q: 'Per un evento importante il make-up è…',
       answers: [
-        { label: '10 minuti e sono pronta', icon: 'clock', mk: 0, sk: 0, hc: 0 },
-        { label: 'Dipende dalla giornata', icon: 'clock', mk: 3, sk: 0, hc: 0 },
-        { label: 'Ho una vera routine', icon: 'bottle', mk: 0, sk: 3, hc: 0 },
-        { label: 'Prepararmi è parte del mood', icon: 'sparkle', mk: 2, sk: 2, hc: 2 }
+        { label: 'Lo stesso di sempre', icon: 'sparkle', points: 0 },
+        { label: 'Qualcosa in più su occhi o labbra', icon: 'heart', points: 2 },
+        { label: 'Una versione abbinata al mio outfit', icon: 'brush', points: 3 },
+        { label: 'Un beauty look con prodotti speciali che uso nelle occasioni', icon: 'mirror', points: 5 }
       ]
     },
     {
-      heroTitle: 'Il tuo mood',
-      q: 'Quale aesthetic ti rappresenta di più?',
+      type: 'scoring', category: 'mk',
+      heroTitle: 'Il refresh',
+      q: 'Refresh prima di un appuntamento improvviso?',
       answers: [
-        { label: 'Clean girl', icon: 'bottle', mk: 0, sk: 3, hc: 0 },
-        { label: 'Soft glam', icon: 'brush', mk: 3, sk: 0, hc: 0 },
-        { label: 'Off duty model', icon: 'mirror', mk: 0, sk: 0, hc: 3 },
-        { label: 'Pinterest / self-care core', icon: 'heart', mk: 2, sk: 2, hc: 2 }
+        { label: 'Mi pettino e basta', icon: 'clock', points: 0 },
+        { label: 'Retouch alle labbra + tocco di mascara', icon: 'heart', points: 1 },
+        { label: 'Rinfresco fondotinta, blush, labbra', icon: 'brush', points: 4 },
+        { label: 'Rifaccio il look completo', icon: 'sparkle', points: 5 }
       ]
     },
     {
-      heroTitle: 'Quando parti',
-      q: 'Quando prepari la valigia…',
+      type: 'scoring', category: 'sk',
+      heroTitle: 'Skincare',
+      q: 'Quanto cambia la tua skincare tra mattina, sera e routine speciali?',
       answers: [
-        { label: 'Porto solo il necessario', icon: 'suitcase', mk: 0, sk: 0, hc: 0 },
-        { label: 'Organizzo tutto in pouch separate', icon: 'bag', mk: 0, sk: 3, hc: 0 },
-        { label: 'Porto prodotti per ogni situazione', icon: 'plane', mk: 3, sk: 0, hc: 0 },
-        { label: 'La beauty bag pesa più dei vestiti', icon: 'suitcase', mk: 2, sk: 2, hc: 2 }
+        { label: 'Uso 1–2 prodotti sempre uguali', icon: 'bottle', points: 0 },
+        { label: 'Routine fissa ed essenziale', icon: 'bottle', points: 1 },
+        { label: 'Routine diverse mattino/sera + maschere occasionali', icon: 'moon', points: 3 },
+        { label: 'Routine personalizzate per ogni momento + weekly treatment', icon: 'sparkle', points: 4 }
       ]
     },
     {
-      heroTitle: 'Il tuo momento',
-      q: 'Il momento beauty che ami di più?',
+      type: 'scoring', category: 'sk',
+      heroTitle: 'Le novità',
+      q: 'Quante volte acquisti skincare all’anno?',
       answers: [
-        { label: 'Fare veloce e uscire', icon: 'clock', mk: 0, sk: 0, hc: 0 },
-        { label: 'La skincare serale', icon: 'moon', mk: 0, sk: 3, hc: 0 },
-        { label: 'Fare la piega', icon: 'brush', mk: 0, sk: 0, hc: 3 },
-        { label: 'Il get ready completo', icon: 'sparkle', mk: 2, sk: 2, hc: 2 }
+        { label: 'Quasi mai', icon: 'bottle', points: 0 },
+        { label: 'Quando finiscono i miei', icon: 'bottle', points: 2 },
+        { label: 'Provo trend o novità ogni tanto', icon: 'sparkle', points: 3 },
+        { label: 'Frequentemente, amo testare', icon: 'heart', points: 5 }
       ]
     },
     {
-      heroTitle: 'Le tue ispirazioni',
-      q: 'Cosa trovi più spesso nei tuoi salvataggi?',
-      answers: [
-        { label: 'Capsule wardrobe', icon: 'home', mk: 0, sk: 0, hc: 0 },
-        { label: 'Routine skincare', icon: 'bottle', mk: 0, sk: 3, hc: 0 },
-        { label: 'Tutorial make-up', icon: 'brush', mk: 3, sk: 0, hc: 0 },
-        { label: 'GRWM e hair tutorials', icon: 'mirror', mk: 0, sk: 0, hc: 3 }
-      ]
-    },
-    {
-      heroTitle: 'Il tuo stile',
-      q: 'Quale frase ti descrive meglio?',
-      answers: [
-        { label: 'Less but better', icon: 'sparkle', mk: 0, sk: 0, hc: 0 },
-        { label: 'Ho bisogno delle mie routine', icon: 'bottle', mk: 0, sk: 3, hc: 0 },
-        { label: 'Mi preparo anche per uscire 5 minuti', icon: 'mirror', mk: 3, sk: 0, hc: 0 },
-        { label: 'Trasformo tutto in un rituale', icon: 'heart', mk: 2, sk: 2, hc: 2 }
-      ]
-    },
-    {
-      heroTitle: 'La sera',
-      q: 'Prima di dormire…',
-      answers: [
-        { label: 'Mi strucco e basta', icon: 'moon', mk: 0, sk: 0, hc: 0 },
-        { label: 'Ho la mia skincare completa', icon: 'bottle', mk: 0, sk: 3, hc: 0 },
-        { label: 'Uso anche prodotti capelli', icon: 'brush', mk: 0, sk: 0, hc: 3 },
-        { label: 'Riordino tutto per il giorno dopo', icon: 'bag', mk: 2, sk: 2, hc: 2 }
-      ]
-    },
-    {
+      type: 'scoring', category: 'sk',
       heroTitle: 'Il tuo spazio',
-      q: 'Il tuo bagno ideale sembra…',
+      q: 'Il tuo bagno o vanity è…',
       answers: [
-        { label: 'Minimal e pulito', icon: 'home', mk: 0, sk: 0, hc: 0 },
-        { label: 'Aesthetic e ordinato', icon: 'sparkle', mk: 0, sk: 3, hc: 0 },
-        { label: 'Pieno di prodotti beauty', icon: 'mirror', mk: 3, sk: 0, hc: 0 },
-        { label: 'Una mini spa', icon: 'bath', mk: 0, sk: 0, hc: 3 }
+        { label: 'Minimal, pochi prodotti', icon: 'home', points: 0 },
+        { label: 'Ordinato e sobrio', icon: 'sparkle', points: 1 },
+        { label: 'Pieno di flaconi e dispenser', icon: 'bottle', points: 4 },
+        { label: 'Mini spa organizzata', icon: 'bath', points: 5 }
       ]
     },
     {
-      heroTitle: 'Ci siamo quasi',
-      q: 'Quale contenuto guarderesti subito?',
+      type: 'scoring', category: 'hc',
+      heroTitle: 'Haircare',
+      q: 'Quanto dura il tuo "everything shower"?',
       answers: [
-        { label: 'Morning routine minimal', icon: 'clock', mk: 0, sk: 0, hc: 0 },
-        { label: 'Sunday reset vlog', icon: 'moon', mk: 0, sk: 3, hc: 0 },
-        { label: 'Full glam transformation', icon: 'brush', mk: 3, sk: 0, hc: 0 },
-        { label: 'Haircare / everything shower routine', icon: 'bath', mk: 0, sk: 0, hc: 3 }
+        { label: '10 minuti e sono fuori', icon: 'clock', points: 0 },
+        { label: 'Una mezz’ora: shampoo, balsamo e piega veloce', icon: 'clock', points: 1 },
+        { label: 'Un paio d’ore: maschera in posa, piega e finish con olio', icon: 'bath', points: 3 },
+        { label: 'Un giorno intero di home spa: inizio la mattina con impacchi in posa e finisco la sera con i bigodini', icon: 'moon', points: 4 }
+      ]
+    },
+    {
+      type: 'scoring', category: 'hc',
+      heroTitle: 'I tuoi tools',
+      q: 'Oltre ai prodotti, cosa fa parte della tua routine capelli?',
+      answers: [
+        { label: 'Il phon, una spazzola e qualche elastico', icon: 'brush', points: 0 },
+        { label: 'Phon, una piastra/ferro, 2-3 spazzole e qualche clip', icon: 'brush', points: 2 },
+        { label: 'Phon, piastra e ferro, più spazzole, fasce e accessori', icon: 'sparkle', points: 3 },
+        { label: 'Tutti i tools per fare ogni piega che voglio + accessori per ogni acconciatura', icon: 'mirror', points: 5 }
+      ]
+    },
+    {
+      type: 'scoring', category: 'hc',
+      heroTitle: 'Le spazzole',
+      q: 'Quante spazzole hai per i capelli?',
+      answers: [
+        { label: 'Una sola, sempre quella', icon: 'brush', points: 0 },
+        { label: 'Due: una per la piega, una pettina', icon: 'brush', points: 1 },
+        { label: '3–4, scelgo in base alla situazione', icon: 'brush', points: 4 },
+        { label: 'Ne ho tantissime, per ogni situazione e styling', icon: 'sparkle', points: 5 }
+      ]
+    },
+    {
+      type: 'correction',
+      heroTitle: 'Per finire',
+      q: 'Pensando alla tua routine nei prossimi mesi, vorresti…',
+      answers: [
+        { label: 'Vorrei fare qualche declutter e renderla più essenziale', icon: 'home', delta: -1 },
+        { label: 'Mantenerla così. Ho raggiunto il mio equilibrio', icon: 'heart', delta: 0 },
+        { label: 'Perfezionarla aggiungendo qualcosa ed eliminando qualcosa', icon: 'sparkle', delta: 0 },
+        { label: 'Farla crescere, ho già tanti prodotti e tools nella wishlist', icon: 'bag', delta: 1 }
       ]
     }
   ];
@@ -216,7 +230,7 @@
 
     function levelOf(score) {
       var proMin = parseInt(config.levelProMin, 10);
-      if (isNaN(proMin)) proMin = 12;
+      if (isNaN(proMin)) proMin = 9;
       var medMin = parseInt(config.levelMediumMin, 10);
       if (isNaN(medMin)) medMin = 6;
       if (score >= proMin) return 'PRO';
@@ -295,12 +309,26 @@
 
     function compute() {
       var mk = 0, sk = 0, hc = 0;
+      var correctionDelta = 0;
       for (var i = 0; i < total; i++) {
-        var a = questions[i].answers[answers[i]];
+        var q = questions[i];
+        var a = q.answers[answers[i]];
         if (!a) continue;
-        mk += (parseInt(a.mk, 10) || 0);
-        sk += (parseInt(a.sk, 10) || 0);
-        hc += (parseInt(a.hc, 10) || 0);
+        if (q.type === 'correction') {
+          correctionDelta += (parseInt(a.delta, 10) || 0);
+          continue;
+        }
+        var pts = parseInt(a.points, 10) || 0;
+        var cat = (q.category || '').toLowerCase();
+        if (cat === 'mk') mk += pts;
+        else if (cat === 'sk') sk += pts;
+        else if (cat === 'hc') hc += pts;
+      }
+      // Apply correction to the highest-scoring category (tie-break mk → sk → hc).
+      if (correctionDelta !== 0) {
+        if (mk >= sk && mk >= hc) mk += correctionDelta;
+        else if (sk >= hc) sk += correctionDelta;
+        else hc += correctionDelta;
       }
       var key = levelOf(mk) + '-' + levelOf(sk) + '-' + levelOf(hc);
       var arch = archetypes[key] || archetypes['BASIC-BASIC-BASIC'] || ARCHETYPES_DEFAULT['BASIC-BASIC-BASIC'];
