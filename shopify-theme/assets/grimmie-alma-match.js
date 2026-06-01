@@ -34,9 +34,9 @@
       q: 'La tua borsa di solito è…',
       answers: [
         { label: 'Super essenziale', icon: 'bag', mk: 0, sk: 0, hc: 0 },
-        { label: 'Ordinata ma piena di mini cose', icon: 'sparkle', mk: 0, sk: 1, hc: 0 },
-        { label: 'Una mini beauty station', icon: 'mirror', mk: 2, sk: 0, hc: 0 },
-        { label: 'Praticamente un kit di sopravvivenza', icon: 'suitcase', mk: 1, sk: 1, hc: 1 }
+        { label: 'Ordinata ma piena di mini cose', icon: 'sparkle', mk: 0, sk: 3, hc: 0 },
+        { label: 'Una mini beauty station', icon: 'mirror', mk: 3, sk: 0, hc: 0 },
+        { label: 'Praticamente un kit di sopravvivenza', icon: 'suitcase', mk: 2, sk: 2, hc: 2 }
       ]
     },
     {
@@ -44,19 +44,19 @@
       q: 'Quanto tempo impieghi per prepararti?',
       answers: [
         { label: '10 minuti e sono pronta', icon: 'clock', mk: 0, sk: 0, hc: 0 },
-        { label: 'Dipende dalla giornata', icon: 'clock', mk: 1, sk: 0, hc: 0 },
-        { label: 'Ho una vera routine', icon: 'bottle', mk: 0, sk: 2, hc: 0 },
-        { label: 'Prepararmi è parte del mood', icon: 'sparkle', mk: 1, sk: 1, hc: 1 }
+        { label: 'Dipende dalla giornata', icon: 'clock', mk: 3, sk: 0, hc: 0 },
+        { label: 'Ho una vera routine', icon: 'bottle', mk: 0, sk: 3, hc: 0 },
+        { label: 'Prepararmi è parte del mood', icon: 'sparkle', mk: 2, sk: 2, hc: 2 }
       ]
     },
     {
       heroTitle: 'Il tuo mood',
       q: 'Quale aesthetic ti rappresenta di più?',
       answers: [
-        { label: 'Clean girl', icon: 'bottle', mk: 0, sk: 2, hc: 0 },
-        { label: 'Soft glam', icon: 'brush', mk: 2, sk: 0, hc: 0 },
-        { label: 'Off duty model', icon: 'mirror', mk: 1, sk: 0, hc: 1 },
-        { label: 'Pinterest / self-care core', icon: 'heart', mk: 0, sk: 2, hc: 1 }
+        { label: 'Clean girl', icon: 'bottle', mk: 0, sk: 3, hc: 0 },
+        { label: 'Soft glam', icon: 'brush', mk: 3, sk: 0, hc: 0 },
+        { label: 'Off duty model', icon: 'mirror', mk: 0, sk: 0, hc: 3 },
+        { label: 'Pinterest / self-care core', icon: 'heart', mk: 2, sk: 2, hc: 2 }
       ]
     },
     {
@@ -64,9 +64,9 @@
       q: 'Quando prepari la valigia…',
       answers: [
         { label: 'Porto solo il necessario', icon: 'suitcase', mk: 0, sk: 0, hc: 0 },
-        { label: 'Organizzo tutto in pouch separate', icon: 'bag', mk: 1, sk: 1, hc: 0 },
-        { label: 'Porto prodotti per ogni situazione', icon: 'plane', mk: 1, sk: 0, hc: 1 },
-        { label: 'La beauty bag pesa più dei vestiti', icon: 'suitcase', mk: 1, sk: 0, hc: 2 }
+        { label: 'Organizzo tutto in pouch separate', icon: 'bag', mk: 0, sk: 3, hc: 0 },
+        { label: 'Porto prodotti per ogni situazione', icon: 'plane', mk: 3, sk: 0, hc: 0 },
+        { label: 'La beauty bag pesa più dei vestiti', icon: 'suitcase', mk: 2, sk: 2, hc: 2 }
       ]
     },
     {
@@ -74,9 +74,9 @@
       q: 'Il momento beauty che ami di più?',
       answers: [
         { label: 'Fare veloce e uscire', icon: 'clock', mk: 0, sk: 0, hc: 0 },
-        { label: 'La skincare serale', icon: 'moon', mk: 0, sk: 2, hc: 0 },
-        { label: 'Fare la piega', icon: 'brush', mk: 0, sk: 0, hc: 2 },
-        { label: 'Il get ready completo', icon: 'sparkle', mk: 2, sk: 0, hc: 1 }
+        { label: 'La skincare serale', icon: 'moon', mk: 0, sk: 3, hc: 0 },
+        { label: 'Fare la piega', icon: 'brush', mk: 0, sk: 0, hc: 3 },
+        { label: 'Il get ready completo', icon: 'sparkle', mk: 2, sk: 2, hc: 2 }
       ]
     },
     {
@@ -84,9 +84,9 @@
       q: 'Cosa trovi più spesso nei tuoi salvataggi?',
       answers: [
         { label: 'Capsule wardrobe', icon: 'home', mk: 0, sk: 0, hc: 0 },
-        { label: 'Routine skincare', icon: 'bottle', mk: 0, sk: 2, hc: 0 },
-        { label: 'Tutorial make-up', icon: 'brush', mk: 2, sk: 0, hc: 0 },
-        { label: 'GRWM e hair tutorials', icon: 'mirror', mk: 1, sk: 0, hc: 2 }
+        { label: 'Routine skincare', icon: 'bottle', mk: 0, sk: 3, hc: 0 },
+        { label: 'Tutorial make-up', icon: 'brush', mk: 3, sk: 0, hc: 0 },
+        { label: 'GRWM e hair tutorials', icon: 'mirror', mk: 0, sk: 0, hc: 3 }
       ]
     },
     {
@@ -94,9 +94,9 @@
       q: 'Quale frase ti descrive meglio?',
       answers: [
         { label: 'Less but better', icon: 'sparkle', mk: 0, sk: 0, hc: 0 },
-        { label: 'Ho bisogno delle mie routine', icon: 'bottle', mk: 0, sk: 1, hc: 0 },
-        { label: 'Mi preparo anche per uscire 5 minuti', icon: 'mirror', mk: 2, sk: 0, hc: 0 },
-        { label: 'Trasformo tutto in un rituale', icon: 'heart', mk: 1, sk: 1, hc: 1 }
+        { label: 'Ho bisogno delle mie routine', icon: 'bottle', mk: 0, sk: 3, hc: 0 },
+        { label: 'Mi preparo anche per uscire 5 minuti', icon: 'mirror', mk: 3, sk: 0, hc: 0 },
+        { label: 'Trasformo tutto in un rituale', icon: 'heart', mk: 2, sk: 2, hc: 2 }
       ]
     },
     {
@@ -104,9 +104,9 @@
       q: 'Prima di dormire…',
       answers: [
         { label: 'Mi strucco e basta', icon: 'moon', mk: 0, sk: 0, hc: 0 },
-        { label: 'Ho la mia skincare completa', icon: 'bottle', mk: 0, sk: 2, hc: 0 },
-        { label: 'Uso anche prodotti capelli', icon: 'brush', mk: 0, sk: 0, hc: 2 },
-        { label: 'Riordino tutto per il giorno dopo', icon: 'bag', mk: 1, sk: 1, hc: 0 }
+        { label: 'Ho la mia skincare completa', icon: 'bottle', mk: 0, sk: 3, hc: 0 },
+        { label: 'Uso anche prodotti capelli', icon: 'brush', mk: 0, sk: 0, hc: 3 },
+        { label: 'Riordino tutto per il giorno dopo', icon: 'bag', mk: 2, sk: 2, hc: 2 }
       ]
     },
     {
@@ -114,9 +114,9 @@
       q: 'Il tuo bagno ideale sembra…',
       answers: [
         { label: 'Minimal e pulito', icon: 'home', mk: 0, sk: 0, hc: 0 },
-        { label: 'Aesthetic e ordinato', icon: 'sparkle', mk: 0, sk: 1, hc: 0 },
-        { label: 'Pieno di prodotti beauty', icon: 'mirror', mk: 2, sk: 0, hc: 0 },
-        { label: 'Una mini spa', icon: 'bath', mk: 0, sk: 2, hc: 1 }
+        { label: 'Aesthetic e ordinato', icon: 'sparkle', mk: 0, sk: 3, hc: 0 },
+        { label: 'Pieno di prodotti beauty', icon: 'mirror', mk: 3, sk: 0, hc: 0 },
+        { label: 'Una mini spa', icon: 'bath', mk: 0, sk: 0, hc: 3 }
       ]
     },
     {
@@ -124,9 +124,9 @@
       q: 'Quale contenuto guarderesti subito?',
       answers: [
         { label: 'Morning routine minimal', icon: 'clock', mk: 0, sk: 0, hc: 0 },
-        { label: 'Sunday reset vlog', icon: 'moon', mk: 0, sk: 2, hc: 0 },
-        { label: 'Full glam transformation', icon: 'brush', mk: 2, sk: 0, hc: 0 },
-        { label: 'Haircare / everything shower routine', icon: 'bath', mk: 0, sk: 1, hc: 2 }
+        { label: 'Sunday reset vlog', icon: 'moon', mk: 0, sk: 3, hc: 0 },
+        { label: 'Full glam transformation', icon: 'brush', mk: 3, sk: 0, hc: 0 },
+        { label: 'Haircare / everything shower routine', icon: 'bath', mk: 0, sk: 0, hc: 3 }
       ]
     }
   ];

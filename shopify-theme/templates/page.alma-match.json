@@ -103,18 +103,18 @@
             "a2_label": "Ordinata ma piena di mini cose",
             "a2_icon": "sparkle",
             "a2_mk": 0,
-            "a2_sk": 1,
+            "a2_sk": 3,
             "a2_hc": 0,
             "a3_label": "Una mini beauty station",
             "a3_icon": "mirror",
-            "a3_mk": 2,
+            "a3_mk": 3,
             "a3_sk": 0,
             "a3_hc": 0,
             "a4_label": "Praticamente un kit di sopravvivenza",
             "a4_icon": "suitcase",
-            "a4_mk": 1,
-            "a4_sk": 1,
-            "a4_hc": 1
+            "a4_mk": 2,
+            "a4_sk": 2,
+            "a4_hc": 2
           }
         },
         "q2": {
@@ -129,19 +129,19 @@
             "a1_hc": 0,
             "a2_label": "Dipende dalla giornata",
             "a2_icon": "clock",
-            "a2_mk": 1,
+            "a2_mk": 3,
             "a2_sk": 0,
             "a2_hc": 0,
             "a3_label": "Ho una vera routine",
             "a3_icon": "bottle",
             "a3_mk": 0,
-            "a3_sk": 2,
+            "a3_sk": 3,
             "a3_hc": 0,
             "a4_label": "Prepararmi è parte del mood",
             "a4_icon": "sparkle",
-            "a4_mk": 1,
-            "a4_sk": 1,
-            "a4_hc": 1
+            "a4_mk": 2,
+            "a4_sk": 2,
+            "a4_hc": 2
           }
         },
         "q3": {
@@ -152,23 +152,23 @@
             "a1_label": "Clean girl",
             "a1_icon": "bottle",
             "a1_mk": 0,
-            "a1_sk": 2,
+            "a1_sk": 3,
             "a1_hc": 0,
             "a2_label": "Soft glam",
             "a2_icon": "brush",
-            "a2_mk": 2,
+            "a2_mk": 3,
             "a2_sk": 0,
             "a2_hc": 0,
             "a3_label": "Off duty model",
             "a3_icon": "mirror",
-            "a3_mk": 1,
+            "a3_mk": 0,
             "a3_sk": 0,
-            "a3_hc": 1,
+            "a3_hc": 3,
             "a4_label": "Pinterest / self-care core",
             "a4_icon": "heart",
-            "a4_mk": 0,
+            "a4_mk": 2,
             "a4_sk": 2,
-            "a4_hc": 1
+            "a4_hc": 2
           }
         },
         "q4": {
@@ -183,18 +183,18 @@
             "a1_hc": 0,
             "a2_label": "Organizzo tutto in pouch separate",
             "a2_icon": "bag",
-            "a2_mk": 1,
-            "a2_sk": 1,
+            "a2_mk": 0,
+            "a2_sk": 3,
             "a2_hc": 0,
             "a3_label": "Porto prodotti per ogni situazione",
             "a3_icon": "plane",
-            "a3_mk": 1,
+            "a3_mk": 3,
             "a3_sk": 0,
-            "a3_hc": 1,
+            "a3_hc": 0,
             "a4_label": "La beauty bag pesa più dei vestiti",
             "a4_icon": "suitcase",
-            "a4_mk": 1,
-            "a4_sk": 0,
+            "a4_mk": 2,
+            "a4_sk": 2,
             "a4_hc": 2
           }
         },
@@ -211,18 +211,18 @@
             "a2_label": "La skincare serale",
             "a2_icon": "moon",
             "a2_mk": 0,
-            "a2_sk": 2,
+            "a2_sk": 3,
             "a2_hc": 0,
             "a3_label": "Fare la piega",
             "a3_icon": "brush",
             "a3_mk": 0,
             "a3_sk": 0,
-            "a3_hc": 2,
+            "a3_hc": 3,
             "a4_label": "Il get ready completo",
             "a4_icon": "sparkle",
             "a4_mk": 2,
-            "a4_sk": 0,
-            "a4_hc": 1
+            "a4_sk": 2,
+            "a4_hc": 2
           }
         },
         "q6": {
@@ -238,18 +238,18 @@
             "a2_label": "Routine skincare",
             "a2_icon": "bottle",
             "a2_mk": 0,
-            "a2_sk": 2,
+            "a2_sk": 3,
             "a2_hc": 0,
             "a3_label": "Tutorial make-up",
             "a3_icon": "brush",
-            "a3_mk": 2,
+            "a3_mk": 3,
             "a3_sk": 0,
             "a3_hc": 0,
             "a4_label": "GRWM e hair tutorials",
             "a4_icon": "mirror",
-            "a4_mk": 1,
+            "a4_mk": 0,
             "a4_sk": 0,
-            "a4_hc": 2
+            "a4_hc": 3
           }
         },
         "q7": {
@@ -265,18 +265,18 @@
             "a2_label": "Ho bisogno delle mie routine",
             "a2_icon": "bottle",
             "a2_mk": 0,
-            "a2_sk": 1,
+            "a2_sk": 3,
             "a2_hc": 0,
             "a3_label": "Mi preparo anche per uscire 5 minuti",
             "a3_icon": "mirror",
-            "a3_mk": 2,
+            "a3_mk": 3,
             "a3_sk": 0,
             "a3_hc": 0,
             "a4_label": "Trasformo tutto in un rituale",
             "a4_icon": "heart",
-            "a4_mk": 1,
-            "a4_sk": 1,
-            "a4_hc": 1
+            "a4_mk": 2,
+            "a4_sk": 2,
+            "a4_hc": 2
           }
         },
         "q8": {
@@ -292,18 +292,18 @@
             "a2_label": "Ho la mia skincare completa",
             "a2_icon": "bottle",
             "a2_mk": 0,
-            "a2_sk": 2,
+            "a2_sk": 3,
             "a2_hc": 0,
             "a3_label": "Uso anche prodotti capelli",
             "a3_icon": "brush",
             "a3_mk": 0,
             "a3_sk": 0,
-            "a3_hc": 2,
+            "a3_hc": 3,
             "a4_label": "Riordino tutto per il giorno dopo",
             "a4_icon": "bag",
-            "a4_mk": 1,
-            "a4_sk": 1,
-            "a4_hc": 0
+            "a4_mk": 2,
+            "a4_sk": 2,
+            "a4_hc": 2
           }
         },
         "q9": {
@@ -319,18 +319,18 @@
             "a2_label": "Aesthetic e ordinato",
             "a2_icon": "sparkle",
             "a2_mk": 0,
-            "a2_sk": 1,
+            "a2_sk": 3,
             "a2_hc": 0,
             "a3_label": "Pieno di prodotti beauty",
             "a3_icon": "mirror",
-            "a3_mk": 2,
+            "a3_mk": 3,
             "a3_sk": 0,
             "a3_hc": 0,
             "a4_label": "Una mini spa",
             "a4_icon": "bath",
             "a4_mk": 0,
-            "a4_sk": 2,
-            "a4_hc": 1
+            "a4_sk": 0,
+            "a4_hc": 3
           }
         },
         "q10": {
@@ -346,18 +346,18 @@
             "a2_label": "Sunday reset vlog",
             "a2_icon": "moon",
             "a2_mk": 0,
-            "a2_sk": 2,
+            "a2_sk": 3,
             "a2_hc": 0,
             "a3_label": "Full glam transformation",
             "a3_icon": "brush",
-            "a3_mk": 2,
+            "a3_mk": 3,
             "a3_sk": 0,
             "a3_hc": 0,
             "a4_label": "Haircare / everything shower routine",
             "a4_icon": "bath",
             "a4_mk": 0,
-            "a4_sk": 1,
-            "a4_hc": 2
+            "a4_sk": 0,
+            "a4_hc": 3
           }
         },
         "a-bbb": {
