@@ -202,6 +202,7 @@
       rDesc: root.querySelector('[data-am-r-desc]'),
       rCombo: root.querySelector('[data-am-r-combo]'),
       cta: root.querySelector('[data-am-cta]'),
+      ctaRestart: root.querySelector('[data-am-cta-restart]'),
       timer: root.querySelector('[data-am-timer]'),
       discountBox: root.querySelector('[data-am-discount]'),
       priceBox: root.querySelector('[data-am-price]'),
@@ -368,11 +369,9 @@
       expired = state;
       if (els.discountBox) els.discountBox.classList.toggle('is-expired', state);
       if (els.expiredMsg) els.expiredMsg.hidden = !state;
-      if (els.cta) {
-        els.cta.classList.toggle('is-disabled', state);
-        if (state) els.cta.setAttribute('aria-disabled', 'true');
-        else els.cta.removeAttribute('aria-disabled');
-      }
+      // When the timer ends, swap the buy CTA for a restart-the-quiz button.
+      if (els.cta) els.cta.hidden = state;
+      if (els.ctaRestart) els.ctaRestart.hidden = !state;
     }
 
     function durationSeconds() {
@@ -480,6 +479,7 @@
     if (els.startBtn) els.startBtn.addEventListener('click', startQuiz);
     if (els.continueBtn) els.continueBtn.addEventListener('click', next);
     if (els.restart) els.restart.addEventListener('click', function (e) { e.preventDefault(); restart(); });
+    if (els.ctaRestart) els.ctaRestart.addEventListener('click', function (e) { e.preventDefault(); restart(); });
     if (els.cta) els.cta.addEventListener('click', function (e) {
       if (expired) { if (e && e.preventDefault) e.preventDefault(); return; }
       safeEvent('alma_match_cta_clicked', { bundle: currentBundle });
