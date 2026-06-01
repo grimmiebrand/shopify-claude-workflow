@@ -293,7 +293,7 @@
       "archetypes": {
         {%- assign a_blocks = section.blocks | where: 'type', 'archetype' -%}
         {%- for b in a_blocks -%}
-          {{ b.settings.mk_level | append: '-' | append: b.settings.sk_level | append: '-' | append: b.settings.hc_level | json }}: { "name": {{ b.settings.archetype_name | json }}, "bundle": {{ b.settings.bundle | json }}, "desc": {{ b.settings.desc | json }}, "descMakeup": {{ b.settings.desc_makeup | json }}, "descSkincare": {{ b.settings.desc_skincare | json }}, "descHaircare": {{ b.settings.desc_haircare | json }}, "routineDaily": {{ b.settings.routine_daily | json }}, "routineTravel": {{ b.settings.routine_travel | json }} }{%- unless forloop.last %},{% endunless -%}
+          {{ b.settings.mk_level | append: '-' | append: b.settings.sk_level | append: '-' | append: b.settings.hc_level | json }}: { "name": {{ b.settings.archetype_name | json }}, "bundle": {{ b.settings.bundle | json }}, "desc": {{ b.settings.desc | json }}, "descMakeup": {{ b.settings.desc_makeup | json }}, "descSkincare": {{ b.settings.desc_skincare | json }}, "descHaircare": {{ b.settings.desc_haircare | json }} }{%- unless forloop.last %},{% endunless -%}
         {%- endfor -%}
       },
       "bundleLinks": {
@@ -504,7 +504,7 @@
           <p class="grimmie-am-{{ sid }}__rdesc" data-am-r-desc></p>
           {%- if s.why_title != blank -%}<p class="grimmie-am-{{ sid }}__rcard-eyebrow" style="font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px;">{{ s.why_title | escape }}</p>{%- endif -%}
           <ul class="grimmie-am-{{ sid }}__why-list">
-            {%- for i in (1..5) -%}
+            {%- for i in (1..3) -%}
               {%- liquid
                 case i
                   when 1
@@ -519,14 +519,6 @@
                     assign w_title = s.why_3_title
                     assign w_text = s.why_3_text
                     assign w_icon = s.why_3_icon
-                  when 4
-                    assign w_title = s.why_4_title
-                    assign w_text = s.why_4_text
-                    assign w_icon = s.why_4_icon
-                  when 5
-                    assign w_title = s.why_5_title
-                    assign w_text = s.why_5_text
-                    assign w_icon = s.why_5_icon
                 endcase
               -%}
               <li class="grimmie-am-{{ sid }}__why-item">
@@ -672,16 +664,6 @@
     ], "default": "hair" },
     { "type": "text", "id": "why_3_title", "label": "Bullet 3 title", "default": "HAIRCARE" },
     { "type": "textarea", "id": "why_3_text", "label": "Bullet 3 text (fallback)", "default": "La tua routine ti segue ovunque: praticità e stile in ogni momento della giornata." },
-    { "type": "select", "id": "why_4_icon", "label": "Bullet 4 icon", "options": [
-      { "value": "makeup", "label": "Make-up" }, { "value": "skincare", "label": "Skincare" }, { "value": "hair", "label": "Hair" }, { "value": "home", "label": "Home" }, { "value": "gym", "label": "Gym" }, { "value": "travel", "label": "Travel" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "heart", "label": "Heart" }
-    ], "default": "home" },
-    { "type": "text", "id": "why_4_title", "label": "Bullet 4 title", "default": "A CASA, OGNI GIORNO" },
-    { "type": "textarea", "id": "why_4_text", "label": "Bullet 4 text (fallback)", "default": "La tua routine ti segue ovunque: praticità e stile in ogni momento della giornata." },
-    { "type": "select", "id": "why_5_icon", "label": "Bullet 5 icon", "options": [
-      { "value": "makeup", "label": "Make-up" }, { "value": "skincare", "label": "Skincare" }, { "value": "hair", "label": "Hair" }, { "value": "home", "label": "Home" }, { "value": "gym", "label": "Gym" }, { "value": "travel", "label": "Travel" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "heart", "label": "Heart" }
-    ], "default": "travel" },
-    { "type": "text", "id": "why_5_title", "label": "Bullet 5 title", "default": "IN VIAGGIO" },
-    { "type": "textarea", "id": "why_5_text", "label": "Bullet 5 text (fallback)", "default": "In viaggio come nella vita di tutti i giorni, hai tutto ciò che ti serve, perfettamente organizzato." },
 
     { "type": "header", "content": "Discount / timer" },
     { "type": "text", "id": "discount_title", "label": "Title", "default": "Wow, hai sbloccato anche un vantaggio ✨" },
@@ -816,9 +798,7 @@
         { "type": "textarea", "id": "desc", "label": "Descrizione personalità (mostrata nel risultato)" },
         { "type": "textarea", "id": "desc_makeup", "label": "Descrizione make-up" },
         { "type": "textarea", "id": "desc_skincare", "label": "Descrizione skincare" },
-        { "type": "textarea", "id": "desc_haircare", "label": "Descrizione haircare" },
-        { "type": "textarea", "id": "routine_daily", "label": "Routine quotidiana (a casa)" },
-        { "type": "textarea", "id": "routine_travel", "label": "Travel routine" }
+        { "type": "textarea", "id": "desc_haircare", "label": "Descrizione haircare" }
       ]
     }
   ],
