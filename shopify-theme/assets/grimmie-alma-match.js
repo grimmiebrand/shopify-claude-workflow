@@ -28,7 +28,7 @@
     bath: '<svg viewBox="0 0 24 24"><path d="M4 12 h16 v3 a4 4 0 0 1 -4 4 h-8 a4 4 0 0 1 -4 -4 z"/><path d="M7 12 V6 a2 2 0 0 1 2 -2 a2 2 0 0 1 2 2"/><path d="M6 19 l-1 2 M18 19 l1 2"/></svg>'
   };
 
-  var QUESTIONS = [
+  var QUESTIONS_DEFAULT = [
     {
       heroTitle: 'Iniziamo da te',
       q: 'La tua borsa di solito è…',
@@ -132,7 +132,7 @@
   ];
 
   // key = "MAKEUP-SKINCARE-HAIRCARE" -> archetype, bundle (display + key), description
-  var ARCHETYPES = {
+  var ARCHETYPES_DEFAULT = {
     'BASIC-BASIC-BASIC':   { name: 'La ragazza acqua e sapone', bundle: '2 Classic + 1 Large', desc: 'La bellezza che non ha bisogno di troppo: naturale, autentica e senza sforzo. Pochi gesti, scelti bene, per sentirti sempre te stessa.' },
     'BASIC-BASIC-MEDIUM':  { name: 'Clean Girl', bundle: '3 Classic + 1 Large', desc: 'Ami la semplicità che parla di cura, equilibrio e dettagli scelti con intenzione. Ogni cosa ha il suo posto, ogni gesto ha il suo ritmo.' },
     'BASIC-BASIC-PRO':     { name: 'Blowout Energy', bundle: '2 Classic + 2 Large', desc: 'I capelli sono la tua firma: piega perfetta, movimento e luce. La tua routine ruota attorno a styling impeccabile e prodotti giusti.' },
@@ -164,12 +164,6 @@
 
   var STORAGE_KEY = 'grimmie_alma_match_result';
   var DEADLINE_KEY = 'grimmie_alma_match_deadline';
-
-  function levelOf(score) {
-    if (score >= 12) return 'PRO';
-    if (score >= 6) return 'MEDIUM';
-    return 'BASIC';
-  }
 
   function safeEvent(name, detail) {
     try { window.dispatchEvent(new CustomEvent(name, { detail: detail || {} })); } catch (e) {}
@@ -214,7 +208,23 @@
       loadingTitle: root.querySelector('[data-am-loading-title]')
     };
 
-    var total = QUESTIONS.length;
+    // Read the quiz data from the section's config so merchants can edit
+    // questions, answers, scores and archetypes from the theme editor.
+    // Fall back to the bundled defaults when the section has no blocks.
+    var questions = (config.questions && config.questions.length) ? config.questions : QUESTIONS_DEFAULT;
+    var archetypes = (config.archetypes && Object.keys(config.archetypes).length) ? config.archetypes : ARCHETYPES_DEFAULT;
+
+    function levelOf(score) {
+      var proMin = parseInt(config.levelProMin, 10);
+      if (isNaN(proMin)) proMin = 12;
+      var medMin = parseInt(config.levelMediumMin, 10);
+      if (isNaN(medMin)) medMin = 6;
+      if (score >= proMin) return 'PRO';
+      if (score >= medMin) return 'MEDIUM';
+      return 'BASIC';
+    }
+
+    var total = questions.length;
     var answers = new Array(total).fill(-1);
     var current = 0;
     var timerId = null;
@@ -231,7 +241,7 @@
     }
 
     function renderQuestion() {
-      var data = QUESTIONS[current];
+      var data = questions[current];
       if (els.heroTitle) els.heroTitle.textContent = data.heroTitle;
       if (els.progressLabel) els.progressLabel.textContent = 'DOMANDA ' + (current + 1) + ' DI ' + total;
       if (els.bar) els.bar.style.width = ((current + 1) / total * 100) + '%';
@@ -286,12 +296,14 @@
     function compute() {
       var mk = 0, sk = 0, hc = 0;
       for (var i = 0; i < total; i++) {
-        var a = QUESTIONS[i].answers[answers[i]];
+        var a = questions[i].answers[answers[i]];
         if (!a) continue;
-        mk += a.mk; sk += a.sk; hc += a.hc;
+        mk += (parseInt(a.mk, 10) || 0);
+        sk += (parseInt(a.sk, 10) || 0);
+        hc += (parseInt(a.hc, 10) || 0);
       }
       var key = levelOf(mk) + '-' + levelOf(sk) + '-' + levelOf(hc);
-      var arch = ARCHETYPES[key] || ARCHETYPES['BASIC-BASIC-BASIC'];
+      var arch = archetypes[key] || archetypes['BASIC-BASIC-BASIC'] || ARCHETYPES_DEFAULT['BASIC-BASIC-BASIC'];
       return { key: key, name: arch.name, bundle: arch.bundle, desc: arch.desc, mk: mk, sk: sk, hc: hc };
     }
 

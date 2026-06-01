@@ -85,8 +85,618 @@
         "classic_product": "shopify://products/almaclassic",
         "large_product": "shopify://products/almalarge",
         "classic_variant_id": "57915894792566",
-        "large_variant_id": "57915894989174"
-      }
+        "large_variant_id": "57915894989174",
+        "level_medium_min": 6,
+        "level_pro_min": 12
+      },
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "hero_title": "Iniziamo da te",
+            "q_text": "La tua borsa di solito è…",
+            "a1_label": "Super essenziale",
+            "a1_icon": "bag",
+            "a1_mk": 0,
+            "a1_sk": 0,
+            "a1_hc": 0,
+            "a2_label": "Ordinata ma piena di mini cose",
+            "a2_icon": "sparkle",
+            "a2_mk": 0,
+            "a2_sk": 1,
+            "a2_hc": 0,
+            "a3_label": "Una mini beauty station",
+            "a3_icon": "mirror",
+            "a3_mk": 2,
+            "a3_sk": 0,
+            "a3_hc": 0,
+            "a4_label": "Praticamente un kit di sopravvivenza",
+            "a4_icon": "suitcase",
+            "a4_mk": 1,
+            "a4_sk": 1,
+            "a4_hc": 1
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "hero_title": "Il tuo ritmo",
+            "q_text": "Quanto tempo impieghi per prepararti?",
+            "a1_label": "10 minuti e sono pronta",
+            "a1_icon": "clock",
+            "a1_mk": 0,
+            "a1_sk": 0,
+            "a1_hc": 0,
+            "a2_label": "Dipende dalla giornata",
+            "a2_icon": "clock",
+            "a2_mk": 1,
+            "a2_sk": 0,
+            "a2_hc": 0,
+            "a3_label": "Ho una vera routine",
+            "a3_icon": "bottle",
+            "a3_mk": 0,
+            "a3_sk": 2,
+            "a3_hc": 0,
+            "a4_label": "Prepararmi è parte del mood",
+            "a4_icon": "sparkle",
+            "a4_mk": 1,
+            "a4_sk": 1,
+            "a4_hc": 1
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "hero_title": "Il tuo mood",
+            "q_text": "Quale aesthetic ti rappresenta di più?",
+            "a1_label": "Clean girl",
+            "a1_icon": "bottle",
+            "a1_mk": 0,
+            "a1_sk": 2,
+            "a1_hc": 0,
+            "a2_label": "Soft glam",
+            "a2_icon": "brush",
+            "a2_mk": 2,
+            "a2_sk": 0,
+            "a2_hc": 0,
+            "a3_label": "Off duty model",
+            "a3_icon": "mirror",
+            "a3_mk": 1,
+            "a3_sk": 0,
+            "a3_hc": 1,
+            "a4_label": "Pinterest / self-care core",
+            "a4_icon": "heart",
+            "a4_mk": 0,
+            "a4_sk": 2,
+            "a4_hc": 1
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "hero_title": "Quando parti",
+            "q_text": "Quando prepari la valigia…",
+            "a1_label": "Porto solo il necessario",
+            "a1_icon": "suitcase",
+            "a1_mk": 0,
+            "a1_sk": 0,
+            "a1_hc": 0,
+            "a2_label": "Organizzo tutto in pouch separate",
+            "a2_icon": "bag",
+            "a2_mk": 1,
+            "a2_sk": 1,
+            "a2_hc": 0,
+            "a3_label": "Porto prodotti per ogni situazione",
+            "a3_icon": "plane",
+            "a3_mk": 1,
+            "a3_sk": 0,
+            "a3_hc": 1,
+            "a4_label": "La beauty bag pesa più dei vestiti",
+            "a4_icon": "suitcase",
+            "a4_mk": 1,
+            "a4_sk": 0,
+            "a4_hc": 2
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "hero_title": "Il tuo momento",
+            "q_text": "Il momento beauty che ami di più?",
+            "a1_label": "Fare veloce e uscire",
+            "a1_icon": "clock",
+            "a1_mk": 0,
+            "a1_sk": 0,
+            "a1_hc": 0,
+            "a2_label": "La skincare serale",
+            "a2_icon": "moon",
+            "a2_mk": 0,
+            "a2_sk": 2,
+            "a2_hc": 0,
+            "a3_label": "Fare la piega",
+            "a3_icon": "brush",
+            "a3_mk": 0,
+            "a3_sk": 0,
+            "a3_hc": 2,
+            "a4_label": "Il get ready completo",
+            "a4_icon": "sparkle",
+            "a4_mk": 2,
+            "a4_sk": 0,
+            "a4_hc": 1
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "hero_title": "Le tue ispirazioni",
+            "q_text": "Cosa trovi più spesso nei tuoi salvataggi?",
+            "a1_label": "Capsule wardrobe",
+            "a1_icon": "home",
+            "a1_mk": 0,
+            "a1_sk": 0,
+            "a1_hc": 0,
+            "a2_label": "Routine skincare",
+            "a2_icon": "bottle",
+            "a2_mk": 0,
+            "a2_sk": 2,
+            "a2_hc": 0,
+            "a3_label": "Tutorial make-up",
+            "a3_icon": "brush",
+            "a3_mk": 2,
+            "a3_sk": 0,
+            "a3_hc": 0,
+            "a4_label": "GRWM e hair tutorials",
+            "a4_icon": "mirror",
+            "a4_mk": 1,
+            "a4_sk": 0,
+            "a4_hc": 2
+          }
+        },
+        "q7": {
+          "type": "question",
+          "settings": {
+            "hero_title": "Il tuo stile",
+            "q_text": "Quale frase ti descrive meglio?",
+            "a1_label": "Less but better",
+            "a1_icon": "sparkle",
+            "a1_mk": 0,
+            "a1_sk": 0,
+            "a1_hc": 0,
+            "a2_label": "Ho bisogno delle mie routine",
+            "a2_icon": "bottle",
+            "a2_mk": 0,
+            "a2_sk": 1,
+            "a2_hc": 0,
+            "a3_label": "Mi preparo anche per uscire 5 minuti",
+            "a3_icon": "mirror",
+            "a3_mk": 2,
+            "a3_sk": 0,
+            "a3_hc": 0,
+            "a4_label": "Trasformo tutto in un rituale",
+            "a4_icon": "heart",
+            "a4_mk": 1,
+            "a4_sk": 1,
+            "a4_hc": 1
+          }
+        },
+        "q8": {
+          "type": "question",
+          "settings": {
+            "hero_title": "La sera",
+            "q_text": "Prima di dormire…",
+            "a1_label": "Mi strucco e basta",
+            "a1_icon": "moon",
+            "a1_mk": 0,
+            "a1_sk": 0,
+            "a1_hc": 0,
+            "a2_label": "Ho la mia skincare completa",
+            "a2_icon": "bottle",
+            "a2_mk": 0,
+            "a2_sk": 2,
+            "a2_hc": 0,
+            "a3_label": "Uso anche prodotti capelli",
+            "a3_icon": "brush",
+            "a3_mk": 0,
+            "a3_sk": 0,
+            "a3_hc": 2,
+            "a4_label": "Riordino tutto per il giorno dopo",
+            "a4_icon": "bag",
+            "a4_mk": 1,
+            "a4_sk": 1,
+            "a4_hc": 0
+          }
+        },
+        "q9": {
+          "type": "question",
+          "settings": {
+            "hero_title": "Il tuo spazio",
+            "q_text": "Il tuo bagno ideale sembra…",
+            "a1_label": "Minimal e pulito",
+            "a1_icon": "home",
+            "a1_mk": 0,
+            "a1_sk": 0,
+            "a1_hc": 0,
+            "a2_label": "Aesthetic e ordinato",
+            "a2_icon": "sparkle",
+            "a2_mk": 0,
+            "a2_sk": 1,
+            "a2_hc": 0,
+            "a3_label": "Pieno di prodotti beauty",
+            "a3_icon": "mirror",
+            "a3_mk": 2,
+            "a3_sk": 0,
+            "a3_hc": 0,
+            "a4_label": "Una mini spa",
+            "a4_icon": "bath",
+            "a4_mk": 0,
+            "a4_sk": 2,
+            "a4_hc": 1
+          }
+        },
+        "q10": {
+          "type": "question",
+          "settings": {
+            "hero_title": "Ci siamo quasi",
+            "q_text": "Quale contenuto guarderesti subito?",
+            "a1_label": "Morning routine minimal",
+            "a1_icon": "clock",
+            "a1_mk": 0,
+            "a1_sk": 0,
+            "a1_hc": 0,
+            "a2_label": "Sunday reset vlog",
+            "a2_icon": "moon",
+            "a2_mk": 0,
+            "a2_sk": 2,
+            "a2_hc": 0,
+            "a3_label": "Full glam transformation",
+            "a3_icon": "brush",
+            "a3_mk": 2,
+            "a3_sk": 0,
+            "a3_hc": 0,
+            "a4_label": "Haircare / everything shower routine",
+            "a4_icon": "bath",
+            "a4_mk": 0,
+            "a4_sk": 1,
+            "a4_hc": 2
+          }
+        },
+        "a-bbb": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "BASIC",
+            "sk_level": "BASIC",
+            "hc_level": "BASIC",
+            "name": "La ragazza acqua e sapone",
+            "bundle": "2 Classic + 1 Large",
+            "desc": "La bellezza che non ha bisogno di troppo: naturale, autentica e senza sforzo. Pochi gesti, scelti bene, per sentirti sempre te stessa."
+          }
+        },
+        "a-bbm": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "BASIC",
+            "sk_level": "BASIC",
+            "hc_level": "MEDIUM",
+            "name": "Clean Girl",
+            "bundle": "3 Classic + 1 Large",
+            "desc": "Ami la semplicità che parla di cura, equilibrio e dettagli scelti con intenzione. Ogni cosa ha il suo posto, ogni gesto ha il suo ritmo."
+          }
+        },
+        "a-bbp": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "BASIC",
+            "sk_level": "BASIC",
+            "hc_level": "PRO",
+            "name": "Blowout Energy",
+            "bundle": "2 Classic + 2 Large",
+            "desc": "I capelli sono la tua firma: piega perfetta, movimento e luce. La tua routine ruota attorno a styling impeccabile e prodotti giusti."
+          }
+        },
+        "a-bmb": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "BASIC",
+            "sk_level": "MEDIUM",
+            "hc_level": "BASIC",
+            "name": "Wellness Era",
+            "bundle": "1 Classic + 2 Large",
+            "desc": "Il benessere prima di tutto: skincare lenta, momenti per te e spazi ordinati. La cura come piccolo rituale quotidiano."
+          }
+        },
+        "a-bmm": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "BASIC",
+            "sk_level": "MEDIUM",
+            "hc_level": "MEDIUM",
+            "name": "Sunday Reset",
+            "bundle": "2 Classic + 2 Large",
+            "desc": "Vivi di piccoli reset che rimettono tutto in ordine. Skincare e capelli curati, per ripartire ogni settimana con leggerezza."
+          }
+        },
+        "a-bmp": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "BASIC",
+            "sk_level": "MEDIUM",
+            "hc_level": "PRO",
+            "name": "Everything Shower Energy",
+            "bundle": "1 Classic + 3 Large",
+            "desc": "Il tuo momento preferito è la doccia che diventa rituale. Capelli, corpo e cura in un’unica routine rigenerante."
+          }
+        },
+        "a-bpb": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "BASIC",
+            "sk_level": "PRO",
+            "hc_level": "BASIC",
+            "name": "Soft Life",
+            "bundle": "2 Classic + 2 Large",
+            "desc": "Scegli la dolcezza in ogni dettaglio: skincare ricca, ritmi morbidi e una bellezza che si prende il suo tempo."
+          }
+        },
+        "a-bpm": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "BASIC",
+            "sk_level": "PRO",
+            "hc_level": "MEDIUM",
+            "name": "Pinterest Core",
+            "bundle": "3 Classic + 2 Large",
+            "desc": "La tua routine è un mood: ordinata, estetica e ispirata. Skincare curata e dettagli che sembrano usciti da una board."
+          }
+        },
+        "a-bpp": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "BASIC",
+            "sk_level": "PRO",
+            "hc_level": "PRO",
+            "name": "Self Care Club",
+            "bundle": "2 Classic + 3 Large",
+            "desc": "La cura di sé è la tua priorità: skincare completa e capelli coccolati. Ogni gesto è un atto d’amore per te stessa."
+          }
+        },
+        "a-mbb": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "MEDIUM",
+            "sk_level": "BASIC",
+            "hc_level": "BASIC",
+            "name": "Vanilla Energy",
+            "bundle": "3 Classic + 1 Large",
+            "desc": "Calda, semplice e sempre curata: un make-up essenziale che ti somiglia. Comfort e bellezza in equilibrio perfetto."
+          }
+        },
+        "a-mbm": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "MEDIUM",
+            "sk_level": "BASIC",
+            "hc_level": "MEDIUM",
+            "name": "Off Duty Model",
+            "bundle": "4 Classic + 1 Large",
+            "desc": "Effortless ma impeccabile: make-up giusto e capelli al naturale. La bellezza che sembra spontanea ma è studiata."
+          }
+        },
+        "a-mbp": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "MEDIUM",
+            "sk_level": "BASIC",
+            "hc_level": "PRO",
+            "name": "Rich Girl Energy",
+            "bundle": "3 Classic + 2 Large",
+            "desc": "Dettagli curati e allure discreta: make-up presente e capelli sempre perfetti. Eleganza che non grida, ma si nota."
+          }
+        },
+        "a-mmb": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "MEDIUM",
+            "sk_level": "MEDIUM",
+            "hc_level": "BASIC",
+            "name": "That Girl",
+            "bundle": "2 Classic + 2 Large",
+            "desc": "Organizzata, motivata e sempre sul pezzo: make-up e skincare in equilibrio. La routine che ti fa sentire la migliore versione di te."
+          }
+        },
+        "a-mmm": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "MEDIUM",
+            "sk_level": "MEDIUM",
+            "hc_level": "MEDIUM",
+            "name": "Pilates Princess",
+            "bundle": "3 Classic + 2 Large",
+            "desc": "Equilibrio tra movimento e bellezza: make-up fresco, skincare e capelli curati. Una routine attiva, elegante e bilanciata."
+          }
+        },
+        "a-mmp": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "MEDIUM",
+            "sk_level": "MEDIUM",
+            "hc_level": "PRO",
+            "name": "Weekend Escape",
+            "bundle": "2 Classic + 3 Large",
+            "desc": "Sempre pronta a partire: make-up versatile e capelli curati per ogni meta. La bellezza che ti segue ovunque."
+          }
+        },
+        "a-mpb": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "MEDIUM",
+            "sk_level": "PRO",
+            "hc_level": "BASIC",
+            "name": "Glazed Skin Era",
+            "bundle": "3 Classic + 2 Large",
+            "desc": "Pelle luminosa e make-up che la esalta: la tua ossessione è il glow. Skincare ricca e dettagli che fanno brillare."
+          }
+        },
+        "a-mpm": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "MEDIUM",
+            "sk_level": "PRO",
+            "hc_level": "MEDIUM",
+            "name": "IT Girl",
+            "bundle": "4 Classic + 2 Large",
+            "desc": "Sei tu a dettare il mood: make-up curato, skincare completa e stile. Una presenza che si fa ricordare, sempre."
+          }
+        },
+        "a-mpp": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "MEDIUM",
+            "sk_level": "PRO",
+            "hc_level": "PRO",
+            "name": "Beauty Addict",
+            "bundle": "3 Classic + 3 Large",
+            "desc": "Ami la bellezza in ogni sua forma: make-up, skincare e capelli al massimo. Una routine completa per chi non rinuncia a nulla."
+          }
+        },
+        "a-pbb": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "PRO",
+            "sk_level": "BASIC",
+            "hc_level": "BASIC",
+            "name": "Soft Glam",
+            "bundle": "2 Classic + 2 Large",
+            "desc": "Il glamour nella sua versione morbida: make-up curato e luminoso. Sofisticata senza eccessi, sempre al punto giusto."
+          }
+        },
+        "a-pbm": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "PRO",
+            "sk_level": "BASIC",
+            "hc_level": "MEDIUM",
+            "name": "Airport Look",
+            "bundle": "3 Classic + 2 Large",
+            "desc": "Glam anche in viaggio: make-up impeccabile e capelli curati ovunque. La bellezza che non conosce fuso orario."
+          }
+        },
+        "a-pbp": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "PRO",
+            "sk_level": "BASIC",
+            "hc_level": "PRO",
+            "name": "Main Character Energy",
+            "bundle": "2 Classic + 3 Large",
+            "desc": "Sei la protagonista della tua storia: make-up deciso e capelli da scena. Una routine che ti mette sempre al centro."
+          }
+        },
+        "a-pmb": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "PRO",
+            "sk_level": "MEDIUM",
+            "hc_level": "BASIC",
+            "name": "Matcha Girl",
+            "bundle": "1 Classic + 3 Large",
+            "desc": "Make-up curato e ritmi morbidi: bellezza e benessere in armonia. Una routine calda, lenta e piena di stile."
+          }
+        },
+        "a-pmm": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "PRO",
+            "sk_level": "MEDIUM",
+            "hc_level": "MEDIUM",
+            "name": "City Girl Era",
+            "bundle": "2 Classic + 3 Large",
+            "desc": "Ritmo veloce e stile sempre on point: make-up curato e capelli pronti. La bellezza che tiene il passo con la città."
+          }
+        },
+        "a-pmp": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "PRO",
+            "sk_level": "MEDIUM",
+            "hc_level": "PRO",
+            "name": "GRWM Core",
+            "bundle": "1 Classic + 4 Large",
+            "desc": "Prepararti è il tuo momento preferito: make-up completo e capelli protagonisti. Ogni get ready è un piccolo spettacolo."
+          }
+        },
+        "a-ppb": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "PRO",
+            "sk_level": "PRO",
+            "hc_level": "BASIC",
+            "name": "Beauty Collector",
+            "bundle": "2 Classic + 3 Large",
+            "desc": "Collezioni prodotti come piccoli tesori: make-up e skincare al completo. La bellezza è la tua passione più curata."
+          }
+        },
+        "a-ppm": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "PRO",
+            "sk_level": "PRO",
+            "hc_level": "MEDIUM",
+            "name": "Content Creator Energy",
+            "bundle": "3 Classic + 3 Large",
+            "desc": "Sempre pronta a brillare davanti alla camera: make-up, skincare e capelli perfetti. Una routine completa per chi crea ed ispira."
+          }
+        },
+        "a-ppp": {
+          "type": "archetype",
+          "settings": {
+            "mk_level": "PRO",
+            "sk_level": "PRO",
+            "hc_level": "PRO",
+            "name": "Ultimate Beauty Energy",
+            "bundle": "2 Classic + 4 Large",
+            "desc": "La tua routine non ha limiti: make-up, skincare e capelli al massimo livello. La bellezza totale, organizzata con eleganza."
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8",
+        "q9",
+        "q10",
+        "a-bbb",
+        "a-bbm",
+        "a-bbp",
+        "a-bmb",
+        "a-bmm",
+        "a-bmp",
+        "a-bpb",
+        "a-bpm",
+        "a-bpp",
+        "a-mbb",
+        "a-mbm",
+        "a-mbp",
+        "a-mmb",
+        "a-mmm",
+        "a-mmp",
+        "a-mpb",
+        "a-mpm",
+        "a-mpp",
+        "a-pbb",
+        "a-pbm",
+        "a-pbp",
+        "a-pmb",
+        "a-pmm",
+        "a-pmp",
+        "a-ppb",
+        "a-ppm",
+        "a-ppp"
+      ]
     }
   },
   "order": [
