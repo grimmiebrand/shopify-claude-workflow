@@ -133,7 +133,7 @@
       ]
     },
     {
-      type: 'correction',
+      type: 'feedback',
       heroTitle: 'Per finire',
       q: 'Pensando alla tua routine nei prossimi mesi, vorresti…',
       answers: [
@@ -314,7 +314,7 @@
         var q = questions[i];
         var a = q.answers[answers[i]];
         if (!a) continue;
-        if (q.type === 'correction') {
+        if (q.type === 'feedback') {
           correctionDelta += (parseInt(a.delta, 10) || 0);
           continue;
         }
