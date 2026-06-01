@@ -283,7 +283,7 @@
       "archetypes": {
         {%- assign a_blocks = section.blocks | where: 'type', 'archetype' -%}
         {%- for b in a_blocks -%}
-          {{ b.settings.mk_level | append: '-' | append: b.settings.sk_level | append: '-' | append: b.settings.hc_level | json }}: { "name": {{ b.settings.name | json }}, "bundle": {{ b.settings.bundle | json }}, "desc": {{ b.settings.desc | json }} }{%- unless forloop.last %},{% endunless -%}
+          {{ b.settings.mk_level | append: '-' | append: b.settings.sk_level | append: '-' | append: b.settings.hc_level | json }}: { "name": {{ b.settings.archetype_name | json }}, "bundle": {{ b.settings.bundle | json }}, "desc": {{ b.settings.desc | json }} }{%- unless forloop.last %},{% endunless -%}
         {%- endfor -%}
       },
       "bundleLinks": {
@@ -618,7 +618,7 @@
     { "type": "text", "id": "question_sub", "label": "Answer prompt", "default": "Scegli l'opzione che ti rappresenta di più." },
     { "type": "text", "id": "question_reassure", "label": "Reassurance text", "default": "Le tue risposte sono 100% personali e riservate." },
 
-    { "type": "header", "content": "Scoring thresholds" },
+    { "type": "header", "content": "Scoring thresholds", "info": "Determine BASIC / MEDIUM / PRO levels from the per-axis score. Used together with the Question and Archetype blocks below." },
     { "type": "number", "id": "level_medium_min", "label": "Minimum score for MEDIUM", "default": 6 },
     { "type": "number", "id": "level_pro_min", "label": "Minimum score for PRO", "default": 12 },
 
@@ -726,12 +726,56 @@
     { "type": "color", "id": "button_text_color", "label": "Button text", "default": "#FFFFFF" },
     { "type": "color", "id": "button_hover_background_color", "label": "Button hover", "default": "#B97781" }
   ],
+  "max_blocks": 50,
   "blocks": [
     {
       "type": "question",
       "name": "Domanda",
       "settings": [
-        { "type": "text", "id": "q_text", "label": "Domanda" }
+        { "type": "text", "id": "hero_title", "label": "Eyebrow (titolo schermata)", "default": "" },
+        { "type": "text", "id": "q_text", "label": "Testo della domanda", "default": "" },
+
+        { "type": "text", "id": "a1_label", "label": "Risposta 1 — etichetta", "default": "" },
+        { "type": "text", "id": "a1_icon", "label": "Risposta — icona", "info": "Una di: bag, sparkle, mirror, suitcase, clock, bottle, brush, heart, plane, moon, home, bath.", "default": "sparkle" },
+        { "type": "number", "id": "a1_mk", "label": "Punteggio make-up", "default": 0 },
+        { "type": "number", "id": "a1_sk", "label": "Punteggio skincare", "default": 0 },
+        { "type": "number", "id": "a1_hc", "label": "Punteggio haircare", "default": 0 },
+
+        { "type": "text", "id": "a2_label", "label": "Risposta 2 — etichetta", "default": "" },
+        { "type": "text", "id": "a2_icon", "label": "Risposta — icona", "info": "Una di: bag, sparkle, mirror, suitcase, clock, bottle, brush, heart, plane, moon, home, bath.", "default": "sparkle" },
+        { "type": "number", "id": "a2_mk", "label": "Punteggio make-up", "default": 0 },
+        { "type": "number", "id": "a2_sk", "label": "Punteggio skincare", "default": 0 },
+        { "type": "number", "id": "a2_hc", "label": "Punteggio haircare", "default": 0 },
+
+        { "type": "text", "id": "a3_label", "label": "Risposta 3 — etichetta", "default": "" },
+        { "type": "text", "id": "a3_icon", "label": "Risposta — icona", "info": "Una di: bag, sparkle, mirror, suitcase, clock, bottle, brush, heart, plane, moon, home, bath.", "default": "sparkle" },
+        { "type": "number", "id": "a3_mk", "label": "Punteggio make-up", "default": 0 },
+        { "type": "number", "id": "a3_sk", "label": "Punteggio skincare", "default": 0 },
+        { "type": "number", "id": "a3_hc", "label": "Punteggio haircare", "default": 0 },
+
+        { "type": "text", "id": "a4_label", "label": "Risposta 4 — etichetta", "default": "" },
+        { "type": "text", "id": "a4_icon", "label": "Risposta — icona", "info": "Una di: bag, sparkle, mirror, suitcase, clock, bottle, brush, heart, plane, moon, home, bath.", "default": "sparkle" },
+        { "type": "number", "id": "a4_mk", "label": "Punteggio make-up", "default": 0 },
+        { "type": "number", "id": "a4_sk", "label": "Punteggio skincare", "default": 0 },
+        { "type": "number", "id": "a4_hc", "label": "Punteggio haircare", "default": 0 }
+      ]
+    },
+    {
+      "type": "archetype",
+      "name": "Archetipo",
+      "settings": [
+        { "type": "select", "id": "mk_level", "label": "Livello make-up", "default": "BASIC", "options": [
+          { "value": "BASIC", "label": "BASIC" }, { "value": "MEDIUM", "label": "MEDIUM" }, { "value": "PRO", "label": "PRO" }
+        ] },
+        { "type": "select", "id": "sk_level", "label": "Livello skincare", "default": "BASIC", "options": [
+          { "value": "BASIC", "label": "BASIC" }, { "value": "MEDIUM", "label": "MEDIUM" }, { "value": "PRO", "label": "PRO" }
+        ] },
+        { "type": "select", "id": "hc_level", "label": "Livello haircare", "default": "BASIC", "options": [
+          { "value": "BASIC", "label": "BASIC" }, { "value": "MEDIUM", "label": "MEDIUM" }, { "value": "PRO", "label": "PRO" }
+        ] },
+        { "type": "text", "id": "archetype_name", "label": "Nome archetipo", "default": "" },
+        { "type": "text", "id": "bundle", "label": "Combo consigliata", "info": "Formato: '2 Classic + 1 Large'. I numeri determinano i pezzi nel carrello.", "default": "" },
+        { "type": "textarea", "id": "desc", "label": "Descrizione", "default": "" }
       ]
     }
   ],
