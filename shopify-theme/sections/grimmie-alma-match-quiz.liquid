@@ -273,14 +273,10 @@
         {%- assign q_blocks = section.blocks | where: 'type', 'question' -%}
         {%- for b in q_blocks -%}
           { "heroTitle": {{ b.settings.hero_title | json }}, "q": {{ b.settings.q_text | json }}, "answers": [
-            {%- for i in (1..4) -%}
-              {%- assign lbl_key = 'a' | append: i | append: '_label' -%}
-              {%- assign icon_key = 'a' | append: i | append: '_icon' -%}
-              {%- assign mk_key = 'a' | append: i | append: '_mk' -%}
-              {%- assign sk_key = 'a' | append: i | append: '_sk' -%}
-              {%- assign hc_key = 'a' | append: i | append: '_hc' -%}
-              { "label": {{ b.settings[lbl_key] | json }}, "icon": {{ b.settings[icon_key] | default: 'sparkle' | json }}, "mk": {{ b.settings[mk_key] | default: 0 }}, "sk": {{ b.settings[sk_key] | default: 0 }}, "hc": {{ b.settings[hc_key] | default: 0 }} }{%- unless forloop.last %},{% endunless -%}
-            {%- endfor -%}
+            { "label": {{ b.settings.a1_label | json }}, "icon": {{ b.settings.a1_icon | default: 'sparkle' | json }}, "mk": {{ b.settings.a1_mk | default: 0 }}, "sk": {{ b.settings.a1_sk | default: 0 }}, "hc": {{ b.settings.a1_hc | default: 0 }} },
+            { "label": {{ b.settings.a2_label | json }}, "icon": {{ b.settings.a2_icon | default: 'sparkle' | json }}, "mk": {{ b.settings.a2_mk | default: 0 }}, "sk": {{ b.settings.a2_sk | default: 0 }}, "hc": {{ b.settings.a2_hc | default: 0 }} },
+            { "label": {{ b.settings.a3_label | json }}, "icon": {{ b.settings.a3_icon | default: 'sparkle' | json }}, "mk": {{ b.settings.a3_mk | default: 0 }}, "sk": {{ b.settings.a3_sk | default: 0 }}, "hc": {{ b.settings.a3_hc | default: 0 }} },
+            { "label": {{ b.settings.a4_label | json }}, "icon": {{ b.settings.a4_icon | default: 'sparkle' | json }}, "mk": {{ b.settings.a4_mk | default: 0 }}, "sk": {{ b.settings.a4_sk | default: 0 }}, "hc": {{ b.settings.a4_hc | default: 0 }} }
           ] }{%- unless forloop.last %},{% endunless -%}
         {%- endfor -%}
       ],
