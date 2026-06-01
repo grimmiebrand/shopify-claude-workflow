@@ -485,7 +485,7 @@
         <div class="grimmie-am-{{ sid }}__hero-text">
           {%- if s.result_eyebrow != blank -%}<p class="grimmie-am-{{ sid }}__eyebrow">{{ s.result_eyebrow | escape }}</p>{%- endif -%}
           {%- if s.result_title != blank -%}<h2 class="grimmie-am-{{ sid }}__title">{{ s.result_title | newline_to_br }}</h2>{%- endif -%}
-          <p class="grimmie-am-{{ sid }}__lead" data-am-r-hero-desc></p>
+          {%- if s.result_text != blank -%}<p class="grimmie-am-{{ sid }}__lead">{{ s.result_text | escape }}</p>{%- endif -%}
           {%- if s.result_text_2 != blank -%}<p class="grimmie-am-{{ sid }}__lead">{{ s.result_text_2 | escape }}</p>{%- endif -%}
         </div>
       </div>
@@ -501,6 +501,7 @@
               <p class="grimmie-am-{{ sid }}__archetype-name" data-am-r-archetype></p>
             </div>
           </div>
+          <p class="grimmie-am-{{ sid }}__rdesc" data-am-r-desc></p>
           {%- if s.why_title != blank -%}<p class="grimmie-am-{{ sid }}__rcard-eyebrow" style="font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px;">{{ s.why_title | escape }}</p>{%- endif -%}
           <ul class="grimmie-am-{{ sid }}__why-list">
             {%- for i in (1..5) -%}

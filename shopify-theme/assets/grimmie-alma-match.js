@@ -208,7 +208,6 @@
       continueBtn: root.querySelector('[data-am-q-continue]'),
       rArchetype: root.querySelector('[data-am-r-archetype]'),
       rDesc: root.querySelector('[data-am-r-desc]'),
-      rHeroDesc: root.querySelector('[data-am-r-hero-desc]'),
       rWhyTexts: root.querySelectorAll('[data-am-r-why]'),
       rCombo: root.querySelector('[data-am-r-combo]'),
       cta: root.querySelector('[data-am-cta]'),
@@ -498,7 +497,6 @@
       currentBundle = result.bundle;
       if (els.rArchetype) els.rArchetype.textContent = result.name;
       if (els.rDesc) els.rDesc.textContent = result.desc;
-      if (els.rHeroDesc) els.rHeroDesc.textContent = result.desc;
       if (els.rCombo) els.rCombo.textContent = result.bundle;
       // Map the five thematic descriptions onto the "why" list, in order:
       // 1 make-up, 2 skincare, 3 haircare, 4 routine quotidiana, 5 travel.
