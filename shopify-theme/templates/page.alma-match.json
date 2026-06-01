@@ -366,7 +366,7 @@
             "mk_level": "BASIC",
             "sk_level": "BASIC",
             "hc_level": "BASIC",
-            "name": "La ragazza acqua e sapone",
+            "archetype_name": "La ragazza acqua e sapone",
             "bundle": "2 Classic + 1 Large",
             "desc": "La bellezza che non ha bisogno di troppo: naturale, autentica e senza sforzo. Pochi gesti, scelti bene, per sentirti sempre te stessa."
           }
@@ -377,7 +377,7 @@
             "mk_level": "BASIC",
             "sk_level": "BASIC",
             "hc_level": "MEDIUM",
-            "name": "Clean Girl",
+            "archetype_name": "Clean Girl",
             "bundle": "3 Classic + 1 Large",
             "desc": "Ami la semplicità che parla di cura, equilibrio e dettagli scelti con intenzione. Ogni cosa ha il suo posto, ogni gesto ha il suo ritmo."
           }
@@ -388,7 +388,7 @@
             "mk_level": "BASIC",
             "sk_level": "BASIC",
             "hc_level": "PRO",
-            "name": "Blowout Energy",
+            "archetype_name": "Blowout Energy",
             "bundle": "2 Classic + 2 Large",
             "desc": "I capelli sono la tua firma: piega perfetta, movimento e luce. La tua routine ruota attorno a styling impeccabile e prodotti giusti."
           }
@@ -399,7 +399,7 @@
             "mk_level": "BASIC",
             "sk_level": "MEDIUM",
             "hc_level": "BASIC",
-            "name": "Wellness Era",
+            "archetype_name": "Wellness Era",
             "bundle": "1 Classic + 2 Large",
             "desc": "Il benessere prima di tutto: skincare lenta, momenti per te e spazi ordinati. La cura come piccolo rituale quotidiano."
           }
@@ -410,7 +410,7 @@
             "mk_level": "BASIC",
             "sk_level": "MEDIUM",
             "hc_level": "MEDIUM",
-            "name": "Sunday Reset",
+            "archetype_name": "Sunday Reset",
             "bundle": "2 Classic + 2 Large",
             "desc": "Vivi di piccoli reset che rimettono tutto in ordine. Skincare e capelli curati, per ripartire ogni settimana con leggerezza."
           }
@@ -421,7 +421,7 @@
             "mk_level": "BASIC",
             "sk_level": "MEDIUM",
             "hc_level": "PRO",
-            "name": "Everything Shower Energy",
+            "archetype_name": "Everything Shower Energy",
             "bundle": "1 Classic + 3 Large",
             "desc": "Il tuo momento preferito è la doccia che diventa rituale. Capelli, corpo e cura in un’unica routine rigenerante."
           }
@@ -432,7 +432,7 @@
             "mk_level": "BASIC",
             "sk_level": "PRO",
             "hc_level": "BASIC",
-            "name": "Soft Life",
+            "archetype_name": "Soft Life",
             "bundle": "2 Classic + 2 Large",
             "desc": "Scegli la dolcezza in ogni dettaglio: skincare ricca, ritmi morbidi e una bellezza che si prende il suo tempo."
           }
@@ -443,7 +443,7 @@
             "mk_level": "BASIC",
             "sk_level": "PRO",
             "hc_level": "MEDIUM",
-            "name": "Pinterest Core",
+            "archetype_name": "Pinterest Core",
             "bundle": "3 Classic + 2 Large",
             "desc": "La tua routine è un mood: ordinata, estetica e ispirata. Skincare curata e dettagli che sembrano usciti da una board."
           }
@@ -454,7 +454,7 @@
             "mk_level": "BASIC",
             "sk_level": "PRO",
             "hc_level": "PRO",
-            "name": "Self Care Club",
+            "archetype_name": "Self Care Club",
             "bundle": "2 Classic + 3 Large",
             "desc": "La cura di sé è la tua priorità: skincare completa e capelli coccolati. Ogni gesto è un atto d’amore per te stessa."
           }
@@ -465,7 +465,7 @@
             "mk_level": "MEDIUM",
             "sk_level": "BASIC",
             "hc_level": "BASIC",
-            "name": "Vanilla Energy",
+            "archetype_name": "Vanilla Energy",
             "bundle": "3 Classic + 1 Large",
             "desc": "Calda, semplice e sempre curata: un make-up essenziale che ti somiglia. Comfort e bellezza in equilibrio perfetto."
           }
@@ -476,7 +476,7 @@
             "mk_level": "MEDIUM",
             "sk_level": "BASIC",
             "hc_level": "MEDIUM",
-            "name": "Off Duty Model",
+            "archetype_name": "Off Duty Model",
             "bundle": "4 Classic + 1 Large",
             "desc": "Effortless ma impeccabile: make-up giusto e capelli al naturale. La bellezza che sembra spontanea ma è studiata."
           }
@@ -487,7 +487,7 @@
             "mk_level": "MEDIUM",
             "sk_level": "BASIC",
             "hc_level": "PRO",
-            "name": "Rich Girl Energy",
+            "archetype_name": "Rich Girl Energy",
             "bundle": "3 Classic + 2 Large",
             "desc": "Dettagli curati e allure discreta: make-up presente e capelli sempre perfetti. Eleganza che non grida, ma si nota."
           }
@@ -498,7 +498,7 @@
             "mk_level": "MEDIUM",
             "sk_level": "MEDIUM",
             "hc_level": "BASIC",
-            "name": "That Girl",
+            "archetype_name": "That Girl",
             "bundle": "2 Classic + 2 Large",
             "desc": "Organizzata, motivata e sempre sul pezzo: make-up e skincare in equilibrio. La routine che ti fa sentire la migliore versione di te."
           }
@@ -509,7 +509,7 @@
             "mk_level": "MEDIUM",
             "sk_level": "MEDIUM",
             "hc_level": "MEDIUM",
-            "name": "Pilates Princess",
+            "archetype_name": "Pilates Princess",
             "bundle": "3 Classic + 2 Large",
             "desc": "Equilibrio tra movimento e bellezza: make-up fresco, skincare e capelli curati. Una routine attiva, elegante e bilanciata."
           }
@@ -520,7 +520,7 @@
             "mk_level": "MEDIUM",
             "sk_level": "MEDIUM",
             "hc_level": "PRO",
-            "name": "Weekend Escape",
+            "archetype_name": "Weekend Escape",
             "bundle": "2 Classic + 3 Large",
             "desc": "Sempre pronta a partire: make-up versatile e capelli curati per ogni meta. La bellezza che ti segue ovunque."
           }
@@ -531,7 +531,7 @@
             "mk_level": "MEDIUM",
             "sk_level": "PRO",
             "hc_level": "BASIC",
-            "name": "Glazed Skin Era",
+            "archetype_name": "Glazed Skin Era",
             "bundle": "3 Classic + 2 Large",
             "desc": "Pelle luminosa e make-up che la esalta: la tua ossessione è il glow. Skincare ricca e dettagli che fanno brillare."
           }
@@ -542,7 +542,7 @@
             "mk_level": "MEDIUM",
             "sk_level": "PRO",
             "hc_level": "MEDIUM",
-            "name": "IT Girl",
+            "archetype_name": "IT Girl",
             "bundle": "4 Classic + 2 Large",
             "desc": "Sei tu a dettare il mood: make-up curato, skincare completa e stile. Una presenza che si fa ricordare, sempre."
           }
@@ -553,7 +553,7 @@
             "mk_level": "MEDIUM",
             "sk_level": "PRO",
             "hc_level": "PRO",
-            "name": "Beauty Addict",
+            "archetype_name": "Beauty Addict",
             "bundle": "3 Classic + 3 Large",
             "desc": "Ami la bellezza in ogni sua forma: make-up, skincare e capelli al massimo. Una routine completa per chi non rinuncia a nulla."
           }
@@ -564,7 +564,7 @@
             "mk_level": "PRO",
             "sk_level": "BASIC",
             "hc_level": "BASIC",
-            "name": "Soft Glam",
+            "archetype_name": "Soft Glam",
             "bundle": "2 Classic + 2 Large",
             "desc": "Il glamour nella sua versione morbida: make-up curato e luminoso. Sofisticata senza eccessi, sempre al punto giusto."
           }
@@ -575,7 +575,7 @@
             "mk_level": "PRO",
             "sk_level": "BASIC",
             "hc_level": "MEDIUM",
-            "name": "Airport Look",
+            "archetype_name": "Airport Look",
             "bundle": "3 Classic + 2 Large",
             "desc": "Glam anche in viaggio: make-up impeccabile e capelli curati ovunque. La bellezza che non conosce fuso orario."
           }
@@ -586,7 +586,7 @@
             "mk_level": "PRO",
             "sk_level": "BASIC",
             "hc_level": "PRO",
-            "name": "Main Character Energy",
+            "archetype_name": "Main Character Energy",
             "bundle": "2 Classic + 3 Large",
             "desc": "Sei la protagonista della tua storia: make-up deciso e capelli da scena. Una routine che ti mette sempre al centro."
           }
@@ -597,7 +597,7 @@
             "mk_level": "PRO",
             "sk_level": "MEDIUM",
             "hc_level": "BASIC",
-            "name": "Matcha Girl",
+            "archetype_name": "Matcha Girl",
             "bundle": "1 Classic + 3 Large",
             "desc": "Make-up curato e ritmi morbidi: bellezza e benessere in armonia. Una routine calda, lenta e piena di stile."
           }
@@ -608,7 +608,7 @@
             "mk_level": "PRO",
             "sk_level": "MEDIUM",
             "hc_level": "MEDIUM",
-            "name": "City Girl Era",
+            "archetype_name": "City Girl Era",
             "bundle": "2 Classic + 3 Large",
             "desc": "Ritmo veloce e stile sempre on point: make-up curato e capelli pronti. La bellezza che tiene il passo con la città."
           }
@@ -619,7 +619,7 @@
             "mk_level": "PRO",
             "sk_level": "MEDIUM",
             "hc_level": "PRO",
-            "name": "GRWM Core",
+            "archetype_name": "GRWM Core",
             "bundle": "1 Classic + 4 Large",
             "desc": "Prepararti è il tuo momento preferito: make-up completo e capelli protagonisti. Ogni get ready è un piccolo spettacolo."
           }
@@ -630,7 +630,7 @@
             "mk_level": "PRO",
             "sk_level": "PRO",
             "hc_level": "BASIC",
-            "name": "Beauty Collector",
+            "archetype_name": "Beauty Collector",
             "bundle": "2 Classic + 3 Large",
             "desc": "Collezioni prodotti come piccoli tesori: make-up e skincare al completo. La bellezza è la tua passione più curata."
           }
@@ -641,7 +641,7 @@
             "mk_level": "PRO",
             "sk_level": "PRO",
             "hc_level": "MEDIUM",
-            "name": "Content Creator Energy",
+            "archetype_name": "Content Creator Energy",
             "bundle": "3 Classic + 3 Large",
             "desc": "Sempre pronta a brillare davanti alla camera: make-up, skincare e capelli perfetti. Una routine completa per chi crea ed ispira."
           }
@@ -652,7 +652,7 @@
             "mk_level": "PRO",
             "sk_level": "PRO",
             "hc_level": "PRO",
-            "name": "Ultimate Beauty Energy",
+            "archetype_name": "Ultimate Beauty Energy",
             "bundle": "2 Classic + 4 Large",
             "desc": "La tua routine non ha limiti: make-up, skincare e capelli al massimo livello. La bellezza totale, organizzata con eleganza."
           }
