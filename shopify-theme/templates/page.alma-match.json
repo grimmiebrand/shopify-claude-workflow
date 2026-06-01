@@ -37,17 +37,17 @@
         "combo_image_alt": "Combo Alma",
         "combo_sub": "Lo spazio giusto per la tua routine. Compatta, raffinata e pensata per accompagnarti con stile, ogni giorno.",
         "why_title": "Perché è perfetta per te",
-        "why_1_icon": "skincare",
-        "why_1_title": "SKINCARE E MAKE-UP SEMPRE IN ORDINE",
+        "why_1_icon": "makeup",
+        "why_1_title": "MAKE-UP",
         "why_1_text": "I tuoi prodotti essenziali sono selezionati, amati e sempre a portata di mano.",
-        "why_2_icon": "hair",
-        "why_2_title": "CAPELLI CURATI, SPAZI PULITI",
+        "why_2_icon": "skincare",
+        "why_2_title": "SKINCARE",
         "why_2_text": "Separa e proteggi i tuoi must-have per capelli: ogni prodotto ha il suo spazio, con eleganza.",
-        "why_3_icon": "gym",
-        "why_3_title": "DALLA CASA ALLA PALESTRA",
+        "why_3_icon": "hair",
+        "why_3_title": "HAIRCARE",
         "why_3_text": "La tua routine ti segue ovunque: praticità e stile in ogni momento della giornata.",
-        "why_4_icon": "travel",
-        "why_4_title": "PRONTA A PARTIRE, SEMPRE",
+        "why_4_icon": "home",
+        "why_4_title": "A CASA, OGNI GIORNO",
         "why_4_text": "In viaggio come nella vita di tutti i giorni, hai tutto ciò che ti serve, perfettamente organizzato.",
         "discount_title": "Wow, hai sbloccato anche un vantaggio ✨",
         "discount_text": "Affrettati: hai solo 1 minuto per acquistare la tua combo Alma con il 10% di sconto.",
@@ -87,7 +87,10 @@
         "classic_variant_id": "57915894792566",
         "large_variant_id": "57915894989174",
         "level_medium_min": 6,
-        "level_pro_min": 9
+        "level_pro_min": 9,
+        "why_5_icon": "travel",
+        "why_5_title": "IN VIAGGIO",
+        "why_5_text": "In viaggio come nella vita di tutti i giorni, hai tutto ciò che ti serve, perfettamente organizzato."
       },
       "blocks": {
         "q1": {
@@ -297,7 +300,12 @@
             "hc_level": "BASIC",
             "archetype_name": "La ragazza acqua e sapone",
             "bundle": "2 Classic + 1 Large",
-            "desc": "La bellezza che non ha bisogno di troppo: naturale, autentica e senza sforzo. Pochi gesti, scelti bene, per sentirti sempre te stessa."
+            "desc": "Sei autentica, spontanea e naturalmente luminosa. Non hai bisogno di costruirti addosso un personaggio: il tuo punto di forza è proprio la semplicità con cui riesci a essere te stessa.",
+            "desc_makeup": "Il tuo make-up è essenziale, leggero e molto naturale. Non ami appesantire il viso: preferisci pochi prodotti scelti bene, quelli che ti fanno sentire fresca, ordinata e subito più a posto senza stravolgere la tua immagine.",
+            "desc_skincare": "La tua skincare è semplice, pratica e diretta. Ti interessa sentirti pulita, fresca e a tuo agio nella tua pelle, senza una routine troppo lunga o complicata. Pochi prodotti giusti, usati bene, sono tutto ciò che ti serve.",
+            "desc_haircare": "I tuoi capelli seguono la tua naturalezza. Ti piace averli puliti, ordinati e facili da gestire, senza dover dedicare troppo tempo allo styling. Cerchi praticità, leggerezza e prodotti essenziali che ti aiutino a sentirti subito in ordine.",
+            "routine_daily": "A casa ti serve una struttura semplice: pochi prodotti, ben divisi e sempre facili da trovare.",
+            "routine_travel": "In viaggio porti l’essenziale, ma vuoi che sia ordinato e protetto senza creare caos in valigia e una volta in hotel."
           }
         },
         "a-bbm": {
@@ -306,9 +314,14 @@
             "mk_level": "BASIC",
             "sk_level": "BASIC",
             "hc_level": "MEDIUM",
-            "archetype_name": "Clean Girl",
+            "archetype_name": "Vanilla Girl",
             "bundle": "3 Classic + 1 Large",
-            "desc": "Ami la semplicità che parla di cura, equilibrio e dettagli scelti con intenzione. Ogni cosa ha il suo posto, ogni gesto ha il suo ritmo."
+            "desc": "Hai un’eleganza morbida, delicata e rassicurante. Sei quella presenza dolce ma curata, capace di rendere tutto più bello senza mai risultare eccessiva.",
+            "desc_makeup": "Il tuo make-up è essenziale, leggero e molto naturale. Non ami appesantire il viso: preferisci pochi prodotti scelti bene, quelli che ti fanno sentire fresca, ordinata e subito più a posto senza stravolgere la tua immagine.",
+            "desc_skincare": "La tua skincare è semplice, pratica e diretta. Ti interessa sentirti pulita, fresca e a tuo agio nella tua pelle, senza una routine troppo lunga o complicata. Pochi prodotti giusti, usati bene, sono tutto ciò che ti serve.",
+            "desc_haircare": "I capelli per te sono parte importante del look. Ti piace curarli, sistemarli e avere con te i prodotti giusti per mantenerli morbidi, ordinati e coerenti con la tua immagine. Non serve una routine enorme, ma serve spazio per ciò che fa davvero la differenza.",
+            "routine_daily": "A casa ami un’organizzazione delicata e pulita, con piccoli prodotti separati in modo intuitivo. Non tutte serve sempre.",
+            "routine_travel": "In viaggio ti piace avere tutto al suo posto, mantenendo una sensazione ordinata e leggera."
           }
         },
         "a-bbp": {
@@ -317,9 +330,14 @@
             "mk_level": "BASIC",
             "sk_level": "BASIC",
             "hc_level": "PRO",
-            "archetype_name": "Blowout Energy",
+            "archetype_name": "Blowout Girl",
             "bundle": "2 Classic + 2 Large",
-            "desc": "I capelli sono la tua firma: piega perfetta, movimento e luce. La tua routine ruota attorno a styling impeccabile e prodotti giusti."
+            "desc": "Hai un’energia femminile, sicura e sempre curata. Anche quando scegli la semplicità, riesci a trasmettere quella sensazione di ordine, sicurezza e attenzione ai dettagli.",
+            "desc_makeup": "Il tuo make-up è essenziale, leggero e molto naturale. Non ami appesantire il viso: preferisci pochi prodotti scelti bene, quelli che ti fanno sentire fresca, ordinata e subito più a posto senza stravolgere la tua immagine.",
+            "desc_skincare": "La tua skincare è semplice, pratica e diretta. Ti interessa sentirti pulita, fresca e a tuo agio nella tua pelle, senza una routine troppo lunga o complicata. Pochi prodotti giusti, usati bene, sono tutto ciò che ti serve.",
+            "desc_haircare": "L’haircare per te è un vero rituale. Ami prenderti cura dei capelli con prodotti, strumenti e trattamenti diversi, perché sai quanto incidono sul modo in cui ti senti. Che sia piega, styling, maschera o finish finale, i capelli hanno bisogno del loro spazio dedicato.",
+            "routine_daily": "A casa hai bisogno di distinguere gli essenziali quotidiani dagli strumenti e prodotti più voluminosi.",
+            "routine_travel": "In viaggio vuoi spazio per mantenere la tua immagine curata anche fuori casa."
           }
         },
         "a-bmb": {
@@ -328,9 +346,14 @@
             "mk_level": "BASIC",
             "sk_level": "MEDIUM",
             "hc_level": "BASIC",
-            "archetype_name": "Wellness Era",
+            "archetype_name": "Wellness Girl",
             "bundle": "1 Classic + 2 Large",
-            "desc": "Il benessere prima di tutto: skincare lenta, momenti per te e spazi ordinati. La cura come piccolo rituale quotidiano."
+            "desc": "Cerchi equilibrio, armonia e benessere in tutto ciò che fai. Hai un modo di vivere più consapevole, che ti rende centrata, luminosa e profondamente in contatto con te stessa.",
+            "desc_makeup": "Il tuo make-up è essenziale, leggero e molto naturale. Non ami appesantire il viso: preferisci pochi prodotti scelti bene, quelli che ti fanno sentire fresca, ordinata e subito più a posto senza stravolgere la tua immagine.",
+            "desc_skincare": "La skincare per te è un momento importante della giornata. Ti piace prenderti cura della pelle con una routine più completa, fatta di prodotti che ti fanno sentire luminosa, curata e in equilibrio. Non è solo funzionalità: è anche un piccolo momento per te.",
+            "desc_haircare": "I tuoi capelli seguono la tua naturalezza. Ti piace averli puliti, ordinati e facili da gestire, senza dover dedicare troppo tempo allo styling. Cerchi praticità, leggerezza e prodotti essenziali che ti aiutino a sentirti subito in ordine.",
+            "routine_daily": "A casa preferisci un’organizzazione funzionale, con pochi prodotti piccoli e più spazio per ciò che usi nei tuoi rituali.",
+            "routine_travel": "In viaggio vuoi portare ciò che ti fa stare bene, senza perdere ordine nella valigia."
           }
         },
         "a-bmm": {
@@ -339,9 +362,14 @@
             "mk_level": "BASIC",
             "sk_level": "MEDIUM",
             "hc_level": "MEDIUM",
-            "archetype_name": "Sunday Reset",
+            "archetype_name": "Pilates Princess",
             "bundle": "2 Classic + 2 Large",
-            "desc": "Vivi di piccoli reset che rimettono tutto in ordine. Skincare e capelli curati, per ripartire ogni settimana con leggerezza."
+            "desc": "Sei disciplinata, positiva e composta, ma mai rigida. Hai quella leggerezza da ragazza che si prende cura di sé con naturalezza e riesce a sembrare sempre in controllo.",
+            "desc_makeup": "Il tuo make-up è essenziale, leggero e molto naturale. Non ami appesantire il viso: preferisci pochi prodotti scelti bene, quelli che ti fanno sentire fresca, ordinata e subito più a posto senza stravolgere la tua immagine.",
+            "desc_skincare": "La skincare per te è un momento importante della giornata. Ti piace prenderti cura della pelle con una routine più completa, fatta di prodotti che ti fanno sentire luminosa, curata e in equilibrio. Non è solo funzionalità: è anche un piccolo momento per te.",
+            "desc_haircare": "I capelli per te sono parte importante del look. Ti piace curarli, sistemarli e avere con te i prodotti giusti per mantenerli morbidi, ordinati e coerenti con la tua immagine. Non serve una routine enorme, ma serve spazio per ciò che fa davvero la differenza.",
+            "routine_daily": "A casa ti serve una divisione ordinata tra prodotti quotidiani, self-care e accessori pratici.",
+            "routine_travel": "In viaggio vuoi un sistema che funzioni tra palestra, weekend e giornate piene."
           }
         },
         "a-bmp": {
@@ -350,9 +378,14 @@
             "mk_level": "BASIC",
             "sk_level": "MEDIUM",
             "hc_level": "PRO",
-            "archetype_name": "Everything Shower Energy",
+            "archetype_name": "Everything Shower Girl",
             "bundle": "1 Classic + 3 Large",
-            "desc": "Il tuo momento preferito è la doccia che diventa rituale. Capelli, corpo e cura in un’unica routine rigenerante."
+            "desc": "Sei romantica, sensibile e molto connessa ai tuoi piccoli momenti personali. Ti piace sentirti bene nella tua pelle e hai un modo speciale di trasformare anche le cose semplici in qualcosa di tuo.",
+            "desc_makeup": "Il tuo make-up è essenziale, leggero e molto naturale. Non ami appesantire il viso: preferisci pochi prodotti scelti bene, quelli che ti fanno sentire fresca, ordinata e subito più a posto senza stravolgere la tua immagine.",
+            "desc_skincare": "La skincare per te è un momento importante della giornata. Ti piace prenderti cura della pelle con una routine più completa, fatta di prodotti che ti fanno sentire luminosa, curata e in equilibrio. Non è solo funzionalità: è anche un piccolo momento per te.",
+            "desc_haircare": "L’haircare per te è un vero rituale. Ami prenderti cura dei capelli con prodotti, strumenti e trattamenti diversi, perché sai quanto incidono sul modo in cui ti senti. Che sia piega, styling, maschera o finish finale, i capelli hanno bisogno del loro spazio dedicato.",
+            "routine_daily": "A casa hai bisogno di più spazio per prodotti grandi, trattamenti e rituali completi.",
+            "routine_travel": "In viaggio vuoi ricreare i tuoi momenti personali anche lontano da casa."
           }
         },
         "a-bpb": {
@@ -361,9 +394,14 @@
             "mk_level": "BASIC",
             "sk_level": "PRO",
             "hc_level": "BASIC",
-            "archetype_name": "Soft Life",
+            "archetype_name": "Glass Skin Girl",
             "bundle": "2 Classic + 2 Large",
-            "desc": "Scegli la dolcezza in ogni dettaglio: skincare ricca, ritmi morbidi e una bellezza che si prende il suo tempo."
+            "desc": "Hai un’eleganza delicata, pulita e raffinata. Ti distingui per quella luminosità naturale che non ha bisogno di urlare per farsi notare.",
+            "desc_makeup": "Il tuo make-up è essenziale, leggero e molto naturale. Non ami appesantire il viso: preferisci pochi prodotti scelti bene, quelli che ti fanno sentire fresca, ordinata e subito più a posto senza stravolgere la tua immagine.",
+            "desc_skincare": "La skincare è uno dei tuoi rituali principali. Ami conoscere la tua pelle, scegliere prodotti specifici e costruire una routine su misura. Per te la cura del viso non è un passaggio veloce, ma una parte fondamentale del tuo modo di sentirti bene, luminosa e sicura.",
+            "desc_haircare": "I tuoi capelli seguono la tua naturalezza. Ti piace averli puliti, ordinati e facili da gestire, senza dover dedicare troppo tempo allo styling. Cerchi praticità, leggerezza e prodotti essenziali che ti aiutino a sentirti subito in ordine.",
+            "routine_daily": "A casa ti serve ordine tra prodotti piccoli, skincare e trattamenti, senza mischiare tutto.",
+            "routine_travel": "In viaggio vuoi proteggere la tua routine e mantenerla precisa anche con poco spazio."
           }
         },
         "a-bpm": {
@@ -372,9 +410,14 @@
             "mk_level": "BASIC",
             "sk_level": "PRO",
             "hc_level": "MEDIUM",
-            "archetype_name": "Pinterest Core",
+            "archetype_name": "Clean Girl",
             "bundle": "3 Classic + 2 Large",
-            "desc": "La tua routine è un mood: ordinata, estetica e ispirata. Skincare curata e dettagli che sembrano usciti da una board."
+            "desc": "Sei essenziale, ordinata e sofisticata. Hai un’estetica pulita e riconoscibile, quella di chi sembra sempre fresca, composta e impeccabile senza sforzo.",
+            "desc_makeup": "Il tuo make-up è essenziale, leggero e molto naturale. Non ami appesantire il viso: preferisci pochi prodotti scelti bene, quelli che ti fanno sentire fresca, ordinata e subito più a posto senza stravolgere la tua immagine.",
+            "desc_skincare": "La skincare è uno dei tuoi rituali principali. Ami conoscere la tua pelle, scegliere prodotti specifici e costruire una routine su misura. Per te la cura del viso non è un passaggio veloce, ma una parte fondamentale del tuo modo di sentirti bene, luminosa e sicura.",
+            "desc_haircare": "I capelli per te sono parte importante del look. Ti piace curarli, sistemarli e avere con te i prodotti giusti per mantenerli morbidi, ordinati e coerenti con la tua immagine. Non serve una routine enorme, ma serve spazio per ciò che fa davvero la differenza.",
+            "routine_daily": "A casa ami separare tutto con cura: piccoli prodotti, skincare e accessori devono avere il proprio posto.",
+            "routine_travel": "In viaggio vuoi un beauty ordinato, pulito e facile da aprire senza rovesciare tutto."
           }
         },
         "a-bpp": {
@@ -383,9 +426,14 @@
             "mk_level": "BASIC",
             "sk_level": "PRO",
             "hc_level": "PRO",
-            "archetype_name": "Self Care Club",
+            "archetype_name": "Self-Care Girl",
             "bundle": "2 Classic + 3 Large",
-            "desc": "La cura di sé è la tua priorità: skincare completa e capelli coccolati. Ogni gesto è un atto d’amore per te stessa."
+            "desc": "Sai dare valore a te stessa. Hai una sensibilità profonda e trasmetti l’energia di chi ha imparato che prendersi cura di sé non è vanità, ma rispetto.",
+            "desc_makeup": "Il tuo make-up è essenziale, leggero e molto naturale. Non ami appesantire il viso: preferisci pochi prodotti scelti bene, quelli che ti fanno sentire fresca, ordinata e subito più a posto senza stravolgere la tua immagine.",
+            "desc_skincare": "La skincare è uno dei tuoi rituali principali. Ami conoscere la tua pelle, scegliere prodotti specifici e costruire una routine su misura. Per te la cura del viso non è un passaggio veloce, ma una parte fondamentale del tuo modo di sentirti bene, luminosa e sicura.",
+            "desc_haircare": "L’haircare per te è un vero rituale. Ami prenderti cura dei capelli con prodotti, strumenti e trattamenti diversi, perché sai quanto incidono sul modo in cui ti senti. Che sia piega, styling, maschera o finish finale, i capelli hanno bisogno del loro spazio dedicato.",
+            "routine_daily": "A casa hai bisogno di spazio per rituali diversi, prodotti sensoriali e tutto ciò che ti fa sentire bene.",
+            "routine_travel": "In viaggio vuoi portare con te la sensazione di casa, mantenendo ordine e comfort."
           }
         },
         "a-mbb": {
@@ -394,9 +442,14 @@
             "mk_level": "MEDIUM",
             "sk_level": "BASIC",
             "hc_level": "BASIC",
-            "archetype_name": "Vanilla Energy",
+            "archetype_name": "French Girl",
             "bundle": "3 Classic + 1 Large",
-            "desc": "Calda, semplice e sempre curata: un make-up essenziale che ti somiglia. Comfort e bellezza in equilibrio perfetto."
+            "desc": "Hai fascino naturale e un’eleganza istintiva. Non insegui la perfezione: sai che sono proprio spontaneità, carattere e piccoli dettagli imperfetti a renderti interessante.",
+            "desc_makeup": "Il make-up per te è parte della tua identità quotidiana. Ti piace avere più opzioni, alternare prodotti diversi e costruire look che ti facciano sentire curata, sicura e coerente con il tuo stile, senza necessariamente esagerare.",
+            "desc_skincare": "La tua skincare è semplice, pratica e diretta. Ti interessa sentirti pulita, fresca e a tuo agio nella tua pelle, senza una routine troppo lunga o complicata. Pochi prodotti giusti, usati bene, sono tutto ciò che ti serve.",
+            "desc_haircare": "I tuoi capelli seguono la tua naturalezza. Ti piace averli puliti, ordinati e facili da gestire, senza dover dedicare troppo tempo allo styling. Cerchi praticità, leggerezza e prodotti essenziali che ti aiutino a sentirti subito in ordine.",
+            "routine_daily": "A casa ti piace avere un’organizzazione semplice, spontanea ma comunque curata.",
+            "routine_travel": "In viaggio vuoi portare il necessario con stile, senza appesantirti troppo."
           }
         },
         "a-mbm": {
@@ -407,7 +460,12 @@
             "hc_level": "MEDIUM",
             "archetype_name": "Off Duty Model",
             "bundle": "4 Classic + 1 Large",
-            "desc": "Effortless ma impeccabile: make-up giusto e capelli al naturale. La bellezza che sembra spontanea ma è studiata."
+            "desc": "Hai uno stile rilassato ma impossibile da ignorare. Riesci a sembrare curata anche quando non vuoi apparire troppo costruita, ed è proprio questo che ti rende così cool.",
+            "desc_makeup": "Il make-up per te è parte della tua identità quotidiana. Ti piace avere più opzioni, alternare prodotti diversi e costruire look che ti facciano sentire curata, sicura e coerente con il tuo stile, senza necessariamente esagerare.",
+            "desc_skincare": "La tua skincare è semplice, pratica e diretta. Ti interessa sentirti pulita, fresca e a tuo agio nella tua pelle, senza una routine troppo lunga o complicata. Pochi prodotti giusti, usati bene, sono tutto ciò che ti serve.",
+            "desc_haircare": "I capelli per te sono parte importante del look. Ti piace curarli, sistemarli e avere con te i prodotti giusti per mantenerli morbidi, ordinati e coerenti con la tua immagine. Non serve una routine enorme, ma serve spazio per ciò che fa davvero la differenza.",
+            "routine_daily": "A casa ti servono più pouch piccole per dividere dettagli, mini prodotti e accessori essenziali.",
+            "routine_travel": "In viaggio vuoi tutto accessibile, compatto e pronto da usare, anche nei cambi rapidi."
           }
         },
         "a-mbp": {
@@ -416,9 +474,14 @@
             "mk_level": "MEDIUM",
             "sk_level": "BASIC",
             "hc_level": "PRO",
-            "archetype_name": "Rich Girl Energy",
+            "archetype_name": "Rich Girl",
             "bundle": "3 Classic + 2 Large",
-            "desc": "Dettagli curati e allure discreta: make-up presente e capelli sempre perfetti. Eleganza che non grida, ma si nota."
+            "desc": "Hai gusto, presenza e un occhio naturale per ciò che è bello. Ti piace scegliere con cura e trasmetti un’eleganza sicura, mai casuale.",
+            "desc_makeup": "Il make-up per te è parte della tua identità quotidiana. Ti piace avere più opzioni, alternare prodotti diversi e costruire look che ti facciano sentire curata, sicura e coerente con il tuo stile, senza necessariamente esagerare.",
+            "desc_skincare": "La tua skincare è semplice, pratica e diretta. Ti interessa sentirti pulita, fresca e a tuo agio nella tua pelle, senza una routine troppo lunga o complicata. Pochi prodotti giusti, usati bene, sono tutto ciò che ti serve.",
+            "desc_haircare": "L’haircare per te è un vero rituale. Ami prenderti cura dei capelli con prodotti, strumenti e trattamenti diversi, perché sai quanto incidono sul modo in cui ti senti. Che sia piega, styling, maschera o finish finale, i capelli hanno bisogno del loro spazio dedicato.",
+            "routine_daily": "A casa ami un’organizzazione elegante, con prodotti separati per funzione e valore.",
+            "routine_travel": "In viaggio vuoi un set ordinato e completo che ti faccia sentire curata ovunque."
           }
         },
         "a-mmb": {
@@ -429,7 +492,12 @@
             "hc_level": "BASIC",
             "archetype_name": "That Girl",
             "bundle": "2 Classic + 2 Large",
-            "desc": "Organizzata, motivata e sempre sul pezzo: make-up e skincare in equilibrio. La routine che ti fa sentire la migliore versione di te."
+            "desc": "Sei determinata, ordinata e piena di intenzione. Hai l’energia di chi sta costruendo la versione migliore di sé e lo fa con sicurezza, costanza e stile.",
+            "desc_makeup": "Il make-up per te è parte della tua identità quotidiana. Ti piace avere più opzioni, alternare prodotti diversi e costruire look che ti facciano sentire curata, sicura e coerente con il tuo stile, senza necessariamente esagerare.",
+            "desc_skincare": "La skincare per te è un momento importante della giornata. Ti piace prenderti cura della pelle con una routine più completa, fatta di prodotti che ti fanno sentire luminosa, curata e in equilibrio. Non è solo funzionalità: è anche un piccolo momento per te.",
+            "desc_haircare": "I tuoi capelli seguono la tua naturalezza. Ti piace averli puliti, ordinati e facili da gestire, senza dover dedicare troppo tempo allo styling. Cerchi praticità, leggerezza e prodotti essenziali che ti aiutino a sentirti subito in ordine.",
+            "routine_daily": "A casa vuoi un sistema chiaro, efficiente e facile da mantenere. Tutto deve avere una logica.",
+            "routine_travel": "In viaggio vuoi prepararti in modo rapido, ordinato e senza dimenticare nulla."
           }
         },
         "a-mmm": {
@@ -438,9 +506,14 @@
             "mk_level": "MEDIUM",
             "sk_level": "MEDIUM",
             "hc_level": "MEDIUM",
-            "archetype_name": "Pilates Princess",
+            "archetype_name": "IT Girl",
             "bundle": "3 Classic + 2 Large",
-            "desc": "Equilibrio tra movimento e bellezza: make-up fresco, skincare e capelli curati. Una routine attiva, elegante e bilanciata."
+            "desc": "Hai personalità da vendere. Non hai bisogno di seguire ogni tendenza: spesso sei tu a renderla interessante, semplicemente portandola nel tuo modo.",
+            "desc_makeup": "Il make-up per te è parte della tua identità quotidiana. Ti piace avere più opzioni, alternare prodotti diversi e costruire look che ti facciano sentire curata, sicura e coerente con il tuo stile, senza necessariamente esagerare.",
+            "desc_skincare": "La skincare per te è un momento importante della giornata. Ti piace prenderti cura della pelle con una routine più completa, fatta di prodotti che ti fanno sentire luminosa, curata e in equilibrio. Non è solo funzionalità: è anche un piccolo momento per te.",
+            "desc_haircare": "I capelli per te sono parte importante del look. Ti piace curarli, sistemarli e avere con te i prodotti giusti per mantenerli morbidi, ordinati e coerenti con la tua immagine. Non serve una routine enorme, ma serve spazio per ciò che fa davvero la differenza.",
+            "routine_daily": "A casa ti serve spazio per prodotti diversi, ma organizzati in modo estetico e intelligente.",
+            "routine_travel": "In viaggio vuoi un set versatile che segua i tuoi cambi di programma e di look."
           }
         },
         "a-mmp": {
@@ -449,9 +522,14 @@
             "mk_level": "MEDIUM",
             "sk_level": "MEDIUM",
             "hc_level": "PRO",
-            "archetype_name": "Weekend Escape",
+            "archetype_name": "Soft Glam Girl",
             "bundle": "2 Classic + 3 Large",
-            "desc": "Sempre pronta a partire: make-up versatile e capelli curati per ogni meta. La bellezza che ti segue ovunque."
+            "desc": "Hai un’eleganza femminile, morbida e sofisticata. Ti piace sentirti valorizzata, ma sempre con quel tocco naturale che ti rende raffinata e mai eccessiva.",
+            "desc_makeup": "Il make-up per te è parte della tua identità quotidiana. Ti piace avere più opzioni, alternare prodotti diversi e costruire look che ti facciano sentire curata, sicura e coerente con il tuo stile, senza necessariamente esagerare.",
+            "desc_skincare": "La skincare per te è un momento importante della giornata. Ti piace prenderti cura della pelle con una routine più completa, fatta di prodotti che ti fanno sentire luminosa, curata e in equilibrio. Non è solo funzionalità: è anche un piccolo momento per te.",
+            "desc_haircare": "L’haircare per te è un vero rituale. Ami prenderti cura dei capelli con prodotti, strumenti e trattamenti diversi, perché sai quanto incidono sul modo in cui ti senti. Che sia piega, styling, maschera o finish finale, i capelli hanno bisogno del loro spazio dedicato.",
+            "routine_daily": "A casa hai bisogno di dividere make-up, beauty e prodotti più grandi senza perdere eleganza.",
+            "routine_travel": "In viaggio vuoi avere tutto ciò che ti serve per sentirti femminile e curata in ogni occasione."
           }
         },
         "a-mpb": {
@@ -460,9 +538,14 @@
             "mk_level": "MEDIUM",
             "sk_level": "PRO",
             "hc_level": "BASIC",
-            "archetype_name": "Glazed Skin Era",
+            "archetype_name": "K-Girl",
             "bundle": "3 Classic + 2 Large",
-            "desc": "Pelle luminosa e make-up che la esalta: la tua ossessione è il glow. Skincare ricca e dettagli che fanno brillare."
+            "desc": "Sei curiosa, precisa e sempre attenta ai dettagli. Hai un modo delicato ma ricercato di esprimerti, e riesci a trasformare ogni scelta in qualcosa di estremamente curato.",
+            "desc_makeup": "Il make-up per te è parte della tua identità quotidiana. Ti piace avere più opzioni, alternare prodotti diversi e costruire look che ti facciano sentire curata, sicura e coerente con il tuo stile, senza necessariamente esagerare.",
+            "desc_skincare": "La skincare è uno dei tuoi rituali principali. Ami conoscere la tua pelle, scegliere prodotti specifici e costruire una routine su misura. Per te la cura del viso non è un passaggio veloce, ma una parte fondamentale del tuo modo di sentirti bene, luminosa e sicura.",
+            "desc_haircare": "I tuoi capelli seguono la tua naturalezza. Ti piace averli puliti, ordinati e facili da gestire, senza dover dedicare troppo tempo allo styling. Cerchi praticità, leggerezza e prodotti essenziali che ti aiutino a sentirti subito in ordine.",
+            "routine_daily": "A casa ami un’organizzazione precisa, con categorie ben separate e prodotti sempre riconoscibili.",
+            "routine_travel": "In viaggio vuoi proteggere la tua routine e portarla con te in modo ordinato e compatto."
           }
         },
         "a-mpm": {
@@ -471,9 +554,14 @@
             "mk_level": "MEDIUM",
             "sk_level": "PRO",
             "hc_level": "MEDIUM",
-            "archetype_name": "IT Girl",
+            "archetype_name": "Pinterest Girl",
             "bundle": "4 Classic + 2 Large",
-            "desc": "Sei tu a dettare il mood: make-up curato, skincare completa e stile. Una presenza che si fa ricordare, sempre."
+            "desc": "Hai un immaginario forte, creativo e molto personale. Vedi bellezza ovunque e riesci a costruire un’estetica che parla di te ancora prima che tu dica qualcosa.",
+            "desc_makeup": "Il make-up per te è parte della tua identità quotidiana. Ti piace avere più opzioni, alternare prodotti diversi e costruire look che ti facciano sentire curata, sicura e coerente con il tuo stile, senza necessariamente esagerare.",
+            "desc_skincare": "La skincare è uno dei tuoi rituali principali. Ami conoscere la tua pelle, scegliere prodotti specifici e costruire una routine su misura. Per te la cura del viso non è un passaggio veloce, ma una parte fondamentale del tuo modo di sentirti bene, luminosa e sicura.",
+            "desc_haircare": "I capelli per te sono parte importante del look. Ti piace curarli, sistemarli e avere con te i prodotti giusti per mantenerli morbidi, ordinati e coerenti con la tua immagine. Non serve una routine enorme, ma serve spazio per ciò che fa davvero la differenza.",
+            "routine_daily": "A casa ti serve un’organizzazione bella da vedere, oltre che funzionale. Ogni pouch deve avere un ruolo preciso.",
+            "routine_travel": "In viaggio vuoi un set ordinato, fotogenico e coerente con il tuo modo di vivere la bellezza."
           }
         },
         "a-mpp": {
@@ -484,7 +572,12 @@
             "hc_level": "PRO",
             "archetype_name": "Beauty Addict",
             "bundle": "3 Classic + 3 Large",
-            "desc": "Ami la bellezza in ogni sua forma: make-up, skincare e capelli al massimo. Una routine completa per chi non rinuncia a nulla."
+            "desc": "Vivi la bellezza come una forma di espressione. Sei curiosa, appassionata e sempre pronta a scoprire qualcosa che possa raccontare meglio chi sei.",
+            "desc_makeup": "Il make-up per te è parte della tua identità quotidiana. Ti piace avere più opzioni, alternare prodotti diversi e costruire look che ti facciano sentire curata, sicura e coerente con il tuo stile, senza necessariamente esagerare.",
+            "desc_skincare": "La skincare è uno dei tuoi rituali principali. Ami conoscere la tua pelle, scegliere prodotti specifici e costruire una routine su misura. Per te la cura del viso non è un passaggio veloce, ma una parte fondamentale del tuo modo di sentirti bene, luminosa e sicura.",
+            "desc_haircare": "L’haircare per te è un vero rituale. Ami prenderti cura dei capelli con prodotti, strumenti e trattamenti diversi, perché sai quanto incidono sul modo in cui ti senti. Che sia piega, styling, maschera o finish finale, i capelli hanno bisogno del loro spazio dedicato.",
+            "routine_daily": "A casa hai tanti prodotti e hai bisogno di un sistema che li renda facili da usare e da ritrovare.",
+            "routine_travel": "In viaggio vuoi portare più opzioni senza trasformare la valigia in caos."
           }
         },
         "a-pbb": {
@@ -493,9 +586,14 @@
             "mk_level": "PRO",
             "sk_level": "BASIC",
             "hc_level": "BASIC",
-            "archetype_name": "Soft Glam",
+            "archetype_name": "Makeup Lover",
             "bundle": "2 Classic + 2 Large",
-            "desc": "Il glamour nella sua versione morbida: make-up curato e luminoso. Sofisticata senza eccessi, sempre al punto giusto."
+            "desc": "Sei creativa, espressiva e piena di carattere. Ti piace giocare con la tua immagine e usare il beauty come un modo per mostrare le diverse versioni di te.",
+            "desc_makeup": "Per te il make-up è espressione, creatività e presenza. Ami avere scelta, giocare con texture, finish e combinazioni diverse, e costruire look che raccontano il tuo mood. Il tuo beauty ha bisogno di spazio, perché il make-up non è un dettaglio: è parte del tuo modo di comunicare.",
+            "desc_skincare": "La tua skincare è semplice, pratica e diretta. Ti interessa sentirti pulita, fresca e a tuo agio nella tua pelle, senza una routine troppo lunga o complicata. Pochi prodotti giusti, usati bene, sono tutto ciò che ti serve.",
+            "desc_haircare": "I tuoi capelli seguono la tua naturalezza. Ti piace averli puliti, ordinati e facili da gestire, senza dover dedicare troppo tempo allo styling. Cerchi praticità, leggerezza e prodotti essenziali che ti aiutino a sentirti subito in ordine.",
+            "routine_daily": "A casa ti serve dividere make-up, pennelli, basi e prodotti extra in modo pratico.",
+            "routine_travel": "In viaggio vuoi avere i tuoi look possibili sempre con te, senza rovinare o mischiare i prodotti."
           }
         },
         "a-pbm": {
@@ -504,9 +602,14 @@
             "mk_level": "PRO",
             "sk_level": "BASIC",
             "hc_level": "MEDIUM",
-            "archetype_name": "Airport Look",
+            "archetype_name": "City Girl",
             "bundle": "3 Classic + 2 Large",
-            "desc": "Glam anche in viaggio: make-up impeccabile e capelli curati ovunque. La bellezza che non conosce fuso orario."
+            "desc": "Sei indipendente, dinamica e sempre pronta a muoverti nel mondo con sicurezza. Hai un’energia urbana, veloce e brillante, ma non perdi mai il tuo stile.",
+            "desc_makeup": "Per te il make-up è espressione, creatività e presenza. Ami avere scelta, giocare con texture, finish e combinazioni diverse, e costruire look che raccontano il tuo mood. Il tuo beauty ha bisogno di spazio, perché il make-up non è un dettaglio: è parte del tuo modo di comunicare.",
+            "desc_skincare": "La tua skincare è semplice, pratica e diretta. Ti interessa sentirti pulita, fresca e a tuo agio nella tua pelle, senza una routine troppo lunga o complicata. Pochi prodotti giusti, usati bene, sono tutto ciò che ti serve.",
+            "desc_haircare": "I capelli per te sono parte importante del look. Ti piace curarli, sistemarli e avere con te i prodotti giusti per mantenerli morbidi, ordinati e coerenti con la tua immagine. Non serve una routine enorme, ma serve spazio per ciò che fa davvero la differenza.",
+            "routine_daily": "A casa vuoi un sistema pratico e veloce, pensato per una vita piena e in movimento.",
+            "routine_travel": "In viaggio, o anche solo fuori casa, vuoi tutto pronto da prendere e portare via."
           }
         },
         "a-pbp": {
@@ -515,9 +618,14 @@
             "mk_level": "PRO",
             "sk_level": "BASIC",
             "hc_level": "PRO",
-            "archetype_name": "Main Character Energy",
+            "archetype_name": "Main Character",
             "bundle": "2 Classic + 3 Large",
-            "desc": "Sei la protagonista della tua storia: make-up deciso e capelli da scena. Una routine che ti mette sempre al centro."
+            "desc": "Hai presenza, carisma e voglia di vivere la tua vita da protagonista. Non aspetti che siano gli altri a darti spazio: sai prendertelo con naturalezza.",
+            "desc_makeup": "Per te il make-up è espressione, creatività e presenza. Ami avere scelta, giocare con texture, finish e combinazioni diverse, e costruire look che raccontano il tuo mood. Il tuo beauty ha bisogno di spazio, perché il make-up non è un dettaglio: è parte del tuo modo di comunicare.",
+            "desc_skincare": "La tua skincare è semplice, pratica e diretta. Ti interessa sentirti pulita, fresca e a tuo agio nella tua pelle, senza una routine troppo lunga o complicata. Pochi prodotti giusti, usati bene, sono tutto ciò che ti serve.",
+            "desc_haircare": "L’haircare per te è un vero rituale. Ami prenderti cura dei capelli con prodotti, strumenti e trattamenti diversi, perché sai quanto incidono sul modo in cui ti senti. Che sia piega, styling, maschera o finish finale, i capelli hanno bisogno del loro spazio dedicato.",
+            "routine_daily": "A casa hai bisogno di spazio per costruire i tuoi look e mantenere ogni prodotto sotto controllo.",
+            "routine_travel": "In viaggio vuoi arrivare ovunque con tutto ciò che ti fa sentire nella tua energia migliore."
           }
         },
         "a-pmb": {
@@ -526,9 +634,14 @@
             "mk_level": "PRO",
             "sk_level": "MEDIUM",
             "hc_level": "BASIC",
-            "archetype_name": "Matcha Girl",
+            "archetype_name": "Dark Feminine Girl",
             "bundle": "1 Classic + 3 Large",
-            "desc": "Make-up curato e ritmi morbidi: bellezza e benessere in armonia. Una routine calda, lenta e piena di stile."
+            "desc": "Hai un fascino magnetico, intenso e difficile da ignorare. Non hai bisogno di essere rumorosa per farti notare: la tua energia parla prima di te.",
+            "desc_makeup": "Per te il make-up è espressione, creatività e presenza. Ami avere scelta, giocare con texture, finish e combinazioni diverse, e costruire look che raccontano il tuo mood. Il tuo beauty ha bisogno di spazio, perché il make-up non è un dettaglio: è parte del tuo modo di comunicare.",
+            "desc_skincare": "La skincare per te è un momento importante della giornata. Ti piace prenderti cura della pelle con una routine più completa, fatta di prodotti che ti fanno sentire luminosa, curata e in equilibrio. Non è solo funzionalità: è anche un piccolo momento per te.",
+            "desc_haircare": "I tuoi capelli seguono la tua naturalezza. Ti piace averli puliti, ordinati e facili da gestire, senza dover dedicare troppo tempo allo styling. Cerchi praticità, leggerezza e prodotti essenziali che ti aiutino a sentirti subito in ordine.",
+            "routine_daily": "A casa preferisci un’organizzazione decisa e funzionale, con spazio per prodotti più importanti e selezionati.",
+            "routine_travel": "In viaggio vuoi poche cose piccole e più spazio per ciò che definisce davvero il tuo look."
           }
         },
         "a-pmm": {
@@ -537,9 +650,14 @@
             "mk_level": "PRO",
             "sk_level": "MEDIUM",
             "hc_level": "MEDIUM",
-            "archetype_name": "City Girl Era",
+            "archetype_name": "Cool Girl",
             "bundle": "2 Classic + 3 Large",
-            "desc": "Ritmo veloce e stile sempre on point: make-up curato e capelli pronti. La bellezza che tiene il passo con la città."
+            "desc": "Hai quella sicurezza naturale che non si può copiare. Sei spontanea, interessante e mai forzata: il tuo stile funziona perché sembra davvero tuo.",
+            "desc_makeup": "Per te il make-up è espressione, creatività e presenza. Ami avere scelta, giocare con texture, finish e combinazioni diverse, e costruire look che raccontano il tuo mood. Il tuo beauty ha bisogno di spazio, perché il make-up non è un dettaglio: è parte del tuo modo di comunicare.",
+            "desc_skincare": "La skincare per te è un momento importante della giornata. Ti piace prenderti cura della pelle con una routine più completa, fatta di prodotti che ti fanno sentire luminosa, curata e in equilibrio. Non è solo funzionalità: è anche un piccolo momento per te.",
+            "desc_haircare": "I capelli per te sono parte importante del look. Ti piace curarli, sistemarli e avere con te i prodotti giusti per mantenerli morbidi, ordinati e coerenti con la tua immagine. Non serve una routine enorme, ma serve spazio per ciò che fa davvero la differenza.",
+            "routine_daily": "A casa ti serve un sistema flessibile, non troppo rigido, ma capace di tenere tutto sotto controllo.",
+            "routine_travel": "In viaggio vuoi essere pronta senza sembrare troppo preparata: tutto ordinato, ma con naturalezza."
           }
         },
         "a-pmp": {
@@ -548,9 +666,14 @@
             "mk_level": "PRO",
             "sk_level": "MEDIUM",
             "hc_level": "PRO",
-            "archetype_name": "GRWM Core",
+            "archetype_name": "GRWM Girl",
             "bundle": "1 Classic + 4 Large",
-            "desc": "Prepararti è il tuo momento preferito: make-up completo e capelli protagonisti. Ogni get ready è un piccolo spettacolo."
+            "desc": "Hai una personalità solare, espressiva e coinvolgente. Ti piace raccontarti, condividere il tuo mondo e far sentire gli altri parte della tua energia.",
+            "desc_makeup": "Per te il make-up è espressione, creatività e presenza. Ami avere scelta, giocare con texture, finish e combinazioni diverse, e costruire look che raccontano il tuo mood. Il tuo beauty ha bisogno di spazio, perché il make-up non è un dettaglio: è parte del tuo modo di comunicare.",
+            "desc_skincare": "La skincare per te è un momento importante della giornata. Ti piace prenderti cura della pelle con una routine più completa, fatta di prodotti che ti fanno sentire luminosa, curata e in equilibrio. Non è solo funzionalità: è anche un piccolo momento per te.",
+            "desc_haircare": "L’haircare per te è un vero rituale. Ami prenderti cura dei capelli con prodotti, strumenti e trattamenti diversi, perché sai quanto incidono sul modo in cui ti senti. Che sia piega, styling, maschera o finish finale, i capelli hanno bisogno del loro spazio dedicato.",
+            "routine_daily": "A casa hai bisogno di tanto spazio per costruire routine complete, look diversi e contenuti visivi.",
+            "routine_travel": "In viaggio vuoi portare con te tutto il necessario per prepararti, cambiare mood e creare il tuo momento."
           }
         },
         "a-ppb": {
@@ -559,9 +682,14 @@
             "mk_level": "PRO",
             "sk_level": "PRO",
             "hc_level": "BASIC",
-            "archetype_name": "Beauty Collector",
+            "archetype_name": "Sephora Girl",
             "bundle": "2 Classic + 3 Large",
-            "desc": "Collezioni prodotti come piccoli tesori: make-up e skincare al completo. La bellezza è la tua passione più curata."
+            "desc": "Sei curiosa, entusiasta e sempre attratta da ciò che può farti sentire ancora più te stessa. Hai uno spirito esplorativo e vivi il beauty come un universo da scoprire.",
+            "desc_makeup": "Per te il make-up è espressione, creatività e presenza. Ami avere scelta, giocare con texture, finish e combinazioni diverse, e costruire look che raccontano il tuo mood. Il tuo beauty ha bisogno di spazio, perché il make-up non è un dettaglio: è parte del tuo modo di comunicare.",
+            "desc_skincare": "La skincare è uno dei tuoi rituali principali. Ami conoscere la tua pelle, scegliere prodotti specifici e costruire una routine su misura. Per te la cura del viso non è un passaggio veloce, ma una parte fondamentale del tuo modo di sentirti bene, luminosa e sicura.",
+            "desc_haircare": "I tuoi capelli seguono la tua naturalezza. Ti piace averli puliti, ordinati e facili da gestire, senza dover dedicare troppo tempo allo styling. Cerchi praticità, leggerezza e prodotti essenziali che ti aiutino a sentirti subito in ordine.",
+            "routine_daily": "A casa hai bisogno di dividere novità, preferiti e prodotti in rotazione, senza perdere il controllo.",
+            "routine_travel": "In viaggio vuoi avere scelta, ma con un sistema che renda tutto facile da trovare."
           }
         },
         "a-ppm": {
@@ -570,9 +698,14 @@
             "mk_level": "PRO",
             "sk_level": "PRO",
             "hc_level": "MEDIUM",
-            "archetype_name": "Content Creator Energy",
+            "archetype_name": "Beauty Influencer",
             "bundle": "3 Classic + 3 Large",
-            "desc": "Sempre pronta a brillare davanti alla camera: make-up, skincare e capelli perfetti. Una routine completa per chi crea ed ispira."
+            "desc": "Hai creatività, intuito e un occhio allenato per le tendenze. Riesci a trasformare ciò che ami in ispirazione, perché il tuo modo di vedere le cose è già contenuto.",
+            "desc_makeup": "Per te il make-up è espressione, creatività e presenza. Ami avere scelta, giocare con texture, finish e combinazioni diverse, e costruire look che raccontano il tuo mood. Il tuo beauty ha bisogno di spazio, perché il make-up non è un dettaglio: è parte del tuo modo di comunicare.",
+            "desc_skincare": "La skincare è uno dei tuoi rituali principali. Ami conoscere la tua pelle, scegliere prodotti specifici e costruire una routine su misura. Per te la cura del viso non è un passaggio veloce, ma una parte fondamentale del tuo modo di sentirti bene, luminosa e sicura.",
+            "desc_haircare": "I capelli per te sono parte importante del look. Ti piace curarli, sistemarli e avere con te i prodotti giusti per mantenerli morbidi, ordinati e coerenti con la tua immagine. Non serve una routine enorme, ma serve spazio per ciò che fa davvero la differenza.",
+            "routine_daily": "A casa ti serve un’organizzazione modulare, capace di seguire prodotti, trend, prove e contenuti.",
+            "routine_travel": "In viaggio vuoi un set completo e ordinato, pronto per creare, testare e prepararti ovunque."
           }
         },
         "a-ppp": {
@@ -581,9 +714,14 @@
             "mk_level": "PRO",
             "sk_level": "PRO",
             "hc_level": "PRO",
-            "archetype_name": "Ultimate Beauty Energy",
+            "archetype_name": "Star Girl",
             "bundle": "2 Classic + 4 Large",
-            "desc": "La tua routine non ha limiti: make-up, skincare e capelli al massimo livello. La bellezza totale, organizzata con eleganza."
+            "desc": "Hai un’energia luminosa, ambiziosa e impossibile da ignorare. Ti piace distinguerti, puntare in alto e lasciare il segno ovunque vai.",
+            "desc_makeup": "Per te il make-up è espressione, creatività e presenza. Ami avere scelta, giocare con texture, finish e combinazioni diverse, e costruire look che raccontano il tuo mood. Il tuo beauty ha bisogno di spazio, perché il make-up non è un dettaglio: è parte del tuo modo di comunicare.",
+            "desc_skincare": "La skincare è uno dei tuoi rituali principali. Ami conoscere la tua pelle, scegliere prodotti specifici e costruire una routine su misura. Per te la cura del viso non è un passaggio veloce, ma una parte fondamentale del tuo modo di sentirti bene, luminosa e sicura.",
+            "desc_haircare": "L’haircare per te è un vero rituale. Ami prenderti cura dei capelli con prodotti, strumenti e trattamenti diversi, perché sai quanto incidono sul modo in cui ti senti. Che sia piega, styling, maschera o finish finale, i capelli hanno bisogno del loro spazio dedicato.",
+            "routine_daily": "A casa hai bisogno di spazio importante, perché la tua routine è completa e costruita su più livelli.",
+            "routine_travel": "In viaggio vuoi portare con te tutto ciò che sostiene la tua energia, senza sacrificare ordine o presenza."
           }
         }
       },
