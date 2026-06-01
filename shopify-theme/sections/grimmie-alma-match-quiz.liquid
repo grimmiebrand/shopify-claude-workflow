@@ -310,6 +310,21 @@
         "1 Classic + 4 Large": {{ s.link_1c4l | json }},
         "2 Classic + 4 Large": {{ s.link_2c4l | json }}
       },
+      "comboImageAlt": {{ s.combo_image_alt | default: 'Combo Alma' | json }},
+      "comboImages": {
+        "1 Classic + 2 Large": {{ s.combo_img_1c2l | image_url: width: 1200 | json }},
+        "2 Classic + 1 Large": {{ s.combo_img_2c1l | image_url: width: 1200 | json }},
+        "3 Classic + 1 Large": {{ s.combo_img_3c1l | image_url: width: 1200 | json }},
+        "2 Classic + 2 Large": {{ s.combo_img_2c2l | image_url: width: 1200 | json }},
+        "1 Classic + 3 Large": {{ s.combo_img_1c3l | image_url: width: 1200 | json }},
+        "3 Classic + 2 Large": {{ s.combo_img_3c2l | image_url: width: 1200 | json }},
+        "2 Classic + 3 Large": {{ s.combo_img_2c3l | image_url: width: 1200 | json }},
+        "4 Classic + 1 Large": {{ s.combo_img_4c1l | image_url: width: 1200 | json }},
+        "4 Classic + 2 Large": {{ s.combo_img_4c2l | image_url: width: 1200 | json }},
+        "3 Classic + 3 Large": {{ s.combo_img_3c3l | image_url: width: 1200 | json }},
+        "1 Classic + 4 Large": {{ s.combo_img_1c4l | image_url: width: 1200 | json }},
+        "2 Classic + 4 Large": {{ s.combo_img_2c4l | image_url: width: 1200 | json }}
+      },
       "bundleDiscounts": {
         "1 Classic + 2 Large": {{ s.disc_1c2l | json }},
         "2 Classic + 1 Large": {{ s.disc_2c1l | json }},
@@ -548,7 +563,7 @@
           <p class="grimmie-am-{{ sid }}__rcard-eyebrow">{{ s.combo_label | default: 'La combo che ti rappresenta' | escape }}</p>
           <hr class="grimmie-am-{{ sid }}__combo-divider">
           <p class="grimmie-am-{{ sid }}__combo-name" data-am-r-combo></p>
-          <div class="grimmie-am-{{ sid }}__combo-image">
+          <div class="grimmie-am-{{ sid }}__combo-image" data-am-r-combo-image-wrap>
             {%- if s.combo_image != blank -%}
               {{ s.combo_image | image_url: width: 900 | image_tag: alt: s.combo_image_alt, loading: 'lazy', widths: '360,540,720,900' }}
             {%- else -%}
@@ -646,6 +661,20 @@
     { "type": "image_picker", "id": "combo_image", "label": "Bundle image (generic)" },
     { "type": "text", "id": "combo_image_alt", "label": "Bundle image alt text", "default": "Combo Alma" },
     { "type": "textarea", "id": "combo_sub", "label": "Combo subtext", "default": "Lo spazio giusto per la tua routine. Compatta, raffinata e pensata per accompagnarti con stile, ogni giorno." },
+
+    { "type": "header", "content": "Combo images (per bundle)" },
+    { "type": "image_picker", "id": "combo_img_1c2l", "label": "1 Classic + 2 Large" },
+    { "type": "image_picker", "id": "combo_img_2c1l", "label": "2 Classic + 1 Large" },
+    { "type": "image_picker", "id": "combo_img_3c1l", "label": "3 Classic + 1 Large" },
+    { "type": "image_picker", "id": "combo_img_2c2l", "label": "2 Classic + 2 Large" },
+    { "type": "image_picker", "id": "combo_img_1c3l", "label": "1 Classic + 3 Large" },
+    { "type": "image_picker", "id": "combo_img_3c2l", "label": "3 Classic + 2 Large" },
+    { "type": "image_picker", "id": "combo_img_2c3l", "label": "2 Classic + 3 Large" },
+    { "type": "image_picker", "id": "combo_img_4c1l", "label": "4 Classic + 1 Large" },
+    { "type": "image_picker", "id": "combo_img_4c2l", "label": "4 Classic + 2 Large" },
+    { "type": "image_picker", "id": "combo_img_3c3l", "label": "3 Classic + 3 Large" },
+    { "type": "image_picker", "id": "combo_img_1c4l", "label": "1 Classic + 4 Large" },
+    { "type": "image_picker", "id": "combo_img_2c4l", "label": "2 Classic + 4 Large" },
 
     { "type": "header", "content": "Result - Why perfect for you" },
     { "type": "text", "id": "why_title", "label": "Title", "default": "Perché è perfetta per te" },

@@ -210,6 +210,7 @@
       rDesc: root.querySelector('[data-am-r-desc]'),
       rWhyTexts: root.querySelectorAll('[data-am-r-why]'),
       rCombo: root.querySelector('[data-am-r-combo]'),
+      rComboImageWrap: root.querySelector('[data-am-r-combo-image-wrap]'),
       cta: root.querySelector('[data-am-cta]'),
       ctaRestart: root.querySelector('[data-am-cta-restart]'),
       timer: root.querySelector('[data-am-timer]'),
@@ -496,6 +497,16 @@
       if (els.rArchetype) els.rArchetype.textContent = result.name;
       if (els.rDesc) els.rDesc.textContent = result.desc;
       if (els.rCombo) els.rCombo.textContent = result.bundle;
+      // Swap the combo image when a per-bundle picture is configured.
+      var comboImg = (config.comboImages || {})[result.bundle];
+      if (comboImg && els.rComboImageWrap) {
+        els.rComboImageWrap.innerHTML = '';
+        var img = document.createElement('img');
+        img.src = comboImg;
+        img.alt = config.comboImageAlt || result.bundle;
+        img.loading = 'lazy';
+        els.rComboImageWrap.appendChild(img);
+      }
       // Map the three thematic descriptions onto the "why" list, in order:
       // 1 make-up, 2 skincare, 3 haircare.
       var whyTexts = [result.descMakeup, result.descSkincare, result.descHaircare];
