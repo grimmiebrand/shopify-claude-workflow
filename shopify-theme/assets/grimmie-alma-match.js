@@ -386,10 +386,11 @@
       if (!els.timer) return;
       setExpired(false);
       // Persist an absolute deadline so the countdown survives page reloads
-      // instead of restarting from the full duration each time.
+      // instead of restarting from the full duration each time. A stale
+      // deadline in the past must stay expired (don't reset the offer).
       var deadline = 0;
       try { deadline = parseInt(sessionStorage.getItem(DEADLINE_KEY), 10); } catch (e) {}
-      if (!deadline || isNaN(deadline) || deadline <= Date.now()) {
+      if (!deadline || isNaN(deadline)) {
         deadline = Date.now() + durationSeconds() * 1000;
         try { sessionStorage.setItem(DEADLINE_KEY, String(deadline)); } catch (e) {}
       }
