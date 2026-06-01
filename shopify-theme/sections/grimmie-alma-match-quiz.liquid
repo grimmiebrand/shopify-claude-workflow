@@ -268,25 +268,15 @@
       "largePrice": {{ large_price | default: 0 }},
       "currency": {{ shop.currency | json }},
       "levelMediumMin": {{ s.level_medium_min | default: 6 }},
-      "levelProMin": {{ s.level_pro_min | default: 9 }},
+      "levelProMin": {{ s.level_pro_min | default: 12 }},
       "questions": [
         {%- assign q_blocks = section.blocks | where: 'type', 'question' -%}
-        {%- assign c_blocks = section.blocks | where: 'type', 'correction' -%}
         {%- for b in q_blocks -%}
-          { "type": "scoring", "category": {{ b.settings.category | default: 'mk' | json }}, "heroTitle": {{ b.settings.hero_title | json }}, "q": {{ b.settings.q_text | json }}, "answers": [
-            { "label": {{ b.settings.a1_label | json }}, "icon": {{ b.settings.a1_icon | default: 'sparkle' | json }}, "points": {{ b.settings.a1_points | default: 0 }} },
-            { "label": {{ b.settings.a2_label | json }}, "icon": {{ b.settings.a2_icon | default: 'sparkle' | json }}, "points": {{ b.settings.a2_points | default: 0 }} },
-            { "label": {{ b.settings.a3_label | json }}, "icon": {{ b.settings.a3_icon | default: 'sparkle' | json }}, "points": {{ b.settings.a3_points | default: 0 }} },
-            { "label": {{ b.settings.a4_label | json }}, "icon": {{ b.settings.a4_icon | default: 'sparkle' | json }}, "points": {{ b.settings.a4_points | default: 0 }} }
-          ] }{%- unless forloop.last %},{% endunless -%}
-        {%- endfor -%}
-        {%- if q_blocks.size > 0 and c_blocks.size > 0 -%},{%- endif -%}
-        {%- for b in c_blocks -%}
-          { "type": "correction", "heroTitle": {{ b.settings.hero_title | json }}, "q": {{ b.settings.q_text | json }}, "answers": [
-            { "label": {{ b.settings.a1_label | json }}, "icon": {{ b.settings.a1_icon | default: 'sparkle' | json }}, "delta": {{ b.settings.a1_delta | default: 0 }} },
-            { "label": {{ b.settings.a2_label | json }}, "icon": {{ b.settings.a2_icon | default: 'sparkle' | json }}, "delta": {{ b.settings.a2_delta | default: 0 }} },
-            { "label": {{ b.settings.a3_label | json }}, "icon": {{ b.settings.a3_icon | default: 'sparkle' | json }}, "delta": {{ b.settings.a3_delta | default: 0 }} },
-            { "label": {{ b.settings.a4_label | json }}, "icon": {{ b.settings.a4_icon | default: 'sparkle' | json }}, "delta": {{ b.settings.a4_delta | default: 0 }} }
+          { "heroTitle": {{ b.settings.hero_title | json }}, "q": {{ b.settings.q_text | json }}, "answers": [
+            { "label": {{ b.settings.a1_label | json }}, "icon": {{ b.settings.a1_icon | default: 'sparkle' | json }}, "mk": {{ b.settings.a1_mk | default: 0 }}, "sk": {{ b.settings.a1_sk | default: 0 }}, "hc": {{ b.settings.a1_hc | default: 0 }} },
+            { "label": {{ b.settings.a2_label | json }}, "icon": {{ b.settings.a2_icon | default: 'sparkle' | json }}, "mk": {{ b.settings.a2_mk | default: 0 }}, "sk": {{ b.settings.a2_sk | default: 0 }}, "hc": {{ b.settings.a2_hc | default: 0 }} },
+            { "label": {{ b.settings.a3_label | json }}, "icon": {{ b.settings.a3_icon | default: 'sparkle' | json }}, "mk": {{ b.settings.a3_mk | default: 0 }}, "sk": {{ b.settings.a3_sk | default: 0 }}, "hc": {{ b.settings.a3_hc | default: 0 }} },
+            { "label": {{ b.settings.a4_label | json }}, "icon": {{ b.settings.a4_icon | default: 'sparkle' | json }}, "mk": {{ b.settings.a4_mk | default: 0 }}, "sk": {{ b.settings.a4_sk | default: 0 }}, "hc": {{ b.settings.a4_hc | default: 0 }} }
           ] }{%- unless forloop.last %},{% endunless -%}
         {%- endfor -%}
       ],
@@ -630,7 +620,7 @@
 
     { "type": "header", "content": "Scoring thresholds", "info": "Determine BASIC / MEDIUM / PRO levels from the per-axis score. Used together with the Question and Archetype blocks below." },
     { "type": "number", "id": "level_medium_min", "label": "Minimum score for MEDIUM", "default": 6 },
-    { "type": "number", "id": "level_pro_min", "label": "Minimum score for PRO", "default": 9 },
+    { "type": "number", "id": "level_pro_min", "label": "Minimum score for PRO", "default": 12 },
 
     { "type": "header", "content": "Loading screen" },
     { "type": "text", "id": "loading_text_1", "label": "Loading text 1", "default": "Stiamo creando la tua combo Alma…" },
@@ -740,29 +730,34 @@
   "blocks": [
     {
       "type": "question",
-      "name": "Domanda (scoring)",
+      "name": "Domanda",
       "settings": [
         { "type": "text", "id": "hero_title", "label": "Eyebrow (titolo schermata)" },
         { "type": "text", "id": "q_text", "label": "Testo della domanda" },
-        { "type": "select", "id": "category", "label": "Categoria", "default": "mk", "options": [
-          { "value": "mk", "label": "Make-up" }, { "value": "sk", "label": "Skincare" }, { "value": "hc", "label": "Haircare" }
-        ] },
 
         { "type": "text", "id": "a1_label", "label": "Risposta 1 — etichetta" },
-        { "type": "text", "id": "a1_icon", "label": "Risposta 1 — icona", "info": "Una di: bag, sparkle, mirror, suitcase, clock, bottle, brush, heart, plane, moon, home, bath.", "default": "sparkle" },
-        { "type": "number", "id": "a1_points", "label": "Risposta 1 — punti", "default": 0 },
+        { "type": "text", "id": "a1_icon", "label": "Risposta — icona", "info": "Una di: bag, sparkle, mirror, suitcase, clock, bottle, brush, heart, plane, moon, home, bath.", "default": "sparkle" },
+        { "type": "number", "id": "a1_mk", "label": "Punteggio make-up", "default": 0 },
+        { "type": "number", "id": "a1_sk", "label": "Punteggio skincare", "default": 0 },
+        { "type": "number", "id": "a1_hc", "label": "Punteggio haircare", "default": 0 },
 
         { "type": "text", "id": "a2_label", "label": "Risposta 2 — etichetta" },
-        { "type": "text", "id": "a2_icon", "label": "Risposta 2 — icona", "info": "Una di: bag, sparkle, mirror, suitcase, clock, bottle, brush, heart, plane, moon, home, bath.", "default": "sparkle" },
-        { "type": "number", "id": "a2_points", "label": "Risposta 2 — punti", "default": 0 },
+        { "type": "text", "id": "a2_icon", "label": "Risposta — icona", "info": "Una di: bag, sparkle, mirror, suitcase, clock, bottle, brush, heart, plane, moon, home, bath.", "default": "sparkle" },
+        { "type": "number", "id": "a2_mk", "label": "Punteggio make-up", "default": 0 },
+        { "type": "number", "id": "a2_sk", "label": "Punteggio skincare", "default": 0 },
+        { "type": "number", "id": "a2_hc", "label": "Punteggio haircare", "default": 0 },
 
         { "type": "text", "id": "a3_label", "label": "Risposta 3 — etichetta" },
-        { "type": "text", "id": "a3_icon", "label": "Risposta 3 — icona", "info": "Una di: bag, sparkle, mirror, suitcase, clock, bottle, brush, heart, plane, moon, home, bath.", "default": "sparkle" },
-        { "type": "number", "id": "a3_points", "label": "Risposta 3 — punti", "default": 0 },
+        { "type": "text", "id": "a3_icon", "label": "Risposta — icona", "info": "Una di: bag, sparkle, mirror, suitcase, clock, bottle, brush, heart, plane, moon, home, bath.", "default": "sparkle" },
+        { "type": "number", "id": "a3_mk", "label": "Punteggio make-up", "default": 0 },
+        { "type": "number", "id": "a3_sk", "label": "Punteggio skincare", "default": 0 },
+        { "type": "number", "id": "a3_hc", "label": "Punteggio haircare", "default": 0 },
 
         { "type": "text", "id": "a4_label", "label": "Risposta 4 — etichetta" },
-        { "type": "text", "id": "a4_icon", "label": "Risposta 4 — icona", "info": "Una di: bag, sparkle, mirror, suitcase, clock, bottle, brush, heart, plane, moon, home, bath.", "default": "sparkle" },
-        { "type": "number", "id": "a4_points", "label": "Risposta 4 — punti", "default": 0 }
+        { "type": "text", "id": "a4_icon", "label": "Risposta — icona", "info": "Una di: bag, sparkle, mirror, suitcase, clock, bottle, brush, heart, plane, moon, home, bath.", "default": "sparkle" },
+        { "type": "number", "id": "a4_mk", "label": "Punteggio make-up", "default": 0 },
+        { "type": "number", "id": "a4_sk", "label": "Punteggio skincare", "default": 0 },
+        { "type": "number", "id": "a4_hc", "label": "Punteggio haircare", "default": 0 }
       ]
     },
     {
@@ -774,7 +769,7 @@
 
         { "type": "text", "id": "a1_label", "label": "Risposta 1 — etichetta" },
         { "type": "text", "id": "a1_icon", "label": "Risposta 1 — icona", "info": "Una di: bag, sparkle, mirror, suitcase, clock, bottle, brush, heart, plane, moon, home, bath.", "default": "sparkle" },
-        { "type": "number", "id": "a1_delta", "label": "Risposta 1 — delta (applicato alla cat. più alta)", "default": 0 },
+        { "type": "number", "id": "a1_delta", "label": "Risposta 1 — delta", "default": 0 },
 
         { "type": "text", "id": "a2_label", "label": "Risposta 2 — etichetta" },
         { "type": "text", "id": "a2_icon", "label": "Risposta 2 — icona", "info": "Una di: bag, sparkle, mirror, suitcase, clock, bottle, brush, heart, plane, moon, home, bath.", "default": "sparkle" },
