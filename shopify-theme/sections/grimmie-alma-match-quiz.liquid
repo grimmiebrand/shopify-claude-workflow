@@ -222,9 +222,6 @@
   .grimmie-am-{{ sid }}__btn.is-disabled { opacity: 0.4; pointer-events: none; cursor: not-allowed; }
   .grimmie-am-{{ sid }}__btn[hidden] { display: none; }
 
-  .grimmie-am-{{ sid }}__restart-wrap { text-align: center; margin-top: clamp(28px, 3.5vw, 44px); }
-  .grimmie-am-{{ sid }}__restart { background: none; border: none; cursor: pointer; font-family: var(--font-body--family); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--am-accent); text-decoration: underline; text-underline-offset: 4px; }
-
   /* Tablet */
   @media (max-width: 900px) {
     .grimmie-am-{{ sid }}__cards { grid-template-columns: repeat(2, 1fr); }
@@ -555,10 +552,6 @@
         </div>
         <a href="{{ s.fallback_link | default: '/collections/all' }}" class="grimmie-am-{{ sid }}__btn" data-am-cta>{{ s.cta_text | default: 'ACQUISTA LA TUA COMBO' | escape }}</a>
         <button type="button" class="grimmie-am-{{ sid }}__btn" data-am-cta-restart hidden>{{ s.restart_text | default: 'Ricomincia il test' | upcase | escape }}</button>
-      </div>
-
-      <div class="grimmie-am-{{ sid }}__restart-wrap">
-        <button type="button" class="grimmie-am-{{ sid }}__restart" data-am-restart>{{ s.restart_text | default: 'Ricomincia il test' | escape }}</button>
       </div>
     </div>
   </div>
