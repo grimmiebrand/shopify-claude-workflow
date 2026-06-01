@@ -278,8 +278,9 @@
             { "label": {{ b.settings.a2_label | json }}, "icon": {{ b.settings.a2_icon | default: 'sparkle' | json }}, "points": {{ b.settings.a2_points | default: 0 }} },
             { "label": {{ b.settings.a3_label | json }}, "icon": {{ b.settings.a3_icon | default: 'sparkle' | json }}, "points": {{ b.settings.a3_points | default: 0 }} },
             { "label": {{ b.settings.a4_label | json }}, "icon": {{ b.settings.a4_icon | default: 'sparkle' | json }}, "points": {{ b.settings.a4_points | default: 0 }} }
-          ] }{% if forloop.last == false or c_blocks.size > 0 %},{% endif %}
+          ] }{%- unless forloop.last %},{% endunless -%}
         {%- endfor -%}
+        {%- if q_blocks.size > 0 and c_blocks.size > 0 -%},{%- endif -%}
         {%- for b in c_blocks -%}
           { "type": "correction", "heroTitle": {{ b.settings.hero_title | json }}, "q": {{ b.settings.q_text | json }}, "answers": [
             { "label": {{ b.settings.a1_label | json }}, "icon": {{ b.settings.a1_icon | default: 'sparkle' | json }}, "delta": {{ b.settings.a1_delta | default: 0 }} },
