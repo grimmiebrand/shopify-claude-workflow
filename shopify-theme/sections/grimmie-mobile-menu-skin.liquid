@@ -121,8 +121,11 @@
     }
     {%- endif -%}
 
-    /* CURRENT page on mobile: soft blush rounded background only.
-       Text stays brown. */
+    /* CURRENT page on mobile: pink rounded background ONLY when explicitly
+       enabled. Default off because Shopify often flags more than one link
+       as 'current' on the Tinker theme, which results in multiple blush
+       blocks. Keeping the rows visually uniform avoids that. */
+    {%- if section.settings.show_mobile_active_bg -%}
     .header__drawer .menu-drawer__menu-item--mainlist.menu-drawer__menu-item--active,
     .header__drawer a.menu-drawer__menu-item--mainlist[aria-current='page'] {
       background-color: {{ active_bg }} !important;
@@ -135,6 +138,18 @@
     .header__drawer a.menu-drawer__menu-item--mainlist[aria-current='page']::before {
       opacity: 1;
     }
+    {%- else -%}
+    /* Force all rows to look identical, neutralising Tinker's default
+       current-page highlight. */
+    .header__drawer .menu-drawer__menu-item--mainlist.menu-drawer__menu-item--active,
+    .header__drawer a.menu-drawer__menu-item--mainlist[aria-current='page'] {
+      background-color: transparent !important;
+      color: {{ text_color }} !important;
+      border-radius: 0 !important;
+      text-decoration: none !important;
+      font-weight: {{ text_weight }} !important;
+    }
+    {%- endif -%}
 
     /* Decorative divider with centered sparkle */
     {%- if section.settings.show_decorative_divider -%}
@@ -199,6 +214,7 @@
     { "type": "checkbox", "id": "show_item_sparkles",      "label": "Show sparkle before each menu item",   "default": true },
     { "type": "range",    "id": "sparkle_size",            "label": "Sparkle size",                          "min": 8, "max": 18, "step": 1, "unit": "px", "default": 11 },
     { "type": "checkbox", "id": "show_decorative_divider", "label": "Show decorative divider with sparkle", "default": true },
+    { "type": "checkbox", "id": "show_mobile_active_bg",   "label": "Highlight current page on mobile",      "info": "Off by default — Shopify may flag more than one menu link as current, which would show multiple pink blocks. Turn on only if your nav links match the current URL one-to-one.", "default": false },
 
     { "type": "header", "content": "Colors" },
     { "type": "color", "id": "drawer_bg",     "label": "Drawer background (must match drawer bg)", "default": "#F7F1EE" },
