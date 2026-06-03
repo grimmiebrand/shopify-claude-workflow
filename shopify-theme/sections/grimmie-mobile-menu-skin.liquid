@@ -1,77 +1,56 @@
 {%- comment -%}
-  Grimmie mobile drawer style.
-  Renders a global <style> block that targets ONLY the Tinker mobile
-  menu drawer (max-width: 749.98px). Does not modify markup. Desktop
-  header, desktop nav, announcement bar and all other pages are
-  untouched.
-
-  Add this section once to the same section group as the header so the
-  styles load on every page.
+  Grimmie mobile menu skin.
+  Renders a global <style> block scoped to the Tinker mobile drawer
+  (.header__drawer + @media max-width: 749.98px). No markup output.
+  Desktop header, desktop nav and all other pages are untouched.
 {%- endcomment -%}
 
 {%- liquid
   assign drawer_bg     = section.settings.drawer_bg     | default: '#F7F1EE'
-  assign active_bg     = section.settings.active_bg     | default: '#F7EDEB'
   assign divider_color = section.settings.divider_color | default: '#DDD2CA'
   assign sparkle_color = section.settings.sparkle_color | default: '#EACBC8'
   assign text_color    = section.settings.text_color    | default: '#6E5F59'
   assign accent_color  = section.settings.accent_color  | default: '#C99696'
-  assign item_radius   = section.settings.item_radius   | default: 14
-  assign item_pad_y    = section.settings.item_pad_y    | default: 18
-  assign item_pad_x    = section.settings.item_pad_x    | default: 16
-  assign drawer_width  = section.settings.drawer_width  | default: 76
+  assign item_pad_y    = section.settings.item_pad_y    | default: 14
+  assign item_pad_x    = section.settings.item_pad_x    | default: 18
+  assign text_size     = section.settings.text_size     | default: 14
+  assign text_weight   = section.settings.text_weight   | default: '400'
+  assign sparkle_size  = section.settings.sparkle_size  | default: 11
+  assign letter_spacing = section.settings.letter_spacing | default: 6
 
   assign sparkle_color_url = sparkle_color | replace: '#', '%23'
 %}
 
 <style data-grimmie-menu-skin>
   @media (max-width: 749.98px) {
-    /* Drawer panel width — leaves part of the page visible on the right */
-    {%- if section.settings.set_drawer_width -%}
-    .header__drawer .menu-drawer { width: {{ drawer_width }}vw; max-width: {{ drawer_width }}vw; }
-    {%- endif -%}
+    /* ---- Typography & layout: align with the rest of the site ---- */
+    .header__drawer .menu-drawer__menu-item--mainlist {
+      display: flex !important;
+      align-items: center;
+      gap: 14px;
+      padding: {{ item_pad_y }}px {{ item_pad_x }}px;
+      font-family: inherit;
+      font-size: {{ text_size }}px !important;
+      font-weight: {{ text_weight }} !important;
+      line-height: 1.2;
+      letter-spacing: {{ letter_spacing | divided_by: 100.0 }}em;
+      color: {{ text_color }};
+      border-radius: 0 !important;
+      background-color: transparent;
+      transition: color 0.18s ease;
+    }
+    .header__drawer .menu-drawer__menu-item--mainlist .menu-drawer__menu-item-text {
+      flex: 1 1 auto;
+      font: inherit;
+    }
 
-    /* Reset the existing line dividers so we can re-draw them consistently */
+    /* Reset Tinker's built-in dividers so we control them once */
     .header__drawer .menu-drawer__list-item--divider { border-bottom: 0 !important; }
     .header__drawer .menu-drawer__menu-container--divider { border-bottom: 0 !important; }
 
-    /* Decorative divider with a centered sparkle, sits under the logo area */
-    {%- if section.settings.show_decorative_divider -%}
-    .header__drawer .menu-drawer__navigation {
-      position: relative;
-      padding-top: 56px;
-    }
-    .header__drawer .menu-drawer__navigation::before {
-      content: '';
-      position: absolute;
-      top: 28px;
-      left: 28px;
-      right: 28px;
-      height: 1px;
-      background-color: {{ divider_color }};
-    }
-    .header__drawer .menu-drawer__navigation::after {
-      content: '';
-      position: absolute;
-      top: 28px;
-      left: 50%;
-      width: 28px;
-      height: 28px;
-      transform: translate(-50%, -50%);
-      background-color: {{ drawer_bg }};
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='{{ sparkle_color_url }}' d='M12 2.5 L13.6 9.4 L19.5 10.6 L13.6 12 L12 19 L10.4 12 L4.5 10.6 L10.4 9.4 Z'/></svg>");
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: 18px 18px;
-    }
-    {%- endif -%}
-
-    /* Top-level menu rows: row layout + sparkle + soft divider */
+    /* Soft dividers between rows */
     .header__drawer .menu-drawer__list-item--flat,
-    .header__drawer .menu-drawer__list-item--deep {
-      list-style: none;
-      padding: 0 18px;
-    }
+    .header__drawer .menu-drawer__list-item--deep { padding: 0 18px; }
     .header__drawer .menu-drawer__list-item--flat + .menu-drawer__list-item--flat,
     .header__drawer .menu-drawer__list-item--deep + .menu-drawer__list-item--deep,
     .header__drawer .menu-drawer__list-item--flat + .menu-drawer__list-item--deep,
@@ -79,26 +58,13 @@
       border-top: 1px solid {{ divider_color }};
     }
 
-    .header__drawer .menu-drawer__menu-item--mainlist {
-      display: flex !important;
-      align-items: center;
-      gap: 16px;
-      padding: {{ item_pad_y }}px {{ item_pad_x }}px;
-      border-radius: {{ item_radius }}px;
-      color: {{ text_color }};
-      text-decoration: none;
-      transition: background-color 0.18s ease;
-    }
-    .header__drawer .menu-drawer__menu-item--mainlist .menu-drawer__menu-item-text {
-      flex: 1 1 auto;
-    }
-
+    /* ---- Small sparkle before each item ---- */
     {%- if section.settings.show_item_sparkles -%}
     .header__drawer .menu-drawer__menu-item--mainlist::before {
       content: '';
       flex: 0 0 auto;
-      width: 18px;
-      height: 18px;
+      width: {{ sparkle_size }}px;
+      height: {{ sparkle_size }}px;
       background-color: {{ accent_color }};
       -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2.5 L13.6 9.4 L19.5 10.6 L13.6 12 L12 19 L10.4 12 L4.5 10.6 L10.4 9.4 Z' fill='black'/></svg>");
               mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2.5 L13.6 9.4 L19.5 10.6 L13.6 12 L12 19 L10.4 12 L4.5 10.6 L10.4 9.4 Z' fill='black'/></svg>");
@@ -108,19 +74,50 @@
               mask-size: contain;
       -webkit-mask-position: center;
               mask-position: center;
+      opacity: 0.85;
     }
     {%- endif -%}
 
-    /* Active page: soft blush rounded background */
+    /* ---- Active page indicator: subtle, no rectangle ---- */
     .header__drawer .menu-drawer__menu-item--mainlist.menu-drawer__menu-item--active,
     .header__drawer a.menu-drawer__menu-item--mainlist[aria-current='page'] {
-      background-color: {{ active_bg }};
+      background-color: transparent !important;
+      color: {{ accent_color }};
+    }
+    .header__drawer .menu-drawer__menu-item--mainlist.menu-drawer__menu-item--active::before,
+    .header__drawer a.menu-drawer__menu-item--mainlist[aria-current='page']::before {
+      background-color: {{ accent_color }};
+      opacity: 1;
     }
 
-    /* Tighten the close button position */
-    {%- if section.settings.tighten_close_button -%}
-    .header__drawer .menu-drawer__close-button {
-      color: {{ text_color }};
+    /* ---- Decorative divider with centered sparkle, under the close X ---- */
+    {%- if section.settings.show_decorative_divider -%}
+    .header__drawer .menu-drawer__navigation {
+      position: relative;
+      padding-top: 48px;
+    }
+    .header__drawer .menu-drawer__navigation::before {
+      content: '';
+      position: absolute;
+      top: 22px;
+      left: 28px;
+      right: 28px;
+      height: 1px;
+      background-color: {{ divider_color }};
+    }
+    .header__drawer .menu-drawer__navigation::after {
+      content: '';
+      position: absolute;
+      top: 22px;
+      left: 50%;
+      width: 24px;
+      height: 24px;
+      transform: translate(-50%, -50%);
+      background-color: {{ drawer_bg }};
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='{{ sparkle_color_url }}' d='M12 2.5 L13.6 9.4 L19.5 10.6 L13.6 12 L12 19 L10.4 12 L4.5 10.6 L10.4 9.4 Z'/></svg>");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 14px 14px;
     }
     {%- endif -%}
   }
@@ -134,27 +131,34 @@
 {
   "name": "Grimmie mobile menu skin",
   "settings": [
-    { "type": "paragraph", "content": "Adds soft-luxury Grimmie styling to the mobile menu drawer: sparkle next to each item, decorative divider under the logo, blush active state. This section has no visible output of its own — add it once to the same section group as the header." },
+    { "type": "paragraph", "content": "Aligns the mobile menu with the rest of the Grimmie site: smaller text, subtle active page indicator, soft dividers, optional sparkle and decorative line." },
+
+    { "type": "header", "content": "Typography" },
+    { "type": "range",  "id": "text_size",      "label": "Text size",        "min": 11, "max": 18, "step": 1, "unit": "px", "default": 14 },
+    { "type": "select", "id": "text_weight",    "label": "Text weight", "options": [
+      { "value": "300", "label": "Light" },
+      { "value": "400", "label": "Regular" },
+      { "value": "500", "label": "Medium" },
+      { "value": "600", "label": "Semi-bold" },
+      { "value": "700", "label": "Bold" }
+    ], "default": "400" },
+    { "type": "range",  "id": "letter_spacing", "label": "Letter spacing",   "min": 0,  "max": 14, "step": 1, "unit": "%", "default": 6, "info": "Tracking, in hundredths of an em." },
 
     { "type": "header", "content": "Layout" },
-    { "type": "checkbox", "id": "set_drawer_width",          "label": "Set drawer width",           "default": false },
-    { "type": "range",    "id": "drawer_width",              "label": "Drawer width",               "min": 60, "max": 90, "step": 1, "unit": "vw", "default": 76, "info": "Used only when 'Set drawer width' is on." },
-    { "type": "range",    "id": "item_pad_y",                "label": "Row vertical padding",       "min": 10, "max": 32, "step": 1, "unit": "px", "default": 18 },
-    { "type": "range",    "id": "item_pad_x",                "label": "Row horizontal padding",     "min": 6,  "max": 32, "step": 1, "unit": "px", "default": 16 },
-    { "type": "range",    "id": "item_radius",               "label": "Active state corner radius", "min": 0,  "max": 24, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "item_pad_y", "label": "Row vertical padding",   "min": 8,  "max": 24, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "item_pad_x", "label": "Row horizontal padding", "min": 8,  "max": 28, "step": 1, "unit": "px", "default": 18 },
 
     { "type": "header", "content": "Decorations" },
-    { "type": "checkbox", "id": "show_decorative_divider", "label": "Show decorative divider with sparkle", "default": true },
     { "type": "checkbox", "id": "show_item_sparkles",      "label": "Show sparkle before each menu item",   "default": true },
-    { "type": "checkbox", "id": "tighten_close_button",    "label": "Match close icon to text color",       "default": true },
+    { "type": "range",    "id": "sparkle_size",            "label": "Sparkle size",                          "min": 8, "max": 18, "step": 1, "unit": "px", "default": 11 },
+    { "type": "checkbox", "id": "show_decorative_divider", "label": "Show decorative divider with sparkle", "default": true },
 
     { "type": "header", "content": "Colors" },
-    { "type": "color", "id": "drawer_bg",     "label": "Drawer background (must match the actual drawer bg)", "default": "#F7F1EE" },
-    { "type": "color", "id": "active_bg",     "label": "Active item background",                              "default": "#F7EDEB" },
-    { "type": "color", "id": "divider_color", "label": "Divider lines",                                       "default": "#DDD2CA" },
-    { "type": "color", "id": "sparkle_color", "label": "Decorative sparkle (center)",                         "default": "#EACBC8" },
-    { "type": "color", "id": "accent_color",  "label": "Item sparkle (next to text)",                         "default": "#C99696" },
-    { "type": "color", "id": "text_color",    "label": "Menu text",                                           "default": "#6E5F59" }
+    { "type": "color", "id": "drawer_bg",     "label": "Drawer background (matches actual drawer bg)", "default": "#F7F1EE" },
+    { "type": "color", "id": "divider_color", "label": "Divider lines",                                "default": "#DDD2CA" },
+    { "type": "color", "id": "sparkle_color", "label": "Decorative sparkle (center)",                  "default": "#EACBC8" },
+    { "type": "color", "id": "accent_color",  "label": "Item sparkle + active text",                   "default": "#C99696" },
+    { "type": "color", "id": "text_color",    "label": "Menu text",                                    "default": "#6E5F59" }
   ],
   "presets": [
     { "name": "Grimmie mobile menu skin", "category": "Grimmie" }
