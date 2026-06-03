@@ -1,0 +1,17 @@
+<div>T8 {{ section.id }}</div>
+
+{% schema %}
+{
+  "name": "Grimmie Test 8",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "Aria label", "default": "Annunci" },
+    { "type": "checkbox", "id": "show_desktop", "label": "Desktop", "default": true },
+    { "type": "checkbox", "id": "show_mobile", "label": "Mobile", "default": true },
+    { "type": "checkbox", "id": "animate", "label": "Animate", "default": true },
+    { "type": "range", "id": "duration", "label": "Duration", "min": 10, "max": 120, "step": 5, "unit": "s", "default": 40 },
+    { "type": "select", "id": "direction", "label": "Direction", "options": [
+      { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" }
+    ], "default": "left" }
+  ]
+}
+{% endschema %}
