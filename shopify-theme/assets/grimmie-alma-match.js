@@ -199,7 +199,7 @@
     };
 
     var els = {
-      startBtn: root.querySelector('[data-am-start]'),
+      startBtns: root.querySelectorAll('[data-am-start]'),
       heroTitle: root.querySelector('[data-am-q-herotitle]'),
       progressLabel: root.querySelector('[data-am-q-progress-label]'),
       bar: root.querySelector('[data-am-q-bar]'),
@@ -547,7 +547,7 @@
       show('intro');
     }
 
-    if (els.startBtn) els.startBtn.addEventListener('click', startQuiz);
+    if (els.startBtns) Array.prototype.forEach.call(els.startBtns, function (b) { b.addEventListener('click', startQuiz); });
     if (els.continueBtn) els.continueBtn.addEventListener('click', next);
     if (els.restart) els.restart.addEventListener('click', function (e) { e.preventDefault(); restart(); });
     if (els.ctaRestart) els.ctaRestart.addEventListener('click', function (e) { e.preventDefault(); restart(); });
