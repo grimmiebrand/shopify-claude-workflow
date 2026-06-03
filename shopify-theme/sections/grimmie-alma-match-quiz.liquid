@@ -121,6 +121,7 @@
   }
   .grimmie-am-{{ sid }}__btn:hover:not(:disabled) { background-color: var(--am-btn-hover); }
   .grimmie-am-{{ sid }}__btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .grimmie-am-{{ sid }}__start-after-steps { display: none; }
 
   /* Progress */
   .grimmie-am-{{ sid }}__progress { margin-top: 6px; max-width: 320px; width: 100%; }
@@ -238,6 +239,8 @@
     [data-am-result] .grimmie-am-{{ sid }}__hero { align-items: flex-start; }
     [data-am-result] .grimmie-am-{{ sid }}__hero-content { padding-top: clamp(24px, 6vw, 40px); }
     [data-am-result] .grimmie-am-{{ sid }}__hero-text { max-width: 50%; }
+    .grimmie-am-{{ sid }}__start-intro { display: none; }
+    .grimmie-am-{{ sid }}__start-after-steps { display: inline-flex; margin-top: clamp(20px, 5vw, 32px); }
     .grimmie-am-{{ sid }}__discount { flex-direction: column; text-align: center; }
     .grimmie-am-{{ sid }}__discount-text { max-width: none; }
     .grimmie-am-{{ sid }}__discount .grimmie-am-{{ sid }}__btn { width: 100%; }
@@ -367,7 +370,7 @@
               {%- if s.intro_bullet_3 != blank -%}<li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5 L11 15 L16 9.5"/></svg><span>{{ s.intro_bullet_3 | escape }}</span></li>{%- endif -%}
             </ul>
           {%- endif -%}
-          <button type="button" class="grimmie-am-{{ sid }}__btn" data-am-start style="margin-top: clamp(8px,1.4vw,16px);">{{ s.intro_button_text | default: 'INIZIA IL TEST' | escape }}</button>
+          <button type="button" class="grimmie-am-{{ sid }}__btn grimmie-am-{{ sid }}__start-intro" data-am-start style="margin-top: clamp(8px,1.4vw,16px);">{{ s.intro_button_text | default: 'INIZIA IL TEST' | escape }}</button>
           <div class="grimmie-am-{{ sid }}__progress" aria-hidden="true">
             <p class="grimmie-am-{{ sid }}__progress-label">1 / 10</p>
             <div class="grimmie-am-{{ sid }}__bar"><span style="width:10%;"></span></div>
@@ -420,6 +423,7 @@
           {%- endunless -%}
         {%- endfor -%}
       </div>
+      <button type="button" class="grimmie-am-{{ sid }}__btn grimmie-am-{{ sid }}__start-after-steps" data-am-start>{{ s.intro_button_text | default: 'INIZIA IL TEST' | escape }}</button>
     </div>
 
     {%- comment -%} Brand strip {%- endcomment -%}
