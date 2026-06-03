@@ -28,20 +28,20 @@
   @media (max-width: 749.98px) {
     /* Drawer panel width — leaves part of the page visible on the right */
     {%- if section.settings.set_drawer_width -%}
-    .header-drawer--mobile .menu-drawer { width: {{ drawer_width }}vw; max-width: {{ drawer_width }}vw; }
+    .header__drawer .menu-drawer { width: {{ drawer_width }}vw; max-width: {{ drawer_width }}vw; }
     {%- endif -%}
 
     /* Reset the existing line dividers so we can re-draw them consistently */
-    .header-drawer--mobile .menu-drawer__list-item--divider { border-bottom: 0 !important; }
-    .header-drawer--mobile .menu-drawer__menu-container--divider { border-bottom: 0 !important; }
+    .header__drawer .menu-drawer__list-item--divider { border-bottom: 0 !important; }
+    .header__drawer .menu-drawer__menu-container--divider { border-bottom: 0 !important; }
 
     /* Decorative divider with a centered sparkle, sits under the logo area */
     {%- if section.settings.show_decorative_divider -%}
-    .header-drawer--mobile .menu-drawer__navigation {
+    .header__drawer .menu-drawer__navigation {
       position: relative;
       padding-top: 56px;
     }
-    .header-drawer--mobile .menu-drawer__navigation::before {
+    .header__drawer .menu-drawer__navigation::before {
       content: '';
       position: absolute;
       top: 28px;
@@ -50,7 +50,7 @@
       height: 1px;
       background-color: {{ divider_color }};
     }
-    .header-drawer--mobile .menu-drawer__navigation::after {
+    .header__drawer .menu-drawer__navigation::after {
       content: '';
       position: absolute;
       top: 28px;
@@ -67,19 +67,19 @@
     {%- endif -%}
 
     /* Top-level menu rows: row layout + sparkle + soft divider */
-    .header-drawer--mobile .menu-drawer__list-item--flat,
-    .header-drawer--mobile .menu-drawer__list-item--deep {
+    .header__drawer .menu-drawer__list-item--flat,
+    .header__drawer .menu-drawer__list-item--deep {
       list-style: none;
       padding: 0 18px;
     }
-    .header-drawer--mobile .menu-drawer__list-item--flat + .menu-drawer__list-item--flat,
-    .header-drawer--mobile .menu-drawer__list-item--deep + .menu-drawer__list-item--deep,
-    .header-drawer--mobile .menu-drawer__list-item--flat + .menu-drawer__list-item--deep,
-    .header-drawer--mobile .menu-drawer__list-item--deep + .menu-drawer__list-item--flat {
+    .header__drawer .menu-drawer__list-item--flat + .menu-drawer__list-item--flat,
+    .header__drawer .menu-drawer__list-item--deep + .menu-drawer__list-item--deep,
+    .header__drawer .menu-drawer__list-item--flat + .menu-drawer__list-item--deep,
+    .header__drawer .menu-drawer__list-item--deep + .menu-drawer__list-item--flat {
       border-top: 1px solid {{ divider_color }};
     }
 
-    .header-drawer--mobile .menu-drawer__menu-item--mainlist {
+    .header__drawer .menu-drawer__menu-item--mainlist {
       display: flex !important;
       align-items: center;
       gap: 16px;
@@ -89,12 +89,12 @@
       text-decoration: none;
       transition: background-color 0.18s ease;
     }
-    .header-drawer--mobile .menu-drawer__menu-item--mainlist .menu-drawer__menu-item-text {
+    .header__drawer .menu-drawer__menu-item--mainlist .menu-drawer__menu-item-text {
       flex: 1 1 auto;
     }
 
     {%- if section.settings.show_item_sparkles -%}
-    .header-drawer--mobile .menu-drawer__menu-item--mainlist::before {
+    .header__drawer .menu-drawer__menu-item--mainlist::before {
       content: '';
       flex: 0 0 auto;
       width: 18px;
@@ -112,21 +112,21 @@
     {%- endif -%}
 
     /* Active page: soft blush rounded background */
-    .header-drawer--mobile .menu-drawer__menu-item--mainlist.menu-drawer__menu-item--active,
-    .header-drawer--mobile a.menu-drawer__menu-item--mainlist[aria-current='page'] {
+    .header__drawer .menu-drawer__menu-item--mainlist.menu-drawer__menu-item--active,
+    .header__drawer a.menu-drawer__menu-item--mainlist[aria-current='page'] {
       background-color: {{ active_bg }};
     }
 
     /* Tighten the close button position */
     {%- if section.settings.tighten_close_button -%}
-    .header-drawer--mobile .menu-drawer__close-button {
+    .header__drawer .menu-drawer__close-button {
       color: {{ text_color }};
     }
     {%- endif -%}
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .header-drawer--mobile .menu-drawer__menu-item--mainlist { transition: none; }
+    .header__drawer .menu-drawer__menu-item--mainlist { transition: none; }
   }
 </style>
 
