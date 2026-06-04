@@ -1,0 +1,12 @@
+<div>{{ section.id }}</div>
+
+{% schema %}
+{
+  "name": "Grimmie order tracking",
+  "settings": [
+    { "type": "url", "id": "help_cta_link", "label": "CTA link", "default": "mailto:info@grimmie.co" }
+  ],
+  "blocks": [ { "type": "@app" } ],
+  "presets": [ { "name": "Grimmie order tracking", "category": "Grimmie" } ]
+}
+{% endschema %}
