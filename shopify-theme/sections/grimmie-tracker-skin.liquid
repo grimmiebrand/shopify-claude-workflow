@@ -22,26 +22,25 @@
   assign body_size   = section.settings.body_size   | default: 14
   assign masked_path = section.settings.masked_path | default: '/pages/traccia-il-tuo-ordine'
   assign mask_url    = section.settings.mask_url
+  assign pp_path     = section.settings.pp_path     | default: '/tools/tracking'
 -%}
 
 <script>
 (function(){
+  var TRACK_PATH = {{ pp_path | json }};
   function mark(){
     var p = window.location.pathname || '';
-    if (p.indexOf('/apps/parcelpanel') === 0) {
+    if (TRACK_PATH && p.indexOf(TRACK_PATH) === 0) {
       document.documentElement.classList.add('grimmie-pp-page');
       if (document.body) document.body.classList.add('grimmie-pp-page');
 
       {%- if mask_url -%}
-      // Rewrite the visible URL to the branded path while keeping the
-      // ParcelPanel content rendered. Reload will land on the friendly
-      // Grimmie page (with the CTA card).
       try {
         if (window.history && window.history.replaceState) {
           var pretty = {{ masked_path | json }};
           window.history.replaceState(null, '', pretty + window.location.search + window.location.hash);
         }
-      } catch(e) { /* no-op */ }
+      } catch(e) {}
       {%- endif -%}
     }
   }
@@ -205,7 +204,10 @@
 {
   "name": "Grimmie tracker skin",
   "settings": [
-    { "type": "paragraph", "content": "Forces sane heading and form sizes on the hosted ParcelPanel tracking page (/apps/parcelpanel). Add once to the header section group; no visible output." },
+    { "type": "paragraph", "content": "Forces sane heading and form sizes on the hosted ParcelPanel tracking page. Add once to the header section group; no visible output." },
+
+    { "type": "header", "content": "Tracking page URL" },
+    { "type": "text", "id": "pp_path", "label": "ParcelPanel proxy path", "default": "/tools/tracking", "info": "Where the ParcelPanel tracking page lives (set this in ParcelPanel admin + Shopify Apps proxy settings). The skin script applies the styling when the customer is on this path." },
 
     { "type": "header", "content": "URL masking" },
     { "type": "checkbox", "id": "mask_url",    "label": "Hide /apps/parcelpanel in the URL bar", "info": "Replaces the URL with the branded path below using history.replaceState. Reloading the page lands the customer back on the branded Grimmie page (with the CTA).", "default": true },
