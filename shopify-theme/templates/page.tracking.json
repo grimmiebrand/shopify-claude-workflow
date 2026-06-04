@@ -7,6 +7,8 @@
         "hero_image_alt": "Grimmie Alma pouches",
         "hero_title": "Traccia il tuo ordine",
         "hero_subtitle": "Segui il percorso del tuo pacco, fino a destinazione.",
+        "embed_url": "/apps/parcelpanel",
+        "iframe_min_height": 1100,
         "show_help_card": true,
         "help_title": "Hai bisogno di aiuto?",
         "help_text": "Il nostro servizio clienti è disponibile dal lunedì al venerdì, dalle 9:00 alle 18:00.",
