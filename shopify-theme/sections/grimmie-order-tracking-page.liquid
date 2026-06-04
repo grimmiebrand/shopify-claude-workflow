@@ -1,0 +1,246 @@
+{%- liquid
+  assign sid = section.id
+  assign s = section.settings
+-%}
+
+<style>
+  .grimmie-trk-{{ sid }} {
+    --gtrk-bg: {{ s.background_color }};
+    --gtrk-bg2: {{ s.hero_bg_color }};
+    --gtrk-blush: {{ s.blush_color }};
+    --gtrk-blush-light: {{ s.blush_light_color }};
+    --gtrk-heading: {{ s.heading_color }};
+    --gtrk-text: {{ s.text_color }};
+    --gtrk-border: {{ s.border_color }};
+    --gtrk-accent: {{ s.accent_color }};
+    --gtrk-btn-bg: {{ s.button_background_color }};
+    --gtrk-btn-text: {{ s.button_text_color }};
+    --gtrk-btn-hover: {{ s.button_hover_background_color }};
+
+    background-color: var(--gtrk-bg);
+    color: var(--gtrk-text);
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    font-family: var(--font-body--family);
+  }
+  .grimmie-trk-{{ sid }} * { box-sizing: border-box; }
+  .grimmie-trk-{{ sid }} [hidden] { display: none !important; }
+
+  .grimmie-trk-{{ sid }}__inner { max-width: 1180px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 56px); }
+
+  /* Hero */
+  .grimmie-trk-{{ sid }}__hero {
+    position: relative;
+    width: 100%;
+    min-height: clamp(280px, 30vw, 420px);
+    background-color: var(--gtrk-bg2);
+    overflow: hidden;
+    display: flex;
+  }
+  .grimmie-trk-{{ sid }}__hero-image { position: absolute; inset: 0; z-index: 0; }
+  .grimmie-trk-{{ sid }}__hero-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .grimmie-trk-{{ sid }}__hero-image svg.placeholder { width: 100%; height: 100%; color: var(--gtrk-blush); opacity: 0.4; }
+  .grimmie-trk-{{ sid }}__hero-content {
+    position: relative; z-index: 1; width: 100%; max-width: 1180px;
+    margin: 0 auto; padding: clamp(40px, 7vw, 80px) clamp(20px, 5vw, 56px);
+    display: flex; align-items: center; justify-content: flex-end;
+  }
+  .grimmie-trk-{{ sid }}__hero-text {
+    max-width: 520px;
+    display: flex; flex-direction: column; gap: clamp(10px, 1.4vw, 16px);
+    text-align: right;
+  }
+  .grimmie-trk-{{ sid }}__title {
+    font-family: var(--font-heading--family); font-style: var(--font-heading--style); font-weight: var(--font-heading--weight);
+    color: var(--gtrk-heading);
+    font-size: clamp(28px, 4vw, 52px);
+    line-height: 1.05; letter-spacing: -0.01em; margin: 0;
+  }
+  .grimmie-trk-{{ sid }}__lead {
+    font-size: clamp(13px, 1vw, 15px); line-height: 1.6;
+    color: var(--gtrk-text); margin: 0; max-width: 46ch;
+  }
+
+  /* Body */
+  .grimmie-trk-{{ sid }}__body { padding: clamp(40px, 5vw, 64px) 0; display: flex; flex-direction: column; gap: clamp(20px, 2.4vw, 28px); }
+
+  /* Card */
+  .grimmie-trk-{{ sid }}__card {
+    background-color: var(--gtrk-bg);
+    border: 1px solid var(--gtrk-border);
+    border-radius: 12px;
+    padding: clamp(24px, 3vw, 40px);
+  }
+
+  /* Help card */
+  .grimmie-trk-{{ sid }}__help {
+    display: flex; align-items: center; gap: clamp(16px, 2vw, 28px); flex-wrap: wrap;
+  }
+  .grimmie-trk-{{ sid }}__help-icon {
+    flex: 0 0 auto; width: 52px; height: 52px; border-radius: 50%;
+    background-color: var(--gtrk-blush-light);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gtrk-accent);
+  }
+  .grimmie-trk-{{ sid }}__help-icon svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .grimmie-trk-{{ sid }}__help-text { flex: 1 1 240px; min-width: 0; }
+  .grimmie-trk-{{ sid }}__help-title { margin: 0 0 4px; font-family: var(--font-heading--family); font-style: var(--font-heading--style); font-weight: var(--font-heading--weight); color: var(--gtrk-heading); font-size: clamp(16px, 1.4vw, 20px); }
+  .grimmie-trk-{{ sid }}__help-desc { margin: 0; font-size: clamp(13px, 0.95vw, 14.5px); line-height: 1.55; color: var(--gtrk-text); }
+  .grimmie-trk-{{ sid }}__help-cta {
+    flex: 0 0 auto; color: var(--gtrk-accent); text-decoration: underline;
+    text-underline-offset: 4px; text-decoration-thickness: 1px;
+    font-size: clamp(13px, 0.95vw, 14.5px); font-weight: 500; letter-spacing: 0.04em;
+  }
+  .grimmie-trk-{{ sid }}__help-cta:hover { color: var(--gtrk-btn-hover); }
+
+  /* ParcelPanel widget styling overrides — scoped to this section */
+  .grimmie-trk-{{ sid }} .pp-tracking-page,
+  .grimmie-trk-{{ sid }} .parcelpanel-tracking,
+  .grimmie-trk-{{ sid }} [class*="parcelpanel"] {
+    --pp-primary-color: var(--gtrk-blush);
+    --pp-accent-color: var(--gtrk-accent);
+    font-family: var(--font-body--family) !important;
+    color: var(--gtrk-text);
+  }
+  .grimmie-trk-{{ sid }} .pp-button,
+  .grimmie-trk-{{ sid }} [class*="parcelpanel"] button[type="submit"] {
+    background-color: var(--gtrk-btn-bg) !important;
+    color: var(--gtrk-btn-text) !important;
+    border-radius: 8px !important;
+    border: none !important;
+    padding: 14px 24px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+  }
+  .grimmie-trk-{{ sid }} .pp-button:hover,
+  .grimmie-trk-{{ sid }} [class*="parcelpanel"] button[type="submit"]:hover {
+    background-color: var(--gtrk-btn-hover) !important;
+  }
+
+  /* Empty-state when no app block is added yet */
+  .grimmie-trk-{{ sid }}__placeholder {
+    border: 1px dashed var(--gtrk-border);
+    border-radius: 12px;
+    padding: clamp(32px, 4vw, 56px) clamp(24px, 3vw, 40px);
+    text-align: center;
+    color: var(--gtrk-text);
+    background-color: var(--gtrk-bg);
+  }
+  .grimmie-trk-{{ sid }}__placeholder p { margin: 0 0 8px; }
+  .grimmie-trk-{{ sid }}__placeholder strong { color: var(--gtrk-heading); }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .grimmie-trk-{{ sid }}__hero { min-height: clamp(240px, 60vw, 360px); align-items: flex-end; }
+    .grimmie-trk-{{ sid }}__hero-content { padding: 24px 20px; justify-content: flex-start; }
+    .grimmie-trk-{{ sid }}__hero-text { text-align: left; max-width: 100%; }
+    .grimmie-trk-{{ sid }}__help { gap: 14px; }
+    .grimmie-trk-{{ sid }}__help-cta { flex: 1 1 100%; text-align: left; }
+  }
+</style>
+
+<section class="grimmie-trk-{{ sid }}" aria-label="Traccia il tuo ordine">
+
+  {%- if s.show_hero -%}
+    <div class="grimmie-trk-{{ sid }}__hero">
+      <div class="grimmie-trk-{{ sid }}__hero-image">
+        {%- if s.hero_image != blank -%}
+          {{ s.hero_image | image_url: width: 2400 | image_tag: alt: s.hero_image_alt, loading: 'eager', widths: '720,960,1200,1600,2000,2400', sizes: '100vw' }}
+        {%- else -%}
+          <svg class="placeholder" viewBox="0 0 160 60" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="160" height="60" fill="currentColor" opacity="0.4"/></svg>
+        {%- endif -%}
+      </div>
+      <div class="grimmie-trk-{{ sid }}__hero-content">
+        <div class="grimmie-trk-{{ sid }}__hero-text">
+          {%- if s.hero_title != blank -%}<h1 class="grimmie-trk-{{ sid }}__title">{{ s.hero_title | escape }}</h1>{%- endif -%}
+          {%- if s.hero_subtitle != blank -%}<p class="grimmie-trk-{{ sid }}__lead">{{ s.hero_subtitle | escape }}</p>{%- endif -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="grimmie-trk-{{ sid }}__inner">
+    <div class="grimmie-trk-{{ sid }}__body">
+
+      {%- comment -%} ParcelPanel app block goes here. Merchant adds it from the editor. {%- endcomment -%}
+      {%- assign has_app_block = false -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}
+          {%- assign has_app_block = true -%}
+          <div class="grimmie-trk-{{ sid }}__card" {{ block.shopify_attributes }}>
+            {% render block %}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if has_app_block == false -%}
+        <div class="grimmie-trk-{{ sid }}__placeholder">
+          <p><strong>Aggiungi il widget di tracking</strong></p>
+          <p>Apri il Theme Editor su questa pagina, clicca sulla section <em>Grimmie order tracking page</em> &rarr; <em>Add block</em> e seleziona il blocco <em>ParcelPanel</em>.</p>
+        </div>
+      {%- endif -%}
+
+      {%- if s.show_help_card -%}
+        <div class="grimmie-trk-{{ sid }}__card grimmie-trk-{{ sid }}__help">
+          <span class="grimmie-trk-{{ sid }}__help-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 14 V11 a8 8 0 0 1 16 0 V14"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/><path d="M17 20 a4 4 0 0 1 -4 4 h-1"/></svg>
+          </span>
+          <div class="grimmie-trk-{{ sid }}__help-text">
+            <p class="grimmie-trk-{{ sid }}__help-title">{{ s.help_title | escape }}</p>
+            <p class="grimmie-trk-{{ sid }}__help-desc">{{ s.help_text | escape }}</p>
+          </div>
+          <a class="grimmie-trk-{{ sid }}__help-cta" href="{{ s.help_cta_link }}">{{ s.help_cta_text | escape }}</a>
+        </div>
+      {%- endif -%}
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Grimmie order tracking",
+  "tag": "section",
+  "class": "grimmie-trk-section",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "checkbox",     "id": "show_hero",      "label": "Show hero",                     "default": true },
+    { "type": "image_picker", "id": "hero_image",     "label": "Hero image" },
+    { "type": "text",         "id": "hero_image_alt", "label": "Hero image alt text",           "default": "Grimmie Alma pouches" },
+    { "type": "text",         "id": "hero_title",     "label": "Hero title",                    "default": "Traccia il tuo ordine" },
+    { "type": "text",         "id": "hero_subtitle",  "label": "Hero subtitle",                 "default": "Segui il percorso del tuo pacco, fino a destinazione." },
+
+    { "type": "header", "content": "Help card" },
+    { "type": "checkbox", "id": "show_help_card",  "label": "Show help card",          "default": true },
+    { "type": "text",     "id": "help_title",      "label": "Title",                   "default": "Hai bisogno di aiuto?" },
+    { "type": "textarea", "id": "help_text",       "label": "Text",                    "default": "Il nostro servizio clienti è disponibile dal lunedì al venerdì, dalle 9:00 alle 18:00." },
+    { "type": "text",     "id": "help_cta_text",   "label": "CTA text",                "default": "Contattaci" },
+    { "type": "url",      "id": "help_cta_link",   "label": "CTA link",                "default": "mailto:info@grimmie.co" },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color",        "label": "Page background",         "default": "#F7F1EE" },
+    { "type": "color", "id": "hero_bg_color",           "label": "Hero background",         "default": "#F1EBE6" },
+    { "type": "color", "id": "blush_color",             "label": "Blush",                   "default": "#EACBC8" },
+    { "type": "color", "id": "blush_light_color",       "label": "Soft blush",              "default": "#F7EDEB" },
+    { "type": "color", "id": "heading_color",           "label": "Heading",                 "default": "#6E5F59" },
+    { "type": "color", "id": "text_color",              "label": "Body text",               "default": "#6E5F59" },
+    { "type": "color", "id": "border_color",            "label": "Borders",                 "default": "#DDD2CA" },
+    { "type": "color", "id": "accent_color",            "label": "Accent",                  "default": "#C99696" },
+    { "type": "color", "id": "button_background_color", "label": "Widget button bg",        "default": "#EACBC8" },
+    { "type": "color", "id": "button_text_color",       "label": "Widget button text",      "default": "#6E5F59" },
+    { "type": "color", "id": "button_hover_background_color", "label": "Widget button hover", "default": "#DFAFB3" }
+  ],
+  "blocks": [
+    { "type": "@app" }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    { "name": "Grimmie order tracking", "category": "Grimmie" }
+  ],
+  "enabled_on": {
+    "templates": ["page"]
+  }
+}
+{% endschema %}
