@@ -81,6 +81,21 @@
         "icon_size": 15
       }
     },
+    "grimmie_tracker_skin_T1R2K3": {
+      "type": "grimmie-tracker-skin",
+      "name": "Grimmie tracker skin",
+      "settings": {
+        "h1_max": 36,
+        "h_max": 22,
+        "body_size": 14,
+        "text_color": "#6E5F59",
+        "border": "#DDD2CA",
+        "accent": "#C99696",
+        "btn_bg": "#EACBC8",
+        "btn_text": "#6E5F59",
+        "btn_hover": "#DFAFB3"
+      }
+    },
     "grimmie_mobile_menu_skin_X1A2B3": {
       "type": "grimmie-mobile-menu-skin",
       "name": "Grimmie mobile menu skin",
@@ -225,6 +240,7 @@
   },
   "order": [
     "grimmie_scrolling_announcement_bar_Ui7EYN",
+    "grimmie_tracker_skin_T1R2K3",
     "grimmie_mobile_menu_skin_X1A2B3",
     "header_announcements_WbCTVz",
     "header_section"
