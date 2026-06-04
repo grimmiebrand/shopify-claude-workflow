@@ -85,6 +85,8 @@
       "type": "grimmie-tracker-skin",
       "name": "Grimmie tracker skin",
       "settings": {
+        "mask_url": true,
+        "masked_path": "/pages/traccia-il-tuo-ordine",
         "h1_max": 28,
         "h_max": 18,
         "body_size": 14,

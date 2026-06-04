@@ -20,6 +20,8 @@
   assign h1_max      = section.settings.h1_max      | default: 28
   assign h_max       = section.settings.h_max       | default: 18
   assign body_size   = section.settings.body_size   | default: 14
+  assign masked_path = section.settings.masked_path | default: '/pages/traccia-il-tuo-ordine'
+  assign mask_url    = section.settings.mask_url
 -%}
 
 <script>
@@ -29,6 +31,18 @@
     if (p.indexOf('/apps/parcelpanel') === 0) {
       document.documentElement.classList.add('grimmie-pp-page');
       if (document.body) document.body.classList.add('grimmie-pp-page');
+
+      {%- if mask_url -%}
+      // Rewrite the visible URL to the branded path while keeping the
+      // ParcelPanel content rendered. Reload will land on the friendly
+      // Grimmie page (with the CTA card).
+      try {
+        if (window.history && window.history.replaceState) {
+          var pretty = {{ masked_path | json }};
+          window.history.replaceState(null, '', pretty + window.location.search + window.location.hash);
+        }
+      } catch(e) { /* no-op */ }
+      {%- endif -%}
     }
   }
   mark();
@@ -192,6 +206,10 @@
   "name": "Grimmie tracker skin",
   "settings": [
     { "type": "paragraph", "content": "Forces sane heading and form sizes on the hosted ParcelPanel tracking page (/apps/parcelpanel). Add once to the header section group; no visible output." },
+
+    { "type": "header", "content": "URL masking" },
+    { "type": "checkbox", "id": "mask_url",    "label": "Hide /apps/parcelpanel in the URL bar", "info": "Replaces the URL with the branded path below using history.replaceState. Reloading the page lands the customer back on the branded Grimmie page (with the CTA).", "default": true },
+    { "type": "text",     "id": "masked_path", "label": "Branded path",                          "default": "/pages/traccia-il-tuo-ordine" },
 
     { "type": "header", "content": "Sizes" },
     { "type": "range", "id": "h1_max",    "label": "H1 max size",   "min": 18, "max": 48, "step": 1, "unit": "px", "default": 28 },
