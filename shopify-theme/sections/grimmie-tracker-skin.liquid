@@ -17,8 +17,8 @@
   assign btn_text    = section.settings.btn_text    | default: '#6E5F59'
   assign btn_hover   = section.settings.btn_hover   | default: '#DFAFB3'
   assign border      = section.settings.border      | default: '#DDD2CA'
-  assign h1_max      = section.settings.h1_max      | default: 36
-  assign h_max       = section.settings.h_max       | default: 22
+  assign h1_max      = section.settings.h1_max      | default: 28
+  assign h_max       = section.settings.h_max       | default: 18
   assign body_size   = section.settings.body_size   | default: 14
 -%}
 
@@ -42,11 +42,15 @@
   /* Scoped to /apps/parcelpanel only */
   html.grimmie-pp-page h1,
   body.grimmie-pp-page h1 {
-    font-size: clamp(22px, 2.6vw, {{ h1_max }}px) !important;
-    line-height: 1.2 !important;
-    letter-spacing: -0.005em !important;
-    margin: 0.5em 0 !important;
-    color: {{ text_color }};
+    font-family: var(--font-heading--family) !important;
+    font-style: var(--font-heading--style) !important;
+    font-weight: var(--font-heading--weight) !important;
+    font-size: clamp(22px, 2vw, {{ h1_max }}px) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.01em !important;
+    text-transform: none !important;
+    margin: 0.4em 0 !important;
+    color: {{ text_color }} !important;
   }
   html.grimmie-pp-page h2,
   html.grimmie-pp-page h3,
@@ -58,12 +62,50 @@
   body.grimmie-pp-page h4,
   body.grimmie-pp-page h5,
   body.grimmie-pp-page h6 {
-    font-size: clamp(15px, 1.6vw, {{ h_max }}px) !important;
-    line-height: 1.3 !important;
-    letter-spacing: 0 !important;
-    margin: 0.5em 0 !important;
-    color: {{ text_color }};
+    font-family: var(--font-heading--family) !important;
+    font-style: var(--font-heading--style) !important;
     font-weight: 500 !important;
+    font-size: clamp(15px, 1.4vw, {{ h_max }}px) !important;
+    line-height: 1.25 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    margin: 0.5em 0 !important;
+    color: {{ text_color }} !important;
+  }
+
+  /* Aggressive fallback: also style ParcelPanel containers by their class names. */
+  [class*='ParcelPanel'] h1,
+  [class*='parcelpanel'] h1,
+  [id*='parcelpanel'] h1,
+  [class*='pp-tracking'] h1,
+  [class*='pp-app'] h1 {
+    font-family: var(--font-heading--family) !important;
+    font-style: var(--font-heading--style) !important;
+    font-weight: var(--font-heading--weight) !important;
+    font-size: clamp(22px, 2vw, {{ h1_max }}px) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.01em !important;
+    text-transform: none !important;
+    color: {{ text_color }} !important;
+  }
+  [class*='ParcelPanel'] h2,
+  [class*='ParcelPanel'] h3,
+  [class*='ParcelPanel'] h4,
+  [class*='parcelpanel'] h2,
+  [class*='parcelpanel'] h3,
+  [class*='parcelpanel'] h4,
+  [id*='parcelpanel'] h2,
+  [id*='parcelpanel'] h3,
+  [class*='pp-tracking'] h2,
+  [class*='pp-tracking'] h3,
+  [class*='pp-app'] h2,
+  [class*='pp-app'] h3 {
+    font-family: var(--font-heading--family) !important;
+    font-weight: 500 !important;
+    font-size: clamp(15px, 1.4vw, {{ h_max }}px) !important;
+    line-height: 1.25 !important;
+    text-transform: none !important;
+    color: {{ text_color }} !important;
   }
 
   html.grimmie-pp-page p,
@@ -85,6 +127,7 @@
     font-size: {{ body_size }}px !important;
     line-height: 1.5 !important;
     letter-spacing: 0.02em !important;
+    font-family: var(--font-body--family) !important;
   }
 
   /* Submit / primary buttons inside the ParcelPanel UI */
@@ -132,11 +175,15 @@
   /* Mobile: extra small clamp for headings to avoid wrapping nightmares */
   @media (max-width: 480px) {
     html.grimmie-pp-page h1,
-    body.grimmie-pp-page h1 { font-size: 22px !important; }
+    body.grimmie-pp-page h1,
+    [class*='ParcelPanel'] h1,
+    [class*='parcelpanel'] h1 { font-size: 22px !important; }
     html.grimmie-pp-page h2,
     html.grimmie-pp-page h3,
     body.grimmie-pp-page h2,
-    body.grimmie-pp-page h3 { font-size: 16px !important; }
+    body.grimmie-pp-page h3,
+    [class*='ParcelPanel'] h2,
+    [class*='ParcelPanel'] h3 { font-size: 16px !important; }
   }
 </style>
 
@@ -147,8 +194,8 @@
     { "type": "paragraph", "content": "Forces sane heading and form sizes on the hosted ParcelPanel tracking page (/apps/parcelpanel). Add once to the header section group; no visible output." },
 
     { "type": "header", "content": "Sizes" },
-    { "type": "range", "id": "h1_max",    "label": "H1 max size",   "min": 22, "max": 56, "step": 1, "unit": "px", "default": 36 },
-    { "type": "range", "id": "h_max",     "label": "H2–H6 max size","min": 14, "max": 32, "step": 1, "unit": "px", "default": 22 },
+    { "type": "range", "id": "h1_max",    "label": "H1 max size",   "min": 18, "max": 48, "step": 1, "unit": "px", "default": 28 },
+    { "type": "range", "id": "h_max",     "label": "H2–H6 max size","min": 14, "max": 28, "step": 1, "unit": "px", "default": 18 },
     { "type": "range", "id": "body_size", "label": "Body text size","min": 12, "max": 18, "step": 1, "unit": "px", "default": 14 },
 
     { "type": "header", "content": "Colors" },
