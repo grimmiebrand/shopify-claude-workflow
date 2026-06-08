@@ -36,21 +36,55 @@
 
   /* ============ HERO ============ */
   .grimmie-ct-{{ sid }}__hero {
-    background-color: var(--gct-hero-bg);
-    display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    align-items: stretch;
+    position: relative;
     width: 100%;
-    min-height: clamp(360px, 36vw, 520px);
+    min-height: clamp(240px, 24vw, 360px);
+    background-color: var(--gct-hero-bg);
+    overflow: hidden;
+    display: flex;
+  }
+  .grimmie-ct-{{ sid }}__hero-media { position: absolute; inset: 0; z-index: 0; }
+  .grimmie-ct-{{ sid }}__hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right center;
+    display: block;
+  }
+  .grimmie-ct-{{ sid }}__hero-media .gct-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: var(--gct-hero-bg);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8%;
+    color: var(--gct-blush);
+  }
+  .grimmie-ct-{{ sid }}__hero-media .gct-placeholder svg { width: 72px; height: 72px; opacity: 0.45; }
+  .grimmie-ct-{{ sid }}__hero-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(90deg, {{ s.hero_bg_color }} 0%, {{ s.hero_bg_color }} 26%, {{ s.hero_bg_color }}00 68%);
+  }
+  .grimmie-ct-{{ sid }}__hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: clamp(28px, 4vw, 56px) clamp(24px, 5vw, 56px);
+    display: flex;
+    align-items: center;
+    {% if s.hero_text_align == 'center' %}justify-content: center;{% elsif s.hero_text_align == 'right' %}justify-content: flex-end;{% else %}justify-content: flex-start;{% endif %}
   }
   .grimmie-ct-{{ sid }}__hero-text {
+    max-width: 540px;
     text-align: {{ s.hero_text_align }};
     display: flex;
     flex-direction: column;
-    gap: clamp(14px, 1.6vw, 20px);
-    justify-content: center;
-    padding: clamp(40px, 6vw, 88px) clamp(28px, 5vw, 72px);
-    {% if s.hero_text_align == 'center' %}align-items: center;{% elsif s.hero_text_align == 'right' %}align-items: flex-end;{% else %}align-items: flex-start;{% endif %}
+    gap: clamp(12px, 1.4vw, 18px);
   }
   .grimmie-ct-{{ sid }}__eyebrow {
     margin: 0;
@@ -67,7 +101,7 @@
     font-style: var(--font-heading--style);
     font-weight: var(--font-heading--weight);
     color: var(--gct-heading);
-    font-size: clamp(34px, 5vw, 62px);
+    font-size: clamp(30px, 4.2vw, 54px);
     line-height: 1.04;
     letter-spacing: -0.01em;
   }
@@ -78,30 +112,6 @@
     color: var(--gct-text);
     max-width: 42ch;
   }
-  .grimmie-ct-{{ sid }}__hero-media {
-    position: relative;
-    overflow: hidden;
-    min-height: clamp(240px, 30vw, 520px);
-  }
-  .grimmie-ct-{{ sid }}__hero-media img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .grimmie-ct-{{ sid }}__hero-media .gct-placeholder {
-    width: 100%;
-    height: 100%;
-    background-color: var(--gct-blush-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--gct-blush);
-  }
-  .grimmie-ct-{{ sid }}__hero-media .gct-placeholder svg { width: 64px; height: 64px; opacity: 0.5; }
-
   /* ============ DIRECTION ============ */
   .grimmie-ct-{{ sid }}__direction { padding: clamp(48px, 6vw, 84px) 0 clamp(8px, 1vw, 12px); }
   .grimmie-ct-{{ sid }}__section-title {
@@ -289,20 +299,13 @@
 
   /* ============ MOBILE ============ */
   @media (max-width: 749px) {
-    .grimmie-ct-{{ sid }}__hero {
-      grid-template-columns: 1fr;
-      min-height: 0;
+    .grimmie-ct-{{ sid }}__hero { min-height: clamp(300px, 78vw, 420px); }
+    .grimmie-ct-{{ sid }}__hero-media img { object-position: center; }
+    .grimmie-ct-{{ sid }}__hero-scrim {
+      background: linear-gradient(180deg, {{ s.hero_bg_color }} 0%, {{ s.hero_bg_color }} 32%, {{ s.hero_bg_color }}00 94%);
     }
-    .grimmie-ct-{{ sid }}__hero-text {
-      text-align: left;
-      align-items: flex-start;
-      order: 1;
-      padding: clamp(32px, 8vw, 48px) 24px clamp(24px, 6vw, 32px);
-    }
-    .grimmie-ct-{{ sid }}__hero-media {
-      order: 2;
-      min-height: clamp(220px, 62vw, 340px);
-    }
+    .grimmie-ct-{{ sid }}__hero-content { align-items: flex-start; padding-top: clamp(28px, 8vw, 40px); }
+    .grimmie-ct-{{ sid }}__hero-text { text-align: left; max-width: 100%; }
     .grimmie-ct-{{ sid }}__grid { grid-template-columns: 1fr; gap: clamp(14px, 4vw, 18px); }
     .grimmie-ct-{{ sid }}__field--grid { margin-bottom: clamp(14px, 4vw, 18px); }
     .grimmie-ct-{{ sid }}__card { gap: 16px; padding: 20px; }
@@ -314,25 +317,28 @@
   {%- comment -%} ============ HERO ============ {%- endcomment -%}
   {%- if s.show_hero -%}
     <div class="grimmie-ct-{{ sid }}__hero">
-      <div class="grimmie-ct-{{ sid }}__hero-text">
-        {%- if s.hero_eyebrow != blank -%}
-          <p class="grimmie-ct-{{ sid }}__eyebrow">{{ s.hero_eyebrow | escape }}</p>
-        {%- endif -%}
-        {%- if s.hero_title != blank -%}
-          <h1 class="grimmie-ct-{{ sid }}__hero-title">{{ s.hero_title }}</h1>
-        {%- endif -%}
-        {%- if s.hero_subtitle != blank -%}
-          <p class="grimmie-ct-{{ sid }}__hero-sub">{{ s.hero_subtitle | escape }}</p>
-        {%- endif -%}
-      </div>
       <div class="grimmie-ct-{{ sid }}__hero-media">
         {%- if s.hero_image != blank -%}
-          {{ s.hero_image | image_url: width: 1800 | image_tag: alt: s.hero_image_alt, loading: 'eager', widths: '600,900,1200,1600,1800', sizes: '(max-width: 749px) 100vw, 50vw' }}
+          {{ s.hero_image | image_url: width: 2400 | image_tag: alt: s.hero_image_alt, loading: 'eager', widths: '720,960,1200,1600,2000,2400', sizes: '100vw' }}
         {%- else -%}
           <div class="gct-placeholder" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M3 11h18"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
           </div>
         {%- endif -%}
+      </div>
+      <div class="grimmie-ct-{{ sid }}__hero-scrim" aria-hidden="true"></div>
+      <div class="grimmie-ct-{{ sid }}__hero-content">
+        <div class="grimmie-ct-{{ sid }}__hero-text">
+          {%- if s.hero_eyebrow != blank -%}
+            <p class="grimmie-ct-{{ sid }}__eyebrow">{{ s.hero_eyebrow | escape }}</p>
+          {%- endif -%}
+          {%- if s.hero_title != blank -%}
+            <h1 class="grimmie-ct-{{ sid }}__hero-title">{{ s.hero_title }}</h1>
+          {%- endif -%}
+          {%- if s.hero_subtitle != blank -%}
+            <p class="grimmie-ct-{{ sid }}__hero-sub">{{ s.hero_subtitle | escape }}</p>
+          {%- endif -%}
+        </div>
       </div>
     </div>
   {%- endif -%}
@@ -397,7 +403,7 @@
           {%- endif -%}
         </div>
 
-        {%- form 'contact', class: 'grimmie-ct-' | append: sid | append: '__form' -%}
+        {%- form 'contact' -%}
           {%- if form.posted_successfully? -%}
             <div class="grimmie-ct-{{ sid }}__note grimmie-ct-{{ sid }}__note--success" role="status" tabindex="-1">
               {{ s.success_message | escape }}
