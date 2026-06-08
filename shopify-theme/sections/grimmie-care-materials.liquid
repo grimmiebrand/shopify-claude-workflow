@@ -1,0 +1,283 @@
+{%- liquid
+  assign section_id = section.id
+
+  assign banner_title = section.settings.banner_title
+  assign banner_text = section.settings.banner_text
+  assign banner_icon = section.settings.banner_icon
+  assign banner_fallback_icon = section.settings.banner_fallback_icon
+  assign banner_icon_alt = section.settings.banner_icon_alt
+
+  assign motto_text = section.settings.motto_text
+  assign motto_decoration = section.settings.motto_decoration
+
+  assign bg_color = section.settings.background_color
+  assign banner_bg = section.settings.banner_background_color
+  assign banner_icon_bg = section.settings.banner_icon_background_color
+  assign heading_color = section.settings.heading_color
+  assign text_color = section.settings.text_color
+  assign accent_color = section.settings.accent_color
+  assign border_color = section.settings.border_color
+-%}
+
+<style>
+  .grimmie-care-mat-{{ section_id }} {
+    --gcm-bg: {{ bg_color }};
+    --gcm-banner-bg: {{ banner_bg }};
+    --gcm-banner-icon-bg: {{ banner_icon_bg }};
+    --gcm-heading: {{ heading_color }};
+    --gcm-text: {{ text_color }};
+    --gcm-accent: {{ accent_color }};
+    --gcm-border: {{ border_color }};
+
+    background-color: var(--gcm-bg);
+    color: var(--gcm-text);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .grimmie-care-mat-{{ section_id }} * { box-sizing: border-box; }
+
+  .grimmie-care-mat-{{ section_id }}__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 56px);
+  }
+
+  /* Materials banner */
+  .grimmie-care-mat-{{ section_id }}__banner {
+    background-color: var(--gcm-banner-bg);
+    border-radius: 18px;
+    padding: clamp(20px, 2.4vw, 28px) clamp(22px, 3vw, 36px);
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 2.4vw, 28px);
+  }
+
+  .grimmie-care-mat-{{ section_id }}__banner-icon {
+    flex-shrink: 0;
+    width: clamp(44px, 4.4vw, 56px);
+    height: clamp(44px, 4.4vw, 56px);
+    border-radius: 50%;
+    background-color: var(--gcm-banner-icon-bg);
+    color: var(--gcm-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .grimmie-care-mat-{{ section_id }}__banner-icon svg {
+    width: 52%;
+    height: 52%;
+    fill: currentColor;
+    stroke: currentColor;
+    stroke-width: 1;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .grimmie-care-mat-{{ section_id }}__banner-icon img {
+    width: 56%;
+    height: 56%;
+    object-fit: contain;
+  }
+
+  .grimmie-care-mat-{{ section_id }}__banner-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .grimmie-care-mat-{{ section_id }}__banner-title {
+    font-family: var(--font-body--family);
+    color: var(--gcm-accent);
+    font-size: clamp(12px, 0.95vw, 14px);
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin: 0 0 4px;
+    line-height: 1.3;
+  }
+
+  .grimmie-care-mat-{{ section_id }}__banner-text {
+    font-family: var(--font-body--family);
+    color: var(--gcm-text);
+    font-weight: 400;
+    font-size: clamp(13px, 0.95vw, 14.5px);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* Motto */
+  .grimmie-care-mat-{{ section_id }}__motto {
+    text-align: center;
+    margin-top: clamp(48px, 6vw, 80px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(14px, 1.6vw, 20px);
+  }
+
+  .grimmie-care-mat-{{ section_id }}__motto-decoration {
+    color: var(--gcm-heading);
+    width: clamp(16px, 1.6vw, 22px);
+    height: clamp(16px, 1.6vw, 22px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .grimmie-care-mat-{{ section_id }}__motto-decoration svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+
+  .grimmie-care-mat-{{ section_id }}__motto-text {
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    color: var(--gcm-heading);
+    font-size: clamp(20px, 2.2vw, 30px);
+    line-height: 1.3;
+    letter-spacing: -0.005em;
+    margin: 0;
+    text-transform: none;
+    max-width: 760px;
+  }
+
+  .grimmie-care-mat-{{ section_id }}__motto-heart {
+    color: var(--gcm-accent);
+    width: clamp(20px, 2vw, 26px);
+    height: clamp(20px, 2vw, 26px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .grimmie-care-mat-{{ section_id }}__motto-heart svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+
+  @media (max-width: 640px) {
+    .grimmie-care-mat-{{ section_id }} {
+      padding-top: {{ section.settings.padding_top | times: 0.7 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.7 | round }}px;
+    }
+    .grimmie-care-mat-{{ section_id }}__banner {
+      flex-direction: row;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 18px;
+    }
+    .grimmie-care-mat-{{ section_id }}__motto { margin-top: 40px; }
+  }
+</style>
+
+<section
+  class="grimmie-care-mat-{{ section_id }}"
+  aria-label="{{ section.settings.aria_label | default: 'Materiali e cura' | escape }}"
+>
+  <div class="grimmie-care-mat-{{ section_id }}__inner">
+    {%- if banner_title != blank or banner_text != blank or banner_icon != blank -%}
+      <div class="grimmie-care-mat-{{ section_id }}__banner">
+        <div class="grimmie-care-mat-{{ section_id }}__banner-icon" aria-hidden="{% if banner_icon_alt == blank %}true{% else %}false{% endif %}">
+          {%- if banner_icon != blank -%}
+            {{ banner_icon | image_url: width: 100 | image_tag: alt: banner_icon_alt, loading: 'lazy' }}
+          {%- else -%}
+            {%- case banner_fallback_icon -%}
+              {%- when 'leaf' -%}
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ banner_icon_alt | default: 'Leaf' | escape }}"><path d="M4 20 C 4 11 11 4 20 4 C 20 13 13 20 4 20 Z" fill="currentColor" stroke="none"/><path d="M4 20 L 14 10" stroke="#fff" stroke-width="1.5" fill="none"/></svg>
+              {%- when 'sparkle' -%}
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ banner_icon_alt | default: 'Sparkle' | escape }}"><path d="M12 3 L13.5 9 L19 10.5 L13.5 12 L12 18 L10.5 12 L5 10.5 L10.5 9 Z" fill="currentColor" stroke="none"/></svg>
+              {%- else -%}
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ banner_icon_alt | default: 'Icon' | escape }}"><circle cx="12" cy="12" r="6" fill="currentColor"/></svg>
+            {%- endcase -%}
+          {%- endif -%}
+        </div>
+        <div class="grimmie-care-mat-{{ section_id }}__banner-body">
+          {%- if banner_title != blank -%}
+            <p class="grimmie-care-mat-{{ section_id }}__banner-title">{{ banner_title | escape }}</p>
+          {%- endif -%}
+          {%- if banner_text != blank -%}
+            <p class="grimmie-care-mat-{{ section_id }}__banner-text">{{ banner_text | escape }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if motto_text != blank -%}
+      <div class="grimmie-care-mat-{{ section_id }}__motto">
+        {%- if motto_decoration != 'none' -%}
+          <span class="grimmie-care-mat-{{ section_id }}__motto-decoration" aria-hidden="true">
+            {%- case motto_decoration -%}
+              {%- when 'sparkle' -%}
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3 L13.5 9 L19 10.5 L13.5 12 L12 18 L10.5 12 L5 10.5 L10.5 9 Z"/></svg>
+              {%- when 'flower' -%}
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="6" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="12" r="3"/><circle cx="12" cy="18" r="3"/><circle cx="12" cy="12" r="2"/></svg>
+              {%- when 'dot' -%}
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="3"/></svg>
+            {%- endcase -%}
+          </span>
+        {%- endif -%}
+        <p class="grimmie-care-mat-{{ section_id }}__motto-text">{{ motto_text | escape }}</p>
+        {%- if section.settings.motto_heart -%}
+          <span class="grimmie-care-mat-{{ section_id }}__motto-heart" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 21 C 6 16 3 13 3 9 a 4 4 0 0 1 8 -1 a 4 4 0 0 1 8 1 c 0 4 -3 7 -7 12 Z"/></svg>
+          </span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Grimmie Care Materials",
+  "tag": "section",
+  "class": "grimmie-care-materials-section",
+  "settings": [
+    { "type": "header", "content": "Materials banner" },
+    { "type": "text", "id": "banner_title", "label": "Banner title", "default": "MATERIALI" },
+    { "type": "textarea", "id": "banner_text", "label": "Banner text", "default": "PU leather esterno, nylon interno." },
+    { "type": "image_picker", "id": "banner_icon", "label": "Banner icon (optional)" },
+    { "type": "text", "id": "banner_icon_alt", "label": "Banner icon alt text" },
+    { "type": "select", "id": "banner_fallback_icon", "label": "Fallback icon", "options": [
+      { "value": "leaf", "label": "Leaf" },
+      { "value": "sparkle", "label": "Sparkle" },
+      { "value": "none", "label": "None (dot)" }
+    ], "default": "leaf" },
+
+    { "type": "header", "content": "Final motto" },
+    { "type": "textarea", "id": "motto_text", "label": "Motto", "default": "Piu ti prendi cura di Alma, piu lei si prendera cura di te." },
+    { "type": "select", "id": "motto_decoration", "label": "Top decoration", "options": [
+      { "value": "sparkle", "label": "Sparkle" },
+      { "value": "flower", "label": "Flower" },
+      { "value": "dot", "label": "Dot" },
+      { "value": "none", "label": "None" }
+    ], "default": "sparkle" },
+    { "type": "checkbox", "id": "motto_heart", "label": "Show heart under motto", "default": true },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color", "label": "Section background", "default": "#F7F1EE" },
+    { "type": "color", "id": "banner_background_color", "label": "Banner background", "default": "#F7EDEB" },
+    { "type": "color", "id": "banner_icon_background_color", "label": "Banner icon background", "default": "#F1EBE6" },
+    { "type": "color", "id": "heading_color", "label": "Heading / motto", "default": "#6E5F59" },
+    { "type": "color", "id": "text_color", "label": "Body text", "default": "#6E5F59" },
+    { "type": "color", "id": "accent_color", "label": "Accent (banner title / heart)", "default": "#C99696" },
+    { "type": "color", "id": "border_color", "label": "Border / divider", "default": "#DDD2CA" },
+
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 80 },
+
+    { "type": "header", "content": "Accessibility" },
+    { "type": "text", "id": "aria_label", "label": "Section aria-label", "default": "Materiali e cura" }
+  ],
+  "presets": [
+    { "name": "Grimmie Care Materials", "category": "Grimmie" }
+  ]
+}
+{% endschema %}

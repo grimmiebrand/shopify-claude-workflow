@@ -1,0 +1,246 @@
+{%- liquid
+  assign section_id = section.id
+  assign section_title = section.settings.section_title
+
+  assign bg_color = section.settings.background_color
+  assign card_bg = section.settings.card_background_color
+  assign heading_color = section.settings.heading_color
+  assign text_color = section.settings.text_color
+  assign accent_color = section.settings.accent_color
+  assign border_color = section.settings.border_color
+-%}
+
+<style>
+  .grimmie-care-tips-{{ section_id }} {
+    --gct-bg: {{ bg_color }};
+    --gct-card-bg: {{ card_bg }};
+    --gct-heading: {{ heading_color }};
+    --gct-text: {{ text_color }};
+    --gct-accent: {{ accent_color }};
+    --gct-border: {{ border_color }};
+
+    background-color: var(--gct-bg);
+    color: var(--gct-text);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .grimmie-care-tips-{{ section_id }} * { box-sizing: border-box; }
+
+  .grimmie-care-tips-{{ section_id }}__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 56px);
+  }
+
+  .grimmie-care-tips-{{ section_id }}__title {
+    text-align: center;
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    color: var(--gct-heading);
+    font-size: clamp(22px, 2.6vw, 32px);
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    margin: 0 0 clamp(28px, 3.5vw, 44px);
+    text-transform: none;
+  }
+
+  .grimmie-care-tips-{{ section_id }}__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(14px, 1.6vw, 22px);
+  }
+
+  .grimmie-care-tips-{{ section_id }}__card {
+    background-color: var(--gct-card-bg);
+    border: 1px solid var(--gct-border);
+    border-radius: 14px;
+    padding: clamp(18px, 2vw, 26px);
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(14px, 1.6vw, 20px);
+  }
+
+  .grimmie-care-tips-{{ section_id }}__icon {
+    flex-shrink: 0;
+    width: clamp(52px, 5vw, 64px);
+    height: clamp(52px, 5vw, 64px);
+    border-radius: 50%;
+    background-color: var(--gct-accent);
+    color: var(--gct-heading);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .grimmie-care-tips-{{ section_id }}__icon svg {
+    width: 52%;
+    height: 52%;
+    stroke: currentColor;
+    stroke-width: 1.4;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .grimmie-care-tips-{{ section_id }}__icon img {
+    width: 56%;
+    height: 56%;
+    object-fit: contain;
+  }
+
+  .grimmie-care-tips-{{ section_id }}__body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .grimmie-care-tips-{{ section_id }}__card-title {
+    font-family: var(--font-body--family);
+    color: var(--gct-heading);
+    font-size: clamp(12px, 0.95vw, 14px);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+    line-height: 1.3;
+  }
+
+  .grimmie-care-tips-{{ section_id }}__card-text {
+    font-family: var(--font-body--family);
+    color: var(--gct-text);
+    font-weight: 400;
+    font-size: clamp(13px, 0.95vw, 14.5px);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .grimmie-care-tips-{{ section_id }}__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .grimmie-care-tips-{{ section_id }}__grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .grimmie-care-tips-{{ section_id }} {
+      padding-top: {{ section.settings.padding_top | times: 0.7 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.7 | round }}px;
+    }
+  }
+</style>
+
+<section
+  class="grimmie-care-tips-{{ section_id }}"
+  aria-label="{{ section.settings.section_title | default: 'I nostri consigli di cura' | escape }}"
+>
+  <div class="grimmie-care-tips-{{ section_id }}__inner">
+    {%- if section_title != blank -%}
+      <h2 class="grimmie-care-tips-{{ section_id }}__title">{{ section_title | escape }}</h2>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="grimmie-care-tips-{{ section_id }}__grid">
+        {%- for block in section.blocks -%}
+          <div class="grimmie-care-tips-{{ section_id }}__card" {{ block.shopify_attributes }}>
+            <div class="grimmie-care-tips-{{ section_id }}__icon" aria-hidden="{% if block.settings.icon_alt == blank %}true{% else %}false{% endif %}">
+              {%- if block.settings.icon != blank -%}
+                {{ block.settings.icon | image_url: width: 120 | image_tag: alt: block.settings.icon_alt, loading: 'lazy' }}
+              {%- else -%}
+                {%- case block.settings.fallback_icon -%}
+                  {%- when 'hairdryer' -%}
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt | default: 'Hair dryer' | escape }}"><path d="M4 10 a4 4 0 0 1 4 -4 h9 a3 3 0 0 1 3 3 v4 a3 3 0 0 1 -3 3 h-7 v3 l-2 3 h-2 l2 -3 v-3 a4 4 0 0 1 -4 -4 z"/><circle cx="10" cy="10" r="1.3" fill="currentColor"/></svg>
+                  {%- when 'water' -%}
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt | default: 'Water drop' | escape }}"><path d="M12 3 C 8 9 6 12 6 15 a 6 6 0 0 0 12 0 C 18 12 16 9 12 3 Z"/></svg>
+                  {%- when 'sun' -%}
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt | default: 'Sun' | escape }}"><circle cx="12" cy="12" r="4.5"/><path d="M12 2 V5 M12 19 V22 M2 12 H5 M19 12 H22 M4.6 4.6 L6.7 6.7 M17.3 17.3 L19.4 19.4 M19.4 4.6 L17.3 6.7 M6.7 17.3 L4.6 19.4"/></svg>
+                  {%- when 'circle' -%}
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt | default: 'Circle' | escape }}"><circle cx="9" cy="12" r="4.5"/><circle cx="15" cy="14" r="3"/></svg>
+                  {%- when 'cloth' -%}
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt | default: 'Cloth' | escape }}"><path d="M5 5 L19 5 L19 19 L5 19 Z" stroke-dasharray="2 2"/><path d="M5 9 L19 9 M9 5 L9 19"/></svg>
+                  {%- when 'pouch' -%}
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt | default: 'Pouch' | escape }}"><rect x="3" y="9" width="18" height="11" rx="2"/><path d="M7 9 V7 a3 3 0 0 1 3 -3 h4 a3 3 0 0 1 3 3 V9"/><path d="M12 13 V16"/></svg>
+                  {%- else -%}
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ block.settings.icon_alt | default: 'Icon' | escape }}"><circle cx="12" cy="12" r="6"/></svg>
+                {%- endcase -%}
+              {%- endif -%}
+            </div>
+            <div class="grimmie-care-tips-{{ section_id }}__body">
+              {%- if block.settings.title != blank -%}
+                <h3 class="grimmie-care-tips-{{ section_id }}__card-title">{{ block.settings.title | escape }}</h3>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <p class="grimmie-care-tips-{{ section_id }}__card-text">{{ block.settings.text | escape }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Grimmie Care Tips",
+  "tag": "section",
+  "class": "grimmie-care-tips-section",
+  "settings": [
+    { "type": "header", "content": "Section" },
+    { "type": "text", "id": "section_title", "label": "Section title", "default": "I nostri consigli di cura" },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#F7F1EE" },
+    { "type": "color", "id": "card_background_color", "label": "Card background", "default": "#F7EDEB" },
+    { "type": "color", "id": "heading_color", "label": "Heading", "default": "#6E5F59" },
+    { "type": "color", "id": "text_color", "label": "Body text", "default": "#6E5F59" },
+    { "type": "color", "id": "accent_color", "label": "Icon background (blush)", "default": "#EACBC8" },
+    { "type": "color", "id": "border_color", "label": "Card border", "default": "#DDD2CA" },
+
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 48 }
+  ],
+  "blocks": [
+    {
+      "type": "tip_card",
+      "name": "Care tip",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "1. LASCIA RAFFREDDARE" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Lascia raffreddare completamente phon, piastre e hair tools prima di inserirli nella pouch." },
+        { "type": "image_picker", "id": "icon", "label": "Custom icon (optional)", "info": "Overrides fallback icon if uploaded." },
+        { "type": "text", "id": "icon_alt", "label": "Icon alt text" },
+        { "type": "select", "id": "fallback_icon", "label": "Fallback icon", "options": [
+          { "value": "hairdryer", "label": "Hair dryer" },
+          { "value": "water", "label": "Water drop" },
+          { "value": "sun", "label": "Sun" },
+          { "value": "circle", "label": "Object / no overload" },
+          { "value": "cloth", "label": "Cloth / cleaning" },
+          { "value": "pouch", "label": "Pouch / bag" },
+          { "value": "none", "label": "None (circle)" }
+        ], "default": "hairdryer" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Grimmie Care Tips",
+      "category": "Grimmie",
+      "blocks": [
+        { "type": "tip_card", "settings": { "title": "1. LASCIA RAFFREDDARE", "text": "Lascia raffreddare completamente phon, piastre e hair tools prima di inserirli nella pouch.", "fallback_icon": "hairdryer" } },
+        { "type": "tip_card", "settings": { "title": "2. EVITA L'ACQUA", "text": "Evita acqua e ambienti troppo umidi come sauna, bagno turco o spa.", "fallback_icon": "water" } },
+        { "type": "tip_card", "settings": { "title": "3. LONTANA DAL SOLE", "text": "Non lasciare Alma sotto il sole diretto per troppo tempo.", "fallback_icon": "sun" } },
+        { "type": "tip_card", "settings": { "title": "4. NON SOVRACCARICARE", "text": "Evita di sovraccaricarla per preservare la sua forma e struttura.", "fallback_icon": "circle" } },
+        { "type": "tip_card", "settings": { "title": "5. ASCIUTTA E PULITA", "text": "Conservala sempre asciutta e pulita, lontana da residui e impurita.", "fallback_icon": "cloth" } },
+        { "type": "tip_card", "settings": { "title": "6. MANEGGIA CON CURA", "text": "Usa attenzione e delicatezza nell'uso quotidiano per mantenerla perfetta nel tempo.", "fallback_icon": "pouch" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

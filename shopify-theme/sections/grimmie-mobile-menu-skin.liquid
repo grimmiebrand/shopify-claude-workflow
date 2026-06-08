@@ -1,0 +1,231 @@
+{%- comment -%}
+  Grimmie menu skin.
+  Renders a global <style> block that aligns the header navigation
+  (desktop + mobile drawer) with the Grimmie palette and gives the
+  current page a single, consistent look. No markup output. Other
+  pages/sections untouched.
+
+  Behaviour:
+  - all menu items default to the same brown text
+  - desktop current page  : underline + bold + accent color
+  - mobile current page   : soft blush rounded background, text stays brown
+{%- endcomment -%}
+
+{%- liquid
+  assign drawer_bg     = section.settings.drawer_bg     | default: '#F7F1EE'
+  assign active_bg     = section.settings.active_bg     | default: '#F7EDEB'
+  assign divider_color = section.settings.divider_color | default: '#DDD2CA'
+  assign sparkle_color = section.settings.sparkle_color | default: '#EACBC8'
+  assign text_color    = section.settings.text_color    | default: '#6E5F59'
+  assign accent_color  = section.settings.accent_color  | default: '#C99696'
+  assign item_pad_y    = section.settings.item_pad_y    | default: 14
+  assign item_pad_x    = section.settings.item_pad_x    | default: 18
+  assign item_radius   = section.settings.item_radius   | default: 14
+  assign text_size     = section.settings.text_size     | default: 14
+  assign text_weight   = section.settings.text_weight   | default: '400'
+  assign sparkle_size  = section.settings.sparkle_size  | default: 11
+  assign letter_spacing = section.settings.letter_spacing | default: 6
+
+  assign sparkle_color_url = sparkle_color | replace: '#', '%23'
+%}
+
+<style data-grimmie-menu-skin>
+  /* =============================================================
+     DESKTOP NAVIGATION
+     ============================================================= */
+  @media (min-width: 750px) {
+    /* Force every top-level link back to the canonical brown,
+       overriding Tinker's subdued-sibling behaviour. */
+    .header-menu .menu-list .menu-list__link,
+    .menu-list:where(:has(.menu-list__list-item:hover)) .menu-list__link,
+    .menu-list:where(:has(.menu-list__list-item:focus-within)) .menu-list__link,
+    .menu-list:where(:has(.menu-list__list-item:not([aria-hidden='true']) .menu-list__link--active)) .menu-list__link,
+    .menu-list .menu-list__list-item:hover .menu-list__link,
+    .menu-list .menu-list__list-item:focus-within .menu-list__link {
+      color: {{ text_color }} !important;
+      font-weight: 400 !important;
+      text-decoration: none !important;
+    }
+
+    /* Current page only: bold + underline + accent */
+    .header-menu .menu-list .menu-list__link[aria-current='page'],
+    .header-menu .menu-list .menu-list__link--active,
+    .menu-list .menu-list__link[aria-current='page'] .menu-list__link-title,
+    .menu-list .menu-list__link--active .menu-list__link-title {
+      color: {{ accent_color }} !important;
+      font-weight: 700 !important;
+      text-decoration: underline !important;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1.5px;
+    }
+  }
+
+  /* =============================================================
+     MOBILE DRAWER
+     ============================================================= */
+  @media (max-width: 749.98px) {
+    /* Typography aligned with the rest of the site */
+    .header__drawer .menu-drawer__menu-item--mainlist {
+      display: flex !important;
+      align-items: center;
+      gap: 14px;
+      padding: {{ item_pad_y }}px {{ item_pad_x }}px;
+      font-family: inherit;
+      font-size: {{ text_size }}px !important;
+      font-weight: {{ text_weight }} !important;
+      line-height: 1.2;
+      letter-spacing: {{ letter_spacing | divided_by: 100.0 }}em;
+      color: {{ text_color }} !important;
+      border-radius: 0;
+      background-color: transparent;
+      transition: background-color 0.18s ease;
+      text-decoration: none !important;
+    }
+    .header__drawer .menu-drawer__menu-item--mainlist .menu-drawer__menu-item-text {
+      flex: 1 1 auto;
+      font: inherit;
+      color: inherit;
+    }
+
+    /* Reset Tinker's built-in dividers */
+    .header__drawer .menu-drawer__list-item--divider { border-bottom: 0 !important; }
+    .header__drawer .menu-drawer__menu-container--divider { border-bottom: 0 !important; }
+
+    /* Soft dividers between rows */
+    .header__drawer .menu-drawer__list-item--flat,
+    .header__drawer .menu-drawer__list-item--deep { padding: 0 18px; }
+    .header__drawer .menu-drawer__list-item--flat + .menu-drawer__list-item--flat,
+    .header__drawer .menu-drawer__list-item--deep + .menu-drawer__list-item--deep,
+    .header__drawer .menu-drawer__list-item--flat + .menu-drawer__list-item--deep,
+    .header__drawer .menu-drawer__list-item--deep + .menu-drawer__list-item--flat {
+      border-top: 1px solid {{ divider_color }};
+    }
+
+    /* Sparkle before each item */
+    {%- if section.settings.show_item_sparkles -%}
+    .header__drawer .menu-drawer__menu-item--mainlist::before {
+      content: '';
+      flex: 0 0 auto;
+      width: {{ sparkle_size }}px;
+      height: {{ sparkle_size }}px;
+      background-color: {{ accent_color }};
+      -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2.5 L13.6 9.4 L19.5 10.6 L13.6 12 L12 19 L10.4 12 L4.5 10.6 L10.4 9.4 Z' fill='black'/></svg>");
+              mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2.5 L13.6 9.4 L19.5 10.6 L13.6 12 L12 19 L10.4 12 L4.5 10.6 L10.4 9.4 Z' fill='black'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+              mask-repeat: no-repeat;
+      -webkit-mask-size: contain;
+              mask-size: contain;
+      -webkit-mask-position: center;
+              mask-position: center;
+      opacity: 0.85;
+    }
+    {%- endif -%}
+
+    /* CURRENT page on mobile: pink rounded background ONLY when explicitly
+       enabled. Default off because Shopify often flags more than one link
+       as 'current' on the Tinker theme, which results in multiple blush
+       blocks. Keeping the rows visually uniform avoids that. */
+    {%- if section.settings.show_mobile_active_bg -%}
+    .header__drawer .menu-drawer__menu-item--mainlist.menu-drawer__menu-item--active,
+    .header__drawer a.menu-drawer__menu-item--mainlist[aria-current='page'] {
+      background-color: {{ active_bg }} !important;
+      color: {{ text_color }} !important;
+      border-radius: {{ item_radius }}px !important;
+      text-decoration: none !important;
+      font-weight: {{ text_weight }} !important;
+    }
+    .header__drawer .menu-drawer__menu-item--mainlist.menu-drawer__menu-item--active::before,
+    .header__drawer a.menu-drawer__menu-item--mainlist[aria-current='page']::before {
+      opacity: 1;
+    }
+    {%- else -%}
+    /* Force all rows to look identical, neutralising Tinker's default
+       current-page highlight. */
+    .header__drawer .menu-drawer__menu-item--mainlist.menu-drawer__menu-item--active,
+    .header__drawer a.menu-drawer__menu-item--mainlist[aria-current='page'] {
+      background-color: transparent !important;
+      color: {{ text_color }} !important;
+      border-radius: 0 !important;
+      text-decoration: none !important;
+      font-weight: {{ text_weight }} !important;
+    }
+    {%- endif -%}
+
+    /* Decorative divider with centered sparkle */
+    {%- if section.settings.show_decorative_divider -%}
+    .header__drawer .menu-drawer__navigation {
+      position: relative;
+      padding-top: 48px;
+    }
+    .header__drawer .menu-drawer__navigation::before {
+      content: '';
+      position: absolute;
+      top: 22px;
+      left: 28px;
+      right: 28px;
+      height: 1px;
+      background-color: {{ divider_color }};
+    }
+    .header__drawer .menu-drawer__navigation::after {
+      content: '';
+      position: absolute;
+      top: 22px;
+      left: 50%;
+      width: 24px;
+      height: 24px;
+      transform: translate(-50%, -50%);
+      background-color: {{ drawer_bg }};
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='{{ sparkle_color_url }}' d='M12 2.5 L13.6 9.4 L19.5 10.6 L13.6 12 L12 19 L10.4 12 L4.5 10.6 L10.4 9.4 Z'/></svg>");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 14px 14px;
+    }
+    {%- endif -%}
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .header__drawer .menu-drawer__menu-item--mainlist { transition: none; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Grimmie mobile menu skin",
+  "settings": [
+    { "type": "paragraph", "content": "Aligns desktop nav and mobile drawer with the Grimmie palette. All items use the same brown text. The current page becomes underline + bold + accent on desktop, and gets a soft blush rounded background on mobile." },
+
+    { "type": "header", "content": "Typography (mobile rows)" },
+    { "type": "range",  "id": "text_size",      "label": "Text size",       "min": 11, "max": 18, "step": 1, "unit": "px", "default": 14 },
+    { "type": "select", "id": "text_weight",    "label": "Text weight", "options": [
+      { "value": "300", "label": "Light" },
+      { "value": "400", "label": "Regular" },
+      { "value": "500", "label": "Medium" },
+      { "value": "600", "label": "Semi-bold" },
+      { "value": "700", "label": "Bold" }
+    ], "default": "400" },
+    { "type": "range",  "id": "letter_spacing", "label": "Letter spacing",  "min": 0,  "max": 14, "step": 1, "unit": "%", "default": 6 },
+
+    { "type": "header", "content": "Layout (mobile rows)" },
+    { "type": "range", "id": "item_pad_y", "label": "Row vertical padding",   "min": 8,  "max": 24, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "item_pad_x", "label": "Row horizontal padding", "min": 8,  "max": 28, "step": 1, "unit": "px", "default": 18 },
+    { "type": "range", "id": "item_radius", "label": "Active state corner radius", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 14 },
+
+    { "type": "header", "content": "Decorations (mobile)" },
+    { "type": "checkbox", "id": "show_item_sparkles",      "label": "Show sparkle before each menu item",   "default": true },
+    { "type": "range",    "id": "sparkle_size",            "label": "Sparkle size",                          "min": 8, "max": 18, "step": 1, "unit": "px", "default": 11 },
+    { "type": "checkbox", "id": "show_decorative_divider", "label": "Show decorative divider with sparkle", "default": true },
+    { "type": "checkbox", "id": "show_mobile_active_bg",   "label": "Highlight current page on mobile",      "info": "Marks the current page with a soft blush rounded background. Note: if multiple nav links share the same URL (e.g. a 'Track your order' item pointing to the home page), more than one row will be highlighted.", "default": true },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "drawer_bg",     "label": "Drawer background (must match drawer bg)", "default": "#F7F1EE" },
+    { "type": "color", "id": "active_bg",     "label": "Mobile active background",                  "default": "#F7EDEB" },
+    { "type": "color", "id": "divider_color", "label": "Divider lines",                             "default": "#DDD2CA" },
+    { "type": "color", "id": "sparkle_color", "label": "Decorative sparkle (center)",               "default": "#EACBC8" },
+    { "type": "color", "id": "accent_color",  "label": "Accent (current page + sparkle)",           "default": "#C99696" },
+    { "type": "color", "id": "text_color",    "label": "Menu text",                                 "default": "#6E5F59" }
+  ],
+  "presets": [
+    { "name": "Grimmie mobile menu skin", "category": "Grimmie" }
+  ]
+}
+{% endschema %}
