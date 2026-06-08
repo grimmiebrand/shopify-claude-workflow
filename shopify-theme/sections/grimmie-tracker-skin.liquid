@@ -52,9 +52,12 @@
 </script>
 
 <style data-grimmie-tracker-skin>
-  /* Scoped to /apps/parcelpanel only */
-  html.grimmie-pp-page h1,
-  body.grimmie-pp-page h1 {
+  /* Scoped to the ParcelPanel content inside <main id="MainContent"> only.
+     :where(#MainContent) keeps these selectors at their original specificity
+     (it adds 0) while preventing them from leaking into the theme header,
+     footer and announcement bar, which live OUTSIDE <main>. */
+  html.grimmie-pp-page :where(#MainContent) h1,
+  body.grimmie-pp-page :where(#MainContent) h1 {
     font-family: var(--font-heading--family) !important;
     font-style: var(--font-heading--style) !important;
     font-weight: var(--font-heading--weight) !important;
@@ -65,16 +68,16 @@
     margin: 0.4em 0 !important;
     color: {{ text_color }} !important;
   }
-  html.grimmie-pp-page h2,
-  html.grimmie-pp-page h3,
-  html.grimmie-pp-page h4,
-  html.grimmie-pp-page h5,
-  html.grimmie-pp-page h6,
-  body.grimmie-pp-page h2,
-  body.grimmie-pp-page h3,
-  body.grimmie-pp-page h4,
-  body.grimmie-pp-page h5,
-  body.grimmie-pp-page h6 {
+  html.grimmie-pp-page :where(#MainContent) h2,
+  html.grimmie-pp-page :where(#MainContent) h3,
+  html.grimmie-pp-page :where(#MainContent) h4,
+  html.grimmie-pp-page :where(#MainContent) h5,
+  html.grimmie-pp-page :where(#MainContent) h6,
+  body.grimmie-pp-page :where(#MainContent) h2,
+  body.grimmie-pp-page :where(#MainContent) h3,
+  body.grimmie-pp-page :where(#MainContent) h4,
+  body.grimmie-pp-page :where(#MainContent) h5,
+  body.grimmie-pp-page :where(#MainContent) h6 {
     font-family: var(--font-heading--family) !important;
     font-style: var(--font-heading--style) !important;
     font-weight: 500 !important;
@@ -121,22 +124,22 @@
     color: {{ text_color }} !important;
   }
 
-  html.grimmie-pp-page p,
-  html.grimmie-pp-page span,
-  html.grimmie-pp-page label,
-  html.grimmie-pp-page input,
-  html.grimmie-pp-page select,
-  html.grimmie-pp-page textarea,
-  html.grimmie-pp-page button,
-  html.grimmie-pp-page a,
-  body.grimmie-pp-page p,
-  body.grimmie-pp-page span,
-  body.grimmie-pp-page label,
-  body.grimmie-pp-page input,
-  body.grimmie-pp-page select,
-  body.grimmie-pp-page textarea,
-  body.grimmie-pp-page button,
-  body.grimmie-pp-page a {
+  html.grimmie-pp-page :where(#MainContent) p,
+  html.grimmie-pp-page :where(#MainContent) span,
+  html.grimmie-pp-page :where(#MainContent) label,
+  html.grimmie-pp-page :where(#MainContent) input,
+  html.grimmie-pp-page :where(#MainContent) select,
+  html.grimmie-pp-page :where(#MainContent) textarea,
+  html.grimmie-pp-page :where(#MainContent) button,
+  html.grimmie-pp-page :where(#MainContent) a,
+  body.grimmie-pp-page :where(#MainContent) p,
+  body.grimmie-pp-page :where(#MainContent) span,
+  body.grimmie-pp-page :where(#MainContent) label,
+  body.grimmie-pp-page :where(#MainContent) input,
+  body.grimmie-pp-page :where(#MainContent) select,
+  body.grimmie-pp-page :where(#MainContent) textarea,
+  body.grimmie-pp-page :where(#MainContent) button,
+  body.grimmie-pp-page :where(#MainContent) a {
     font-size: {{ body_size }}px !important;
     line-height: 1.5 !important;
     letter-spacing: 0.02em !important;
@@ -158,12 +161,12 @@
   }
 
   /* Submit / primary buttons inside the ParcelPanel UI */
-  html.grimmie-pp-page button[type='submit'],
-  html.grimmie-pp-page input[type='submit'],
-  html.grimmie-pp-page .pp-button,
-  body.grimmie-pp-page button[type='submit'],
-  body.grimmie-pp-page input[type='submit'],
-  body.grimmie-pp-page .pp-button {
+  html.grimmie-pp-page :where(#MainContent) button[type='submit'],
+  html.grimmie-pp-page :where(#MainContent) input[type='submit'],
+  html.grimmie-pp-page :where(#MainContent) .pp-button,
+  body.grimmie-pp-page :where(#MainContent) button[type='submit'],
+  body.grimmie-pp-page :where(#MainContent) input[type='submit'],
+  body.grimmie-pp-page :where(#MainContent) .pp-button {
     background-color: {{ btn_bg }} !important;
     color: {{ btn_text }} !important;
     border: none !important;
@@ -176,22 +179,22 @@
     cursor: pointer !important;
     transition: background-color 0.2s ease !important;
   }
-  html.grimmie-pp-page button[type='submit']:hover,
-  html.grimmie-pp-page input[type='submit']:hover,
-  html.grimmie-pp-page .pp-button:hover,
-  body.grimmie-pp-page button[type='submit']:hover,
-  body.grimmie-pp-page input[type='submit']:hover,
-  body.grimmie-pp-page .pp-button:hover {
+  html.grimmie-pp-page :where(#MainContent) button[type='submit']:hover,
+  html.grimmie-pp-page :where(#MainContent) input[type='submit']:hover,
+  html.grimmie-pp-page :where(#MainContent) .pp-button:hover,
+  body.grimmie-pp-page :where(#MainContent) button[type='submit']:hover,
+  body.grimmie-pp-page :where(#MainContent) input[type='submit']:hover,
+  body.grimmie-pp-page :where(#MainContent) .pp-button:hover {
     background-color: {{ btn_hover }} !important;
   }
 
   /* Inputs */
-  html.grimmie-pp-page input[type='text'],
-  html.grimmie-pp-page input[type='email'],
-  html.grimmie-pp-page input[type='search'],
-  body.grimmie-pp-page input[type='text'],
-  body.grimmie-pp-page input[type='email'],
-  body.grimmie-pp-page input[type='search'] {
+  html.grimmie-pp-page :where(#MainContent) input[type='text'],
+  html.grimmie-pp-page :where(#MainContent) input[type='email'],
+  html.grimmie-pp-page :where(#MainContent) input[type='search'],
+  body.grimmie-pp-page :where(#MainContent) input[type='text'],
+  body.grimmie-pp-page :where(#MainContent) input[type='email'],
+  body.grimmie-pp-page :where(#MainContent) input[type='search'] {
     border: 1px solid {{ border }} !important;
     border-radius: 8px !important;
     padding: 12px 14px !important;
@@ -201,14 +204,14 @@
 
   /* Mobile: extra small clamp for headings to avoid wrapping nightmares */
   @media (max-width: 480px) {
-    html.grimmie-pp-page h1,
-    body.grimmie-pp-page h1,
+    html.grimmie-pp-page :where(#MainContent) h1,
+    body.grimmie-pp-page :where(#MainContent) h1,
     [class*='ParcelPanel'] h1,
     [class*='parcelpanel'] h1 { font-size: 22px !important; }
-    html.grimmie-pp-page h2,
-    html.grimmie-pp-page h3,
-    body.grimmie-pp-page h2,
-    body.grimmie-pp-page h3,
+    html.grimmie-pp-page :where(#MainContent) h2,
+    html.grimmie-pp-page :where(#MainContent) h3,
+    body.grimmie-pp-page :where(#MainContent) h2,
+    body.grimmie-pp-page :where(#MainContent) h3,
     [class*='ParcelPanel'] h2,
     [class*='ParcelPanel'] h3 { font-size: 16px !important; }
   }
