@@ -62,12 +62,6 @@
     color: var(--gct-blush);
   }
   .grimmie-ct-{{ sid }}__hero-media .gct-placeholder svg { width: 72px; height: 72px; opacity: 0.45; }
-  .grimmie-ct-{{ sid }}__hero-scrim {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(90deg, {{ s.hero_bg_color }} 0%, {{ s.hero_bg_color }} 26%, {{ s.hero_bg_color }}00 68%);
-  }
   .grimmie-ct-{{ sid }}__hero-content {
     position: relative;
     z-index: 2;
@@ -305,9 +299,6 @@
   @media (max-width: 749px) {
     .grimmie-ct-{{ sid }}__hero { aspect-ratio: auto; min-height: clamp(190px, 50vw, 260px); }
     .grimmie-ct-{{ sid }}__hero-media img { object-position: center; }
-    .grimmie-ct-{{ sid }}__hero-scrim {
-      background: linear-gradient(180deg, {{ s.hero_bg_color }} 0%, {{ s.hero_bg_color }} 32%, {{ s.hero_bg_color }}00 94%);
-    }
     .grimmie-ct-{{ sid }}__hero-content { align-items: center; padding-top: clamp(20px, 6vw, 32px); padding-bottom: clamp(20px, 6vw, 32px); }
     .grimmie-ct-{{ sid }}__hero-text { text-align: left; max-width: 100%; }
     .grimmie-ct-{{ sid }}__grid { grid-template-columns: 1fr; }
@@ -329,7 +320,6 @@
           </div>
         {%- endif -%}
       </div>
-      <div class="grimmie-ct-{{ sid }}__hero-scrim" aria-hidden="true"></div>
       <div class="grimmie-ct-{{ sid }}__hero-content">
         <div class="grimmie-ct-{{ sid }}__hero-text">
           {%- if s.hero_eyebrow != blank -%}
