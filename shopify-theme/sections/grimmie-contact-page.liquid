@@ -1,0 +1,586 @@
+{%- liquid
+  assign sid = section.id
+  assign s = section.settings
+-%}
+
+<style>
+  .grimmie-ct-{{ sid }} {
+    --gct-bg: {{ s.background_color }};
+    --gct-hero-bg: {{ s.hero_bg_color }};
+    --gct-blush: {{ s.blush_color }};
+    --gct-blush-light: {{ s.blush_light_color }};
+    --gct-heading: {{ s.heading_color }};
+    --gct-text: {{ s.text_color }};
+    --gct-border: {{ s.border_color }};
+    --gct-accent: {{ s.accent_color }};
+    --gct-btn-bg: {{ s.button_background_color }};
+    --gct-btn-text: {{ s.button_text_color }};
+    --gct-btn-hover: {{ s.button_hover_background_color }};
+    --gct-input-bg: {{ s.input_background_color }};
+
+    background-color: var(--gct-bg);
+    color: var(--gct-text);
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    font-family: var(--font-body--family);
+  }
+  .grimmie-ct-{{ sid }} * { box-sizing: border-box; }
+
+  .grimmie-ct-{{ sid }}__container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding-left: clamp(20px, 5vw, 40px);
+    padding-right: clamp(20px, 5vw, 40px);
+  }
+
+  /* ============ HERO ============ */
+  .grimmie-ct-{{ sid }}__hero {
+    background-color: var(--gct-hero-bg);
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: stretch;
+    width: 100%;
+    min-height: clamp(360px, 36vw, 520px);
+  }
+  .grimmie-ct-{{ sid }}__hero-text {
+    text-align: {{ s.hero_text_align }};
+    display: flex;
+    flex-direction: column;
+    gap: clamp(14px, 1.6vw, 20px);
+    justify-content: center;
+    padding: clamp(40px, 6vw, 88px) clamp(28px, 5vw, 72px);
+    {% if s.hero_text_align == 'center' %}align-items: center;{% elsif s.hero_text_align == 'right' %}align-items: flex-end;{% else %}align-items: flex-start;{% endif %}
+  }
+  .grimmie-ct-{{ sid }}__eyebrow {
+    margin: 0;
+    font-family: var(--font-body--family);
+    font-size: clamp(11px, 0.85vw, 13px);
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gct-accent);
+  }
+  .grimmie-ct-{{ sid }}__hero-title {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    color: var(--gct-heading);
+    font-size: clamp(34px, 5vw, 62px);
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+  }
+  .grimmie-ct-{{ sid }}__hero-sub {
+    margin: 0;
+    font-size: clamp(14px, 1.05vw, 16.5px);
+    line-height: 1.6;
+    color: var(--gct-text);
+    max-width: 42ch;
+  }
+  .grimmie-ct-{{ sid }}__hero-media {
+    position: relative;
+    overflow: hidden;
+    min-height: clamp(240px, 30vw, 520px);
+  }
+  .grimmie-ct-{{ sid }}__hero-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .grimmie-ct-{{ sid }}__hero-media .gct-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: var(--gct-blush-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gct-blush);
+  }
+  .grimmie-ct-{{ sid }}__hero-media .gct-placeholder svg { width: 64px; height: 64px; opacity: 0.5; }
+
+  /* ============ DIRECTION ============ */
+  .grimmie-ct-{{ sid }}__direction { padding: clamp(48px, 6vw, 84px) 0 clamp(8px, 1vw, 12px); }
+  .grimmie-ct-{{ sid }}__section-title {
+    margin: 0 0 clamp(28px, 3.2vw, 40px);
+    text-align: center;
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    color: var(--gct-heading);
+    font-size: clamp(24px, 3vw, 38px);
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+  }
+  .grimmie-ct-{{ sid }}__cards {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(16px, 1.8vw, 22px);
+  }
+  .grimmie-ct-{{ sid }}__card {
+    display: flex;
+    align-items: center;
+    gap: clamp(18px, 2.2vw, 28px);
+    background-color: var(--gct-blush-light);
+    border: 1px solid var(--gct-border);
+    border-radius: 16px;
+    padding: clamp(22px, 2.6vw, 30px) clamp(22px, 2.8vw, 34px);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+  }
+  .grimmie-ct-{{ sid }}__card:hover {
+    border-color: var(--gct-blush);
+    background-color: var(--gct-bg);
+    transform: translateY(-2px);
+  }
+  .grimmie-ct-{{ sid }}__card:focus-visible {
+    outline: 2px solid var(--gct-accent);
+    outline-offset: 3px;
+  }
+  .grimmie-ct-{{ sid }}__card-icon {
+    flex: 0 0 auto;
+    width: clamp(54px, 5vw, 64px);
+    height: clamp(54px, 5vw, 64px);
+    border-radius: 50%;
+    background-color: var(--gct-blush-light);
+    border: 1px solid var(--gct-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gct-accent);
+  }
+  .grimmie-ct-{{ sid }}__card:hover .grimmie-ct-{{ sid }}__card-icon { background-color: var(--gct-blush-light); }
+  .grimmie-ct-{{ sid }}__card-icon svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .grimmie-ct-{{ sid }}__card-text { flex: 1 1 auto; min-width: 0; }
+  .grimmie-ct-{{ sid }}__card-title {
+    margin: 0 0 5px;
+    font-family: var(--font-body--family);
+    font-weight: 600;
+    color: var(--gct-heading);
+    font-size: clamp(16px, 1.4vw, 19px);
+    line-height: 1.25;
+  }
+  .grimmie-ct-{{ sid }}__card-desc {
+    margin: 0;
+    font-size: clamp(13px, 1vw, 14.5px);
+    line-height: 1.55;
+    color: var(--gct-text);
+  }
+  .grimmie-ct-{{ sid }}__card-arrow {
+    flex: 0 0 auto;
+    color: var(--gct-accent);
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease;
+  }
+  .grimmie-ct-{{ sid }}__card:hover .grimmie-ct-{{ sid }}__card-arrow { transform: translateX(4px); }
+  .grimmie-ct-{{ sid }}__card-arrow svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ============ CONTACT FORM ============ */
+  .grimmie-ct-{{ sid }}__contact {
+    background-color: var(--gct-hero-bg);
+    margin-top: clamp(48px, 6vw, 84px);
+    padding: clamp(48px, 6vw, 84px) 0 clamp(56px, 7vw, 96px);
+  }
+  .grimmie-ct-{{ sid }}__contact-head { text-align: center; margin-bottom: clamp(28px, 3.4vw, 40px); }
+  .grimmie-ct-{{ sid }}__contact-title {
+    margin: 0 0 10px;
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    color: var(--gct-heading);
+    font-size: clamp(28px, 3.6vw, 46px);
+    line-height: 1.1;
+    letter-spacing: -0.005em;
+  }
+  .grimmie-ct-{{ sid }}__contact-sub {
+    margin: 0 auto;
+    max-width: 52ch;
+    font-size: clamp(14px, 1.05vw, 16px);
+    line-height: 1.6;
+    color: var(--gct-text);
+  }
+  .grimmie-ct-{{ sid }}__form { display: block; }
+  .grimmie-ct-{{ sid }}__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(14px, 1.6vw, 18px);
+  }
+  .grimmie-ct-{{ sid }}__field { margin-bottom: clamp(14px, 1.6vw, 18px); }
+  .grimmie-ct-{{ sid }}__field--grid { margin-bottom: 0; }
+  .grimmie-ct-{{ sid }}__visually-hidden {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0);
+    white-space: nowrap; border: 0;
+  }
+  .grimmie-ct-{{ sid }}__input,
+  .grimmie-ct-{{ sid }}__textarea {
+    width: 100%;
+    font-family: var(--font-body--family);
+    font-size: 15px;
+    color: var(--gct-text);
+    background-color: var(--gct-input-bg);
+    border: 1px solid var(--gct-border);
+    border-radius: 10px;
+    padding: 15px 18px;
+    line-height: 1.5;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  }
+  .grimmie-ct-{{ sid }}__input::placeholder,
+  .grimmie-ct-{{ sid }}__textarea::placeholder { color: var(--gct-text); opacity: 0.55; }
+  .grimmie-ct-{{ sid }}__input:focus,
+  .grimmie-ct-{{ sid }}__textarea:focus {
+    outline: none;
+    border-color: var(--gct-blush);
+    box-shadow: 0 0 0 3px {{ s.blush_color }}59;
+    background-color: var(--gct-bg);
+  }
+  .grimmie-ct-{{ sid }}__textarea { min-height: 150px; resize: vertical; }
+  .grimmie-ct-{{ sid }}__submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: var(--gct-btn-bg);
+    color: var(--gct-btn-text);
+    font-family: var(--font-body--family);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 18px 28px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    min-height: 56px;
+    line-height: 1;
+    margin-top: clamp(6px, 1vw, 10px);
+    transition: background-color 0.2s ease;
+  }
+  .grimmie-ct-{{ sid }}__submit:hover { background-color: var(--gct-btn-hover); }
+  .grimmie-ct-{{ sid }}__submit:focus-visible { outline: 2px solid var(--gct-accent); outline-offset: 3px; }
+
+  .grimmie-ct-{{ sid }}__note {
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 22px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .grimmie-ct-{{ sid }}__note--success {
+    background-color: var(--gct-blush-light);
+    border: 1px solid var(--gct-blush);
+    color: var(--gct-heading);
+  }
+  .grimmie-ct-{{ sid }}__note--error {
+    background-color: #fbeceb;
+    border: 1px solid #e0b4b1;
+    color: #8a4a47;
+  }
+  .grimmie-ct-{{ sid }}__note ul { margin: 8px 0 0; padding-left: 18px; }
+
+  /* ============ MOBILE ============ */
+  @media (max-width: 749px) {
+    .grimmie-ct-{{ sid }}__hero {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+    .grimmie-ct-{{ sid }}__hero-text {
+      text-align: left;
+      align-items: flex-start;
+      order: 1;
+      padding: clamp(32px, 8vw, 48px) 24px clamp(24px, 6vw, 32px);
+    }
+    .grimmie-ct-{{ sid }}__hero-media {
+      order: 2;
+      min-height: clamp(220px, 62vw, 340px);
+    }
+    .grimmie-ct-{{ sid }}__grid { grid-template-columns: 1fr; gap: clamp(14px, 4vw, 18px); }
+    .grimmie-ct-{{ sid }}__field--grid { margin-bottom: clamp(14px, 4vw, 18px); }
+    .grimmie-ct-{{ sid }}__card { gap: 16px; padding: 20px; }
+  }
+</style>
+
+<section class="grimmie-ct-{{ sid }}" aria-label="{{ s.contact_title | default: 'Contatti' | escape }}">
+
+  {%- comment -%} ============ HERO ============ {%- endcomment -%}
+  {%- if s.show_hero -%}
+    <div class="grimmie-ct-{{ sid }}__hero">
+      <div class="grimmie-ct-{{ sid }}__hero-text">
+        {%- if s.hero_eyebrow != blank -%}
+          <p class="grimmie-ct-{{ sid }}__eyebrow">{{ s.hero_eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if s.hero_title != blank -%}
+          <h1 class="grimmie-ct-{{ sid }}__hero-title">{{ s.hero_title }}</h1>
+        {%- endif -%}
+        {%- if s.hero_subtitle != blank -%}
+          <p class="grimmie-ct-{{ sid }}__hero-sub">{{ s.hero_subtitle | escape }}</p>
+        {%- endif -%}
+      </div>
+      <div class="grimmie-ct-{{ sid }}__hero-media">
+        {%- if s.hero_image != blank -%}
+          {{ s.hero_image | image_url: width: 1800 | image_tag: alt: s.hero_image_alt, loading: 'eager', widths: '600,900,1200,1600,1800', sizes: '(max-width: 749px) 100vw, 50vw' }}
+        {%- else -%}
+          <div class="gct-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M3 11h18"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ============ DIRECTION CARDS ============ {%- endcomment -%}
+  {%- if s.show_direction -%}
+    <div class="grimmie-ct-{{ sid }}__direction">
+      <div class="grimmie-ct-{{ sid }}__container">
+        {%- if s.direction_title != blank -%}
+          <h2 class="grimmie-ct-{{ sid }}__section-title">{{ s.direction_title | escape }}</h2>
+        {%- endif -%}
+        <div class="grimmie-ct-{{ sid }}__cards">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'card' -%}
+              <a
+                class="grimmie-ct-{{ sid }}__card"
+                {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% else %}href="#"{% endif %}
+                aria-label="{{ block.settings.title | escape }}"
+                {{ block.shopify_attributes }}
+              >
+                <span class="grimmie-ct-{{ sid }}__card-icon" aria-hidden="true">
+                  {%- case block.settings.icon -%}
+                    {%- when 'question' -%}
+                      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1 .9-1 1.7"/><circle cx="12" cy="16.5" r="0.6" fill="currentColor" stroke="none"/></svg>
+                    {%- when 'package' -%}
+                      <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+                    {%- when 'truck' -%}
+                      <svg viewBox="0 0 24 24"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                    {%- when 'chat' -%}
+                      <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    {%- when 'mail' -%}
+                      <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+                    {%- else -%}
+                      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1 .9-1 1.7"/><circle cx="12" cy="16.5" r="0.6" fill="currentColor" stroke="none"/></svg>
+                  {%- endcase -%}
+                </span>
+                <span class="grimmie-ct-{{ sid }}__card-text">
+                  {%- if block.settings.title != blank -%}<span class="grimmie-ct-{{ sid }}__card-title">{{ block.settings.title | escape }}</span>{%- endif -%}
+                  {%- if block.settings.description != blank -%}<span class="grimmie-ct-{{ sid }}__card-desc">{{ block.settings.description | escape }}</span>{%- endif -%}
+                </span>
+                <span class="grimmie-ct-{{ sid }}__card-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </span>
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ============ CONTACT FORM ============ {%- endcomment -%}
+  {%- if s.show_contact -%}
+    <div class="grimmie-ct-{{ sid }}__contact">
+      <div class="grimmie-ct-{{ sid }}__container">
+        <div class="grimmie-ct-{{ sid }}__contact-head">
+          {%- if s.contact_title != blank -%}
+            <h2 class="grimmie-ct-{{ sid }}__contact-title">{{ s.contact_title | escape }}</h2>
+          {%- endif -%}
+          {%- if s.contact_subtitle != blank -%}
+            <p class="grimmie-ct-{{ sid }}__contact-sub">{{ s.contact_subtitle | escape }}</p>
+          {%- endif -%}
+        </div>
+
+        {%- form 'contact', class: 'grimmie-ct-' | append: sid | append: '__form' -%}
+          {%- if form.posted_successfully? -%}
+            <div class="grimmie-ct-{{ sid }}__note grimmie-ct-{{ sid }}__note--success" role="status" tabindex="-1">
+              {{ s.success_message | escape }}
+            </div>
+          {%- elsif form.errors -%}
+            <div class="grimmie-ct-{{ sid }}__note grimmie-ct-{{ sid }}__note--error" role="alert" tabindex="-1">
+              {{ s.error_message | escape }}
+              <ul>
+                {%- for field in form.errors -%}
+                  <li>{{ form.errors.translated_fields[field] | capitalize }} {{ form.errors.messages[field] }}</li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+
+          <div class="grimmie-ct-{{ sid }}__grid">
+            <div class="grimmie-ct-{{ sid }}__field grimmie-ct-{{ sid }}__field--grid">
+              <label class="grimmie-ct-{{ sid }}__visually-hidden" for="gct-name-{{ sid }}">{{ s.label_name | default: 'Nome' | escape }}</label>
+              <input
+                class="grimmie-ct-{{ sid }}__input"
+                type="text"
+                id="gct-name-{{ sid }}"
+                name="contact[name]"
+                value="{% if form.name %}{{ form.name | escape }}{% else %}{{ customer.name }}{% endif %}"
+                placeholder="{{ s.label_name | default: 'Nome' | escape }}"
+                autocomplete="name"
+              >
+            </div>
+            <div class="grimmie-ct-{{ sid }}__field grimmie-ct-{{ sid }}__field--grid">
+              <label class="grimmie-ct-{{ sid }}__visually-hidden" for="gct-email-{{ sid }}">{{ s.label_email | default: 'Email' | escape }}</label>
+              <input
+                class="grimmie-ct-{{ sid }}__input"
+                type="email"
+                id="gct-email-{{ sid }}"
+                name="contact[email]"
+                value="{% if form.email %}{{ form.email | escape }}{% else %}{{ customer.email }}{% endif %}"
+                placeholder="{{ s.label_email | default: 'Email' | escape }}"
+                autocomplete="email"
+                required
+              >
+            </div>
+          </div>
+
+          <div class="grimmie-ct-{{ sid }}__field">
+            <label class="grimmie-ct-{{ sid }}__visually-hidden" for="gct-order-{{ sid }}">{{ s.label_order | default: 'Numero ordine (facoltativo)' | escape }}</label>
+            <input
+              class="grimmie-ct-{{ sid }}__input"
+              type="text"
+              id="gct-order-{{ sid }}"
+              name="contact[Numero ordine]"
+              placeholder="{{ s.label_order | default: 'Numero ordine (facoltativo)' | escape }}"
+            >
+          </div>
+
+          <div class="grimmie-ct-{{ sid }}__field">
+            <label class="grimmie-ct-{{ sid }}__visually-hidden" for="gct-body-{{ sid }}">{{ s.label_message | default: 'Messaggio' | escape }}</label>
+            <textarea
+              class="grimmie-ct-{{ sid }}__textarea"
+              id="gct-body-{{ sid }}"
+              name="contact[body]"
+              placeholder="{{ s.label_message | default: 'Messaggio' | escape }}"
+              required
+            >{% if form.body %}{{ form.body }}{% endif %}</textarea>
+          </div>
+
+          <button type="submit" class="grimmie-ct-{{ sid }}__submit">
+            {{ s.submit_text | default: 'INVIA IL MESSAGGIO' | escape }}
+          </button>
+        {%- endform -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+</section>
+
+{%- if section.settings.show_contact -%}
+  <script>
+    (function () {
+      var root = document.currentScript.previousElementSibling;
+      if (!root) return;
+      var note = root.querySelector('[role="status"], [role="alert"]');
+      if (note) { note.focus(); note.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Grimmie contact page",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "checkbox", "id": "show_hero", "label": "Show hero", "default": true },
+    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "CONTATTI" },
+    { "type": "text", "id": "hero_title", "label": "Title", "default": "Come possiamo aiutarti?", "info": "Use <br> to control line breaks." },
+    { "type": "textarea", "id": "hero_subtitle", "label": "Subtitle", "default": "Siamo qui per rispondere alle tue domande e aiutarti quando ne hai bisogno." },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "text", "id": "hero_image_alt", "label": "Hero image alt text", "default": "Pouch Grimmie Alma in tonalità ivory" },
+    {
+      "type": "select", "id": "hero_text_align", "label": "Hero text alignment", "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+
+    { "type": "header", "content": "Direction section" },
+    { "type": "checkbox", "id": "show_direction", "label": "Show direction cards", "default": true },
+    { "type": "text", "id": "direction_title", "label": "Section title", "default": "Tutto è più semplice quando sai dove cercare" },
+
+    { "type": "header", "content": "Contact form" },
+    { "type": "checkbox", "id": "show_contact", "label": "Show contact form", "default": true },
+    { "type": "text", "id": "contact_title", "label": "Title", "default": "Contattaci" },
+    { "type": "textarea", "id": "contact_subtitle", "label": "Subtitle", "default": "Se non hai trovato quello che cercavi, siamo qui per aiutarti." },
+    { "type": "text", "id": "label_name", "label": "Name placeholder", "default": "Nome" },
+    { "type": "text", "id": "label_email", "label": "Email placeholder", "default": "Email" },
+    { "type": "text", "id": "label_order", "label": "Order number placeholder", "default": "Numero ordine (facoltativo)" },
+    { "type": "text", "id": "label_message", "label": "Message placeholder", "default": "Messaggio" },
+    { "type": "text", "id": "submit_text", "label": "Submit button text", "default": "INVIA IL MESSAGGIO" },
+    { "type": "textarea", "id": "success_message", "label": "Success message", "default": "Grazie, abbiamo ricevuto il tuo messaggio. Ti risponderemo il prima possibile." },
+    { "type": "textarea", "id": "error_message", "label": "Error message", "default": "Controlla i campi inseriti e riprova." },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color", "label": "Page background", "default": "#F7F1EE" },
+    { "type": "color", "id": "hero_bg_color", "label": "Hero / form background", "default": "#F1EBE6" },
+    { "type": "color", "id": "blush_color", "label": "Blush", "default": "#EACBC8" },
+    { "type": "color", "id": "blush_light_color", "label": "Soft blush", "default": "#F7EDEB" },
+    { "type": "color", "id": "heading_color", "label": "Heading", "default": "#6E5F59" },
+    { "type": "color", "id": "text_color", "label": "Body text", "default": "#6E5F59" },
+    { "type": "color", "id": "border_color", "label": "Borders", "default": "#DDD2CA" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#C99696" },
+    { "type": "color", "id": "input_background_color", "label": "Input background", "default": "#F7EDEB" },
+    { "type": "color", "id": "button_background_color", "label": "Button background", "default": "#EACBC8" },
+    { "type": "color", "id": "button_text_color", "label": "Button text", "default": "#6E5F59" },
+    { "type": "color", "id": "button_hover_background_color", "label": "Button hover", "default": "#DFAFB3" }
+  ],
+  "max_blocks": 2,
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Direction card",
+      "settings": [
+        {
+          "type": "select", "id": "icon", "label": "Icon", "default": "question",
+          "options": [
+            { "value": "question", "label": "Question mark" },
+            { "value": "package", "label": "Package" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "chat", "label": "Chat" },
+            { "value": "mail", "label": "Mail" }
+          ]
+        },
+        { "type": "text", "id": "title", "label": "Title", "default": "Le risposte più cercate" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "Le abbiamo raccolte tutte nello stesso posto, così puoi trovare quello che cerchi in pochi secondi." },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grimmie contact page",
+      "category": "Grimmie",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "icon": "question",
+            "title": "Le risposte più cercate",
+            "description": "Le abbiamo raccolte tutte nello stesso posto, così puoi trovare quello che cerchi in pochi secondi.",
+            "link": "/pages/faqs"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "icon": "package",
+            "title": "Traccia il tuo ordine",
+            "description": "Per sapere dove si trova il tuo pacco senza dover aspettare una risposta.",
+            "link": "/tools/tracking"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

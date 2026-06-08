@@ -1,0 +1,66 @@
+{
+  "sections": {
+    "main": {
+      "type": "grimmie-contact-page",
+      "blocks": {
+        "card_faq": {
+          "type": "card",
+          "settings": {
+            "icon": "question",
+            "title": "Le risposte più cercate",
+            "description": "Le abbiamo raccolte tutte nello stesso posto, così puoi trovare quello che cerchi in pochi secondi.",
+            "link": "/pages/faqs"
+          }
+        },
+        "card_tracking": {
+          "type": "card",
+          "settings": {
+            "icon": "package",
+            "title": "Traccia il tuo ordine",
+            "description": "Per sapere dove si trova il tuo pacco senza dover aspettare una risposta.",
+            "link": "/tools/tracking"
+          }
+        }
+      },
+      "block_order": [
+        "card_faq",
+        "card_tracking"
+      ],
+      "settings": {
+        "show_hero": true,
+        "hero_eyebrow": "CONTATTI",
+        "hero_title": "Come possiamo aiutarti?",
+        "hero_subtitle": "Siamo qui per rispondere alle tue domande e aiutarti quando ne hai bisogno.",
+        "hero_image_alt": "Pouch Grimmie Alma in tonalità ivory",
+        "hero_text_align": "left",
+        "show_direction": true,
+        "direction_title": "Tutto è più semplice quando sai dove cercare",
+        "show_contact": true,
+        "contact_title": "Contattaci",
+        "contact_subtitle": "Se non hai trovato quello che cercavi, siamo qui per aiutarti.",
+        "label_name": "Nome",
+        "label_email": "Email",
+        "label_order": "Numero ordine (facoltativo)",
+        "label_message": "Messaggio",
+        "submit_text": "INVIA IL MESSAGGIO",
+        "success_message": "Grazie, abbiamo ricevuto il tuo messaggio. Ti risponderemo il prima possibile.",
+        "error_message": "Controlla i campi inseriti e riprova.",
+        "background_color": "#F7F1EE",
+        "hero_bg_color": "#F1EBE6",
+        "blush_color": "#EACBC8",
+        "blush_light_color": "#F7EDEB",
+        "heading_color": "#6E5F59",
+        "text_color": "#6E5F59",
+        "border_color": "#DDD2CA",
+        "accent_color": "#C99696",
+        "input_background_color": "#F7EDEB",
+        "button_background_color": "#EACBC8",
+        "button_text_color": "#6E5F59",
+        "button_hover_background_color": "#DFAFB3"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
