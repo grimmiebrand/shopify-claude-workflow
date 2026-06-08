@@ -38,7 +38,7 @@
   .grimmie-ct-{{ sid }}__hero {
     position: relative;
     width: 100%;
-    min-height: clamp(240px, 24vw, 360px);
+    aspect-ratio: 16 / 5;
     background-color: var(--gct-hero-bg);
     overflow: hidden;
     display: flex;
@@ -101,14 +101,15 @@
     font-style: var(--font-heading--style);
     font-weight: var(--font-heading--weight);
     color: var(--gct-heading);
-    font-size: var(--font-h2--size);
-    line-height: var(--font-h2--line-height);
-    letter-spacing: var(--font-h2--letter-spacing);
+    font-size: clamp(24px, 3.2vw, 42px);
+    line-height: 1.1;
+    letter-spacing: -0.005em;
+    text-transform: none;
   }
   .grimmie-ct-{{ sid }}__hero-sub {
     margin: 0;
-    font-size: var(--font-paragraph--size);
-    line-height: var(--font-paragraph--line-height);
+    font-size: clamp(13px, 1vw, 15px);
+    line-height: 1.6;
     color: var(--gct-text);
     max-width: 42ch;
   }
@@ -121,9 +122,9 @@
     font-style: var(--font-heading--style);
     font-weight: var(--font-heading--weight);
     color: var(--gct-heading);
-    font-size: var(--font-h3--size);
-    line-height: var(--font-h3--line-height);
-    letter-spacing: var(--font-h3--letter-spacing);
+    font-size: clamp(24px, 3.2vw, 42px);
+    line-height: 1.15;
+    letter-spacing: -0.005em;
   }
   .grimmie-ct-{{ sid }}__cards {
     display: flex;
@@ -182,8 +183,8 @@
   .grimmie-ct-{{ sid }}__card-desc {
     display: block;
     margin: 0;
-    font-size: var(--font-paragraph--size);
-    line-height: var(--font-paragraph--line-height);
+    font-size: clamp(13px, 0.95vw, 14.5px);
+    line-height: 1.55;
     color: var(--gct-text);
   }
   .grimmie-ct-{{ sid }}__card-arrow {
@@ -209,15 +210,15 @@
     font-style: var(--font-heading--style);
     font-weight: var(--font-heading--weight);
     color: var(--gct-heading);
-    font-size: var(--font-h3--size);
-    line-height: var(--font-h3--line-height);
-    letter-spacing: var(--font-h3--letter-spacing);
+    font-size: clamp(24px, 3.2vw, 42px);
+    line-height: 1.15;
+    letter-spacing: -0.005em;
   }
   .grimmie-ct-{{ sid }}__contact-sub {
     margin: 0 auto;
     max-width: 52ch;
-    font-size: var(--font-paragraph--size);
-    line-height: var(--font-paragraph--line-height);
+    font-size: clamp(13px, 1vw, 15px);
+    line-height: 1.6;
     color: var(--gct-text);
   }
   .grimmie-ct-{{ sid }}__form { display: flex; flex-direction: column; gap: clamp(14px, 1.6vw, 18px); }
@@ -302,12 +303,12 @@
 
   /* ============ MOBILE ============ */
   @media (max-width: 749px) {
-    .grimmie-ct-{{ sid }}__hero { min-height: clamp(300px, 78vw, 420px); }
+    .grimmie-ct-{{ sid }}__hero { aspect-ratio: auto; min-height: clamp(190px, 50vw, 260px); }
     .grimmie-ct-{{ sid }}__hero-media img { object-position: center; }
     .grimmie-ct-{{ sid }}__hero-scrim {
       background: linear-gradient(180deg, {{ s.hero_bg_color }} 0%, {{ s.hero_bg_color }} 32%, {{ s.hero_bg_color }}00 94%);
     }
-    .grimmie-ct-{{ sid }}__hero-content { align-items: flex-start; padding-top: clamp(28px, 8vw, 40px); }
+    .grimmie-ct-{{ sid }}__hero-content { align-items: center; padding-top: clamp(20px, 6vw, 32px); padding-bottom: clamp(20px, 6vw, 32px); }
     .grimmie-ct-{{ sid }}__hero-text { text-align: left; max-width: 100%; }
     .grimmie-ct-{{ sid }}__grid { grid-template-columns: 1fr; }
     .grimmie-ct-{{ sid }}__card { gap: 16px; padding: 20px; }
