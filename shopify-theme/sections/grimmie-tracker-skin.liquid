@@ -143,6 +143,20 @@
     font-family: var(--font-body--family) !important;
   }
 
+  /* The broad typography rules above are meant for the ParcelPanel content,
+     but on the tracking path the Grimmie theme chrome (the scrolling
+     announcement bar) is rendered around it and inherits those sizes — which
+     inflates the bar vs. the rest of the site. Re-assert the announcement
+     bar's own compact scale so it matches every other page. */
+  html.grimmie-pp-page .grimmie-ann-section,
+  html.grimmie-pp-page .grimmie-ann-section *,
+  body.grimmie-pp-page .grimmie-ann-section,
+  body.grimmie-pp-page .grimmie-ann-section * {
+    font-size: var(--gann-text-size, 13px) !important;
+    line-height: 1 !important;
+    letter-spacing: 0.04em !important;
+  }
+
   /* Submit / primary buttons inside the ParcelPanel UI */
   html.grimmie-pp-page button[type='submit'],
   html.grimmie-pp-page input[type='submit'],
