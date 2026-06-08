@@ -167,14 +167,19 @@
   .grimmie-ct-{{ sid }}__card-icon svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
   .grimmie-ct-{{ sid }}__card-text { flex: 1 1 auto; min-width: 0; }
   .grimmie-ct-{{ sid }}__card-title {
-    margin: 0 0 5px;
-    font-family: var(--font-body--family);
-    font-weight: 600;
+    display: block;
+    margin: 0 0 8px;
+    font-family: var(--font-accent--family);
+    font-style: var(--font-accent--style);
+    font-weight: var(--font-accent--weight);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-md);
     color: var(--gct-heading);
-    font-size: var(--font-h5--size);
-    line-height: 1.25;
+    font-size: var(--font-size--sm);
+    line-height: 1.3;
   }
   .grimmie-ct-{{ sid }}__card-desc {
+    display: block;
     margin: 0;
     font-size: var(--font-paragraph--size);
     line-height: var(--font-paragraph--line-height);
