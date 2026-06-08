@@ -410,6 +410,7 @@
         </div>
 
         {%- form 'contact' -%}
+          <div class="grimmie-ct-{{ sid }}__form">
           {%- if form.posted_successfully? -%}
             <div class="grimmie-ct-{{ sid }}__note grimmie-ct-{{ sid }}__note--success" role="status" tabindex="-1">
               {{ s.success_message | escape }}
@@ -478,6 +479,7 @@
           <button type="submit" class="grimmie-ct-{{ sid }}__submit">
             {{ s.submit_text | default: 'INVIA IL MESSAGGIO' | escape }}
           </button>
+          </div>
         {%- endform -%}
       </div>
     </div>
