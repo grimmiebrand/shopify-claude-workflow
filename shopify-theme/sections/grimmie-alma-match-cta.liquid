@@ -90,21 +90,33 @@
   .gam-{{ sid }}__spark--3 { width: 18px; height: 18px; bottom: 22%; right: 9%; }
   .gam-{{ sid }}__spark--4 { width: 12px; height: 12px; bottom: 34%; left: 6%; opacity: 0.5; }
 
-  /* Cards — fan / wheel */
-  .gam-{{ sid }}__cards {
+  /* Carousel / wheel */
+  .gam-{{ sid }}__wheel {
     position: relative;
     z-index: 2;
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: flex-end;
-    padding-top: clamp(12px, 2vw, 28px);
+    gap: clamp(4px, 1.4vw, 16px);
     margin-bottom: clamp(32px, 4vw, 48px);
   }
+  .gam-{{ sid }}__cards {
+    position: relative;
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 14px;
+    overflow-x: auto;
+    min-height: clamp(300px, 32vw, 366px);
+  }
+  .gam-{{ sid }}__cards.is-wheel { overflow: visible; gap: 0; }
+  .gam-{{ sid }}__cards.is-wheel .gam-{{ sid }}__card { position: absolute; left: 50%; bottom: 0; margin: 0; }
   .gam-{{ sid }}__card {
     flex: 0 0 auto;
     width: clamp(150px, 15vw, 200px);
-    margin-left: -40px;
     transform-origin: bottom center;
+    will-change: transform, opacity;
     background: var(--gam-card-bg);
     border: 1px solid var(--gam-border);
     border-radius: 16px;
@@ -112,10 +124,9 @@
     box-shadow: 0 10px 30px rgba(110, 95, 89, 0.10);
     text-decoration: none;
     color: inherit;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
   }
-  .gam-{{ sid }}__card:first-child { margin-left: 0; }
-  .gam-{{ sid }}__card:hover { opacity: 1 !important; filter: none !important; z-index: 30 !important; box-shadow: 0 16px 40px rgba(110, 95, 89, 0.18); }
   .gam-{{ sid }}__card-name {
     display: block;
     font-family: var(--font-heading--family);
@@ -126,6 +137,10 @@
     line-height: 1.15;
     text-align: center;
     margin: 2px 0 10px;
+    min-height: 2.3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .gam-{{ sid }}__card-img {
     width: 100%;
@@ -142,6 +157,28 @@
   .gam-{{ sid }}__card-foot svg { flex: 0 0 auto; width: 16px; height: 16px; fill: none; stroke: var(--gam-accent); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
   .gam-{{ sid }}__card-match { font-size: 11px; line-height: 1.25; color: var(--gam-text); text-align: left; }
   .gam-{{ sid }}__card-match b { color: var(--gam-heading); font-weight: 600; }
+
+  /* Arrows */
+  .gam-{{ sid }}__arrow {
+    display: none;
+    flex: 0 0 auto;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid var(--gam-border);
+    background: var(--gam-card-bg);
+    color: var(--gam-accent);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 6;
+    box-shadow: 0 6px 18px rgba(110, 95, 89, 0.12);
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+  .gam-{{ sid }}__wheel.is-ready .gam-{{ sid }}__arrow { display: flex; }
+  .gam-{{ sid }}__arrow svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .gam-{{ sid }}__arrow:hover { background: var(--gam-blush); color: var(--gam-heading); transform: scale(1.06); }
+  .gam-{{ sid }}__arrow:focus-visible { outline: 2px solid var(--gam-accent); outline-offset: 2px; }
 
   /* Benefits */
   .gam-{{ sid }}__benefits {
@@ -192,17 +229,10 @@
       position: static;
       margin: 0 auto clamp(20px, 6vw, 28px);
     }
-    .gam-{{ sid }}__cards {
-      justify-content: center;
-      gap: 0;
-    }
-    .gam-{{ sid }}__card { width: clamp(96px, 27vw, 132px); margin-left: -26px; padding: 8px 8px 10px; }
-    .gam-{{ sid }}__card:first-child { margin-left: 0; }
-    .gam-{{ sid }}__card-name { font-size: clamp(12px, 3.4vw, 14px); margin: 2px 0 8px; }
-    .gam-{{ sid }}__card-img { margin-bottom: 8px; }
-    .gam-{{ sid }}__card-foot { gap: 5px; }
-    .gam-{{ sid }}__card-foot svg { width: 13px; height: 13px; }
-    .gam-{{ sid }}__card-match { font-size: 9.5px; }
+    .gam-{{ sid }}__cards { min-height: clamp(280px, 78vw, 320px); }
+    .gam-{{ sid }}__card { width: clamp(120px, 42vw, 162px); padding: 9px 9px 11px; }
+    .gam-{{ sid }}__card-match { font-size: 10px; }
+    .gam-{{ sid }}__arrow { width: 38px; height: 38px; }
     .gam-{{ sid }}__benefits { flex-direction: column; align-items: flex-start; gap: 16px; }
     .gam-{{ sid }}__benefit { border-left: 0; padding: 0; }
     .gam-{{ sid }}__cta { max-width: 100%; }
@@ -234,46 +264,41 @@
 
     {%- assign card_blocks = section.blocks | where: 'type', 'card' -%}
     {%- if card_blocks.size > 0 -%}
-      <div class="gam-{{ sid }}__cards">
-        {%- for block in card_blocks -%}
-          {%- liquid
-            assign n = card_blocks.size
-            assign center = n | minus: 1 | divided_by: 2.0
-            assign offset = forloop.index0 | minus: center
-            assign aoff = offset | abs
-            assign base_angle = s.fan_angle | default: 10
-            assign angle = offset | times: base_angle
-            if block.settings.rotation != 0
-              assign angle = block.settings.rotation
-            endif
-            assign fade = s.outer_fade | default: 0.4
-            assign op_drop = aoff | times: fade
-            assign opacity = 1 | minus: op_drop
-            assign sc_drop = aoff | times: 0.08
-            assign scale = 1.04 | minus: sc_drop
-            assign sat_drop = aoff | times: 0.4
-            assign sat = 1 | minus: sat_drop
-            assign zi = aoff | round
-            assign z = 20 | minus: zi
-            assign style = 'transform: rotate(' | append: angle | append: 'deg) scale(' | append: scale | append: '); opacity: ' | append: opacity | append: '; filter: saturate(' | append: sat | append: '); z-index: ' | append: z | append: ';'
-          -%}
-          {%- assign card_tag = 'div' -%}
-          {%- if block.settings.link != blank -%}{%- assign card_tag = 'a' -%}{%- endif -%}
-          <{{ card_tag }} class="gam-{{ sid }}__card"{% if block.settings.link != blank %} href="{{ block.settings.link }}"{% endif %} style="{{ style }}" {{ block.shopify_attributes }}>
-            {%- if block.settings.title != blank -%}<span class="gam-{{ sid }}__card-name">{{ block.settings.title | escape }}</span>{%- endif -%}
-            <div class="gam-{{ sid }}__card-img">
-              {%- if block.settings.image != blank -%}
-                {{ block.settings.image | image_url: width: 500 | image_tag: alt: block.settings.image_alt, loading: 'lazy', widths: '200,300,400,500' }}
-              {%- else -%}
-                <div class="gam-ph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="9" r="1.6"/><path d="m4 16 5-4 4 3 3-2 4 3"/></svg></div>
-              {%- endif -%}
-            </div>
-            <div class="gam-{{ sid }}__card-foot">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.1 10.2a2 2 0 0 1-2 1.8H8.1a2 2 0 0 1-2-1.8z"/><path d="M8 8a4 4 0 0 1 8 0"/></svg>
-              <span class="gam-{{ sid }}__card-match"><b>{{ s.match_label | default: 'Alma Match' | escape }}</b> {{ block.settings.alma_match | escape }}</span>
-            </div>
-          </{{ card_tag }}>
-        {%- endfor -%}
+      <div class="gam-{{ sid }}__wheel" id="gam-{{ sid }}-wheel"
+           data-gam-active="{{ s.start_index | default: 0 }}"
+           data-gam-angle="{{ s.fan_angle | default: 7 }}"
+           data-gam-fade="{{ s.outer_fade | default: 0.3 }}"
+           data-gam-side="{{ s.side_visible | default: 3 }}">
+        {%- if card_blocks.size > 1 -%}
+          <button type="button" class="gam-{{ sid }}__arrow gam-{{ sid }}__arrow--prev" data-gam-prev aria-label="{{ s.prev_label | default: 'Precedente' | escape }}">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+          </button>
+        {%- endif -%}
+        <div class="gam-{{ sid }}__cards" data-gam-track>
+          {%- for block in card_blocks -%}
+            {%- assign card_tag = 'div' -%}
+            {%- if block.settings.link != blank -%}{%- assign card_tag = 'a' -%}{%- endif -%}
+            <{{ card_tag }} class="gam-{{ sid }}__card" data-gam-card{% if block.settings.link != blank %} href="{{ block.settings.link }}"{% endif %} {{ block.shopify_attributes }}>
+              {%- if block.settings.title != blank -%}<span class="gam-{{ sid }}__card-name">{{ block.settings.title | escape }}</span>{%- endif -%}
+              <div class="gam-{{ sid }}__card-img">
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 500 | image_tag: alt: block.settings.image_alt, loading: 'lazy', widths: '200,300,400,500' }}
+                {%- else -%}
+                  <div class="gam-ph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="9" r="1.6"/><path d="m4 16 5-4 4 3 3-2 4 3"/></svg></div>
+                {%- endif -%}
+              </div>
+              <div class="gam-{{ sid }}__card-foot">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.1 10.2a2 2 0 0 1-2 1.8H8.1a2 2 0 0 1-2-1.8z"/><path d="M8 8a4 4 0 0 1 8 0"/></svg>
+                <span class="gam-{{ sid }}__card-match"><b>{{ s.match_label | default: 'Alma Match' | escape }}</b> {{ block.settings.alma_match | escape }}</span>
+              </div>
+            </{{ card_tag }}>
+          {%- endfor -%}
+        </div>
+        {%- if card_blocks.size > 1 -%}
+          <button type="button" class="gam-{{ sid }}__arrow gam-{{ sid }}__arrow--next" data-gam-next aria-label="{{ s.next_label | default: 'Successivo' | escape }}">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+        {%- endif -%}
       </div>
     {%- endif -%}
 
@@ -309,6 +334,94 @@
   </div>
 </section>
 
+<script>
+  (function () {
+    var root = document.getElementById('gam-{{ sid }}-wheel');
+    if (!root) return;
+    var track = root.querySelector('[data-gam-track]');
+    if (!track) return;
+    var cards = Array.prototype.slice.call(track.querySelectorAll('[data-gam-card]'));
+    var n = cards.length;
+    if (n < 2) return;
+
+    var active = parseInt(root.getAttribute('data-gam-active') || '0', 10) || 0;
+    active = ((active % n) + n) % n;
+    var ANGLE = parseFloat(root.getAttribute('data-gam-angle')) || 7;
+    var FADE = parseFloat(root.getAttribute('data-gam-fade')) || 0.26;
+    var SIDE = parseInt(root.getAttribute('data-gam-side') || '3', 10) || 3;
+
+    track.classList.add('is-wheel');
+    root.classList.add('is-ready');
+
+    function layout() {
+      var cw = cards[0].offsetWidth || 180;
+      var step = cw * 0.42;
+      for (var i = 0; i < n; i++) {
+        var card = cards[i];
+        var d = i - active;
+        if (d > n / 2) d -= n;
+        if (d < -n / 2) d += n;
+        var ad = Math.abs(d);
+        if (ad > SIDE) {
+          card.style.opacity = '0';
+          card.style.visibility = 'hidden';
+          card.style.pointerEvents = 'none';
+          card.style.transform = 'translateX(-50%) scale(0.5)';
+          card.style.zIndex = '0';
+          card.setAttribute('aria-hidden', 'true');
+          continue;
+        }
+        var scale = Math.max(0.55, 1.06 - ad * 0.14);
+        var opacity = Math.max(0.16, 1 - ad * FADE);
+        var sat = Math.max(0.2, 1 - ad * 0.3);
+        var tx = d * step;
+        card.style.visibility = 'visible';
+        card.style.pointerEvents = 'auto';
+        card.style.transform = 'translateX(calc(-50% + ' + tx + 'px)) rotate(' + (d * ANGLE) + 'deg) scale(' + scale + ')';
+        card.style.opacity = String(opacity);
+        card.style.filter = 'saturate(' + sat + ')';
+        card.style.zIndex = String(100 - ad);
+        card.setAttribute('aria-hidden', d === 0 ? 'false' : 'true');
+      }
+    }
+
+    function go(dir) {
+      active = ((active + dir) % n + n) % n;
+      layout();
+    }
+
+    var prev = root.querySelector('[data-gam-prev]');
+    var next = root.querySelector('[data-gam-next]');
+    if (prev) prev.addEventListener('click', function () { go(-1); });
+    if (next) next.addEventListener('click', function () { go(1); });
+
+    cards.forEach(function (card, i) {
+      card.addEventListener('click', function (e) {
+        if (i !== active) { e.preventDefault(); active = i; layout(); }
+      });
+    });
+
+    var sx = null;
+    track.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', function (e) {
+      if (sx === null) return;
+      var dx = e.changedTouches[0].clientX - sx;
+      if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+      sx = null;
+    }, { passive: true });
+
+    window.addEventListener('resize', layout);
+
+    document.addEventListener('shopify:block:select', function (ev) {
+      for (var i = 0; i < n; i++) {
+        if (cards[i] === ev.target) { active = i; layout(); break; }
+      }
+    });
+
+    layout();
+  })();
+</script>
+
 {% schema %}
 {
   "name": "Grimmie Alma Match CTA",
@@ -331,6 +444,14 @@
     { "type": "header", "content": "Decoration" },
     { "type": "checkbox", "id": "show_sparkles", "label": "Show decorative sparkles", "default": true },
 
+    { "type": "header", "content": "Carousel" },
+    { "type": "range", "id": "start_index", "label": "Start card (position, 0 = first)", "min": 0, "max": 40, "step": 1, "default": 1 },
+    { "type": "range", "id": "side_visible", "label": "Cards visible each side", "min": 1, "max": 5, "step": 1, "default": 3 },
+    { "type": "range", "id": "fan_angle", "label": "Card fan angle", "min": 0, "max": 16, "step": 1, "unit": "deg", "default": 7 },
+    { "type": "range", "id": "outer_fade", "label": "Outer cards fade per step", "min": 0, "max": 0.5, "step": 0.1, "default": 0.3 },
+    { "type": "text", "id": "prev_label", "label": "Prev arrow label (accessibility)", "default": "Precedente" },
+    { "type": "text", "id": "next_label", "label": "Next arrow label (accessibility)", "default": "Successivo" },
+
     { "type": "header", "content": "Colors" },
     { "type": "color", "id": "bg_gradient_1", "label": "Background gradient top", "default": "#F7EDEB" },
     { "type": "color", "id": "bg_gradient_2", "label": "Background gradient bottom", "default": "#F1EBE6" },
@@ -345,25 +466,22 @@
     { "type": "color", "id": "button_hover_background_color", "label": "Button hover", "default": "#DFAFB3" },
 
     { "type": "header", "content": "Layout" },
-    { "type": "range", "id": "fan_angle", "label": "Card fan angle", "min": 0, "max": 20, "step": 1, "unit": "deg", "default": 10 },
-    { "type": "range", "id": "outer_fade", "label": "Outer cards fade", "min": 0, "max": 0.6, "step": 0.1, "default": 0.4 },
     { "type": "range", "id": "container_max_width", "label": "Container max width", "min": 1000, "max": 1500, "step": 20, "unit": "px", "default": 1320 },
     { "type": "range", "id": "border_radius", "label": "Container corner radius", "min": 0, "max": 48, "step": 2, "unit": "px", "default": 28 },
     { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 },
     { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 }
   ],
-  "max_blocks": 6,
+  "max_blocks": 40,
   "blocks": [
     {
       "type": "card",
       "name": "Archetype card",
-      "limit": 3,
+      "limit": 30,
       "settings": [
-        { "type": "text", "id": "title", "label": "Card title", "default": "Clean Girl" },
+        { "type": "text", "id": "title", "label": "Archetype name", "default": "Clean Girl" },
         { "type": "image_picker", "id": "image", "label": "Image" },
         { "type": "text", "id": "image_alt", "label": "Image alt text" },
-        { "type": "text", "id": "alma_match", "label": "Alma Match text", "default": "2 Classic + 1 Large" },
-        { "type": "range", "id": "rotation", "label": "Rotation (0 = auto)", "min": -12, "max": 12, "step": 1, "unit": "deg", "default": 0 },
+        { "type": "text", "id": "alma_match", "label": "Pouch combo", "default": "2C + 1L" },
         { "type": "url", "id": "link", "label": "Link (optional)" }
       ]
     },
@@ -393,9 +511,9 @@
       "name": "Grimmie Alma Match CTA",
       "category": "Grimmie",
       "blocks": [
-        { "type": "card", "settings": { "title": "Clean Girl", "alma_match": "2 Classic + 1 Large" } },
-        { "type": "card", "settings": { "title": "Star Girl", "alma_match": "3 Classic + 2 Large" } },
-        { "type": "card", "settings": { "title": "Soft Glam Girl", "alma_match": "2 Classic + 1 Large" } },
+        { "type": "card", "settings": { "title": "Soft Glam Girl", "alma_match": "2C + 3L" } },
+        { "type": "card", "settings": { "title": "Clean Girl", "alma_match": "3C + 2L" } },
+        { "type": "card", "settings": { "title": "Star Girl", "alma_match": "2C + 4L" } },
         { "type": "benefit", "settings": { "icon": "check", "text": "Risultato personalizzato" } },
         { "type": "benefit", "settings": { "icon": "sparkle", "text": "Consigli su misura per te" } },
         { "type": "benefit", "settings": { "icon": "pouch", "text": "Scopri le tue Alma ideali" } }
