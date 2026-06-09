@@ -406,7 +406,8 @@
             <div class="grimmie-ct-{{ sid }}__note grimmie-ct-{{ sid }}__note--success" role="status" tabindex="-1">
               {{ s.success_message | escape }}
             </div>
-          {%- elsif form.errors -%}
+          {%- else -%}
+          {%- if form.errors -%}
             <div class="grimmie-ct-{{ sid }}__note grimmie-ct-{{ sid }}__note--error" role="alert" tabindex="-1">
               {{ s.error_message | escape }}
               <ul>
@@ -470,6 +471,7 @@
           <button type="submit" class="grimmie-ct-{{ sid }}__submit">
             {{ s.submit_text | default: 'INVIA IL MESSAGGIO' | escape }}
           </button>
+          {%- endif -%}
           </div>
         {%- endform -%}
       </div>
