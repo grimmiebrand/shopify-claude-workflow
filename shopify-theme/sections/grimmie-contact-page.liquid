@@ -74,11 +74,11 @@
     {% if s.hero_text_align == 'center' %}justify-content: center;{% elsif s.hero_text_align == 'right' %}justify-content: flex-end;{% else %}justify-content: flex-start;{% endif %}
   }
   .grimmie-ct-{{ sid }}__hero-text {
-    max-width: 540px;
+    max-width: none;
     text-align: {{ s.hero_text_align }};
     display: flex;
     flex-direction: column;
-    gap: clamp(12px, 1.4vw, 18px);
+    gap: clamp(14px, 1.6vw, 20px);
   }
   .grimmie-ct-{{ sid }}__eyebrow {
     margin: 0;
@@ -95,17 +95,17 @@
     font-style: var(--font-heading--style);
     font-weight: var(--font-heading--weight);
     color: var(--gct-heading);
-    font-size: clamp(24px, 3.2vw, 42px);
+    font-size: clamp(28px, 3vw, 44px);
     line-height: 1.1;
-    letter-spacing: -0.005em;
+    letter-spacing: -0.01em;
     text-transform: none;
   }
   .grimmie-ct-{{ sid }}__hero-sub {
     margin: 0;
-    font-size: clamp(13px, 1vw, 15px);
-    line-height: 1.6;
+    font-size: 15px;
+    line-height: 1.55;
     color: var(--gct-text);
-    max-width: 42ch;
+    white-space: nowrap;
   }
   /* ============ DIRECTION ============ */
   .grimmie-ct-{{ sid }}__direction { padding: clamp(48px, 6vw, 84px) 0 clamp(8px, 1vw, 12px); }
@@ -317,6 +317,7 @@
     .grimmie-ct-{{ sid }}__hero-media img { object-position: center; }
     .grimmie-ct-{{ sid }}__hero-content { align-items: center; padding-top: clamp(20px, 6vw, 32px); padding-bottom: clamp(20px, 6vw, 32px); }
     .grimmie-ct-{{ sid }}__hero-text { text-align: left; max-width: 100%; }
+    .grimmie-ct-{{ sid }}__hero-sub { white-space: normal; }
     .grimmie-ct-{{ sid }}__grid { grid-template-columns: 1fr; }
     .grimmie-ct-{{ sid }}__card { gap: 16px; padding: 20px; }
   }
