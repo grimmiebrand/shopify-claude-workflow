@@ -253,6 +253,22 @@
     box-shadow: 0 0 0 3px {{ s.blush_color }}59;
     background-color: var(--gct-bg);
   }
+  .grimmie-ct-{{ sid }}__input:-webkit-autofill,
+  .grimmie-ct-{{ sid }}__input:-webkit-autofill:hover,
+  .grimmie-ct-{{ sid }}__textarea:-webkit-autofill {
+    -webkit-text-fill-color: var(--gct-text);
+    -webkit-box-shadow: 0 0 0 1000px var(--gct-input-bg) inset;
+    box-shadow: 0 0 0 1000px var(--gct-input-bg) inset;
+    border: 1px solid var(--gct-border);
+    caret-color: var(--gct-text);
+    transition: background-color 600000s 0s, color 600000s 0s;
+  }
+  .grimmie-ct-{{ sid }}__input:-webkit-autofill:focus,
+  .grimmie-ct-{{ sid }}__textarea:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px var(--gct-bg) inset, 0 0 0 3px {{ s.blush_color }}59;
+    box-shadow: 0 0 0 1000px var(--gct-bg) inset, 0 0 0 3px {{ s.blush_color }}59;
+    border-color: var(--gct-blush);
+  }
   .grimmie-ct-{{ sid }}__textarea { min-height: 150px; resize: vertical; }
   .grimmie-ct-{{ sid }}__submit {
     display: flex;
