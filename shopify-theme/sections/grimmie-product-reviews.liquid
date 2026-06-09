@@ -1,0 +1,165 @@
+{%- liquid
+  assign sid = section.id
+  assign s = section.settings
+-%}
+
+<style>
+  .gpr-{{ sid }} {
+    --gpr-bg: {{ s.background_color }};
+    --gpr-card-bg: {{ s.card_background_color }};
+    --gpr-heading: {{ s.heading_color }};
+    --gpr-text: {{ s.text_color }};
+    --gpr-accent: {{ s.accent_color }};
+    --gpr-blush: {{ s.blush_color }};
+    --gpr-border: {{ s.border_color }};
+    background-color: var(--gpr-bg);
+    color: var(--gpr-text);
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font-body--family);
+    padding: {{ s.padding_top }}px 0 {{ s.padding_bottom }}px;
+  }
+  .gpr-{{ sid }} * { box-sizing: border-box; }
+  .gpr-{{ sid }}__inner { max-width: 980px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 56px); }
+  .gpr-{{ sid }}__head { text-align: center; margin-bottom: clamp(24px, 3vw, 40px); }
+  .gpr-{{ sid }}__title {
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    color: var(--gpr-heading);
+    font-size: clamp(22px, 2.6vw, 32px);
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    margin: 0 0 12px;
+  }
+  .gpr-{{ sid }}__stars { display: inline-flex; gap: 3px; vertical-align: middle; }
+  .gpr-{{ sid }}__stars svg { width: 18px; height: 18px; fill: var(--gpr-blush); }
+  .gpr-{{ sid }}__rating { margin: 8px 0 0; font-size: clamp(13px, 1vw, 15px); color: var(--gpr-text); }
+  .gpr-{{ sid }}__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(16px, 2vw, 24px);
+  }
+  .gpr-{{ sid }}__card {
+    background-color: var(--gpr-card-bg);
+    border: 1px solid var(--gpr-border);
+    border-radius: 16px;
+    padding: clamp(22px, 2.4vw, 32px);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .gpr-{{ sid }}__card-stars { display: inline-flex; gap: 3px; }
+  .gpr-{{ sid }}__card-stars svg { width: 15px; height: 15px; fill: var(--gpr-blush); }
+  .gpr-{{ sid }}__quote {
+    font-size: clamp(14px, 1.05vw, 16px);
+    line-height: 1.6;
+    color: var(--gpr-text);
+    margin: 0;
+    font-style: italic;
+  }
+  .gpr-{{ sid }}__author { display: flex; align-items: center; gap: 12px; margin-top: auto; }
+  .gpr-{{ sid }}__avatar {
+    flex: 0 0 auto;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: var(--gpr-blush);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gpr-heading);
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .gpr-{{ sid }}__avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gpr-{{ sid }}__name { font-weight: 600; color: var(--gpr-heading); font-size: 14px; display: flex; align-items: center; gap: 6px; }
+  .gpr-{{ sid }}__verified { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 500; color: var(--gpr-accent); letter-spacing: 0.02em; }
+  .gpr-{{ sid }}__verified svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  @media (max-width: 749px) {
+    .gpr-{{ sid }}__grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+{%- capture star_svg -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 18.9 6.1 21.6l1.2-6.6L2.5 9.4l6.6-.9z"/></svg>{%- endcapture -%}
+
+<section class="gpr-{{ sid }}" aria-label="{{ s.title | default: 'Recensioni' | escape }}">
+  <div class="gpr-{{ sid }}__inner">
+    <div class="gpr-{{ sid }}__head">
+      {%- if s.title != blank -%}<h2 class="gpr-{{ sid }}__title">{{ s.title | escape }}</h2>{%- endif -%}
+      <span class="gpr-{{ sid }}__stars" aria-hidden="true">{{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}</span>
+      {%- if s.rating_text != blank -%}<p class="gpr-{{ sid }}__rating">{{ s.rating_text | escape }}</p>{%- endif -%}
+    </div>
+    <div class="gpr-{{ sid }}__grid">
+      {%- for block in section.blocks -%}
+        <article class="gpr-{{ sid }}__card" {{ block.shopify_attributes }}>
+          <span class="gpr-{{ sid }}__card-stars" aria-hidden="true">{{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}</span>
+          {%- if block.settings.quote != blank -%}<p class="gpr-{{ sid }}__quote">{{ block.settings.quote | escape }}</p>{%- endif -%}
+          <div class="gpr-{{ sid }}__author">
+            <span class="gpr-{{ sid }}__avatar" aria-hidden="true">
+              {%- if block.settings.avatar != blank -%}
+                {{ block.settings.avatar | image_url: width: 120 | image_tag: alt: block.settings.name, loading: 'lazy', widths: '44,88,120' }}
+              {%- elsif block.settings.name != blank -%}
+                {{ block.settings.name | slice: 0 }}
+              {%- endif -%}
+            </span>
+            <span class="gpr-{{ sid }}__name">
+              {{ block.settings.name | escape }}
+              {%- if block.settings.verified -%}
+                <span class="gpr-{{ sid }}__verified">{{ s.verified_label | default: 'Verificato' | escape }}<svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+              {%- endif -%}
+            </span>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Grimmie reviews",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Section title", "default": "Cosa dicono di Alma" },
+    { "type": "text", "id": "rating_text", "label": "Rating line", "default": "4.9/5 da oltre 1.200 recensioni" },
+    { "type": "text", "id": "verified_label", "label": "Verified label", "default": "Verificato" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#F1EBE6" },
+    { "type": "color", "id": "card_background_color", "label": "Card background", "default": "#F7F1EE" },
+    { "type": "color", "id": "heading_color", "label": "Heading", "default": "#6E5F59" },
+    { "type": "color", "id": "text_color", "label": "Body text", "default": "#6E5F59" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#C99696" },
+    { "type": "color", "id": "blush_color", "label": "Stars / avatar", "default": "#EACBC8" },
+    { "type": "color", "id": "border_color", "label": "Border", "default": "#DDD2CA" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 72 }
+  ],
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "image_picker", "id": "avatar", "label": "Customer photo (optional)" },
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "Finalmente ho tutto in ordine: capiente ma compatto, e così elegante che lo lascio sempre in vista." },
+        { "type": "text", "id": "name", "label": "Customer name", "default": "Martina R." },
+        { "type": "checkbox", "id": "verified", "label": "Show verified label", "default": true }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grimmie reviews",
+      "category": "Grimmie",
+      "blocks": [
+        { "type": "review", "settings": { "quote": "Finalmente ho tutto in ordine: capiente ma compatto, e così elegante che lo lascio sempre in vista.", "name": "Martina R.", "verified": true } },
+        { "type": "review", "settings": { "quote": "Il duo perfetto per casa e viaggi. Materiale bellissimo e super resistente!", "name": "Giulia T.", "verified": true } }
+      ]
+    }
+  ],
+  "enabled_on": { "templates": ["product"] }
+}
+{% endschema %}

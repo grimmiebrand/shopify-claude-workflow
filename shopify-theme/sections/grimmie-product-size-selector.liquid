@@ -1,0 +1,240 @@
+{%- liquid
+  assign sid = section.id
+  assign s = section.settings
+-%}
+
+<style>
+  .gps-{{ sid }} {
+    --gps-bg: {{ s.background_color }};
+    --gps-card-bg: {{ s.card_background_color }};
+    --gps-heading: {{ s.heading_color }};
+    --gps-text: {{ s.text_color }};
+    --gps-accent: {{ s.accent_color }};
+    --gps-blush: {{ s.blush_color }};
+    --gps-border: {{ s.border_color }};
+    background-color: var(--gps-bg);
+    color: var(--gps-text);
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font-body--family);
+    padding: {{ s.padding_top }}px 0 {{ s.padding_bottom }}px;
+  }
+  .gps-{{ sid }} * { box-sizing: border-box; }
+  .gps-{{ sid }}__inner { max-width: 1180px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 56px); }
+  .gps-{{ sid }}__title {
+    text-align: center;
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    color: var(--gps-heading);
+    font-size: clamp(22px, 2.6vw, 32px);
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    margin: 0 0 clamp(24px, 3vw, 40px);
+  }
+  .gps-{{ sid }}__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(16px, 2vw, 24px);
+  }
+  .gps-{{ sid }}__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--gps-card-bg);
+    border: 1px solid var(--gps-border);
+    border-radius: 16px;
+    padding: clamp(16px, 1.6vw, 22px);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .gps-{{ sid }}__card:hover { transform: translateY(-3px); border-color: var(--gps-blush); }
+  .gps-{{ sid }}__card:focus-visible { outline: 2px solid var(--gps-accent); outline-offset: 3px; }
+  .gps-{{ sid }}__card--rec { border-color: var(--gps-blush); border-width: 2px; }
+  .gps-{{ sid }}__badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 2;
+    background-color: var(--gps-blush);
+    color: var(--gps-heading);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    border-radius: 999px;
+  }
+  .gps-{{ sid }}__media {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: var(--gps-bg);
+    margin-bottom: 16px;
+  }
+  .gps-{{ sid }}__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gps-{{ sid }}__media .gps-ph { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--gps-blush); }
+  .gps-{{ sid }}__media .gps-ph svg { width: 48px; height: 48px; opacity: 0.5; }
+  .gps-{{ sid }}__name {
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    color: var(--gps-heading);
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.2;
+    margin: 0 0 4px;
+  }
+  .gps-{{ sid }}__dim {
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gps-accent);
+    margin: 0 0 10px;
+  }
+  .gps-{{ sid }}__desc {
+    font-size: clamp(13px, 0.95vw, 14.5px);
+    line-height: 1.55;
+    color: var(--gps-text);
+    margin: 0 0 16px;
+    flex: 1 1 auto;
+  }
+  .gps-{{ sid }}__price-row { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .gps-{{ sid }}__price {
+    font-family: var(--font-body--family);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--gps-heading);
+  }
+  .gps-{{ sid }}__compare {
+    font-size: 14px;
+    color: var(--gps-text);
+    opacity: 0.6;
+    text-decoration: line-through;
+  }
+  .gps-{{ sid }}__cta {
+    margin-top: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gps-accent);
+  }
+  .gps-{{ sid }}__card:hover .gps-{{ sid }}__cta { color: var(--gps-heading); }
+
+  @media (max-width: 749px) {
+    .gps-{{ sid }}__grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<section class="gps-{{ sid }}" aria-label="{{ s.title | default: 'Scegli la misura' | escape }}">
+  <div class="gps-{{ sid }}__inner">
+    {%- if s.title != blank -%}<h2 class="gps-{{ sid }}__title">{{ s.title | escape }}</h2>{%- endif -%}
+    <div class="gps-{{ sid }}__grid">
+      {%- for block in section.blocks -%}
+        {%- assign p = block.settings.product -%}
+        {%- liquid
+          assign card_url = block.settings.link
+          if p != blank and card_url == blank
+            assign card_url = p.url
+          endif
+          assign card_name = block.settings.title
+          if card_name == blank and p != blank
+            assign card_name = p.title
+          endif
+        -%}
+        <a class="gps-{{ sid }}__card{% if block.settings.recommended %} gps-{{ sid }}__card--rec{% endif %}"
+           {% if card_url != blank %}href="{{ card_url }}"{% else %}href="#"{% endif %}
+           aria-label="{{ card_name | escape }}"
+           {{ block.shopify_attributes }}>
+          {%- if block.settings.badge != blank -%}<span class="gps-{{ sid }}__badge">{{ block.settings.badge | escape }}</span>{%- endif -%}
+          <div class="gps-{{ sid }}__media">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 700 | image_tag: alt: card_name, loading: 'lazy', widths: '300,450,600,700' }}
+            {%- elsif p != blank and p.featured_image -%}
+              {{ p.featured_image | image_url: width: 700 | image_tag: alt: card_name, loading: 'lazy', widths: '300,450,600,700' }}
+            {%- else -%}
+              <div class="gps-ph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M3 11h18"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div>
+            {%- endif -%}
+          </div>
+          {%- if card_name != blank -%}<h3 class="gps-{{ sid }}__name">{{ card_name | escape }}</h3>{%- endif -%}
+          {%- if block.settings.dimensions != blank -%}<p class="gps-{{ sid }}__dim">{{ block.settings.dimensions | escape }}</p>{%- endif -%}
+          {%- if block.settings.description != blank -%}<p class="gps-{{ sid }}__desc">{{ block.settings.description | escape }}</p>{%- endif -%}
+          <div class="gps-{{ sid }}__price-row">
+            {%- if p != blank -%}
+              <span class="gps-{{ sid }}__price">{{ p.price | money }}</span>
+              {%- if p.compare_at_price != blank and p.compare_at_price > p.price -%}
+                <span class="gps-{{ sid }}__compare">{{ p.compare_at_price | money }}</span>
+              {%- elsif block.settings.compare_text != blank -%}
+                <span class="gps-{{ sid }}__compare">{{ block.settings.compare_text | escape }}</span>
+              {%- endif -%}
+            {%- else -%}
+              {%- if block.settings.price_text != blank -%}<span class="gps-{{ sid }}__price">{{ block.settings.price_text | escape }}</span>{%- endif -%}
+              {%- if block.settings.compare_text != blank -%}<span class="gps-{{ sid }}__compare">{{ block.settings.compare_text | escape }}</span>{%- endif -%}
+            {%- endif -%}
+          </div>
+          {%- if block.settings.cta_text != blank -%}
+            <span class="gps-{{ sid }}__cta">{{ block.settings.cta_text | escape }}<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></span>
+          {%- endif -%}
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Grimmie size selector",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Section title", "default": "Scegli la misura perfetta per te" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#F7F1EE" },
+    { "type": "color", "id": "card_background_color", "label": "Card background", "default": "#F7EDEB" },
+    { "type": "color", "id": "heading_color", "label": "Heading", "default": "#6E5F59" },
+    { "type": "color", "id": "text_color", "label": "Body text", "default": "#6E5F59" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#C99696" },
+    { "type": "color", "id": "blush_color", "label": "Blush (selected/badge)", "default": "#EACBC8" },
+    { "type": "color", "id": "border_color", "label": "Border", "default": "#DDD2CA" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Size card",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product", "info": "Pulls price, image and link automatically. Leave empty to use the manual fields below." },
+        { "type": "image_picker", "id": "image", "label": "Image (override)" },
+        { "type": "text", "id": "title", "label": "Title (override)" },
+        { "type": "text", "id": "dimensions", "label": "Dimensions / label", "default": "24 × 12 × 12 cm" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "Ideale per make-up e skincare quotidiani." },
+        { "type": "text", "id": "price_text", "label": "Price (used only if no product)", "default": "€58,00" },
+        { "type": "text", "id": "compare_text", "label": "Compare-at text (optional)" },
+        { "type": "text", "id": "badge", "label": "Badge (optional)" },
+        { "type": "checkbox", "id": "recommended", "label": "Highlight as recommended", "default": false },
+        { "type": "url", "id": "link", "label": "Link (used only if no product)" },
+        { "type": "text", "id": "cta_text", "label": "Link text", "default": "Scopri" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grimmie size selector",
+      "category": "Grimmie",
+      "blocks": [
+        { "type": "card", "settings": { "title": "Alma Classic", "dimensions": "24 × 12 × 12 cm", "description": "Ideale per make-up e skincare quotidiani.", "price_text": "€58,00", "cta_text": "Scopri" } },
+        { "type": "card", "settings": { "title": "Alma Large", "dimensions": "37 × 12 × 12 cm", "description": "Perfetta per capelli, styling e accessori da viaggio.", "price_text": "€78,00", "cta_text": "Scopri" } },
+        { "type": "card", "settings": { "title": "Alma Duo", "dimensions": "Classic + Large", "description": "Il set completo per organizzare ogni parte della tua routine.", "price_text": "€128,00", "compare_text": "€154,00", "badge": "MIGLIOR SCELTA", "recommended": true, "cta_text": "Scopri" } }
+      ]
+    }
+  ],
+  "enabled_on": { "templates": ["product"] }
+}
+{% endschema %}
