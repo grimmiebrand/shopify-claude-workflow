@@ -36,6 +36,30 @@
       "block_order": ["card_classic", "card_large", "card_duo"],
       "settings": { "title": "Scegli la misura perfetta per te" }
     },
+    "grimmie_alma_match": {
+      "type": "grimmie-alma-match-cta",
+      "blocks": {
+        "c1": { "type": "card", "settings": { "title": "Clean Girl", "alma_match": "2 Classic + 1 Large" } },
+        "c2": { "type": "card", "settings": { "title": "Star Girl", "alma_match": "3 Classic + 2 Large" } },
+        "c3": { "type": "card", "settings": { "title": "Soft Glam Girl", "alma_match": "2 Classic + 1 Large" } },
+        "ben1": { "type": "benefit", "settings": { "icon": "check", "text": "Risultato personalizzato" } },
+        "ben2": { "type": "benefit", "settings": { "icon": "sparkle", "text": "Consigli su misura per te" } },
+        "ben3": { "type": "benefit", "settings": { "icon": "pouch", "text": "Scopri le tue Alma ideali" } }
+      },
+      "block_order": ["c1", "c2", "c3", "ben1", "ben2", "ben3"],
+      "settings": {
+        "eyebrow": "SCOPRI IL TUO ARCHETIPO",
+        "title": "Trova la tua combo ideale",
+        "subtitle": "Rispondi a poche domande e scopri il tuo archetipo di bellezza, quali Alma fanno per te e quante pochette sono perfette per la tua routine.",
+        "match_label": "Alma Match",
+        "show_badge": true,
+        "badge_top": "2 MINUTI",
+        "badge_bottom": "10 DOMANDE",
+        "cta_text": "FAI IL QUIZ",
+        "cta_link": "/pages/alma-match",
+        "show_sparkles": true
+      }
+    },
     "grimmie_benefits": {
       "type": "grimmie-product-benefits",
       "blocks": {
@@ -67,5 +91,5 @@
       "settings": { "title": "Cosa dicono di Alma", "rating_text": "4.9/5 da oltre 1.200 recensioni" }
     }
   },
-  "order": ["grimmie_hero", "grimmie_size", "grimmie_benefits", "grimmie_lifestyle", "grimmie_reviews"]
+  "order": ["grimmie_hero", "grimmie_size", "grimmie_alma_match", "grimmie_benefits", "grimmie_lifestyle", "grimmie_reviews"]
 }
