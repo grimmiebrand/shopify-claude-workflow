@@ -38,7 +38,7 @@
   .grimmie-ct-{{ sid }}__hero {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 4;
+    min-height: clamp(280px, 30vw, 420px);
     background-color: var(--gct-hero-bg);
     overflow: hidden;
     display: flex;
@@ -313,7 +313,7 @@
 
   /* ============ MOBILE ============ */
   @media (max-width: 749px) {
-    .grimmie-ct-{{ sid }}__hero { aspect-ratio: auto; min-height: clamp(190px, 50vw, 260px); }
+    .grimmie-ct-{{ sid }}__hero { min-height: clamp(240px, 60vw, 360px); }
     .grimmie-ct-{{ sid }}__hero-media img { object-position: center; }
     .grimmie-ct-{{ sid }}__hero-content { align-items: center; padding-top: clamp(20px, 6vw, 32px); padding-bottom: clamp(20px, 6vw, 32px); }
     .grimmie-ct-{{ sid }}__hero-text { text-align: left; max-width: 100%; }
