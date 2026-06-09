@@ -90,18 +90,21 @@
   .gam-{{ sid }}__spark--3 { width: 18px; height: 18px; bottom: 22%; right: 9%; }
   .gam-{{ sid }}__spark--4 { width: 12px; height: 12px; bottom: 34%; left: 6%; opacity: 0.5; }
 
-  /* Cards */
+  /* Cards — fan / wheel */
   .gam-{{ sid }}__cards {
     position: relative;
     z-index: 2;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
+    padding-top: clamp(12px, 2vw, 28px);
     margin-bottom: clamp(32px, 4vw, 48px);
   }
   .gam-{{ sid }}__card {
     flex: 0 0 auto;
     width: clamp(150px, 15vw, 200px);
+    margin-left: -40px;
+    transform-origin: bottom center;
     background: var(--gam-card-bg);
     border: 1px solid var(--gam-border);
     border-radius: 16px;
@@ -109,9 +112,10 @@
     box-shadow: 0 10px 30px rgba(110, 95, 89, 0.10);
     text-decoration: none;
     color: inherit;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
   }
-  .gam-{{ sid }}__card:hover { box-shadow: 0 16px 40px rgba(110, 95, 89, 0.16); }
+  .gam-{{ sid }}__card:first-child { margin-left: 0; }
+  .gam-{{ sid }}__card:hover { opacity: 1 !important; filter: none !important; z-index: 30 !important; box-shadow: 0 16px 40px rgba(110, 95, 89, 0.18); }
   .gam-{{ sid }}__card-name {
     display: block;
     font-family: var(--font-heading--family);
@@ -192,7 +196,8 @@
       justify-content: center;
       gap: 0;
     }
-    .gam-{{ sid }}__card { width: clamp(96px, 27vw, 132px); padding: 8px 8px 10px; }
+    .gam-{{ sid }}__card { width: clamp(96px, 27vw, 132px); margin-left: -26px; padding: 8px 8px 10px; }
+    .gam-{{ sid }}__card:first-child { margin-left: 0; }
     .gam-{{ sid }}__card-name { font-size: clamp(12px, 3.4vw, 14px); margin: 2px 0 8px; }
     .gam-{{ sid }}__card-img { margin-bottom: 8px; }
     .gam-{{ sid }}__card-foot { gap: 5px; }
@@ -232,29 +237,25 @@
       <div class="gam-{{ sid }}__cards">
         {%- for block in card_blocks -%}
           {%- liquid
-            assign pos = 'center'
-            if forloop.first and card_blocks.size > 1
-              assign pos = 'left'
+            assign n = card_blocks.size
+            assign center = n | minus: 1 | divided_by: 2.0
+            assign offset = forloop.index0 | minus: center
+            assign aoff = offset | abs
+            assign base_angle = s.fan_angle | default: 10
+            assign angle = offset | times: base_angle
+            if block.settings.rotation != 0
+              assign angle = block.settings.rotation
             endif
-            assign last_index = card_blocks.size | minus: 1
-            if forloop.index0 == last_index and card_blocks.size > 1
-              assign pos = 'right'
-            endif
-            assign rot = block.settings.rotation
-            assign style = ''
-            if pos == 'left'
-              assign style = 'transform: rotate(' | append: rot | append: 'deg); margin-right: -22px; z-index: 1;'
-              if rot == 0
-                assign style = 'transform: rotate(-7deg); margin-right: -22px; z-index: 1;'
-              endif
-            elsif pos == 'right'
-              assign style = 'transform: rotate(' | append: rot | append: 'deg); margin-left: -22px; z-index: 1;'
-              if rot == 0
-                assign style = 'transform: rotate(7deg); margin-left: -22px; z-index: 1;'
-              endif
-            else
-              assign style = 'transform: translateY(-10px) scale(1.06); z-index: 3;'
-            endif
+            assign fade = s.outer_fade | default: 0.4
+            assign op_drop = aoff | times: fade
+            assign opacity = 1 | minus: op_drop
+            assign sc_drop = aoff | times: 0.08
+            assign scale = 1.04 | minus: sc_drop
+            assign sat_drop = aoff | times: 0.4
+            assign sat = 1 | minus: sat_drop
+            assign zi = aoff | round
+            assign z = 20 | minus: zi
+            assign style = 'transform: rotate(' | append: angle | append: 'deg) scale(' | append: scale | append: '); opacity: ' | append: opacity | append: '; filter: saturate(' | append: sat | append: '); z-index: ' | append: z | append: ';'
           -%}
           {%- assign card_tag = 'div' -%}
           {%- if block.settings.link != blank -%}{%- assign card_tag = 'a' -%}{%- endif -%}
@@ -344,6 +345,8 @@
     { "type": "color", "id": "button_hover_background_color", "label": "Button hover", "default": "#DFAFB3" },
 
     { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "fan_angle", "label": "Card fan angle", "min": 0, "max": 20, "step": 1, "unit": "deg", "default": 10 },
+    { "type": "range", "id": "outer_fade", "label": "Outer cards fade", "min": 0, "max": 0.6, "step": 0.1, "default": 0.4 },
     { "type": "range", "id": "container_max_width", "label": "Container max width", "min": 1000, "max": 1500, "step": 20, "unit": "px", "default": 1320 },
     { "type": "range", "id": "border_radius", "label": "Container corner radius", "min": 0, "max": 48, "step": 2, "unit": "px", "default": 28 },
     { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 },
