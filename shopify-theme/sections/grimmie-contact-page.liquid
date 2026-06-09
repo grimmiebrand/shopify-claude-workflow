@@ -38,7 +38,7 @@
   .grimmie-ct-{{ sid }}__hero {
     position: relative;
     width: 100%;
-    min-height: clamp(280px, 30vw, 420px);
+    min-height: 240px;
     background-color: var(--gct-hero-bg);
     overflow: hidden;
     display: flex;
@@ -68,7 +68,7 @@
     width: 100%;
     max-width: 1180px;
     margin: 0 auto;
-    padding: clamp(28px, 4vw, 56px) clamp(24px, 5vw, 56px);
+    padding: clamp(24px, 3vw, 40px) clamp(24px, 5vw, 56px);
     display: flex;
     align-items: center;
     {% if s.hero_text_align == 'center' %}justify-content: center;{% elsif s.hero_text_align == 'right' %}justify-content: flex-end;{% else %}justify-content: flex-start;{% endif %}
@@ -313,7 +313,7 @@
 
   /* ============ MOBILE ============ */
   @media (max-width: 749px) {
-    .grimmie-ct-{{ sid }}__hero { min-height: clamp(240px, 60vw, 360px); }
+    .grimmie-ct-{{ sid }}__hero { min-height: 220px; }
     .grimmie-ct-{{ sid }}__hero-media img { object-position: center; }
     .grimmie-ct-{{ sid }}__hero-content { align-items: center; padding-top: clamp(20px, 6vw, 32px); padding-bottom: clamp(20px, 6vw, 32px); }
     .grimmie-ct-{{ sid }}__hero-text { text-align: left; max-width: 100%; }
