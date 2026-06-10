@@ -50,6 +50,7 @@
     justify-content: center;
   }
   .gpb-{{ sid }}__icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .gpb-{{ sid }}__icon img { width: 100%; height: 100%; object-fit: contain; }
   .gpb-{{ sid }}__item-title {
     font-family: var(--font-heading--family);
     font-style: var(--font-heading--style);
@@ -81,7 +82,10 @@
     <div class="gpb-{{ sid }}__grid">
       {%- for block in section.blocks -%}
         <div class="gpb-{{ sid }}__item" {{ block.shopify_attributes }}>
-          <span class="gpb-{{ sid }}__icon" aria-hidden="true">
+          <span class="gpb-{{ sid }}__icon"{% if block.settings.icon_image == blank %} aria-hidden="true"{% endif %}>
+            {%- if block.settings.icon_image != blank -%}
+              {{ block.settings.icon_image | image_url: width: 120 | image_tag: alt: block.settings.icon_alt, loading: 'lazy', widths: '44,88,120' }}
+            {%- else -%}
             {%- case block.settings.icon -%}
               {%- when 'pouch' -%}
                 <svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M8 8a4 4 0 0 1 8 0"/></svg>
@@ -100,6 +104,7 @@
               {%- else -%}
                 <svg viewBox="0 0 24 24"><path d="M12 3l1.6 5.4L19 10l-5.4 1.6L12 17l-1.6-5.4L5 10l5.4-1.6z"/></svg>
             {%- endcase -%}
+            {%- endif -%}
           </span>
           {%- if block.settings.title != blank -%}<h3 class="gpb-{{ sid }}__item-title">{{ block.settings.title | escape }}</h3>{%- endif -%}
           {%- if block.settings.text != blank -%}<p class="gpb-{{ sid }}__item-text">{{ block.settings.text | escape }}</p>{%- endif -%}
@@ -141,8 +146,11 @@
             { "value": "leaf", "label": "Leaf" },
             { "value": "heart", "label": "Heart" },
             { "value": "shield", "label": "Shield" }
-          ]
+          ],
+          "info": "Used only if no custom icon image is uploaded below."
         },
+        { "type": "image_picker", "id": "icon_image", "label": "Custom icon (optional)", "info": "Upload your own icon. Replaces the icon above. Use a small square PNG/SVG." },
+        { "type": "text", "id": "icon_alt", "label": "Custom icon alt text" },
         { "type": "text", "id": "title", "label": "Title", "default": "Ordine quotidiano" },
         { "type": "textarea", "id": "text", "label": "Text", "default": "Tutto al suo posto, ogni giorno." }
       ]
