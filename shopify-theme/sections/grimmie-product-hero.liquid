@@ -68,6 +68,7 @@
     z-index: 3;
     width: 36px;
     height: 36px;
+    padding: 0;
     border-radius: 50%;
     background: var(--gph-bg);
     border: 1px solid var(--gph-border);
@@ -75,8 +76,40 @@
     align-items: center;
     justify-content: center;
     color: var(--gph-accent);
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
+  .gph-{{ sid }}__zoom:hover { background: var(--gph-blush); color: var(--gph-heading); }
   .gph-{{ sid }}__zoom svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+  .gph-{{ sid }}__lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(16px, 4vw, 48px);
+    background: rgba(60, 50, 46, 0.86);
+    cursor: zoom-out;
+  }
+  .gph-{{ sid }}__lightbox.is-open { display: flex; }
+  .gph-{{ sid }}__lightbox img { max-width: 92vw; max-height: 90vh; width: auto; height: auto; object-fit: contain; border-radius: 6px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); }
+  .gph-{{ sid }}__lb-close {
+    position: absolute;
+    top: clamp(12px, 2vw, 22px);
+    right: clamp(12px, 2vw, 22px);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: var(--gph-bg);
+    color: var(--gph-heading);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .gph-{{ sid }}__lb-close svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
   .gph-{{ sid }}__thumbs {
     display: grid;
     grid-template-columns: repeat({{ s.thumb_columns | default: 4 }}, 1fr);
@@ -257,7 +290,7 @@
         {%- endif -%}
       {%- endfor -%}
       <div class="gph-{{ sid }}__stage">
-        <span class="gph-{{ sid }}__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+        <button type="button" class="gph-{{ sid }}__zoom" id="gph-zoom-{{ sid }}" aria-label="{{ s.zoom_label | default: 'Ingrandisci immagine' | escape }}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
         {%- if product.media.size > 0 -%}
           {%- for media in product.media -%}
             {%- if media.media_type == 'image' -%}
@@ -385,7 +418,47 @@
     </div>
 
   </div>
+
+  <div class="gph-{{ sid }}__lightbox" id="gph-lb-{{ sid }}" aria-hidden="true">
+    <button type="button" class="gph-{{ sid }}__lb-close" aria-label="{{ s.close_label | default: 'Chiudi' | escape }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <img src="" alt="" loading="lazy">
+  </div>
 </section>
+
+<script>
+  (function () {
+    var root = document.getElementById('gph-{{ sid }}');
+    var zoom = document.getElementById('gph-zoom-{{ sid }}');
+    var lb = document.getElementById('gph-lb-{{ sid }}');
+    if (!root || !zoom || !lb) return;
+    var lbImg = lb.querySelector('img');
+    var radios = root.querySelectorAll('.gph-{{ sid }}__sel');
+    var slides = root.querySelectorAll('.gph-{{ sid }}__slide');
+    function activeIndex() {
+      for (var i = 0; i < radios.length; i++) { if (radios[i].checked) return i; }
+      return 0;
+    }
+    function openLb() {
+      var slide = slides[activeIndex()] || slides[0];
+      var img = slide ? slide.querySelector('img') : null;
+      if (img) { lbImg.src = img.currentSrc || img.src; lbImg.alt = img.alt || ''; }
+      lb.classList.add('is-open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLb() {
+      lb.classList.remove('is-open');
+      lb.setAttribute('aria-hidden', 'true');
+      lbImg.removeAttribute('src');
+      document.body.style.overflow = '';
+    }
+    zoom.addEventListener('click', openLb);
+    lb.addEventListener('click', closeLb);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLb();
+    });
+  })();
+</script>
 
 <script>
   (function () {
