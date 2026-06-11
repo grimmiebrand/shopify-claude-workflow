@@ -110,6 +110,28 @@
     cursor: pointer;
   }
   .gph-{{ sid }}__lb-close svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+  .gph-{{ sid }}__lb-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: var(--gph-bg);
+    color: var(--gph-heading);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .gph-{{ sid }}__lb-nav:hover { background: var(--gph-blush); }
+  .gph-{{ sid }}__lb-nav--prev { left: clamp(10px, 3vw, 32px); }
+  .gph-{{ sid }}__lb-nav--next { right: clamp(10px, 3vw, 32px); }
+  .gph-{{ sid }}__lb-nav svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .gph-{{ sid }}__lb-nav[hidden] { display: none; }
   .gph-{{ sid }}__thumbs {
     display: grid;
     grid-template-columns: repeat({{ s.thumb_columns | default: 4 }}, 1fr);
@@ -421,7 +443,9 @@
 
   <div class="gph-{{ sid }}__lightbox" id="gph-lb-{{ sid }}" aria-hidden="true">
     <button type="button" class="gph-{{ sid }}__lb-close" aria-label="{{ s.close_label | default: 'Chiudi' | escape }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <button type="button" class="gph-{{ sid }}__lb-nav gph-{{ sid }}__lb-nav--prev" data-gph-prev aria-label="{{ s.prev_label | default: 'Immagine precedente' | escape }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
     <img src="" alt="" loading="lazy">
+    <button type="button" class="gph-{{ sid }}__lb-nav gph-{{ sid }}__lb-nav--next" data-gph-next aria-label="{{ s.next_label | default: 'Immagine successiva' | escape }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
   </div>
 </section>
 
@@ -432,16 +456,26 @@
     var lb = document.getElementById('gph-lb-{{ sid }}');
     if (!root || !zoom || !lb) return;
     var lbImg = lb.querySelector('img');
+    var closeBtn = lb.querySelector('.gph-{{ sid }}__lb-close');
+    var prevBtn = lb.querySelector('[data-gph-prev]');
+    var nextBtn = lb.querySelector('[data-gph-next]');
     var radios = root.querySelectorAll('.gph-{{ sid }}__sel');
     var slides = root.querySelectorAll('.gph-{{ sid }}__slide');
+    var count = slides.length;
+    var index = 0;
     function activeIndex() {
       for (var i = 0; i < radios.length; i++) { if (radios[i].checked) return i; }
       return 0;
     }
-    function openLb() {
-      var slide = slides[activeIndex()] || slides[0];
-      var img = slide ? slide.querySelector('img') : null;
+    function show(i) {
+      if (count === 0) return;
+      index = (i % count + count) % count;
+      var img = slides[index] ? slides[index].querySelector('img') : null;
       if (img) { lbImg.src = img.currentSrc || img.src; lbImg.alt = img.alt || ''; }
+      if (radios[index]) radios[index].checked = true;
+    }
+    function openLb() {
+      show(activeIndex());
       lb.classList.add('is-open');
       lb.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
@@ -452,10 +486,20 @@
       lbImg.removeAttribute('src');
       document.body.style.overflow = '';
     }
+    if (count < 2) {
+      if (prevBtn) prevBtn.hidden = true;
+      if (nextBtn) nextBtn.hidden = true;
+    }
     zoom.addEventListener('click', openLb);
-    lb.addEventListener('click', closeLb);
+    lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
+    if (closeBtn) closeBtn.addEventListener('click', closeLb);
+    if (prevBtn) prevBtn.addEventListener('click', function () { show(index - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { show(index + 1); });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLb();
+      if (!lb.classList.contains('is-open')) return;
+      if (e.key === 'Escape') closeLb();
+      else if (e.key === 'ArrowLeft') show(index - 1);
+      else if (e.key === 'ArrowRight') show(index + 1);
     });
   })();
 </script>
