@@ -41,6 +41,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    text-align: center;
     background-color: var(--gps-card-bg);
     border: 1px solid var(--gps-border);
     border-radius: 16px;
@@ -100,7 +101,7 @@
     margin: 0 0 16px;
     flex: 1 1 auto;
   }
-  .gps-{{ sid }}__price-row { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .gps-{{ sid }}__price-row { display: flex; align-items: baseline; justify-content: center; gap: 10px; flex-wrap: wrap; }
   .gps-{{ sid }}__price {
     font-family: var(--font-body--family);
     font-weight: 600;
@@ -114,17 +115,24 @@
     text-decoration: line-through;
   }
   .gps-{{ sid }}__cta {
-    margin-top: 14px;
-    display: inline-flex;
+    margin-top: 18px;
+    display: flex;
     align-items: center;
-    gap: 6px;
+    justify-content: center;
+    width: 100%;
+    min-height: 46px;
+    padding: 0 18px;
+    border: 1px solid var(--gps-blush);
+    border-radius: 0;
+    background-color: transparent;
     font-size: 12px;
     font-weight: 500;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--gps-accent);
+    color: var(--gps-heading);
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
   }
-  .gps-{{ sid }}__card:hover .gps-{{ sid }}__cta { color: var(--gps-heading); }
+  .gps-{{ sid }}__card:hover .gps-{{ sid }}__cta { background-color: var(--gps-blush); border-color: var(--gps-blush); color: var(--gps-heading); }
 
   @media (max-width: 749px) {
     .gps-{{ sid }}__grid { grid-template-columns: 1fr; }
@@ -178,7 +186,7 @@
             {%- endif -%}
           </div>
           {%- if block.settings.cta_text != blank -%}
-            <span class="gps-{{ sid }}__cta">{{ block.settings.cta_text | escape }}<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></span>
+            <span class="gps-{{ sid }}__cta">{{ block.settings.cta_text | escape }}</span>
           {%- endif -%}
         </a>
       {%- endfor -%}
