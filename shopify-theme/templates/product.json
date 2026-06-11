@@ -91,7 +91,7 @@
     "grimmie_benefits": {
       "type": "grimmie-product-benefits",
       "blocks": {
-        "b1": { "type": "benefit", "settings": { "icon": "pouch", "title": "Ordine quotidiano", "text": "Tutto al suo posto, ogni giorno." } },
+        "b1": { "type": "benefit", "settings": { "icon": "order", "title": "Ordine quotidiano", "text": "Tutto al suo posto, ogni giorno." } },
         "b2": { "type": "benefit", "settings": { "icon": "droplet", "title": "Materiali lavabili", "text": "Interno facile da pulire, sempre impeccabile." } },
         "b3": { "type": "benefit", "settings": { "icon": "suitcase", "title": "Perfette in viaggio", "text": "Leggere, resistenti e salvaspazio." } },
         "b4": { "type": "benefit", "settings": { "icon": "sparkle", "title": "Set coordinato", "text": "Due misure, un solo stile senza tempo." } }

@@ -87,6 +87,8 @@
               {{ block.settings.icon_image | image_url: width: 120 | image_tag: alt: block.settings.icon_alt, loading: 'lazy', widths: '44,88,120' }}
             {%- else -%}
             {%- case block.settings.icon -%}
+              {%- when 'order' -%}
+                <svg viewBox="0 0 24 24"><rect x="3.8" y="5" width="16.4" height="14" rx="2.4"/><path d="M3.8 11.4h16.4"/><path d="M12 5v6.4"/><path d="M9 11.4v7.6"/><path d="M15 11.4v7.6"/></svg>
               {%- when 'pouch' -%}
                 <svg viewBox="0 0 24 24"><path d="M5 9.4C7.5 7 16.5 7 19 9.4l-.8 7A2.4 2.4 0 0 1 15.8 18.5H8.2A2.4 2.4 0 0 1 5.8 16.4z"/><path d="M5 9.4c3 1.6 11 1.6 14 0"/><path d="M18.9 9.5 20.1 8.3"/></svg>
               {%- when 'bag' -%}
@@ -147,8 +149,9 @@
       "name": "Benefit",
       "settings": [
         {
-          "type": "select", "id": "icon", "label": "Icon", "default": "pouch",
+          "type": "select", "id": "icon", "label": "Icon", "default": "order",
           "options": [
+            { "value": "order", "label": "Organizer (order)" },
             { "value": "pouch", "label": "Trousse / pouch" },
             { "value": "bag", "label": "Bag" },
             { "value": "droplet", "label": "Droplet" },
@@ -176,7 +179,7 @@
       "name": "Grimmie benefits",
       "category": "Grimmie",
       "blocks": [
-        { "type": "benefit", "settings": { "icon": "pouch", "title": "Ordine quotidiano", "text": "Tutto al suo posto, ogni giorno." } },
+        { "type": "benefit", "settings": { "icon": "order", "title": "Ordine quotidiano", "text": "Tutto al suo posto, ogni giorno." } },
         { "type": "benefit", "settings": { "icon": "droplet", "title": "Materiali lavabili", "text": "Interno facile da pulire, sempre impeccabile." } },
         { "type": "benefit", "settings": { "icon": "suitcase", "title": "Perfette in viaggio", "text": "Leggere, resistenti e salvaspazio." } },
         { "type": "benefit", "settings": { "icon": "sparkle", "title": "Set coordinato", "text": "Due misure, un solo stile senza tempo." } }
