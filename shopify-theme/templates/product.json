@@ -479,11 +479,19 @@
             "title": "Sempre con te",
             "text": "La tua routine, ovunque tu sia."
           }
+        },
+        "l4": {
+          "type": "card",
+          "settings": {
+            "title": "In palestra",
+            "text": "I tuoi essentials sempre pronti."
+          }
         }
       },
       "block_order": [
         "l1",
         "l2",
+        "l4",
         "l3"
       ],
       "settings": {
