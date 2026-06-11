@@ -119,5 +119,5 @@
       "settings": { "title": "Cosa dicono di Alma", "rating_text": "4.9/5 da oltre 1.200 recensioni" }
     }
   },
-  "order": ["grimmie_hero", "grimmie_size", "grimmie_alma_match", "grimmie_benefits", "grimmie_lifestyle", "grimmie_reviews"]
+  "order": ["grimmie_hero", "grimmie_benefits", "grimmie_size", "grimmie_alma_match", "grimmie_lifestyle", "grimmie_reviews"]
 }
