@@ -29,9 +29,9 @@
     "grimmie_size": {
       "type": "grimmie-product-size-selector",
       "blocks": {
-        "card_classic": { "type": "card", "settings": { "product": "almaclassic", "title": "Alma Classic", "dimensions": "24 × 12 × 12 cm", "description": "Ideale per make-up e skincare quotidiani.", "price_text": "€58,00", "cta_text": "Scopri" } },
-        "card_large": { "type": "card", "settings": { "product": "almalarge", "title": "Alma Large", "dimensions": "37 × 12 × 12 cm", "description": "Perfetta per capelli, styling e accessori da viaggio.", "price_text": "€78,00", "cta_text": "Scopri" } },
-        "card_duo": { "type": "card", "settings": { "product": "almaduo", "title": "Alma Duo", "dimensions": "Classic + Large", "description": "Il set completo per organizzare ogni parte della tua routine.", "price_text": "€128,00", "compare_text": "€154,00", "badge": "MIGLIOR SCELTA", "recommended": true, "cta_text": "Scopri" } }
+        "card_classic": { "type": "card", "settings": { "product": "almaclassic", "title": "Alma Classic", "dimensions": "24 × 12 × 12 cm", "description": "Ideale per make-up e skincare quotidiani.", "price_text": "€58,00", "cta_text": "Aggiungi al carrello" } },
+        "card_large": { "type": "card", "settings": { "product": "almalarge", "title": "Alma Large", "dimensions": "37 × 12 × 12 cm", "description": "Perfetta per capelli, styling e accessori da viaggio.", "price_text": "€78,00", "cta_text": "Aggiungi al carrello" } },
+        "card_duo": { "type": "card", "settings": { "product": "almaduo", "title": "Alma Duo", "dimensions": "Classic + Large", "description": "Il set completo per organizzare ogni parte della tua routine.", "price_text": "€128,00", "compare_text": "€154,00", "badge": "MIGLIOR SCELTA", "recommended": true, "cta_text": "Aggiungi al carrello" } }
       },
       "block_order": ["card_classic", "card_large", "card_duo"],
       "settings": { "title": "Scegli la misura perfetta per te" }

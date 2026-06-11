@@ -46,13 +46,19 @@
     border: 1px solid var(--gps-border);
     border-radius: 16px;
     padding: clamp(16px, 1.6vw, 22px);
-    text-decoration: none;
     color: inherit;
     transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   }
   .gps-{{ sid }}__card:hover { transform: translateY(-3px); border-color: var(--gps-blush); }
-  .gps-{{ sid }}__card:focus-visible { outline: 2px solid var(--gps-accent); outline-offset: 3px; }
   .gps-{{ sid }}__card--rec { border-color: var(--gps-blush); border-width: 2px; }
+  .gps-{{ sid }}__link {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    text-decoration: none;
+    color: inherit;
+  }
+  .gps-{{ sid }}__link:focus-visible { outline: 2px solid var(--gps-accent); outline-offset: 3px; }
   .gps-{{ sid }}__badge {
     position: absolute;
     top: 14px;
@@ -114,8 +120,8 @@
     opacity: 0.6;
     text-decoration: line-through;
   }
+  .gps-{{ sid }}__form { margin: 18px 0 0; }
   .gps-{{ sid }}__cta {
-    margin-top: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -125,14 +131,19 @@
     border: 1px solid var(--gps-blush);
     border-radius: 0;
     background-color: transparent;
+    font-family: var(--font-body--family);
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--gps-heading);
+    text-decoration: none;
+    cursor: pointer;
     transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
   }
-  .gps-{{ sid }}__card:hover .gps-{{ sid }}__cta { background-color: var(--gps-blush); border-color: var(--gps-blush); color: var(--gps-heading); }
+  .gps-{{ sid }}__cta:hover { background-color: var(--gps-blush); border-color: var(--gps-blush); color: var(--gps-heading); }
+  .gps-{{ sid }}__cta:focus-visible { outline: 2px solid var(--gps-accent); outline-offset: 3px; }
+  .gps-{{ sid }}__cta[disabled] { opacity: 0.5; cursor: not-allowed; }
 
   @media (max-width: 749px) {
     .gps-{{ sid }}__grid { grid-template-columns: 1fr; }
@@ -155,40 +166,49 @@
             assign card_name = p.title
           endif
         -%}
-        <a class="gps-{{ sid }}__card{% if block.settings.recommended %} gps-{{ sid }}__card--rec{% endif %}"
-           {% if card_url != blank %}href="{{ card_url }}"{% else %}href="#"{% endif %}
-           aria-label="{{ card_name | escape }}"
-           {{ block.shopify_attributes }}>
+        <div class="gps-{{ sid }}__card{% if block.settings.recommended %} gps-{{ sid }}__card--rec{% endif %}" {{ block.shopify_attributes }}>
           {%- if block.settings.badge != blank -%}<span class="gps-{{ sid }}__badge">{{ block.settings.badge | escape }}</span>{%- endif -%}
-          <div class="gps-{{ sid }}__media">
-            {%- if block.settings.image != blank -%}
-              {{ block.settings.image | image_url: width: 700 | image_tag: alt: card_name, loading: 'lazy', widths: '300,450,600,700' }}
-            {%- elsif p != blank and p.featured_image -%}
-              {{ p.featured_image | image_url: width: 700 | image_tag: alt: card_name, loading: 'lazy', widths: '300,450,600,700' }}
-            {%- else -%}
-              <div class="gps-ph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M3 11h18"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div>
-            {%- endif -%}
-          </div>
-          {%- if card_name != blank -%}<h3 class="gps-{{ sid }}__name">{{ card_name | escape }}</h3>{%- endif -%}
-          {%- if block.settings.dimensions != blank -%}<p class="gps-{{ sid }}__dim">{{ block.settings.dimensions | escape }}</p>{%- endif -%}
-          {%- if block.settings.description != blank -%}<p class="gps-{{ sid }}__desc">{{ block.settings.description | escape }}</p>{%- endif -%}
-          <div class="gps-{{ sid }}__price-row">
-            {%- if p != blank -%}
-              <span class="gps-{{ sid }}__price">{{ p.price | money }}</span>
-              {%- if p.compare_at_price != blank and p.compare_at_price > p.price -%}
-                <span class="gps-{{ sid }}__compare">{{ p.compare_at_price | money }}</span>
-              {%- elsif block.settings.compare_text != blank -%}
-                <span class="gps-{{ sid }}__compare">{{ block.settings.compare_text | escape }}</span>
+          <a class="gps-{{ sid }}__link"{% if card_url != blank %} href="{{ card_url }}"{% else %} href="#"{% endif %} aria-label="{{ card_name | escape }}">
+            <div class="gps-{{ sid }}__media">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 700 | image_tag: alt: card_name, loading: 'lazy', widths: '300,450,600,700' }}
+              {%- elsif p != blank and p.featured_image -%}
+                {{ p.featured_image | image_url: width: 700 | image_tag: alt: card_name, loading: 'lazy', widths: '300,450,600,700' }}
+              {%- else -%}
+                <div class="gps-ph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M3 11h18"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div>
               {%- endif -%}
-            {%- else -%}
-              {%- if block.settings.price_text != blank -%}<span class="gps-{{ sid }}__price">{{ block.settings.price_text | escape }}</span>{%- endif -%}
-              {%- if block.settings.compare_text != blank -%}<span class="gps-{{ sid }}__compare">{{ block.settings.compare_text | escape }}</span>{%- endif -%}
-            {%- endif -%}
-          </div>
+            </div>
+            {%- if card_name != blank -%}<h3 class="gps-{{ sid }}__name">{{ card_name | escape }}</h3>{%- endif -%}
+            {%- if block.settings.dimensions != blank -%}<p class="gps-{{ sid }}__dim">{{ block.settings.dimensions | escape }}</p>{%- endif -%}
+            {%- if block.settings.description != blank -%}<p class="gps-{{ sid }}__desc">{{ block.settings.description | escape }}</p>{%- endif -%}
+            <div class="gps-{{ sid }}__price-row">
+              {%- if p != blank -%}
+                <span class="gps-{{ sid }}__price">{{ p.price | money }}</span>
+                {%- if p.compare_at_price != blank and p.compare_at_price > p.price -%}
+                  <span class="gps-{{ sid }}__compare">{{ p.compare_at_price | money }}</span>
+                {%- elsif block.settings.compare_text != blank -%}
+                  <span class="gps-{{ sid }}__compare">{{ block.settings.compare_text | escape }}</span>
+                {%- endif -%}
+              {%- else -%}
+                {%- if block.settings.price_text != blank -%}<span class="gps-{{ sid }}__price">{{ block.settings.price_text | escape }}</span>{%- endif -%}
+                {%- if block.settings.compare_text != blank -%}<span class="gps-{{ sid }}__compare">{{ block.settings.compare_text | escape }}</span>{%- endif -%}
+              {%- endif -%}
+            </div>
+          </a>
           {%- if block.settings.cta_text != blank -%}
-            <span class="gps-{{ sid }}__cta">{{ block.settings.cta_text | escape }}</span>
+            {%- if p != blank and p.available -%}
+              {%- assign cur_variant = p.selected_or_first_available_variant -%}
+              {% form 'product', p %}
+                <input type="hidden" name="id" value="{{ cur_variant.id }}">
+                <button type="submit" name="add" class="gps-{{ sid }}__cta">{{ block.settings.cta_text | escape }}</button>
+              {% endform %}
+            {%- elsif p != blank -%}
+              <button type="button" class="gps-{{ sid }}__cta" disabled>{{ s.sold_out_text | default: 'Esaurito' | escape }}</button>
+            {%- else -%}
+              <a class="gps-{{ sid }}__cta"{% if card_url != blank %} href="{{ card_url }}"{% else %} href="#"{% endif %}>{{ block.settings.cta_text | escape }}</a>
+            {%- endif -%}
           {%- endif -%}
-        </a>
+        </div>
       {%- endfor -%}
     </div>
   </div>
@@ -200,6 +220,7 @@
   "tag": "section",
   "settings": [
     { "type": "text", "id": "title", "label": "Section title", "default": "Scegli la misura perfetta per te" },
+    { "type": "text", "id": "sold_out_text", "label": "Sold-out button text", "default": "Esaurito" },
     { "type": "header", "content": "Colors" },
     { "type": "color", "id": "background_color", "label": "Background", "default": "#F7F1EE" },
     { "type": "color", "id": "card_background_color", "label": "Card background", "default": "#F7EDEB" },
@@ -218,7 +239,7 @@
       "type": "card",
       "name": "Size card",
       "settings": [
-        { "type": "product", "id": "product", "label": "Product", "info": "Pulls price, image and link automatically. Leave empty to use the manual fields below." },
+        { "type": "product", "id": "product", "label": "Product", "info": "Pulls price, image, link and add-to-cart automatically. Leave empty to use the manual fields below." },
         { "type": "image_picker", "id": "image", "label": "Image (override)" },
         { "type": "text", "id": "title", "label": "Title (override)" },
         { "type": "text", "id": "dimensions", "label": "Dimensions / label", "default": "24 × 12 × 12 cm" },
@@ -228,7 +249,7 @@
         { "type": "text", "id": "badge", "label": "Badge (optional)" },
         { "type": "checkbox", "id": "recommended", "label": "Highlight as recommended", "default": false },
         { "type": "url", "id": "link", "label": "Link (used only if no product)" },
-        { "type": "text", "id": "cta_text", "label": "Link text", "default": "Scopri" }
+        { "type": "text", "id": "cta_text", "label": "Button text", "default": "Aggiungi al carrello" }
       ]
     }
   ],
@@ -237,9 +258,9 @@
       "name": "Grimmie size selector",
       "category": "Grimmie",
       "blocks": [
-        { "type": "card", "settings": { "title": "Alma Classic", "dimensions": "24 × 12 × 12 cm", "description": "Ideale per make-up e skincare quotidiani.", "price_text": "€58,00", "cta_text": "Scopri" } },
-        { "type": "card", "settings": { "title": "Alma Large", "dimensions": "37 × 12 × 12 cm", "description": "Perfetta per capelli, styling e accessori da viaggio.", "price_text": "€78,00", "cta_text": "Scopri" } },
-        { "type": "card", "settings": { "title": "Alma Duo", "dimensions": "Classic + Large", "description": "Il set completo per organizzare ogni parte della tua routine.", "price_text": "€128,00", "compare_text": "€154,00", "badge": "MIGLIOR SCELTA", "recommended": true, "cta_text": "Scopri" } }
+        { "type": "card", "settings": { "title": "Alma Classic", "dimensions": "24 × 12 × 12 cm", "description": "Ideale per make-up e skincare quotidiani.", "price_text": "€58,00", "cta_text": "Aggiungi al carrello" } },
+        { "type": "card", "settings": { "title": "Alma Large", "dimensions": "37 × 12 × 12 cm", "description": "Perfetta per capelli, styling e accessori da viaggio.", "price_text": "€78,00", "cta_text": "Aggiungi al carrello" } },
+        { "type": "card", "settings": { "title": "Alma Duo", "dimensions": "Classic + Large", "description": "Il set completo per organizzare ogni parte della tua routine.", "price_text": "€128,00", "compare_text": "€154,00", "badge": "MIGLIOR SCELTA", "recommended": true, "cta_text": "Aggiungi al carrello" } }
       ]
     }
   ],
