@@ -211,6 +211,7 @@
       rWhyTexts: root.querySelectorAll('[data-am-r-why]'),
       rCombo: root.querySelector('[data-am-r-combo]'),
       rComboImageWrap: root.querySelector('[data-am-r-combo-image-wrap]'),
+      rCardImageWrap: root.querySelector('[data-am-r-card-image-wrap]'),
       cta: root.querySelector('[data-am-cta]'),
       ctaRestart: root.querySelector('[data-am-cta-restart]'),
       timer: root.querySelector('[data-am-timer]'),
@@ -342,6 +343,7 @@
         descMakeup: arch.descMakeup || '',
         descSkincare: arch.descSkincare || '',
         descHaircare: arch.descHaircare || '',
+        cardImage: arch.cardImage || '',
         mk: mk, sk: sk, hc: hc
       };
     }
@@ -506,6 +508,17 @@
         img.alt = config.comboImageAlt || result.bundle;
         img.loading = 'lazy';
         els.rComboImageWrap.appendChild(img);
+      }
+      // Per-archetype card image, shown below the description.
+      if (els.rCardImageWrap) {
+        els.rCardImageWrap.innerHTML = '';
+        if (result.cardImage) {
+          var cardImg = document.createElement('img');
+          cardImg.src = result.cardImage;
+          cardImg.alt = result.name || '';
+          cardImg.loading = 'lazy';
+          els.rCardImageWrap.appendChild(cardImg);
+        }
       }
       // Map the three thematic descriptions onto the "why" list, in order:
       // 1 make-up, 2 skincare, 3 haircare.
