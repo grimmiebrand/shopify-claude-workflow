@@ -532,9 +532,9 @@
   "order": [
     "grimmie_hero",
     "grimmie_benefits",
+    "grimmie_lifestyle",
     "grimmie_size",
     "grimmie_alma_match",
-    "grimmie_lifestyle",
     "grimmie_reviews"
   ]
 }
