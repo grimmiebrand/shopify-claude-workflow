@@ -105,189 +105,216 @@
           "type": "card",
           "settings": {
             "title": "Soft Glam Girl",
-            "alma_match": "2C + 3L"
+            "alma_match": "2C + 3L",
+            "image": "shopify://shop_images/Soft_Glam_Girl.png"
           }
         },
         "c2": {
           "type": "card",
           "settings": {
             "title": "Clean Girl",
-            "alma_match": "3C + 2L"
+            "alma_match": "3C + 2L",
+            "image": "shopify://shop_images/Clean_Girl_708e4832-61dc-4276-a067-4d4e2bbb722b.png"
           }
         },
         "c3": {
           "type": "card",
           "settings": {
             "title": "Star Girl",
-            "alma_match": "2C + 4L"
+            "alma_match": "2C + 4L",
+            "image": "shopify://shop_images/Star_Girl.png"
           }
         },
         "c4": {
           "type": "card",
           "settings": {
             "title": "La ragazza acqua e sapone",
-            "alma_match": "2C + 1L"
+            "alma_match": "2C + 1L",
+            "image": "shopify://shop_images/La_ragazza_acqua_e_sapone_6a8d120d-6823-42df-8a03-3eae1d99d7d9.png"
           }
         },
         "c5": {
           "type": "card",
           "settings": {
             "title": "Vanilla Girl",
-            "alma_match": "3C + 1L"
+            "alma_match": "3C + 1L",
+            "image": "shopify://shop_images/Vanilla_Girl_a0e521d1-9727-4aac-8cbb-29e30f1020bd.png"
           }
         },
         "c6": {
           "type": "card",
           "settings": {
             "title": "Blowout Girl",
-            "alma_match": "2C + 2L"
+            "alma_match": "2C + 2L",
+            "image": "shopify://shop_images/Blowout_Girl_c08d441c-77ec-43ab-83ba-875b164c56b7.png"
           }
         },
         "c7": {
           "type": "card",
           "settings": {
             "title": "Wellness Girl",
-            "alma_match": "1C + 2L"
+            "alma_match": "1C + 2L",
+            "image": "shopify://shop_images/Wellness_Girl_ebf05113-1935-4541-a61c-d279e94903b2.png"
           }
         },
         "c8": {
           "type": "card",
           "settings": {
             "title": "Pilates Princess",
-            "alma_match": "2C + 2L"
+            "alma_match": "2C + 2L",
+            "image": "shopify://shop_images/Pilates_Princess_84d69207-581c-4bc0-9c4c-6cc2b857c758.png"
           }
         },
         "c9": {
           "type": "card",
           "settings": {
             "title": "Everything Shower Girl",
-            "alma_match": "1C + 3L"
+            "alma_match": "1C + 3L",
+            "image": "shopify://shop_images/Everything_Shower_Girl_a35a6975-0705-49f5-8a4f-a8d133caab67.png"
           }
         },
         "c10": {
           "type": "card",
           "settings": {
             "title": "Glass Skin Girl",
-            "alma_match": "2C + 2L"
+            "alma_match": "2C + 2L",
+            "image": "shopify://shop_images/Glass_Skin_Girl_5bae5277-2dc9-480c-8d90-b3e714d41a33.png"
           }
         },
         "c11": {
           "type": "card",
           "settings": {
             "title": "Self-Care Girl",
-            "alma_match": "2C + 3L"
+            "alma_match": "2C + 3L",
+            "image": "shopify://shop_images/Self-Care_Girl_21283610-6086-46fd-985c-1dd905296fca.png"
           }
         },
         "c12": {
           "type": "card",
           "settings": {
             "title": "French Girl",
-            "alma_match": "3C + 1L"
+            "alma_match": "3C + 1L",
+            "image": "shopify://shop_images/French_Girl_1662dc62-8500-4cbb-bfc2-78c8d41469f8.png"
           }
         },
         "c13": {
           "type": "card",
           "settings": {
             "title": "Off Duty Model",
-            "alma_match": "4C + 1L"
+            "alma_match": "4C + 1L",
+            "image": "shopify://shop_images/Off_Duty_Model.png"
           }
         },
         "c14": {
           "type": "card",
           "settings": {
             "title": "Rich Girl",
-            "alma_match": "3C + 2L"
+            "alma_match": "3C + 2L",
+            "image": "shopify://shop_images/Rich_Girl.png"
           }
         },
         "c15": {
           "type": "card",
           "settings": {
             "title": "That Girl",
-            "alma_match": "2C + 2L"
+            "alma_match": "2C + 2L",
+            "image": "shopify://shop_images/That_Girl.png"
           }
         },
         "c16": {
           "type": "card",
           "settings": {
             "title": "IT Girl",
-            "alma_match": "3C + 2L"
+            "alma_match": "3C + 2L",
+            "image": "shopify://shop_images/IT_Girl.png"
           }
         },
         "c17": {
           "type": "card",
           "settings": {
             "title": "K-Girl",
-            "alma_match": "3C + 2L"
+            "alma_match": "3C + 2L",
+            "image": "shopify://shop_images/K-Girl.png"
           }
         },
         "c18": {
           "type": "card",
           "settings": {
             "title": "Pinterest Girl",
-            "alma_match": "4C + 2L"
+            "alma_match": "4C + 2L",
+            "image": "shopify://shop_images/Pinterest_Girl.png"
           }
         },
         "c19": {
           "type": "card",
           "settings": {
             "title": "Beauty Addict",
-            "alma_match": "3C + 3L"
+            "alma_match": "3C + 3L",
+            "image": "shopify://shop_images/Beauty_Addict.png"
           }
         },
         "c20": {
           "type": "card",
           "settings": {
             "title": "Makeup Lover",
-            "alma_match": "2C + 2L"
+            "alma_match": "2C + 2L",
+            "image": "shopify://shop_images/Makeup_Lover.png"
           }
         },
         "c21": {
           "type": "card",
           "settings": {
             "title": "City Girl",
-            "alma_match": "3C + 2L"
+            "alma_match": "3C + 2L",
+            "image": "shopify://shop_images/City_Girl.png"
           }
         },
         "c22": {
           "type": "card",
           "settings": {
             "title": "Main Character",
-            "alma_match": "2C + 3L"
+            "alma_match": "2C + 3L",
+            "image": "shopify://shop_images/Main_Character.png"
           }
         },
         "c23": {
           "type": "card",
           "settings": {
             "title": "Dark Feminine Girl",
-            "alma_match": "1C + 3L"
+            "alma_match": "1C + 3L",
+            "image": "shopify://shop_images/Dark_Feminine_Girl.png"
           }
         },
         "c24": {
           "type": "card",
           "settings": {
             "title": "Cool Girl",
-            "alma_match": "2C + 3L"
+            "alma_match": "2C + 3L",
+            "image": "shopify://shop_images/Cool_Girl.png"
           }
         },
         "c25": {
           "type": "card",
           "settings": {
             "title": "GRWM Girl",
-            "alma_match": "1C + 4L"
+            "alma_match": "1C + 4L",
+            "image": "shopify://shop_images/GRWM_Girl.png"
           }
         },
         "c26": {
           "type": "card",
           "settings": {
             "title": "Sephora Girl",
-            "alma_match": "2C + 3L"
+            "alma_match": "2C + 3L",
+            "image": "shopify://shop_images/Sephora_Girl_PNG.png"
           }
         },
         "c27": {
           "type": "card",
           "settings": {
             "title": "Beauty Influencer",
-            "alma_match": "3C + 3L"
+            "alma_match": "3C + 3L",
+            "image": "shopify://shop_images/Beauty_Influencer.png"
           }
         },
         "ben1": {
