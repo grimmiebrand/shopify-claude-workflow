@@ -525,7 +525,8 @@
       "settings": {
         "title": "Cosa dicono di Alma",
         "rating_text": "4.9/5 da oltre 1.200 recensioni"
-      }
+      },
+      "disabled": true
     }
   },
   "order": [
