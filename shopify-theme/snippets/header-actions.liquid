@@ -239,13 +239,6 @@
                 >
                   {% render 'grimmie-cart-shipping-bar', section: section %}
                   {% render 'cart-summary', section_id: section.id %}
-                  <a
-                    href="{{ routes.cart_url }}"
-                    class="g-cart-view"
-                  >
-                    {{ section.settings.cart_view_cart_text | default: 'Visualizza carrello' }}
-                  </a>
-                  {% render 'grimmie-cart-reassurance', section: section %}
                 </div>
               </scroll-hint>
             {%- endif -%}
@@ -740,13 +733,13 @@
   /* Header title -> Gloock heading font, 20px, + subtitle */
   .g-cart-headwrap { display: flex; flex-direction: column; gap: 2px; }
   .cart-drawer__heading {
-    font-family: var(--font-heading--family);
-    font-weight: var(--font-heading--weight);
+    font-family: var(--font-heading--family) !important;
+    font-weight: var(--font-heading--weight) !important;
     color: #6e5f59;
-    font-size: 20px;
+    font-size: 20px !important;
     line-height: 1.1;
-    text-transform: none;
-    letter-spacing: 0;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
   }
   .g-cart-subtitle {
     margin: 0;
