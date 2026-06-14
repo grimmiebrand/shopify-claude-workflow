@@ -1,8 +1,20 @@
 {% comment %}
-  Grimmie - cart page styling to match the cart drawer.
-  Renders no visible markup; only scoped styles loaded on the cart template.
+  Grimmie - cart page enhancements to match the cart drawer.
+  - Free-shipping progress bar (reuses the drawer snippet; threshold from the
+    shop metafield custom.free_shipping_threshold).
+  - Scoped styles: smaller title, blush quantity badge, blush checkout button.
 {% endcomment %}
+
+{%- unless cart.empty? -%}
+  <div class="g-cart-page-ship">
+    {% render 'grimmie-cart-shipping-bar', section: section %}
+  </div>
+{%- endunless -%}
+
 <style>
+  /* Title "Il tuo carrello" -> 40% smaller */
+  .cart-title h1 { font-size: calc(var(--font-h2--size) * 0.6) !important; }
+
   /* Quantity badge next to the title -> blush (was grey), like the drawer */
   .cart-title .cart-bubble__background { background-color: #eacbc8 !important; }
   .cart-title .cart-bubble__text { color: #6e5f59 !important; }
@@ -16,6 +28,16 @@
   .cart__checkout-button:hover {
     background: #eacbc8 !important;
     color: #6e5f59 !important;
+  }
+
+  /* Free-shipping bar wrapper -> align with the cart content width */
+  .g-cart-page-ship {
+    width: 100%;
+    max-width: var(--page-width, 1200px);
+    margin-inline: auto;
+    padding-inline: var(--page-margin, 20px);
+    padding-block-start: 24px;
+    box-sizing: border-box;
   }
 </style>
 {% schema %}
