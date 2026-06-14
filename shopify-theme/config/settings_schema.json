@@ -2290,6 +2290,28 @@
     "settings": [
       {
         "type": "header",
+        "content": "Testata"
+      },
+      {
+        "type": "text",
+        "id": "cart_drawer_title",
+        "label": "Titolo carrello",
+        "default": "Il tuo carrello"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_cart_subtitle",
+        "label": "Mostra sottotitolo",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cart_drawer_subtitle",
+        "label": "Sottotitolo",
+        "default": "la tua routine sta per fare un glow-up"
+      },
+      {
+        "type": "header",
         "content": "Spedizione gratuita"
       },
       {
@@ -2301,28 +2323,28 @@
       {
         "type": "number",
         "id": "free_shipping_threshold",
-        "label": "Soglia spedizione gratuita",
-        "default": 90,
-        "info": "Deve corrispondere alla soglia configurata nelle tariffe di spedizione di Shopify. Usata se il metafield custom.free_shipping_threshold non è impostato."
+        "label": "Soglia spedizione gratuita (in euro)",
+        "default": 55,
+        "info": "Deve corrispondere alla soglia delle tue tariffe di spedizione Shopify."
       },
       {
         "type": "checkbox",
         "id": "show_shipping_values",
-        "label": "Mostra valori (es. 73 / 90)",
+        "label": "Mostra valori (es. 21 / 55) finche non raggiunta",
         "default": true
       },
       {
         "type": "text",
         "id": "free_shipping_pending_text",
         "label": "Testo quando manca",
-        "default": "Ti mancano {{ amount }} per la spedizione gratuita",
+        "default": "Ti mancano {amount} per la spedizione gratuita",
         "info": "Usa {{ amount }} dove inserire l importo mancante."
       },
       {
         "type": "text",
         "id": "free_shipping_reached_text",
         "label": "Testo quando raggiunta",
-        "default": "Hai sbloccato la spedizione gratuita"
+        "default": "Hai sbloccato la spedizione gratuita &#10024;"
       },
       {
         "type": "header",

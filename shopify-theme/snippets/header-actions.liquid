@@ -197,13 +197,19 @@
                 class="cart-drawer__header"
                 id="cart-drawer-header"
               >
-                <h2
-                  class="cart-drawer__heading h4"
-                  id="cart-drawer-heading"
-                >
-                  {{ 'content.cart_title' | t }}
-                  {% render 'cart-bubble' %}
-                </h2>
+                <div class="g-cart-headwrap">
+                  <h2
+                    class="cart-drawer__heading h4"
+                    id="cart-drawer-heading"
+                  >
+                    {{ settings.cart_drawer_title | default: 'Il tuo carrello' }}
+                    {% render 'cart-bubble' %}
+                  </h2>
+                  {%- assign g_cart_sub = settings.cart_drawer_subtitle | default: 'la tua routine sta per fare un glow-up' -%}
+                  {%- unless settings.show_cart_subtitle == false or g_cart_sub == blank -%}
+                    <p class="g-cart-subtitle">{{ g_cart_sub }}</p>
+                  {%- endunless -%}
+                </div>
 
                 <button
                   ref="closeButton"
@@ -731,20 +737,31 @@
     }
   }
 
-  /* Header title -> editorial heading font, larger */
+  /* Header title -> Gloock heading font, 20px, + subtitle */
+  .g-cart-headwrap { display: flex; flex-direction: column; gap: 2px; }
   .cart-drawer__heading {
     font-family: var(--font-heading--family);
     font-weight: var(--font-heading--weight);
     color: #6e5f59;
-    font-size: 31px;
-    line-height: 1.05;
+    font-size: 20px;
+    line-height: 1.1;
     text-transform: none;
     letter-spacing: 0;
   }
-  @media screen and (max-width: 749px) {
-    .cart-drawer__heading { font-size: 28px; }
+  .g-cart-subtitle {
+    margin: 0;
+    font-family: var(--font-body--family);
+    font-size: 13px;
+    line-height: 1.4;
+    color: rgb(110 85 89 / 0.78);
   }
   .cart-drawer__close-button { color: #6e5f59; }
+
+  /* Quantity bubble next to the title -> blush (was grey) */
+  .cart-drawer__dialog .cart-bubble__background {
+    background-color: #eacbc8 !important;
+  }
+  .cart-drawer__dialog .cart-bubble__text { color: #6e5f59 !important; }
 
   /* Summary stacking rhythm for the added blocks */
   .cart-drawer__summary { gap: 16px; }
