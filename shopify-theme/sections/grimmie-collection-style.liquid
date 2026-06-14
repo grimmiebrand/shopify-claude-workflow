@@ -55,16 +55,23 @@
 
   @media screen and (max-width: 749px) {
     /* Center the collection title + subtitle on mobile.
-       Center the blocks within the section panel AND the text within each block. */
-    .section-wrapper [class*="layout-panel-flex"] {
+       Scoped to #MainContent so the footer (also a .section-wrapper) is NOT affected. */
+    #MainContent .section-wrapper [class*="layout-panel-flex"] {
       align-items: center !important;
     }
-    .section-wrapper .text-block {
+    #MainContent .section-wrapper .text-block {
       align-items: center !important;
     }
-    .section-wrapper .text-block > * {
+    #MainContent .section-wrapper .text-block > * {
       text-align: center !important;
       margin-inline: auto !important;
+    }
+
+    /* Show the add-to-cart (quick add) button on mobile (hidden by default
+       because it's a hover-reveal on desktop and mobile quick-add is off) */
+    .quick-add__button {
+      display: flex !important;
+      opacity: 1 !important;
     }
   }
 </style>
