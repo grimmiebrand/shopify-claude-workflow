@@ -202,10 +202,10 @@
                     class="cart-drawer__heading h4"
                     id="cart-drawer-heading"
                   >
-                    {{ settings.cart_drawer_title | default: 'Il tuo carrello' }}
+                    {{ shop.metafields.custom.cart_drawer_title.value | default: 'Il tuo carrello' }}
                     {% render 'cart-bubble' %}
                   </h2>
-                  {%- assign g_cart_sub = settings.cart_drawer_subtitle | default: 'la tua routine sta per fare un glow-up' -%}
+                  {%- assign g_cart_sub = shop.metafields.custom.cart_drawer_subtitle.value | default: 'la tua routine sta per fare un glow-up' -%}
                   {%- unless settings.show_cart_subtitle == false or g_cart_sub == blank -%}
                     <p class="g-cart-subtitle">{{ g_cart_sub }}</p>
                   {%- endunless -%}
@@ -243,7 +243,7 @@
                     href="{{ routes.cart_url }}"
                     class="g-cart-view"
                   >
-                    {{ settings.view_cart_text | default: 'Visualizza carrello' }}
+                    {{ shop.metafields.custom.cart_view_cart_text.value | default: 'Visualizza carrello' }}
                   </a>
                   {% render 'grimmie-cart-reassurance' %}
                 </div>

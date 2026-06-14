@@ -6,10 +6,10 @@
 
 {%- unless settings.show_cart_reassurance == false -%}
   {%- liquid
-    assign r1_title = settings.reassurance_1_title | default: 'Resi facili'
-    assign r1_text = settings.reassurance_1_text | default: 'entro 30 giorni'
-    assign r2_title = settings.reassurance_2_title | default: 'Pagamenti sicuri'
-    assign r2_text = settings.reassurance_2_text
+    assign r1_title = shop.metafields.custom.cart_reassurance_1_title.value | default: 'Resi facili'
+    assign r1_text = shop.metafields.custom.cart_reassurance_1_text.value | default: 'entro 30 giorni'
+    assign r2_title = shop.metafields.custom.cart_reassurance_2_title.value | default: 'Pagamenti sicuri'
+    assign r2_text = shop.metafields.custom.cart_reassurance_2_text.value
   -%}
   <div class="g-reassure" role="group" aria-label="{{ 'Vantaggi' }}">
     <div class="g-reassure__col">

@@ -40,9 +40,9 @@
         assign progress = 100
       endif
       assign remaining_money = remaining_cents | money
-      assign pending_tpl = settings.free_shipping_pending_text | default: 'Ti mancano {{ amount }} per la spedizione gratuita'
+      assign pending_tpl = shop.metafields.custom.free_shipping_pending.value | default: 'Ti mancano {{ amount }} per la spedizione gratuita'
       assign pending_text = pending_tpl | replace: '{{ amount }}', remaining_money | replace: '{amount}', remaining_money
-      assign reached_text = settings.free_shipping_reached_text | default: 'Hai sbloccato la spedizione gratuita &#10024;'
+      assign reached_text = shop.metafields.custom.free_shipping_reached.value | default: 'Hai sbloccato la spedizione gratuita &#10024;'
     -%}
     <div class="g-ship">
       <div class="g-ship__row">
