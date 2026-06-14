@@ -1,0 +1,72 @@
+{%- doc -%}
+  Grimmie - free-shipping progress bar for the cart drawer.
+
+  Threshold source priority:
+    1) shop metafield custom.free_shipping_threshold (money)
+    2) theme setting settings.free_shipping_threshold (major currency units)
+    3) if neither is valid -> the component is not rendered.
+
+  Calculations use minor currency units (cents). cart.total_price is already in cents.
+  Re-renders together with the cart summary on every AJAX cart update, so no custom JS is needed.
+  Shown by default; hidden only when the Theme setting is explicitly turned off.
+{%- enddoc -%}
+
+{%- unless settings.show_free_shipping_progress == false -%}
+  {%- liquid
+    assign threshold_cents = 0
+
+    assign mf = shop.metafields.custom.free_shipping_threshold
+    if mf != blank
+      assign mf_amount = mf.value.amount | default: mf.value
+      assign mf_cents = mf_amount | times: 100 | round
+      if mf_cents > 0
+        assign threshold_cents = mf_cents
+      endif
+    endif
+
+    if threshold_cents == 0 and settings.free_shipping_threshold > 0
+      assign threshold_cents = settings.free_shipping_threshold | times: 100 | round
+    endif
+  -%}
+
+  {%- if threshold_cents > 0 -%}
+    {%- liquid
+      assign total_cents = cart.total_price
+      assign remaining_cents = threshold_cents | minus: total_cents
+      if remaining_cents < 0
+        assign remaining_cents = 0
+      endif
+      assign progress = total_cents | times: 100 | divided_by: threshold_cents
+      if progress > 100
+        assign progress = 100
+      endif
+      assign remaining_money = remaining_cents | money
+      assign pending_tpl = settings.free_shipping_pending_text | default: 'Ti mancano {{ amount }} per la spedizione gratuita'
+      assign pending_text = pending_tpl | replace: '{{ amount }}', remaining_money | replace: '{amount}', remaining_money
+      assign reached_text = settings.free_shipping_reached_text | default: 'Hai sbloccato la spedizione gratuita'
+    -%}
+    <div class="g-ship">
+      <div class="g-ship__row">
+        <span class="g-ship__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4.5h13v10H1z"/><path d="M14 8.5h4l3 3v3h-7z"/><circle cx="5.5" cy="17.5" r="1.7"/><circle cx="17.5" cy="17.5" r="1.7"/></svg>
+        </span>
+        <p class="g-ship__text">
+          {%- if remaining_cents == 0 -%}{{ reached_text }}{%- else -%}{{ pending_text }}{%- endif -%}
+        </p>
+        {%- unless settings.show_shipping_values == false -%}
+          <span class="g-ship__values">{{ cart.total_price | money }} / {{ threshold_cents | money }}</span>
+        {%- endunless -%}
+      </div>
+      <div
+        class="g-ship__track"
+        role="progressbar"
+        aria-valuemin="0"
+        aria-valuemax="{{ threshold_cents }}"
+        aria-valuenow="{{ total_cents }}"
+        aria-label="{{ 'Progresso spedizione gratuita' }}"
+      >
+        <span class="g-ship__fill" style="width: {{ progress }}%;"></span>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endunless -%}
