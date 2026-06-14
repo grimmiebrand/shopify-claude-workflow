@@ -1,15 +1,15 @@
 {%- doc -%}
   Grimmie - reassurance strip at the bottom of the cart drawer.
-  Two columns (returns + secure payments). Texts/visibility editable in Theme settings.
-  Shown by default; hidden only when the Theme setting is explicitly turned off.
+  Texts/visibility editable in Theme editor -> Header -> "Carrello (drawer)".
+  @param {object} section - the header section (provides settings)
 {%- enddoc -%}
 
-{%- unless settings.show_cart_reassurance == false -%}
+{%- unless section.settings.show_cart_reassurance == false -%}
   {%- liquid
-    assign r1_title = shop.metafields.custom.cart_reassurance_1_title.value | default: 'Resi facili'
-    assign r1_text = shop.metafields.custom.cart_reassurance_1_text.value | default: 'entro 30 giorni'
-    assign r2_title = shop.metafields.custom.cart_reassurance_2_title.value | default: 'Pagamenti sicuri'
-    assign r2_text = shop.metafields.custom.cart_reassurance_2_text.value
+    assign r1_title = section.settings.cart_reassurance_1_title | default: 'Resi facili'
+    assign r1_text = section.settings.cart_reassurance_1_text | default: 'entro 30 giorni'
+    assign r2_title = section.settings.cart_reassurance_2_title | default: 'Pagamenti sicuri'
+    assign r2_text = section.settings.cart_reassurance_2_text
   -%}
   <div class="g-reassure" role="group" aria-label="{{ 'Vantaggi' }}">
     <div class="g-reassure__col">
