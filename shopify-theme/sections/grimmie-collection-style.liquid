@@ -55,7 +55,10 @@
 
   @media screen and (max-width: 749px) {
     /* Center the collection title + subtitle on mobile.
-       Text alignment lives on .text-block > * (via a CSS var), so target it. */
+       Center the blocks within the section panel AND the text within each block. */
+    .section-wrapper [class*="layout-panel-flex"] {
+      align-items: center !important;
+    }
     .section-wrapper .text-block {
       align-items: center !important;
     }
