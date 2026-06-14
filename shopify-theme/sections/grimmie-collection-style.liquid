@@ -67,9 +67,10 @@
       margin-inline: auto !important;
     }
 
-    /* Show the add-to-cart (quick add) button on mobile (hidden by default
-       because it's a hover-reveal on desktop and mobile quick-add is off) */
-    .quick-add__button {
+    /* Show the active add-to-cart (quick add) button on mobile. Only the button
+       matching the product's mode (add vs choose) so we don't reveal both. */
+    .quick-add[data-quick-add-button='add'] .quick-add__button--add,
+    .quick-add[data-quick-add-button='choose'] .quick-add__button--choose {
       display: flex !important;
       opacity: 1 !important;
     }
