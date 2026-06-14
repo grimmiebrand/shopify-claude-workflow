@@ -16,9 +16,9 @@
     assign threshold_cents = 0
 
     assign mf = shop.metafields.custom.free_shipping_threshold
-    if mf != blank
-      assign mf_amount = mf.value.amount | default: mf.value
-      assign mf_cents = mf_amount | times: 100 | round
+    if mf != blank and mf.value != blank
+      # A money metafield value is already expressed in minor units (cents).
+      assign mf_cents = mf.value | round
       if mf_cents > 0
         assign threshold_cents = mf_cents
       endif
