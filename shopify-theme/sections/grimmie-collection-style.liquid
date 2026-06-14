@@ -7,7 +7,7 @@
 {%- liquid
   assign badge_bg = section.settings.badge_bg | default: '#c98c85'
   assign badge_text = section.settings.badge_text | default: '#fbf6f3'
-  assign sale_color = section.settings.sale_color | default: '#b97a6d'
+  assign sale_color = section.settings.sale_color | default: '#c98c85'
   assign dropdown_bg = section.settings.dropdown_bg | default: '#f1ebe6'
   assign addbtn_bg = section.settings.addbtn_bg | default: '#eacbc8'
   assign addbtn_text = section.settings.addbtn_text | default: '#6e5f59'
@@ -20,7 +20,7 @@
     color: {{ badge_text }};
     border-color: transparent;
   }
-  /* Sale price -> rose accent; compare-at price kept muted/struck */
+  /* Sale price -> same rose as the sale badge; compare-at price kept muted/struck */
   .price-item--sale,
   .price__sale .price {
     color: {{ sale_color }};
@@ -45,7 +45,7 @@
     background-color: {{ dropdown_bg }};
   }
 
-  /* Hide the "highest price is..." hint inside the price filter */
+  /* Hide ONLY the "highest price is..." hint (keep the min/max inputs) */
   .price-facet__highest-price {
     display: none;
   }
@@ -62,6 +62,73 @@
   .sorting-filter__select option[value="best-selling"] {
     display: none;
   }
+
+  @media screen and (max-width: 749px) {
+    /* Center the collection title + subtitle on mobile */
+    .section-wrapper [class*="layout-panel-flex"] {
+      --horizontal-alignment: center !important;
+      align-items: center !important;
+    }
+    .section-wrapper .text-block {
+      text-align: center !important;
+      width: 100% !important;
+    }
+
+    /* Keep the filter/sort controls as desktop-style dropdown windows on mobile
+       (instead of the full-screen drawer). Price + Ordina sit on one row. */
+    .facets-toggle {
+      display: none !important;
+    }
+    .facets--horizontal {
+      display: flex !important;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0 var(--facets-form-horizontal-gap);
+      position: relative;
+      top: auto;
+      bottom: auto;
+      height: auto;
+      max-height: none;
+      width: auto;
+      overflow: visible;
+      padding-block: var(--padding-sm);
+      z-index: var(--facets-upper-z-index);
+    }
+    .facets--horizontal .facets__form-wrapper {
+      flex-direction: row;
+      height: auto;
+      width: auto;
+    }
+    .facets--horizontal .facets__form {
+      flex-flow: row wrap;
+      align-items: center;
+      height: auto;
+      width: auto;
+      gap: 0 var(--facets-form-horizontal-gap);
+    }
+    .facets--horizontal .facets__filters-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      margin-inline-end: 0;
+    }
+    /* Price filter opens as a floating window like on desktop */
+    .facets--horizontal .facets__panel {
+      position: relative;
+    }
+    .facets--horizontal .facets__panel-content {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: max-content;
+      min-width: var(--facets-panel-min-width);
+      max-width: 90vw;
+      z-index: var(--facets-upper-z-index);
+      box-shadow: var(--shadow-popover);
+      border: var(--style-border-popover);
+      background-color: {{ dropdown_bg }};
+      border-radius: var(--style-border-radius-popover);
+    }
+  }
 </style>
 
 {% schema %}
@@ -72,7 +139,7 @@
     { "type": "paragraph", "content": "Stili applicati solo alla pagina collezione." },
     { "type": "color", "id": "badge_bg", "label": "Sfondo targhetta offerta", "default": "#c98c85" },
     { "type": "color", "id": "badge_text", "label": "Testo targhetta offerta", "default": "#fbf6f3" },
-    { "type": "color", "id": "sale_color", "label": "Colore prezzo scontato", "default": "#b97a6d" },
+    { "type": "color", "id": "sale_color", "label": "Colore prezzo scontato", "default": "#c98c85" },
     { "type": "color", "id": "dropdown_bg", "label": "Sfondo menu a tendina (filtri/ordina)", "default": "#f1ebe6" },
     { "type": "color", "id": "addbtn_bg", "label": "Sfondo pulsante Aggiungi", "default": "#eacbc8" },
     { "type": "color", "id": "addbtn_text", "label": "Testo pulsante Aggiungi", "default": "#6e5f59" }
