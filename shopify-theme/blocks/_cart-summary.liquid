@@ -31,7 +31,6 @@
   {{ block.shopify_attributes }}
 >
   <div class="{{ cart_summary_inner_class }}">
-    <div class="g-cart-summary-ship">{% render 'grimmie-cart-shipping-bar' %}</div>
     {% render 'cart-summary', accelerated_checkout_buttons_layout: 'vertical', section_id: section.id %}
   </div>
 </div>
@@ -135,11 +134,6 @@
       --color-input-text-rgb: inherit;
       --color-input-background: inherit;
     }
-  }
-
-  /* Grimmie: free-shipping bar inside the cart summary column */
-  .g-cart-summary-ship {
-    width: 100%;
   }
 {% endstylesheet %}
 
