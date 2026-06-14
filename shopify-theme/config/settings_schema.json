@@ -2323,28 +2323,27 @@
       {
         "type": "number",
         "id": "free_shipping_threshold",
-        "label": "Soglia spedizione gratuita (in euro)",
+        "label": "Soglia spedizione gratuita (euro)",
         "default": 55,
-        "info": "Deve corrispondere alla soglia delle tue tariffe di spedizione Shopify."
+        "info": "Deve corrispondere alla soglia delle tariffe di spedizione Shopify."
       },
       {
         "type": "checkbox",
         "id": "show_shipping_values",
-        "label": "Mostra valori (es. 21 / 55) finche non raggiunta",
+        "label": "Mostra valori finche non raggiunta",
         "default": true
       },
       {
         "type": "text",
         "id": "free_shipping_pending_text",
         "label": "Testo quando manca",
-        "default": "Ti mancano {amount} per la spedizione gratuita",
-        "info": "Usa {{ amount }} dove inserire l importo mancante."
+        "default": "Ti mancano {amount} per la spedizione gratuita"
       },
       {
         "type": "text",
         "id": "free_shipping_reached_text",
         "label": "Testo quando raggiunta",
-        "default": "Hai sbloccato la spedizione gratuita &#10024;"
+        "default": "Hai sbloccato la spedizione gratuita"
       },
       {
         "type": "header",
@@ -2369,25 +2368,25 @@
       {
         "type": "text",
         "id": "reassurance_1_title",
-        "label": "Rassicurazione 1 - titolo",
+        "label": "Resi - titolo",
         "default": "Resi facili"
       },
       {
         "type": "text",
         "id": "reassurance_1_text",
-        "label": "Rassicurazione 1 - testo",
+        "label": "Resi - testo",
         "default": "entro 30 giorni"
       },
       {
         "type": "text",
         "id": "reassurance_2_title",
-        "label": "Rassicurazione 2 - titolo",
+        "label": "Pagamenti - titolo",
         "default": "Pagamenti sicuri"
       },
       {
         "type": "text",
         "id": "reassurance_2_text",
-        "label": "Rassicurazione 2 - testo",
+        "label": "Pagamenti - testo",
         "default": ""
       }
     ]
