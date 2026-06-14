@@ -1,0 +1,43 @@
+{% comment %}
+  Grimmie - collection-only visual overrides.
+  Renders no visible markup; only scoped styles that load on the collection
+  template (sale badge colour + sale price colour). Editable defaults below.
+{% endcomment %}
+
+{%- liquid
+  assign badge_bg = section.settings.badge_bg | default: '#c98c85'
+  assign badge_text = section.settings.badge_text | default: '#fbf6f3'
+  assign sale_color = section.settings.sale_color | default: '#b97a6d'
+-%}
+
+<style>
+  /* Sale badge -> soft blush/rose (was a grey colour scheme) */
+  .product-badges__badge {
+    background-color: {{ badge_bg }};
+    color: {{ badge_text }};
+    border-color: transparent;
+  }
+  /* Sale price -> rose accent; compare-at price kept muted/struck */
+  .price-item--sale,
+  .price__sale .price {
+    color: {{ sale_color }};
+  }
+  .compare-at-price {
+    color: var(--color-foreground, #6e5f59);
+    opacity: 0.5;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Collection style",
+  "tag": "section",
+  "settings": [
+    { "type": "paragraph", "content": "Stili applicati solo alla pagina collezione: colore targhetta sconto e colore prezzo scontato." },
+    { "type": "color", "id": "badge_bg", "label": "Sfondo targhetta offerta", "default": "#c98c85" },
+    { "type": "color", "id": "badge_text", "label": "Testo targhetta offerta", "default": "#fbf6f3" },
+    { "type": "color", "id": "sale_color", "label": "Colore prezzo scontato", "default": "#b97a6d" }
+  ],
+  "enabled_on": { "templates": ["collection"] }
+}
+{% endschema %}
