@@ -38,105 +38,33 @@
     border-color: {{ addbtn_bg }};
   }
 
-  /* Filter + sort dropdown panels -> footer beige */
-  .facets__panel-content,
+  /* Sort dropdown -> footer beige */
   .sorting-filter__options,
   .sorting-filter__options-inner {
     background-color: {{ dropdown_bg }};
   }
 
-  /* Hide ONLY the "highest price is..." hint (keep the min/max inputs) */
-  .price-facet__highest-price {
-    display: none;
-  }
-
-  /* Hide the Availability filter */
-  .facets__item:has([id*="filter-v-availability"]) {
-    display: none;
-  }
-
-  /* Hide the "Best seller" (best-selling) sort option */
-  label[for^="sort-option-best-selling-"] {
-    display: none;
+  /* Remove the "Best seller" (best-selling) option from the sort menu */
+  label[for^="sort-option-best-selling-"],
+  label:has(input[value="best-selling"]) {
+    display: none !important;
   }
   .sorting-filter__select option[value="best-selling"] {
-    display: none;
+    display: none !important;
   }
 
   @media screen and (max-width: 749px) {
     /* Center the collection title + subtitle on mobile */
+    .section-wrapper {
+      text-align: center !important;
+    }
     .section-wrapper [class*="layout-panel-flex"] {
       --horizontal-alignment: center !important;
       align-items: center !important;
     }
     .section-wrapper .text-block {
-      text-align: center !important;
       width: 100% !important;
-    }
-
-    /* Keep the filter/sort controls as desktop-style dropdown windows on mobile
-       (instead of the full-screen drawer). Price + Ordina sit on one row. */
-    .facets-toggle {
-      display: none !important;
-    }
-    .facets--horizontal {
-      display: flex !important;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0 var(--facets-form-horizontal-gap);
-      position: relative;
-      top: auto;
-      bottom: auto;
-      height: auto;
-      max-height: none;
-      width: auto;
-      overflow: visible;
-      padding-block: var(--padding-sm);
-      z-index: var(--facets-upper-z-index);
-    }
-    .facets--horizontal .facets__form-wrapper {
-      flex-direction: row;
-      height: auto;
-      width: auto;
-    }
-    .facets--horizontal .facets__form {
-      flex-flow: row wrap;
-      align-items: center;
-      height: auto;
-      width: auto;
-      gap: 0 var(--facets-form-horizontal-gap);
-    }
-    .facets--horizontal .facets__filters-wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      margin-inline-end: 0;
-    }
-    /* Price filter opens as a floating window like on desktop */
-    .facets--horizontal .facets__panel {
-      position: relative;
-    }
-    .facets--horizontal .facets__panel-content {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: max-content;
-      min-width: 300px;
-      max-width: 92vw;
-      padding: var(--padding-md);
-      z-index: var(--facets-upper-z-index);
-      box-shadow: var(--shadow-popover);
-      border: var(--style-border-popover);
-      background-color: {{ dropdown_bg }};
-      border-radius: var(--style-border-radius-popover);
-    }
-    .facets--horizontal .facets__inputs-wrapper {
-      max-height: none;
-      overflow: visible;
-      padding: 0;
-    }
-    /* Don't show the current sort value next to "Ordina" (it overlapped) */
-    .facets--horizontal .sorting-filter .facets__status {
-      display: none !important;
+      text-align: center !important;
     }
   }
 </style>
@@ -150,7 +78,7 @@
     { "type": "color", "id": "badge_bg", "label": "Sfondo targhetta offerta", "default": "#c98c85" },
     { "type": "color", "id": "badge_text", "label": "Testo targhetta offerta", "default": "#fbf6f3" },
     { "type": "color", "id": "sale_color", "label": "Colore prezzo scontato", "default": "#c98c85" },
-    { "type": "color", "id": "dropdown_bg", "label": "Sfondo menu a tendina (filtri/ordina)", "default": "#f1ebe6" },
+    { "type": "color", "id": "dropdown_bg", "label": "Sfondo menu a tendina (ordina)", "default": "#f1ebe6" },
     { "type": "color", "id": "addbtn_bg", "label": "Sfondo pulsante Aggiungi", "default": "#eacbc8" },
     { "type": "color", "id": "addbtn_text", "label": "Testo pulsante Aggiungi", "default": "#6e5f59" }
   ],
