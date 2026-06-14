@@ -1,0 +1,28 @@
+{% comment %}
+  Grimmie - cart page styling to match the cart drawer.
+  Renders no visible markup; only scoped styles loaded on the cart template.
+{% endcomment %}
+<style>
+  /* Quantity badge next to the title -> blush (was grey), like the drawer */
+  .cart-title .cart-bubble__background { background-color: #eacbc8 !important; }
+  .cart-title .cart-bubble__text { color: #6e5f59 !important; }
+
+  /* Checkout button -> deeper blush, rectangular, like the drawer */
+  .cart__checkout-button {
+    background: #dfafb3 !important;
+    color: #f7f1ee !important;
+    border-radius: 4px !important;
+  }
+  .cart__checkout-button:hover {
+    background: #eacbc8 !important;
+    color: #6e5f59 !important;
+  }
+</style>
+{% schema %}
+{
+  "name": "Cart page style",
+  "tag": "section",
+  "settings": [],
+  "enabled_on": { "templates": ["cart"] }
+}
+{% endschema %}
