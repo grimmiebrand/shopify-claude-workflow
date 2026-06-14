@@ -14,16 +14,16 @@
 -%}
 
 <style>
-  /* Sale badge -> soft blush/rose (was a grey colour scheme) */
+  /* Sale badge -> soft blush/rose (stays applied after AJAX filter re-render) */
   .product-badges__badge {
-    background-color: {{ badge_bg }};
-    color: {{ badge_text }};
-    border-color: transparent;
+    background-color: {{ badge_bg }} !important;
+    color: {{ badge_text }} !important;
+    border-color: transparent !important;
   }
   /* Sale price -> same rose as the sale badge; compare-at price kept muted/struck */
   .price-item--sale,
   .price__sale .price {
-    color: {{ sale_color }};
+    color: {{ sale_color }} !important;
   }
   .compare-at-price {
     color: var(--color-foreground, #6e5f59);
@@ -120,13 +120,23 @@
       top: 100%;
       left: 0;
       width: max-content;
-      min-width: var(--facets-panel-min-width);
-      max-width: 90vw;
+      min-width: 300px;
+      max-width: 92vw;
+      padding: var(--padding-md);
       z-index: var(--facets-upper-z-index);
       box-shadow: var(--shadow-popover);
       border: var(--style-border-popover);
       background-color: {{ dropdown_bg }};
       border-radius: var(--style-border-radius-popover);
+    }
+    .facets--horizontal .facets__inputs-wrapper {
+      max-height: none;
+      overflow: visible;
+      padding: 0;
+    }
+    /* Don't show the current sort value next to "Ordina" (it overlapped) */
+    .facets--horizontal .sorting-filter .facets__status {
+      display: none !important;
     }
   }
 </style>
