@@ -1,13 +1,16 @@
 {% comment %}
   Grimmie - collection-only visual overrides.
   Renders no visible markup; only scoped styles that load on the collection
-  template (sale badge colour + sale price colour). Editable defaults below.
+  template. Colours are editable from the Theme Editor (this section).
 {% endcomment %}
 
 {%- liquid
   assign badge_bg = section.settings.badge_bg | default: '#c98c85'
   assign badge_text = section.settings.badge_text | default: '#fbf6f3'
   assign sale_color = section.settings.sale_color | default: '#b97a6d'
+  assign dropdown_bg = section.settings.dropdown_bg | default: '#f1ebe6'
+  assign addbtn_bg = section.settings.addbtn_bg | default: '#eacbc8'
+  assign addbtn_text = section.settings.addbtn_text | default: '#6e5f59'
 -%}
 
 <style>
@@ -26,6 +29,39 @@
     color: var(--color-foreground, #6e5f59);
     opacity: 0.5;
   }
+
+  /* Quick-add "AGGIUNGI" button -> light pink */
+  .quick-add .quick-add__button,
+  .quick-add__button.add-to-cart-button {
+    background-color: {{ addbtn_bg }};
+    color: {{ addbtn_text }};
+    border-color: {{ addbtn_bg }};
+  }
+
+  /* Filter + sort dropdown panels -> footer beige */
+  .facets__panel-content,
+  .sorting-filter__options,
+  .sorting-filter__options-inner {
+    background-color: {{ dropdown_bg }};
+  }
+
+  /* Hide the "highest price is..." hint inside the price filter */
+  .price-facet__highest-price {
+    display: none;
+  }
+
+  /* Hide the Availability filter */
+  .facets__item:has([id*="filter-v-availability"]) {
+    display: none;
+  }
+
+  /* Hide the "Best seller" (best-selling) sort option */
+  label[for^="sort-option-best-selling-"] {
+    display: none;
+  }
+  .sorting-filter__select option[value="best-selling"] {
+    display: none;
+  }
 </style>
 
 {% schema %}
@@ -33,10 +69,13 @@
   "name": "Collection style",
   "tag": "section",
   "settings": [
-    { "type": "paragraph", "content": "Stili applicati solo alla pagina collezione: colore targhetta sconto e colore prezzo scontato." },
+    { "type": "paragraph", "content": "Stili applicati solo alla pagina collezione." },
     { "type": "color", "id": "badge_bg", "label": "Sfondo targhetta offerta", "default": "#c98c85" },
     { "type": "color", "id": "badge_text", "label": "Testo targhetta offerta", "default": "#fbf6f3" },
-    { "type": "color", "id": "sale_color", "label": "Colore prezzo scontato", "default": "#b97a6d" }
+    { "type": "color", "id": "sale_color", "label": "Colore prezzo scontato", "default": "#b97a6d" },
+    { "type": "color", "id": "dropdown_bg", "label": "Sfondo menu a tendina (filtri/ordina)", "default": "#f1ebe6" },
+    { "type": "color", "id": "addbtn_bg", "label": "Sfondo pulsante Aggiungi", "default": "#eacbc8" },
+    { "type": "color", "id": "addbtn_text", "label": "Testo pulsante Aggiungi", "default": "#6e5f59" }
   ],
   "enabled_on": { "templates": ["collection"] }
 }
