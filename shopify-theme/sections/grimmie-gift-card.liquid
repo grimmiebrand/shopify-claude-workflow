@@ -11,8 +11,7 @@
 
 {%- liquid
   assign s = section.settings
-  assign faq_url = s.faq_link | default: pages.faqs.url
-  assign contact_url = s.contact_link | default: pages.contact.url
+  assign support_url = s.support_link | default: pages.contact.url
 -%}
 
 {%- capture sparkle_svg -%}<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 0c.7 6.3 5.4 11 12 12-6.6 1-11.3 5.7-12 12-.7-6.3-5.4-11-12-12C6.6 11 11.3 6.3 12 0Z"/></svg>{%- endcapture -%}
@@ -168,14 +167,20 @@
       </div>
     {%- endif -%}
 
-    {%- comment -%} Help {%- endcomment -%}
-    {%- if s.help_intro != blank -%}
-      <p class="grimmie-gc__help">
-        {{ s.help_intro }}
-        {%- if faq_url != blank and s.faq_label != blank %} <a href="{{ faq_url }}">{{ s.faq_label }}</a>{% endif -%}
-        {%- if s.help_connector != blank %} {{ s.help_connector }}{% endif -%}
-        {%- if contact_url != blank and s.contact_label != blank %} <a href="{{ contact_url }}">{{ s.contact_label }}</a>{% endif -%}.
-      </p>
+    {%- comment -%} Customer support box {%- endcomment -%}
+    {%- if s.support_title != blank or s.support_text != blank -%}
+      <div class="grimmie-gc__support" style="--gc-support-bg: {{ s.support_bg }};">
+        <span class="grimmie-gc__support-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><path d="M20 16a2 2 0 0 1-2 2h-1.5"/><rect x="2.5" y="13.5" width="4" height="6.5" rx="1.6"/><rect x="17.5" y="13.5" width="4" height="6.5" rx="1.6"/></svg>
+        </span>
+        <div class="grimmie-gc__support-body">
+          {%- if s.support_title != blank -%}<p class="grimmie-gc__support-title">{{ s.support_title }}</p>{%- endif -%}
+          {%- if s.support_text != blank -%}<p class="grimmie-gc__support-text">{{ s.support_text }}</p>{%- endif -%}
+        </div>
+        {%- if s.support_button_label != blank and support_url != blank -%}
+          <a class="grimmie-gc__support-btn" href="{{ support_url }}">{{ s.support_button_label }}</a>
+        {%- endif -%}
+      </div>
     {%- endif -%}
 
   </div>
@@ -390,12 +395,12 @@
 
   /* Benefits */
   .grimmie-gc__benefits {
-    margin-top: 28px;
+    margin-top: 18px;
     display: grid;
     grid-template-columns: repeat(var(--gc-benefit-cols, 3), 1fr);
-    background: var(--gc-media-bg);
+    background: transparent;
     border: 1px solid var(--gc-border);
-    border-radius: var(--gc-radius);
+    border-radius: 14px;
     overflow: hidden;
   }
 
@@ -404,27 +409,52 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 10px;
-    padding: 34px 26px;
+    gap: 6px;
+    padding: 18px 16px;
   }
 
   .grimmie-gc__benefit + .grimmie-gc__benefit { border-left: 1px solid var(--gc-border); }
-  .grimmie-gc__benefit-icon { width: 30px; height: 30px; color: var(--gc-accent); }
+  .grimmie-gc__benefit-icon { width: 20px; height: 20px; color: var(--gc-accent); }
   .grimmie-gc__benefit-icon svg, .grimmie-gc__benefit-icon img { width: 100%; height: 100%; object-fit: contain; }
-  .grimmie-gc__benefit-title { margin: 0; font-family: var(--font-heading--family); font-size: 19px; color: var(--gc-text); }
-  .grimmie-gc__benefit-text { margin: 0; font-family: var(--font-body--family); font-size: 13px; line-height: 1.55; color: var(--gc-text); opacity: 0.82; max-width: 26ch; }
+  .grimmie-gc__benefit-title { margin: 0; font-family: var(--font-heading--family); font-size: 15px; color: var(--gc-text); }
+  .grimmie-gc__benefit-text { margin: 0; font-family: var(--font-body--family); font-size: 12px; line-height: 1.5; color: var(--gc-text); opacity: 0.78; max-width: 28ch; }
 
-  /* Help */
-  .grimmie-gc__help {
-    margin: 28px 0 0;
-    text-align: center;
-    font-family: var(--font-body--family);
-    font-size: 15px;
+  /* Customer support box */
+  .grimmie-gc__support {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background: var(--gc-support-bg, #f7edeb);
+    border: 1px solid var(--gc-border);
+    border-radius: var(--gc-radius);
+    padding: 26px 36px;
+  }
+  .grimmie-gc__support-icon {
+    flex: 0 0 auto;
+    width: 62px; height: 62px;
+    border: 1px solid var(--gc-accent);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
     color: var(--gc-text);
   }
-  .grimmie-gc__help a { color: var(--gc-text); text-decoration: underline; text-underline-offset: 3px; }
-  .grimmie-gc__help a:hover { color: var(--gc-accent); }
-  .grimmie-gc__help a:focus-visible { outline: 2px solid var(--gc-text); outline-offset: 2px; }
+  .grimmie-gc__support-icon svg { width: 26px; height: 26px; }
+  .grimmie-gc__support-body { flex: 1 1 auto; }
+  .grimmie-gc__support-title { margin: 0 0 4px; font-family: var(--font-body--family); font-weight: 600; font-size: 17px; color: var(--gc-text); }
+  .grimmie-gc__support-text { margin: 0; font-family: var(--font-body--family); font-size: 15px; line-height: 1.5; color: var(--gc-text); opacity: 0.82; }
+  .grimmie-gc__support-btn {
+    flex: 0 0 auto;
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 52px; padding: 0 30px;
+    background: var(--gc-btn-bg); color: var(--gc-btn-text);
+    border: 1px solid transparent; border-radius: 4px;
+    text-decoration: none;
+    font-family: var(--font-body--family);
+    font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .grimmie-gc__support-btn:hover { background: var(--gc-btn-hover); color: var(--gc-text); }
+  .grimmie-gc__support-btn:focus-visible { outline: 2px solid var(--gc-text); outline-offset: 3px; }
 
   .visually-hidden {
     position: absolute !important;
@@ -444,14 +474,18 @@
   @media screen and (max-width: 749px) {
     .grimmie-gc__title { font-size: var(--gc-title-m); }
     .grimmie-gc__value { font-size: calc(var(--gc-value) * 0.84); }
-    .grimmie-gc__copybtn { flex: 1 1 100%; }
+    .grimmie-gc__coderow { flex-direction: column; align-items: stretch; }
+    .grimmie-gc__code { width: 100%; white-space: nowrap; overflow-x: auto; letter-spacing: 0.1em; font-size: 15px; }
+    .grimmie-gc__copybtn { width: 100%; }
     .grimmie-gc__benefits { grid-template-columns: 1fr; }
     .grimmie-gc__benefit + .grimmie-gc__benefit { border-left: 0; border-top: 1px solid var(--gc-border); }
+    .grimmie-gc__support { flex-direction: column; text-align: center; align-items: center; gap: 16px; padding: 26px 22px; }
+    .grimmie-gc__support-btn { width: 100%; }
   }
 
   /* Print: keep the essentials, hide site chrome and decoration */
   @media print {
-    #header-group, footer, .grimmie-gc__sparkle, .grimmie-gc__copy, .grimmie-gc__wallet { display: none !important; }
+    #header-group, footer, .grimmie-gc__sparkle, .grimmie-gc__copy, .grimmie-gc__wallet, .grimmie-gc__support { display: none !important; }
     .grimmie-gc { padding: 0; background: #fff; }
     .grimmie-gc__panel { border-color: #ccc; }
   }
@@ -489,13 +523,12 @@
     { "type": "checkbox", "id": "show_apple_wallet", "label": "Mostra pulsante Apple Wallet", "default": false },
     { "type": "checkbox", "id": "show_qr", "label": "Mostra codice QR", "default": false },
 
-    { "type": "header", "content": "Aiuto" },
-    { "type": "text", "id": "help_intro", "label": "Testo di aiuto", "default": "Hai domande? Visita le nostre" },
-    { "type": "text", "id": "faq_label", "label": "Testo link FAQ", "default": "FAQ" },
-    { "type": "url", "id": "faq_link", "label": "Link FAQ", "info": "Vuoto = pagina FAQ del sito." },
-    { "type": "text", "id": "help_connector", "label": "Congiunzione", "default": "o" },
-    { "type": "text", "id": "contact_label", "label": "Testo link contatti", "default": "contattaci" },
-    { "type": "url", "id": "contact_link", "label": "Link contatti", "info": "Vuoto = pagina Contatti del sito." },
+    { "type": "header", "content": "Assistenza clienti" },
+    { "type": "text", "id": "support_title", "label": "Titolo assistenza", "default": "Hai ancora domande sul tuo ordine?" },
+    { "type": "text", "id": "support_text", "label": "Testo assistenza", "default": "Il nostro customer care è qui per aiutarti con tempi, consegna e piccoli imprevisti." },
+    { "type": "text", "id": "support_button_label", "label": "Testo pulsante assistenza", "default": "CONTATTA IL SUPPORTO" },
+    { "type": "url", "id": "support_link", "label": "Link assistenza", "info": "Vuoto = pagina Contatti del sito." },
+    { "type": "color", "id": "support_bg", "label": "Colore sfondo assistenza", "default": "#F7EDEB" },
 
     { "type": "header", "content": "Colori" },
     { "type": "color", "id": "bg_color", "label": "Colore sfondo", "default": "#F7F1EE" },
@@ -513,8 +546,8 @@
     { "type": "range", "id": "panel_radius", "label": "Raggio angoli pannello", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 24 },
     { "type": "range", "id": "padding_top", "label": "Spaziatura superiore", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
     { "type": "range", "id": "padding_bottom", "label": "Spaziatura inferiore", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
-    { "type": "range", "id": "title_size_desktop", "label": "Dimensione titolo (desktop)", "min": 32, "max": 72, "step": 1, "unit": "px", "default": 54 },
-    { "type": "range", "id": "title_size_mobile", "label": "Dimensione titolo (mobile)", "min": 24, "max": 48, "step": 1, "unit": "px", "default": 38 },
+    { "type": "range", "id": "title_size_desktop", "label": "Dimensione titolo (desktop)", "min": 28, "max": 72, "step": 1, "unit": "px", "default": 38 },
+    { "type": "range", "id": "title_size_mobile", "label": "Dimensione titolo (mobile)", "min": 20, "max": 48, "step": 1, "unit": "px", "default": 27 },
     { "type": "range", "id": "value_size", "label": "Dimensione valore", "min": 32, "max": 64, "step": 1, "unit": "px", "default": 48 },
     { "type": "range", "id": "body_size", "label": "Dimensione testo", "min": 13, "max": 20, "step": 1, "unit": "px", "default": 16 }
   ],
