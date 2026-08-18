@@ -1,0 +1,138 @@
+{%- liquid
+  assign sid = section.id
+  assign s = section.settings
+-%}
+
+<style>
+  .gpl-{{ sid }} {
+    --gpl-bg: {{ s.background_color }};
+    --gpl-heading: {{ s.heading_color }};
+    --gpl-text: {{ s.text_color }};
+    --gpl-blush: {{ s.blush_color }};
+    background-color: var(--gpl-bg);
+    color: var(--gpl-text);
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font-body--family);
+    padding: {{ s.padding_top }}px 0 {{ s.padding_bottom }}px;
+  }
+  .gpl-{{ sid }} * { box-sizing: border-box; }
+  .gpl-{{ sid }}__inner { max-width: 1180px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 56px); }
+  .gpl-{{ sid }}__title {
+    text-align: center;
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    color: var(--gpl-heading);
+    font-size: clamp(22px, 2.6vw, 32px);
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    margin: 0 0 clamp(24px, 3vw, 40px);
+  }
+  .gpl-{{ sid }}__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(16px, 2vw, 28px);
+  }
+  .gpl-{{ sid }}__card { display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+  .gpl-{{ sid }}__media {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: var(--gpl-blush);
+    margin-bottom: 16px;
+  }
+  .gpl-{{ sid }}__media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  .gpl-{{ sid }}__card:hover .gpl-{{ sid }}__media img { transform: scale(1.03); }
+  .gpl-{{ sid }}__media .gpl-ph { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--gpl-heading); opacity: 0.35; }
+  .gpl-{{ sid }}__media .gpl-ph svg { width: 56px; height: 56px; }
+  .gpl-{{ sid }}__card-title {
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    color: var(--gpl-heading);
+    font-size: clamp(17px, 1.5vw, 20px);
+    line-height: 1.25;
+    margin: 0 0 6px;
+    text-align: center;
+  }
+  .gpl-{{ sid }}__card-text {
+    font-size: clamp(13px, 0.95vw, 14.5px);
+    line-height: 1.55;
+    color: var(--gpl-text);
+    margin: 0;
+    text-align: center;
+  }
+  @media (max-width: 749px) {
+    .gpl-{{ sid }}__grid { grid-template-columns: repeat(2, 1fr); gap: clamp(14px, 4vw, 22px); }
+  }
+</style>
+
+<section class="gpl-{{ sid }}" aria-label="{{ s.title | default: 'Lifestyle' | escape }}">
+  <div class="gpl-{{ sid }}__inner">
+    {%- if s.title != blank -%}<h2 class="gpl-{{ sid }}__title">{{ s.title | escape }}</h2>{%- endif -%}
+    <div class="gpl-{{ sid }}__grid">
+      {%- for block in section.blocks -%}
+        {%- assign tag = 'div' -%}
+        {%- if block.settings.link != blank -%}{%- assign tag = 'a' -%}{%- endif -%}
+        <{{ tag }} class="gpl-{{ sid }}__card"{% if block.settings.link != blank %} href="{{ block.settings.link }}"{% endif %} {{ block.shopify_attributes }}>
+          <div class="gpl-{{ sid }}__media">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 800 | image_tag: alt: block.settings.image_alt, loading: 'lazy', widths: '360,540,720,800' }}
+            {%- else -%}
+              <div class="gpl-ph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m4 16 5-5 4 4 3-3 4 4"/><circle cx="9" cy="9" r="1.5"/></svg></div>
+            {%- endif -%}
+          </div>
+          {%- if block.settings.title != blank -%}<h3 class="gpl-{{ sid }}__card-title">{{ block.settings.title | escape }}</h3>{%- endif -%}
+          {%- if block.settings.text != blank -%}<p class="gpl-{{ sid }}__card-text">{{ block.settings.text | escape }}</p>{%- endif -%}
+        </{{ tag }}>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Grimmie lifestyle",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Section title", "default": "Pensate per accompagnarti ovunque" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#F7F1EE" },
+    { "type": "color", "id": "heading_color", "label": "Heading", "default": "#6E5F59" },
+    { "type": "color", "id": "text_color", "label": "Body text", "default": "#6E5F59" },
+    { "type": "color", "id": "blush_color", "label": "Image placeholder", "default": "#EACBC8" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Lifestyle card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_alt", "label": "Image alt text" },
+        { "type": "text", "id": "title", "label": "Title", "default": "In casa" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Ordine e bellezza sul tuo mobile." },
+        { "type": "url", "id": "link", "label": "Link (optional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grimmie lifestyle",
+      "category": "Grimmie",
+      "blocks": [
+        { "type": "card", "settings": { "title": "In casa", "text": "Ordine e bellezza sul tuo mobile." } },
+        { "type": "card", "settings": { "title": "In viaggio", "text": "Tutto organizzato, zero stress." } },
+        { "type": "card", "settings": { "title": "In palestra", "text": "I tuoi essentials sempre pronti." } },
+        { "type": "card", "settings": { "title": "Sempre con te", "text": "La tua routine, ovunque tu sia." } }
+      ]
+    }
+  ],
+  "enabled_on": { "templates": ["product"] }
+}
+{% endschema %}

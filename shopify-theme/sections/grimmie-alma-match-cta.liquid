@@ -1,0 +1,526 @@
+{%- liquid
+  assign sid = section.id
+  assign s = section.settings
+-%}
+
+<style>
+  .gam-{{ sid }} {
+    --gam-bg1: {{ s.bg_gradient_1 }};
+    --gam-bg2: {{ s.bg_gradient_2 }};
+    --gam-heading: {{ s.heading_color }};
+    --gam-text: {{ s.text_color }};
+    --gam-accent: {{ s.accent_color }};
+    --gam-blush: {{ s.blush_color }};
+    --gam-card-bg: {{ s.card_background_color }};
+    --gam-border: {{ s.border_color }};
+    --gam-btn-bg: {{ s.button_background_color }};
+    --gam-btn-text: {{ s.button_text_color }};
+    --gam-btn-hover: {{ s.button_hover_background_color }};
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font-body--family);
+    padding: {{ s.padding_top }}px clamp(16px, 4vw, 40px) {{ s.padding_bottom }}px;
+  }
+  .gam-{{ sid }} * { box-sizing: border-box; }
+  .gam-{{ sid }}__container {
+    position: relative;
+    max-width: {{ s.container_max_width }}px;
+    margin: 0 auto;
+    background: linear-gradient(165deg, var(--gam-bg1) 0%, var(--gam-bg2) 100%);
+    border: 1px solid var(--gam-border);
+    border-radius: {{ s.border_radius }}px;
+    padding: clamp(40px, 6vw, 84px) clamp(24px, 5vw, 72px) clamp(36px, 5vw, 64px);
+    overflow: hidden;
+    text-align: center;
+  }
+  .gam-{{ sid }}__eyebrow {
+    margin: 0 0 14px;
+    font-family: var(--font-body--family);
+    font-size: clamp(11px, 0.85vw, 13px);
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gam-accent);
+  }
+  .gam-{{ sid }}__title {
+    margin: 0 0 16px;
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    color: var(--gam-heading);
+    font-size: clamp(26px, 3.2vw, 42px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  .gam-{{ sid }}__subtitle {
+    margin: 0 auto clamp(28px, 4vw, 48px);
+    max-width: 700px;
+    font-size: clamp(14px, 1.05vw, 16px);
+    line-height: 1.6;
+    color: var(--gam-text);
+  }
+
+  /* Badge */
+  .gam-{{ sid }}__badge {
+    position: absolute;
+    top: clamp(24px, 4vw, 56px);
+    right: clamp(24px, 4vw, 64px);
+    z-index: 4;
+    width: clamp(92px, 9vw, 120px);
+    height: clamp(92px, 9vw, 120px);
+    border-radius: 50%;
+    background: var(--gam-card-bg);
+    border: 1px solid var(--gam-blush);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    color: var(--gam-heading);
+    box-shadow: 0 6px 20px rgba(110, 95, 89, 0.08);
+  }
+  .gam-{{ sid }}__badge-top { font-size: clamp(13px, 1.1vw, 16px); font-weight: 600; letter-spacing: 0.04em; }
+  .gam-{{ sid }}__badge-bottom { font-size: clamp(9px, 0.8vw, 11px); letter-spacing: 0.1em; text-transform: uppercase; color: var(--gam-accent); }
+
+  /* Sparkles */
+  .gam-{{ sid }}__spark { position: absolute; color: var(--gam-blush); opacity: 0.75; pointer-events: none; z-index: 1; }
+  .gam-{{ sid }}__spark svg { width: 100%; height: 100%; fill: currentColor; }
+  .gam-{{ sid }}__spark--1 { width: 22px; height: 22px; top: 16%; left: 8%; }
+  .gam-{{ sid }}__spark--2 { width: 14px; height: 14px; top: 30%; left: 14%; opacity: 0.5; }
+  .gam-{{ sid }}__spark--3 { width: 18px; height: 18px; bottom: 22%; right: 9%; }
+  .gam-{{ sid }}__spark--4 { width: 12px; height: 12px; bottom: 34%; left: 6%; opacity: 0.5; }
+
+  /* Carousel / wheel */
+  .gam-{{ sid }}__wheel {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(4px, 1.4vw, 16px);
+    margin-bottom: clamp(32px, 4vw, 48px);
+  }
+  .gam-{{ sid }}__cards {
+    position: relative;
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 14px;
+    overflow-x: auto;
+    min-height: clamp(300px, 32vw, 366px);
+  }
+  .gam-{{ sid }}__cards.is-wheel { overflow: visible; gap: 0; }
+  .gam-{{ sid }}__cards.is-wheel .gam-{{ sid }}__card { position: absolute; left: 50%; bottom: 0; margin: 0; }
+  .gam-{{ sid }}__card {
+    flex: 0 0 auto;
+    width: clamp(150px, 15vw, 200px);
+    transform-origin: bottom center;
+    will-change: transform, opacity;
+    background: var(--gam-card-bg);
+    border: 1px solid var(--gam-border);
+    border-radius: 16px;
+    padding: 12px 12px 14px;
+    box-shadow: 0 10px 30px rgba(110, 95, 89, 0.10);
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
+  }
+  .gam-{{ sid }}__card-name {
+    display: block;
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    color: var(--gam-heading);
+    font-size: clamp(14px, 1.2vw, 17px);
+    line-height: 1.15;
+    text-align: center;
+    margin: 2px 0 10px;
+    min-height: 2.3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .gam-{{ sid }}__card-img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--gam-blush);
+    margin-bottom: 12px;
+  }
+  .gam-{{ sid }}__card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gam-{{ sid }}__card-img .gam-ph { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--gam-card-bg); opacity: 0.5; }
+  .gam-{{ sid }}__card-img .gam-ph svg { width: 38px; height: 38px; }
+  .gam-{{ sid }}__card-foot { display: flex; flex-direction: column; align-items: center; gap: 5px; text-align: center; }
+  .gam-{{ sid }}__card-foot svg { flex: 0 0 auto; width: 16px; height: 16px; fill: none; stroke: var(--gam-accent); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .gam-{{ sid }}__card-match { font-size: 11px; line-height: 1.3; color: var(--gam-text); text-align: center; }
+  .gam-{{ sid }}__card-match b { display: block; color: var(--gam-heading); font-weight: 600; }
+  .gam-{{ sid }}__card-combo { display: block; }
+
+  /* Arrows */
+  .gam-{{ sid }}__arrow {
+    display: none;
+    flex: 0 0 auto;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid var(--gam-border);
+    background: var(--gam-card-bg);
+    color: var(--gam-accent);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 6;
+    box-shadow: 0 6px 18px rgba(110, 95, 89, 0.12);
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+  .gam-{{ sid }}__wheel.is-ready .gam-{{ sid }}__arrow { display: flex; }
+  .gam-{{ sid }}__arrow svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .gam-{{ sid }}__arrow:hover { background: var(--gam-blush); color: var(--gam-heading); transform: scale(1.06); }
+  .gam-{{ sid }}__arrow:focus-visible { outline: 2px solid var(--gam-accent); outline-offset: 2px; }
+
+  /* Benefits */
+  .gam-{{ sid }}__benefits {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-bottom: clamp(28px, 4vw, 40px);
+  }
+  .gam-{{ sid }}__benefit {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px clamp(18px, 2.4vw, 34px);
+    border-left: 1px solid var(--gam-border);
+  }
+  .gam-{{ sid }}__benefit:first-child { border-left: 0; }
+  .gam-{{ sid }}__benefit-icon { flex: 0 0 auto; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; color: var(--gam-accent); }
+  .gam-{{ sid }}__benefit-icon svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .gam-{{ sid }}__benefit-icon img { width: 22px; height: 22px; object-fit: contain; }
+  .gam-{{ sid }}__benefit-text { font-size: clamp(13px, 1vw, 14.5px); color: var(--gam-text); }
+
+  /* CTA */
+  .gam-{{ sid }}__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 380px;
+    min-height: 56px;
+    background: var(--gam-btn-bg);
+    color: var(--gam-btn-text);
+    font-family: var(--font-body--family);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border-radius: 0;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  .gam-{{ sid }}__cta:hover { background: var(--gam-btn-hover); }
+  .gam-{{ sid }}__cta:focus-visible { outline: 2px solid var(--gam-accent); outline-offset: 3px; }
+
+  @media (max-width: 749px) {
+    .gam-{{ sid }}__badge {
+      position: static;
+      margin: 0 auto clamp(20px, 6vw, 28px);
+    }
+    .gam-{{ sid }}__cards { min-height: clamp(280px, 78vw, 320px); }
+    .gam-{{ sid }}__card { width: clamp(120px, 42vw, 162px); padding: 9px 9px 11px; }
+    .gam-{{ sid }}__card-match { font-size: 10px; }
+    .gam-{{ sid }}__arrow { width: 38px; height: 38px; }
+    .gam-{{ sid }}__benefits { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .gam-{{ sid }}__benefit { border-left: 0; padding: 0; }
+    .gam-{{ sid }}__cta { max-width: 100%; }
+  }
+</style>
+
+{%- capture spark -%}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.8 6.4L20 10l-6.2 1.6L12 18l-1.8-6.4L4 10l6.2-1.6z"/></svg>{%- endcapture -%}
+
+<section class="gam-{{ sid }}" aria-label="{{ s.title | default: 'Alma Match' | escape }}">
+  <div class="gam-{{ sid }}__container">
+
+    {%- if s.show_sparkles -%}
+      <span class="gam-{{ sid }}__spark gam-{{ sid }}__spark--1">{{ spark }}</span>
+      <span class="gam-{{ sid }}__spark gam-{{ sid }}__spark--2">{{ spark }}</span>
+      <span class="gam-{{ sid }}__spark gam-{{ sid }}__spark--3">{{ spark }}</span>
+      <span class="gam-{{ sid }}__spark gam-{{ sid }}__spark--4">{{ spark }}</span>
+    {%- endif -%}
+
+    {%- if s.show_badge -%}
+      <div class="gam-{{ sid }}__badge" aria-hidden="true">
+        <span class="gam-{{ sid }}__badge-top">{{ s.badge_top | escape }}</span>
+        <span class="gam-{{ sid }}__badge-bottom">{{ s.badge_bottom | escape }}</span>
+      </div>
+    {%- endif -%}
+
+    {%- if s.eyebrow != blank -%}<p class="gam-{{ sid }}__eyebrow">{{ s.eyebrow | escape }}</p>{%- endif -%}
+    {%- if s.title != blank -%}<h2 class="gam-{{ sid }}__title">{{ s.title | escape }}</h2>{%- endif -%}
+    {%- if s.subtitle != blank -%}<p class="gam-{{ sid }}__subtitle">{{ s.subtitle | escape }}</p>{%- endif -%}
+
+    {%- assign card_blocks = section.blocks | where: 'type', 'card' -%}
+    {%- if card_blocks.size > 0 -%}
+      <div class="gam-{{ sid }}__wheel" id="gam-{{ sid }}-wheel"
+           data-gam-active="{{ s.start_index | default: 0 }}"
+           data-gam-angle="{{ s.fan_angle | default: 7 }}"
+           data-gam-fade="{{ s.outer_fade | default: 0.3 }}"
+           data-gam-side="{{ s.side_visible | default: 3 }}">
+        {%- if card_blocks.size > 1 -%}
+          <button type="button" class="gam-{{ sid }}__arrow gam-{{ sid }}__arrow--prev" data-gam-prev aria-label="{{ s.prev_label | default: 'Precedente' | escape }}">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+          </button>
+        {%- endif -%}
+        <div class="gam-{{ sid }}__cards" data-gam-track>
+          {%- for block in card_blocks -%}
+            {%- assign card_tag = 'div' -%}
+            {%- if block.settings.link != blank -%}{%- assign card_tag = 'a' -%}{%- endif -%}
+            <{{ card_tag }} class="gam-{{ sid }}__card" data-gam-card{% if block.settings.link != blank %} href="{{ block.settings.link }}"{% endif %} {{ block.shopify_attributes }}>
+              {%- if block.settings.title != blank -%}<span class="gam-{{ sid }}__card-name">{{ block.settings.title | escape }}</span>{%- endif -%}
+              <div class="gam-{{ sid }}__card-img">
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 500 | image_tag: alt: block.settings.image_alt, loading: 'lazy', widths: '200,300,400,500' }}
+                {%- else -%}
+                  <div class="gam-ph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="9" r="1.6"/><path d="m4 16 5-4 4 3 3-2 4 3"/></svg></div>
+                {%- endif -%}
+              </div>
+              <div class="gam-{{ sid }}__card-foot">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.1 10.2a2 2 0 0 1-2 1.8H8.1a2 2 0 0 1-2-1.8z"/><path d="M8 8a4 4 0 0 1 8 0"/></svg>
+                <span class="gam-{{ sid }}__card-match"><b>{{ s.match_label | default: 'Alma Match' | escape }}</b><span class="gam-{{ sid }}__card-combo">{{ block.settings.alma_match | replace: 'C', ' classic' | replace: 'L', ' large' | escape }}</span></span>
+              </div>
+            </{{ card_tag }}>
+          {%- endfor -%}
+        </div>
+        {%- if card_blocks.size > 1 -%}
+          <button type="button" class="gam-{{ sid }}__arrow gam-{{ sid }}__arrow--next" data-gam-next aria-label="{{ s.next_label | default: 'Successivo' | escape }}">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- assign benefit_blocks = section.blocks | where: 'type', 'benefit' -%}
+    {%- if benefit_blocks.size > 0 -%}
+      <div class="gam-{{ sid }}__benefits">
+        {%- for block in benefit_blocks -%}
+          <div class="gam-{{ sid }}__benefit" {{ block.shopify_attributes }}>
+            <span class="gam-{{ sid }}__benefit-icon" aria-hidden="true">
+              {%- if block.settings.icon_image != blank -%}
+                {{ block.settings.icon_image | image_url: width: 60 | image_tag: alt: block.settings.icon_alt, loading: 'lazy' }}
+              {%- else -%}
+                {%- case block.settings.icon -%}
+                  {%- when 'check' -%}<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.4 2.4 4.6-4.8"/></svg>
+                  {%- when 'sparkle' -%}<svg viewBox="0 0 24 24"><path d="M12 3l1.6 5.4L19 10l-5.4 1.6L12 17l-1.6-5.4L5 10l5.4-1.6z"/></svg>
+                  {%- when 'pouch' -%}<svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M8 8a4 4 0 0 1 8 0"/></svg>
+                  {%- when 'heart' -%}<svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-9A4.8 4.8 0 0 1 12 7a4.8 4.8 0 0 1 9.5 5C19 16.4 12 21 12 21z"/></svg>
+                  {%- when 'star' -%}<svg viewBox="0 0 24 24"><path d="M12 3l2.5 5.6 6.1.6-4.6 4 1.4 6-5.4-3.2L6.1 19.2l1.4-6-4.6-4 6.1-.6z"/></svg>
+                  {%- else -%}<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.4 2.4 4.6-4.8"/></svg>
+                {%- endcase -%}
+              {%- endif -%}
+            </span>
+            <span class="gam-{{ sid }}__benefit-text">{{ block.settings.text | escape }}</span>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if s.cta_text != blank -%}
+      <a class="gam-{{ sid }}__cta" href="{{ s.cta_link | default: '/pages/alma-match' }}">{{ s.cta_text | escape }}</a>
+    {%- endif -%}
+
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('gam-{{ sid }}-wheel');
+    if (!root) return;
+    var track = root.querySelector('[data-gam-track]');
+    if (!track) return;
+    var cards = Array.prototype.slice.call(track.querySelectorAll('[data-gam-card]'));
+    var n = cards.length;
+    if (n < 2) return;
+
+    var active = parseInt(root.getAttribute('data-gam-active') || '0', 10) || 0;
+    active = ((active % n) + n) % n;
+    var ANGLE = parseFloat(root.getAttribute('data-gam-angle')) || 7;
+    var FADE = parseFloat(root.getAttribute('data-gam-fade')) || 0.26;
+    var SIDE = parseInt(root.getAttribute('data-gam-side') || '3', 10) || 3;
+
+    track.classList.add('is-wheel');
+    root.classList.add('is-ready');
+
+    function layout() {
+      var cw = cards[0].offsetWidth || 180;
+      var step = cw * 0.42;
+      for (var i = 0; i < n; i++) {
+        var card = cards[i];
+        var d = i - active;
+        if (d > n / 2) d -= n;
+        if (d < -n / 2) d += n;
+        var ad = Math.abs(d);
+        if (ad > SIDE) {
+          card.style.opacity = '0';
+          card.style.visibility = 'hidden';
+          card.style.pointerEvents = 'none';
+          card.style.transform = 'translateX(-50%) scale(0.5)';
+          card.style.zIndex = '0';
+          card.setAttribute('aria-hidden', 'true');
+          continue;
+        }
+        var scale = Math.max(0.55, 1.06 - ad * 0.14);
+        var opacity = Math.max(0.16, 1 - ad * FADE);
+        var sat = Math.max(0.2, 1 - ad * 0.3);
+        var tx = d * step;
+        card.style.visibility = 'visible';
+        card.style.pointerEvents = 'auto';
+        card.style.transform = 'translateX(calc(-50% + ' + tx + 'px)) rotate(' + (d * ANGLE) + 'deg) scale(' + scale + ')';
+        card.style.opacity = String(opacity);
+        card.style.filter = 'saturate(' + sat + ')';
+        card.style.zIndex = String(100 - ad);
+        card.setAttribute('aria-hidden', d === 0 ? 'false' : 'true');
+      }
+    }
+
+    function go(dir) {
+      active = ((active + dir) % n + n) % n;
+      layout();
+    }
+
+    var prev = root.querySelector('[data-gam-prev]');
+    var next = root.querySelector('[data-gam-next]');
+    if (prev) prev.addEventListener('click', function () { go(-1); });
+    if (next) next.addEventListener('click', function () { go(1); });
+
+    cards.forEach(function (card, i) {
+      card.addEventListener('click', function (e) {
+        if (i !== active) { e.preventDefault(); active = i; layout(); }
+      });
+    });
+
+    var sx = null;
+    track.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', function (e) {
+      if (sx === null) return;
+      var dx = e.changedTouches[0].clientX - sx;
+      if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+      sx = null;
+    }, { passive: true });
+
+    window.addEventListener('resize', layout);
+
+    document.addEventListener('shopify:block:select', function (ev) {
+      for (var i = 0; i < n; i++) {
+        if (cards[i] === ev.target) { active = i; layout(); break; }
+      }
+    });
+
+    layout();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Grimmie Alma Match CTA",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "SCOPRI IL TUO ARCHETIPO" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Trova la tua combo ideale" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Rispondi a poche domande e scopri il tuo archetipo di bellezza, quali Alma fanno per te e quante pochette sono perfette per la tua routine." },
+    { "type": "text", "id": "match_label", "label": "Card match label", "default": "Alma Match" },
+
+    { "type": "header", "content": "Badge" },
+    { "type": "checkbox", "id": "show_badge", "label": "Show badge", "default": true },
+    { "type": "text", "id": "badge_top", "label": "Badge top text", "default": "2 MINUTI" },
+    { "type": "text", "id": "badge_bottom", "label": "Badge bottom text", "default": "10 DOMANDE" },
+
+    { "type": "header", "content": "CTA" },
+    { "type": "text", "id": "cta_text", "label": "Button text", "default": "FAI IL QUIZ" },
+    { "type": "url", "id": "cta_link", "label": "Button link" },
+
+    { "type": "header", "content": "Decoration" },
+    { "type": "checkbox", "id": "show_sparkles", "label": "Show decorative sparkles", "default": true },
+
+    { "type": "header", "content": "Carousel" },
+    { "type": "range", "id": "start_index", "label": "Start card (position, 0 = first)", "min": 0, "max": 40, "step": 1, "default": 1 },
+    { "type": "range", "id": "side_visible", "label": "Cards visible each side", "min": 1, "max": 5, "step": 1, "default": 3 },
+    { "type": "range", "id": "fan_angle", "label": "Card fan angle", "min": 0, "max": 16, "step": 1, "unit": "deg", "default": 7 },
+    { "type": "range", "id": "outer_fade", "label": "Outer cards fade per step", "min": 0, "max": 0.5, "step": 0.1, "default": 0.3 },
+    { "type": "text", "id": "prev_label", "label": "Prev arrow label (accessibility)", "default": "Precedente" },
+    { "type": "text", "id": "next_label", "label": "Next arrow label (accessibility)", "default": "Successivo" },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_gradient_1", "label": "Background gradient top", "default": "#F7EDEB" },
+    { "type": "color", "id": "bg_gradient_2", "label": "Background gradient bottom", "default": "#F1EBE6" },
+    { "type": "color", "id": "heading_color", "label": "Heading", "default": "#6E5F59" },
+    { "type": "color", "id": "text_color", "label": "Body text", "default": "#6E5F59" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#C99696" },
+    { "type": "color", "id": "blush_color", "label": "Blush", "default": "#EACBC8" },
+    { "type": "color", "id": "card_background_color", "label": "Card / badge background", "default": "#F7F1EE" },
+    { "type": "color", "id": "border_color", "label": "Border", "default": "#DDD2CA" },
+    { "type": "color", "id": "button_background_color", "label": "Button background", "default": "#EACBC8" },
+    { "type": "color", "id": "button_text_color", "label": "Button text", "default": "#6E5F59" },
+    { "type": "color", "id": "button_hover_background_color", "label": "Button hover", "default": "#DFAFB3" },
+
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "container_max_width", "label": "Container max width", "min": 1000, "max": 1500, "step": 20, "unit": "px", "default": 1320 },
+    { "type": "range", "id": "border_radius", "label": "Container corner radius", "min": 0, "max": 48, "step": 2, "unit": "px", "default": 28 },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 }
+  ],
+  "max_blocks": 40,
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Archetype card",
+      "limit": 30,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Archetype name", "default": "Clean Girl" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_alt", "label": "Image alt text" },
+        { "type": "text", "id": "alma_match", "label": "Pouch combo", "default": "2C + 1L" },
+        { "type": "url", "id": "link", "label": "Link (optional)" }
+      ]
+    },
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "select", "id": "icon", "label": "Icon", "default": "check",
+          "options": [
+            { "value": "check", "label": "Check" },
+            { "value": "sparkle", "label": "Sparkle" },
+            { "value": "pouch", "label": "Pouch / bag" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "star", "label": "Star" }
+          ]
+        },
+        { "type": "image_picker", "id": "icon_image", "label": "Custom icon (optional)" },
+        { "type": "text", "id": "icon_alt", "label": "Icon alt text" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Risultato personalizzato" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grimmie Alma Match CTA",
+      "category": "Grimmie",
+      "blocks": [
+        { "type": "card", "settings": { "title": "Soft Glam Girl", "alma_match": "2C + 3L" } },
+        { "type": "card", "settings": { "title": "Clean Girl", "alma_match": "3C + 2L" } },
+        { "type": "card", "settings": { "title": "Star Girl", "alma_match": "2C + 4L" } },
+        { "type": "benefit", "settings": { "icon": "check", "text": "Risultato personalizzato" } },
+        { "type": "benefit", "settings": { "icon": "sparkle", "text": "Consigli su misura per te" } },
+        { "type": "benefit", "settings": { "icon": "pouch", "text": "Scopri le tue Alma ideali" } }
+      ]
+    }
+  ],
+  "enabled_on": { "templates": ["product"] }
+}
+{% endschema %}

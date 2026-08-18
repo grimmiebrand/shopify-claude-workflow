@@ -1,0 +1,592 @@
+{%- doc -%}
+  Grimmie - editorial gift card page.
+  Rendered inside the normal theme layout (templates/gift_card.liquid), so the
+  real header / announcement bar / footer / trust strip appear around it without
+  being duplicated or modified.
+
+  Uses native Shopify gift_card objects:
+    gift_card.balance, gift_card.code, gift_card.expired, gift_card.enabled,
+    gift_card.expires_on, gift_card.qr_identifier, gift_card.pass_url
+{%- enddoc -%}
+
+{%- liquid
+  assign s = section.settings
+  assign support_url = s.support_link | default: pages.contact.url
+-%}
+
+{%- capture sparkle_svg -%}<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 0c.7 6.3 5.4 11 12 12-6.6 1-11.3 5.7-12 12-.7-6.3-5.4-11-12-12C6.6 11 11.3 6.3 12 0Z"/></svg>{%- endcapture -%}
+
+<section
+  class="grimmie-gc"
+  style="
+    --gc-bg: {{ s.bg_color }};
+    --gc-card-bg: {{ s.card_bg }};
+    --gc-media-bg: {{ s.media_bg }};
+    --gc-text: {{ s.text_color }};
+    --gc-accent: {{ s.accent_color }};
+    --gc-border: {{ s.border_color }};
+    --gc-btn-bg: {{ s.button_bg }};
+    --gc-btn-text: {{ s.button_text_color }};
+    --gc-btn-hover: {{ s.button_hover_bg }};
+    --gc-sparkle: {{ s.sparkle_color }};
+    --gc-maxw: {{ s.content_max_width }}px;
+    --gc-radius: {{ s.panel_radius }}px;
+    --gc-pt: {{ s.padding_top }}px;
+    --gc-pb: {{ s.padding_bottom }}px;
+    --gc-title-d: {{ s.title_size_desktop }}px;
+    --gc-title-m: {{ s.title_size_mobile }}px;
+    --gc-value: {{ s.value_size }}px;
+    --gc-body: {{ s.body_size }}px;
+  "
+>
+  <div class="grimmie-gc__inner">
+
+    {%- comment -%} Intro {%- endcomment -%}
+    <div class="grimmie-gc__intro">
+      {%- if s.eyebrow != blank -%}<p class="grimmie-gc__eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
+      {%- if s.title != blank -%}<h1 class="grimmie-gc__title">{{ s.title }}</h1>{%- endif -%}
+      {%- if s.intro != blank -%}<p class="grimmie-gc__intro-text">{{ s.intro }}</p>{%- endif -%}
+      {%- if s.show_sparkle -%}<span class="grimmie-gc__sparkle" aria-hidden="true">{{ sparkle_svg }}</span>{%- endif -%}
+    </div>
+
+    {%- comment -%} Card panel {%- endcomment -%}
+    <div class="grimmie-gc__panel">
+      <div class="grimmie-gc__media">
+        {%- if s.image != blank -%}
+          {{ s.image | image_url: width: 1200 | image_tag: loading: 'eager', alt: s.image_alt, class: 'grimmie-gc__img', sizes: '(max-width: 749px) 100vw, 50vw', widths: '400, 600, 800, 1000, 1200' }}
+        {%- else -%}
+          <div class="grimmie-gc__placeholder" role="img" aria-label="{{ s.image_alt | default: 'Buono regalo Grimmie' | escape }}">
+            <svg viewBox="0 0 120 90" fill="none" aria-hidden="true" focusable="false">
+              <rect x="8" y="20" width="104" height="62" rx="4" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M8 24 60 58 112 24" stroke="currentColor" stroke-width="1.6" fill="none"/>
+            </svg>
+            <span class="grimmie-gc__placeholder-word">grimmie</span>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="grimmie-gc__info">
+        {%- comment -%} Value {%- endcomment -%}
+        <p class="grimmie-gc__label">{{ s.value_label }}</p>
+        <p class="grimmie-gc__value">{{ gift_card.balance | money }}</p>
+        {%- if gift_card.enabled == false -%}
+          <p class="grimmie-gc__state" role="status">{{ s.disabled_text }}</p>
+        {%- elsif gift_card.expired -%}
+          <p class="grimmie-gc__state" role="status">{{ s.expired_text }}</p>
+        {%- endif -%}
+
+        <hr class="grimmie-gc__divider">
+
+        {%- comment -%} Code {%- endcomment -%}
+        <p class="grimmie-gc__label">{{ s.code_label }}</p>
+        <div class="grimmie-gc__coderow">
+          <div class="grimmie-gc__code">{{ gift_card.code | format_code }}</div>
+          {%- if gift_card.code -%}
+            <grimmie-copy
+              class="grimmie-gc__copy"
+              data-code="{{ gift_card.code }}"
+              data-copy-label-text="{{ s.copy_label | escape }}"
+              data-copied-label-text="{{ s.copied_label | escape }}"
+            >
+              <button
+                type="button"
+                class="grimmie-gc__copybtn"
+                data-copy-button
+                aria-label="{{ s.copy_aria | default: 'Copia il codice del buono regalo' | escape }}"
+              >
+                <span class="grimmie-gc__copyicon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                </span>
+                <span data-copy-label>{{ s.copy_label }}</span>
+              </button>
+              <span class="visually-hidden" data-copy-status role="status" aria-live="polite"></span>
+            </grimmie-copy>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} Expiry {%- endcomment -%}
+        <hr class="grimmie-gc__divider">
+        <div class="grimmie-gc__expiry">
+          <span class="grimmie-gc__expiry-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+          </span>
+          <div class="grimmie-gc__expiry-body">
+            <p class="grimmie-gc__label">{{ s.expiry_label }}</p>
+            {%- if gift_card.expires_on -%}
+              <p class="grimmie-gc__expiry-date">{{ gift_card.expires_on | date: '%-d %B %Y' }}</p>
+              {%- if s.expiry_note != blank -%}<p class="grimmie-gc__expiry-note">{{ s.expiry_note }}</p>{%- endif -%}
+            {%- else -%}
+              <p class="grimmie-gc__expiry-date">{{ s.no_expiry_text }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+
+        {%- comment -%} Optional: Apple Wallet + QR (off by default to match the reference) {%- endcomment -%}
+        {%- if s.show_apple_wallet and gift_card.pass_url -%}
+          <a class="grimmie-gc__wallet" href="{{ gift_card.pass_url }}">
+            <img src="{{ 'gift-card/add-to-apple-wallet.svg' | shopify_asset_url }}" width="120" height="40" loading="lazy" alt="{{ 'gift_cards.issued.add_to_apple_wallet' | t }}">
+          </a>
+        {%- endif -%}
+        {%- if s.show_qr and gift_card.qr_identifier -%}
+          <div class="grimmie-gc__qr">
+            <qr-code-image data-identifier="{{ gift_card.qr_identifier }}" width="96" height="96" alt="{{ 'gift_cards.issued.qr_image_alt' | t }}"></qr-code-image>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- comment -%} Benefits {%- endcomment -%}
+    {%- assign visible_benefits = 0 -%}
+    {%- for block in section.blocks -%}
+      {%- unless block.settings.show == false -%}{%- assign visible_benefits = visible_benefits | plus: 1 -%}{%- endunless -%}
+    {%- endfor -%}
+    {%- if visible_benefits > 0 -%}
+      <div class="grimmie-gc__benefits" style="--gc-benefit-cols: {{ visible_benefits }};">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.show == false -%}{%- continue -%}{%- endif -%}
+          <div class="grimmie-gc__benefit" {{ block.shopify_attributes }}>
+            <span class="grimmie-gc__benefit-icon" aria-hidden="true">
+              {%- if block.settings.custom_icon != blank -%}
+                {{ block.settings.custom_icon | image_url: width: 80 | image_tag: alt: block.settings.icon_alt, loading: 'lazy', widths: '40, 60, 80' }}
+              {%- else -%}
+                {%- case block.settings.icon -%}
+                  {%- when 'heart' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7.5-4.6-10-9.2C.7 9 1.6 5.5 4.6 4.6 6.7 4 8.9 4.8 10 6.6c.4.6.7 1 2 1 1.3 0 1.6-.4 2-1 1.1-1.8 3.3-2.6 5.4-2 3 .9 3.9 4.4 2.6 7.2C19.5 16.4 12 21 12 21Z"/></svg>
+                  {%- when 'sparkle' -%}<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1c.6 6 5 10.4 11 11-6 .6-10.4 5-11 11-.6-6-5-10.4-11-11C7 11.4 11.4 7 12 1Z"/></svg>
+                  {%- when 'gift' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="1.5"/><path d="M3 12h18M12 8v13M12 8S10.5 3.5 8 4.2C6 4.7 6.3 8 8.5 8H12Zm0 0s1.5-4.5 4-3.8C18 4.7 17.7 8 15.5 8H12Z"/></svg>
+                  {%- when 'leaf' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c0-9 6-15 16-15 0 10-6 16-16 15Z"/><path d="M9 15c3-3 6-4 9-4"/></svg>
+                  {%- when 'lock' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+                  {%- when 'return' -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v5h-5"/></svg>
+                  {%- else -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h14l-1 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1L5 7Z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+                {%- endcase -%}
+              {%- endif -%}
+            </span>
+            {%- if block.settings.title != blank -%}<p class="grimmie-gc__benefit-title">{{ block.settings.title }}</p>{%- endif -%}
+            {%- if block.settings.text != blank -%}<p class="grimmie-gc__benefit-text">{{ block.settings.text }}</p>{%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Customer support box {%- endcomment -%}
+    {%- if s.support_title != blank or s.support_text != blank -%}
+      <div class="grimmie-gc__support" style="--gc-support-bg: {{ s.support_bg }};">
+        <span class="grimmie-gc__support-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><path d="M20 16a2 2 0 0 1-2 2h-1.5"/><rect x="2.5" y="13.5" width="4" height="6.5" rx="1.6"/><rect x="17.5" y="13.5" width="4" height="6.5" rx="1.6"/></svg>
+        </span>
+        <div class="grimmie-gc__support-body">
+          {%- if s.support_title != blank -%}<p class="grimmie-gc__support-title">{{ s.support_title }}</p>{%- endif -%}
+          {%- if s.support_text != blank -%}<p class="grimmie-gc__support-text">{{ s.support_text }}</p>{%- endif -%}
+        </div>
+        {%- if s.support_button_label != blank and support_url != blank -%}
+          <a class="grimmie-gc__support-btn" href="{{ support_url }}">{{ s.support_button_label }}</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+<script src="{{ 'grimmie-gift-card.js' | asset_url }}" type="module" fetchpriority="low"></script>
+
+{% stylesheet %}
+  .grimmie-gc {
+    background: var(--gc-bg);
+    color: var(--gc-text);
+    padding: var(--gc-pt) var(--page-margin, 20px) var(--gc-pb);
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .grimmie-gc__inner {
+    width: 100%;
+    max-width: var(--gc-maxw);
+    margin-inline: auto;
+  }
+
+  /* Intro */
+  .grimmie-gc__intro {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+
+  .grimmie-gc__eyebrow {
+    margin: 0;
+    font-family: var(--font-body--family);
+    color: var(--gc-accent);
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .grimmie-gc__title {
+    margin: 0;
+    font-family: var(--font-heading--family) !important;
+    font-weight: var(--font-heading--weight);
+    color: var(--gc-text);
+    font-size: var(--gc-title-d);
+    line-height: 1.06;
+    letter-spacing: 0;
+    text-transform: none;
+    max-width: 14ch;
+  }
+
+  .grimmie-gc__intro-text {
+    margin: 0;
+    font-family: var(--font-body--family);
+    font-size: var(--gc-body);
+    line-height: 1.6;
+    color: var(--gc-text);
+  }
+
+  .grimmie-gc__sparkle {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    color: var(--gc-sparkle);
+    margin-top: 4px;
+  }
+
+  .grimmie-gc__sparkle svg { width: 100%; height: 100%; display: block; }
+
+  /* Panel */
+  .grimmie-gc__panel {
+    display: grid;
+    grid-template-columns: 46% 54%;
+    background: var(--gc-card-bg);
+    border: 1px solid var(--gc-border);
+    border-radius: var(--gc-radius);
+    overflow: hidden;
+  }
+
+  .grimmie-gc__media {
+    background: var(--gc-media-bg);
+    min-height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .grimmie-gc__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .grimmie-gc__placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    color: var(--gc-accent);
+    padding: 40px;
+  }
+
+  .grimmie-gc__placeholder svg { width: 120px; height: 90px; opacity: 0.8; }
+
+  .grimmie-gc__placeholder-word {
+    font-family: var(--font-heading--family);
+    font-size: 26px;
+    color: var(--gc-text);
+    opacity: 0.7;
+  }
+
+  .grimmie-gc__info {
+    padding: clamp(28px, 4vw, 52px);
+    border-left: 1px solid var(--gc-border);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .grimmie-gc__label {
+    margin: 0 0 10px;
+    font-family: var(--font-body--family);
+    color: var(--gc-accent);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .grimmie-gc__value {
+    margin: 0;
+    font-family: var(--font-heading--family) !important;
+    font-weight: var(--font-heading--weight);
+    color: var(--gc-text);
+    font-size: var(--gc-value);
+    line-height: 1;
+  }
+
+  .grimmie-gc__state {
+    margin: 12px 0 0;
+    font-family: var(--font-body--family);
+    font-size: 14px;
+    color: var(--gc-accent);
+  }
+
+  .grimmie-gc__divider {
+    border: 0;
+    border-top: 1px solid var(--gc-border);
+    margin: 26px 0;
+  }
+
+  .grimmie-gc__coderow {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .grimmie-gc__code {
+    flex: 1 1 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 0 18px;
+    background: var(--gc-media-bg);
+    border: 1px solid var(--gc-border);
+    border-radius: 6px;
+    font-family: var(--font-body--family);
+    font-size: 16px;
+    letter-spacing: 0.16em;
+    color: var(--gc-text);
+    word-break: break-word;
+    text-align: center;
+  }
+
+  .grimmie-gc__copybtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 52px;
+    padding: 0 22px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    background: var(--gc-btn-bg);
+    color: var(--gc-btn-text);
+    font-family: var(--font-body--family);
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .grimmie-gc__copybtn:hover { background: var(--gc-btn-hover); color: var(--gc-text); }
+  .grimmie-gc__copybtn:focus-visible { outline: 2px solid var(--gc-text); outline-offset: 3px; }
+  .grimmie-gc__copyicon { width: 18px; height: 18px; display: inline-flex; }
+  .grimmie-gc__copyicon svg { width: 100%; height: 100%; }
+
+  .grimmie-gc__expiry { display: flex; align-items: flex-start; gap: 14px; }
+  .grimmie-gc__expiry-icon { flex: 0 0 auto; width: 26px; height: 26px; color: var(--gc-accent); margin-top: 2px; }
+  .grimmie-gc__expiry-icon svg { width: 100%; height: 100%; }
+  .grimmie-gc__expiry-body { margin: 0; }
+  .grimmie-gc__expiry-body .grimmie-gc__label { margin-bottom: 4px; }
+  .grimmie-gc__expiry-date { margin: 0; font-family: var(--font-body--family); font-size: 15px; color: var(--gc-text); }
+  .grimmie-gc__expiry-note { margin: 6px 0 0; font-family: var(--font-body--family); font-size: 13px; line-height: 1.5; color: var(--gc-text); opacity: 0.72; }
+
+  .grimmie-gc__wallet { display: inline-block; margin-top: 22px; }
+  .grimmie-gc__qr { margin-top: 22px; }
+
+  /* Benefits */
+  .grimmie-gc__benefits {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(var(--gc-benefit-cols, 3), 1fr);
+    background: transparent;
+    border: 1px solid var(--gc-border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .grimmie-gc__benefit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+    padding: 18px 16px;
+  }
+
+  .grimmie-gc__benefit + .grimmie-gc__benefit { border-left: 1px solid var(--gc-border); }
+  .grimmie-gc__benefit-icon { width: 20px; height: 20px; color: var(--gc-accent); }
+  .grimmie-gc__benefit-icon svg, .grimmie-gc__benefit-icon img { width: 100%; height: 100%; object-fit: contain; }
+  .grimmie-gc__benefit-title { margin: 0; font-family: var(--font-heading--family); font-size: 15px; color: var(--gc-text); }
+  .grimmie-gc__benefit-text { margin: 0; font-family: var(--font-body--family); font-size: 12px; line-height: 1.5; color: var(--gc-text); opacity: 0.78; max-width: 28ch; }
+
+  /* Customer support box */
+  .grimmie-gc__support {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background: var(--gc-support-bg, #f7edeb);
+    border: 1px solid var(--gc-border);
+    border-radius: var(--gc-radius);
+    padding: 26px 36px;
+  }
+  .grimmie-gc__support-icon {
+    flex: 0 0 auto;
+    width: 62px; height: 62px;
+    border: 1px solid var(--gc-accent);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gc-text);
+  }
+  .grimmie-gc__support-icon svg { width: 26px; height: 26px; }
+  .grimmie-gc__support-body { flex: 1 1 auto; }
+  .grimmie-gc__support-title { margin: 0 0 4px; font-family: var(--font-body--family); font-weight: 600; font-size: 17px; color: var(--gc-text); }
+  .grimmie-gc__support-text { margin: 0; font-family: var(--font-body--family); font-size: 15px; line-height: 1.5; color: var(--gc-text); opacity: 0.82; }
+  .grimmie-gc__support-btn {
+    flex: 0 0 auto;
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 52px; padding: 0 30px;
+    background: var(--gc-btn-bg); color: var(--gc-btn-text);
+    border: 1px solid transparent; border-radius: 4px;
+    text-decoration: none;
+    font-family: var(--font-body--family);
+    font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .grimmie-gc__support-btn:hover { background: var(--gc-btn-hover); color: var(--gc-text); }
+  .grimmie-gc__support-btn:focus-visible { outline: 2px solid var(--gc-text); outline-offset: 3px; }
+
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0);
+    white-space: nowrap; border: 0;
+  }
+
+  /* Tablet / mobile */
+  @media screen and (max-width: 899px) {
+    .grimmie-gc__panel { grid-template-columns: 1fr; }
+    .grimmie-gc__media { min-height: 280px; }
+    .grimmie-gc__info { border-left: 0; border-top: 1px solid var(--gc-border); }
+  }
+
+  @media screen and (max-width: 749px) {
+    .grimmie-gc__title { font-size: var(--gc-title-m); }
+    .grimmie-gc__value { font-size: calc(var(--gc-value) * 0.84); }
+    .grimmie-gc__coderow { flex-direction: column; align-items: stretch; }
+    .grimmie-gc__code { flex: 0 0 auto; width: 100%; min-height: 48px; height: 48px; padding: 0 14px; white-space: nowrap; overflow-x: auto; letter-spacing: 0.08em; font-size: 14px; }
+    .grimmie-gc__copybtn { flex: 0 0 auto; width: 100%; min-height: 48px; }
+    .grimmie-gc__benefits { grid-template-columns: 1fr; }
+    .grimmie-gc__benefit + .grimmie-gc__benefit { border-left: 0; border-top: 1px solid var(--gc-border); }
+    .grimmie-gc__support { flex-direction: column; text-align: center; align-items: center; gap: 16px; padding: 26px 22px; }
+    .grimmie-gc__support-btn { width: 100%; }
+  }
+
+  /* Print: keep the essentials, hide site chrome and decoration */
+  @media print {
+    #header-group, footer, .grimmie-gc__sparkle, .grimmie-gc__copy, .grimmie-gc__wallet, .grimmie-gc__support { display: none !important; }
+    .grimmie-gc { padding: 0; background: #fff; }
+    .grimmie-gc__panel { border-color: #ccc; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Buono regalo",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Contenuto principale" },
+    { "type": "text", "id": "eyebrow", "label": "Etichetta superiore", "default": "BUONO REGALO" },
+    { "type": "text", "id": "title", "label": "Titolo", "default": "Un pensiero che resta nel tempo." },
+    { "type": "text", "id": "intro", "label": "Testo introduttivo", "default": "Questo buono regalo è pronto per essere usato." },
+    { "type": "checkbox", "id": "show_sparkle", "label": "Mostra decorazione", "default": true },
+    { "type": "color", "id": "sparkle_color", "label": "Colore decorazione", "default": "#EACBC8" },
+
+    { "type": "header", "content": "Immagine buono regalo" },
+    { "type": "image_picker", "id": "image", "label": "Immagine buono regalo" },
+    { "type": "text", "id": "image_alt", "label": "Testo alternativo immagine", "default": "Buono regalo Grimmie" },
+
+    { "type": "header", "content": "Etichette e testi" },
+    { "type": "text", "id": "value_label", "label": "Etichetta valore", "default": "VALORE" },
+    { "type": "text", "id": "code_label", "label": "Etichetta codice", "default": "CODICE" },
+    { "type": "text", "id": "copy_label", "label": "Testo pulsante copia", "default": "Copia" },
+    { "type": "text", "id": "copied_label", "label": "Testo dopo la copia", "default": "Copiato" },
+    { "type": "text", "id": "copy_aria", "label": "Etichetta accessibile pulsante copia", "default": "Copia il codice del buono regalo" },
+    { "type": "text", "id": "expiry_label", "label": "Etichetta scadenza", "default": "SCADENZA" },
+    { "type": "text", "id": "expiry_note", "label": "Testo sotto la scadenza", "default": "Dopo questa data il buono non sarà più utilizzabile." },
+    { "type": "text", "id": "no_expiry_text", "label": "Testo senza scadenza", "default": "Nessuna scadenza" },
+    { "type": "text", "id": "expired_text", "label": "Testo buono scaduto", "default": "Questo buono regalo è scaduto." },
+    { "type": "text", "id": "disabled_text", "label": "Testo buono non attivo", "default": "Questo buono regalo non è più attivo." },
+
+    { "type": "header", "content": "Funzioni Shopify" },
+    { "type": "checkbox", "id": "show_apple_wallet", "label": "Mostra pulsante Apple Wallet", "default": false },
+    { "type": "checkbox", "id": "show_qr", "label": "Mostra codice QR", "default": false },
+
+    { "type": "header", "content": "Assistenza clienti" },
+    { "type": "text", "id": "support_title", "label": "Titolo assistenza", "default": "Hai ancora domande sul tuo ordine?" },
+    { "type": "text", "id": "support_text", "label": "Testo assistenza", "default": "Il nostro customer care è qui per aiutarti con tempi, consegna e piccoli imprevisti." },
+    { "type": "text", "id": "support_button_label", "label": "Testo pulsante assistenza", "default": "CONTATTA IL SUPPORTO" },
+    { "type": "url", "id": "support_link", "label": "Link assistenza", "info": "Vuoto = pagina Contatti del sito." },
+    { "type": "color", "id": "support_bg", "label": "Colore sfondo assistenza", "default": "#F7EDEB" },
+
+    { "type": "header", "content": "Colori" },
+    { "type": "color", "id": "bg_color", "label": "Colore sfondo", "default": "#F7F1EE" },
+    { "type": "color", "id": "card_bg", "label": "Colore pannello", "default": "#FFFFFF" },
+    { "type": "color", "id": "media_bg", "label": "Colore sfondo immagine", "default": "#F1EDE6" },
+    { "type": "color", "id": "text_color", "label": "Colore testo", "default": "#6E5F59" },
+    { "type": "color", "id": "accent_color", "label": "Colore principale", "default": "#DFAFB3" },
+    { "type": "color", "id": "border_color", "label": "Colore bordi", "default": "#DDD2CA" },
+    { "type": "color", "id": "button_bg", "label": "Colore sfondo pulsante", "default": "#DFAFB3" },
+    { "type": "color", "id": "button_text_color", "label": "Colore testo pulsante", "default": "#F7F1EE" },
+    { "type": "color", "id": "button_hover_bg", "label": "Colore pulsante (hover)", "default": "#EACBC8" },
+
+    { "type": "header", "content": "Layout e dimensioni" },
+    { "type": "range", "id": "content_max_width", "label": "Larghezza contenuto", "min": 800, "max": 1300, "step": 20, "unit": "px", "default": 1120 },
+    { "type": "range", "id": "panel_radius", "label": "Raggio angoli pannello", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_top", "label": "Spaziatura superiore", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Spaziatura inferiore", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "title_size_desktop", "label": "Dimensione titolo (desktop)", "min": 28, "max": 72, "step": 1, "unit": "px", "default": 38 },
+    { "type": "range", "id": "title_size_mobile", "label": "Dimensione titolo (mobile)", "min": 20, "max": 48, "step": 1, "unit": "px", "default": 27 },
+    { "type": "range", "id": "value_size", "label": "Dimensione valore", "min": 32, "max": 64, "step": 1, "unit": "px", "default": 48 },
+    { "type": "range", "id": "body_size", "label": "Dimensione testo", "min": 13, "max": 20, "step": 1, "unit": "px", "default": 16 }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Vantaggio",
+      "limit": 4,
+      "settings": [
+        { "type": "checkbox", "id": "show", "label": "Mostra", "default": true },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icona",
+          "options": [
+            { "value": "bag", "label": "Shopping bag" },
+            { "value": "heart", "label": "Cuore" },
+            { "value": "sparkle", "label": "Scintilla" },
+            { "value": "gift", "label": "Regalo" },
+            { "value": "leaf", "label": "Foglia" },
+            { "value": "lock", "label": "Lucchetto" },
+            { "value": "return", "label": "Reso" }
+          ],
+          "default": "bag"
+        },
+        { "type": "image_picker", "id": "custom_icon", "label": "Icona personalizzata (opzionale)" },
+        { "type": "text", "id": "icon_alt", "label": "Testo alternativo icona" },
+        { "type": "text", "id": "title", "label": "Titolo", "default": "Vantaggio" },
+        { "type": "textarea", "id": "text", "label": "Descrizione" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "default": {
+    "blocks": [
+      { "type": "benefit", "settings": { "icon": "bag", "title": "Facile da usare", "text": "Inserisci il codice in fase di checkout nell’apposito campo." } },
+      { "type": "benefit", "settings": { "icon": "heart", "title": "Per chi ami", "text": "Regala libertà di scelta con un pensiero che dura nel tempo." } },
+      { "type": "benefit", "settings": { "icon": "sparkle", "title": "Valido online", "text": "Utilizzabile su tutti i prodotti del sito Grimmie." } }
+    ]
+  }
+}
+{% endschema %}

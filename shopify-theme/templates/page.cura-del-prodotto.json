@@ -1,0 +1,85 @@
+{
+  "sections": {
+    "hero": {
+      "type": "grimmie-care-hero",
+      "settings": {
+        "eyebrow": "CURA DEL PRODOTTO",
+        "hero_heading": "Come prenderti\ncura di Alma",
+        "hero_text": "Alma si prende cura di te custodendo i tuoi prodotti di bellezza.\nQui ti insegniamo a prenderti cura di Alma.",
+        "hero_image_alt": "Grimmie Alma pouch",
+        "background_color": "#F7F1EE",
+        "secondary_background_color": "#F1EBE6",
+        "heading_color": "#6E5F59",
+        "text_color": "#6E5F59",
+        "accent_color": "#C99696",
+        "padding_top": 24,
+        "padding_bottom": 32,
+        "aria_label": "Cura del prodotto"
+      }
+    },
+    "tips": {
+      "type": "grimmie-care-tips",
+      "blocks": {
+        "t1": { "type": "tip_card", "settings": { "title": "1. LASCIA RAFFREDDARE", "text": "Lascia raffreddare completamente phon, piastre e hair tools prima di inserirli nella pouch.", "fallback_icon": "hairdryer" } },
+        "t2": { "type": "tip_card", "settings": { "title": "2. EVITA L'ACQUA", "text": "Evita acqua e ambienti troppo umidi come sauna, bagno turco o spa.", "fallback_icon": "water" } },
+        "t3": { "type": "tip_card", "settings": { "title": "3. LONTANA DAL SOLE", "text": "Non lasciare Alma sotto il sole diretto per troppo tempo.", "fallback_icon": "sun" } },
+        "t4": { "type": "tip_card", "settings": { "title": "4. NON SOVRACCARICARE", "text": "Evita di sovraccaricarla per preservare la sua forma e struttura.", "fallback_icon": "circle" } },
+        "t5": { "type": "tip_card", "settings": { "title": "5. ASCIUTTA E PULITA", "text": "Conservala sempre asciutta e pulita, lontana da residui e impurita.", "fallback_icon": "cloth" } },
+        "t6": { "type": "tip_card", "settings": { "title": "6. MANEGGIA CON CURA", "text": "Usa attenzione e delicatezza nell'uso quotidiano per mantenerla perfetta nel tempo.", "fallback_icon": "pouch" } }
+      },
+      "block_order": ["t1", "t2", "t3", "t4", "t5", "t6"],
+      "settings": {
+        "section_title": "I nostri consigli di cura",
+        "background_color": "#F7F1EE",
+        "card_background_color": "#F7EDEB",
+        "heading_color": "#6E5F59",
+        "text_color": "#6E5F59",
+        "accent_color": "#EACBC8",
+        "border_color": "#DDD2CA",
+        "padding_top": 32,
+        "padding_bottom": 48
+      }
+    },
+    "cleaning": {
+      "type": "grimmie-care-cleaning",
+      "blocks": {
+        "c1": { "type": "cleaning_card", "settings": { "media_type": "image", "title": "Interno", "text_1": "Pulisci le eventuali tracce di make-up con un dischetto di cotone imbevuto di acqua micellare senza oli.", "text_2": "Lascia asciugare completamente prima di reinserire i tuoi accessori.", "fallback_icon": "sparkle" } },
+        "c2": { "type": "cleaning_card", "settings": { "media_type": "image", "title": "Esterno", "text_1": "Pulisci la superficie esterna con un panno in microfibra umido e delicato.", "text_2": "Lascia asciugare all'aria prima di riporre Alma nella tua routine bag.", "fallback_icon": "sparkle" } }
+      },
+      "block_order": ["c1", "c2"],
+      "settings": {
+        "section_title": "Come pulirla",
+        "background_color": "#F7F1EE",
+        "card_background_color": "#F7EDEB",
+        "heading_color": "#6E5F59",
+        "text_color": "#6E5F59",
+        "accent_color": "#EACBC8",
+        "border_color": "#DDD2CA",
+        "padding_top": 32,
+        "padding_bottom": 48
+      }
+    },
+    "materials": {
+      "type": "grimmie-care-materials",
+      "settings": {
+        "banner_title": "MATERIALI",
+        "banner_text": "PU leather esterno, nylon interno.",
+        "banner_fallback_icon": "leaf",
+        "motto_text": "Piu ti prendi cura di Alma, piu lei si prendera cura di te.",
+        "motto_decoration": "sparkle",
+        "motto_heart": true,
+        "background_color": "#F7F1EE",
+        "banner_background_color": "#F7EDEB",
+        "banner_icon_background_color": "#F1EBE6",
+        "heading_color": "#6E5F59",
+        "text_color": "#6E5F59",
+        "accent_color": "#C99696",
+        "border_color": "#DDD2CA",
+        "padding_top": 24,
+        "padding_bottom": 80,
+        "aria_label": "Materiali e cura"
+      }
+    }
+  },
+  "order": ["hero", "tips", "cleaning", "materials"]
+}

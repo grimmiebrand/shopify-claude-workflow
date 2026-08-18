@@ -1,0 +1,40 @@
+{
+  "sections": {
+    "main": {
+      "type": "grimmie-order-tracking-page",
+      "settings": {
+        "show_hero": true,
+        "hero_image_alt": "Grimmie Alma pouches",
+        "hero_title": "Traccia il tuo ordine",
+        "hero_subtitle": "Segui il percorso del tuo pacco, fino a destinazione.",
+        "embed_url": "/apps/parcelpanel",
+        "cta_eyebrow": "Tracciamento",
+        "cta_title": "Dove si trova il mio ordine?",
+        "cta_text": "Clicca qui sotto per aprire il tracker e seguire il percorso del tuo pacco, fino a destinazione.",
+        "cta_button_text": "Traccia spedizione",
+        "cta_meta": "Servirà il numero ordine e l'email utilizzati al momento dell'acquisto.",
+        "use_iframe": false,
+        "iframe_min_height": 1100,
+        "show_help_card": true,
+        "help_title": "Hai bisogno di aiuto?",
+        "help_text": "Il nostro servizio clienti è disponibile dal lunedì al venerdì, dalle 9:00 alle 18:00.",
+        "help_cta_text": "Contattaci",
+        "help_cta_link": "mailto:info@grimmie.co",
+        "background_color": "#F7F1EE",
+        "hero_bg_color": "#F1EBE6",
+        "blush_color": "#EACBC8",
+        "blush_light_color": "#F7EDEB",
+        "heading_color": "#6E5F59",
+        "text_color": "#6E5F59",
+        "border_color": "#DDD2CA",
+        "accent_color": "#C99696",
+        "button_background_color": "#EACBC8",
+        "button_text_color": "#6E5F59",
+        "button_hover_background_color": "#DFAFB3"
+      },
+      "blocks": {},
+      "block_order": []
+    }
+  },
+  "order": ["main"]
+}

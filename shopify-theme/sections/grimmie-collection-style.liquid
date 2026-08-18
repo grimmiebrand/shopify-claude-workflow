@@ -1,0 +1,101 @@
+{% comment %}
+  Grimmie - collection-only visual overrides.
+  Renders no visible markup; only scoped styles that load on the collection
+  template. Colours are editable from the Theme Editor (this section).
+{% endcomment %}
+
+{%- liquid
+  assign badge_bg = section.settings.badge_bg | default: '#c98c85'
+  assign badge_text = section.settings.badge_text | default: '#fbf6f3'
+  assign sale_color = section.settings.sale_color | default: '#c98c85'
+  assign dropdown_bg = section.settings.dropdown_bg | default: '#f1ebe6'
+  assign addbtn_bg = section.settings.addbtn_bg | default: '#eacbc8'
+  assign addbtn_text = section.settings.addbtn_text | default: '#6e5f59'
+-%}
+
+<style>
+  /* Sale badge -> soft blush/rose (stays applied after AJAX filter re-render) */
+  .product-badges__badge {
+    background-color: {{ badge_bg }} !important;
+    color: {{ badge_text }} !important;
+    border-color: transparent !important;
+  }
+  /* Sale price -> same rose as the sale badge; compare-at price kept muted/struck */
+  .price-item--sale,
+  .price__sale .price {
+    color: {{ sale_color }} !important;
+  }
+  .compare-at-price {
+    color: var(--color-foreground, #6e5f59);
+    opacity: 0.5;
+  }
+
+  /* Quick-add "AGGIUNGI" button -> light pink */
+  .quick-add .quick-add__button,
+  .quick-add__button.add-to-cart-button {
+    background-color: {{ addbtn_bg }};
+    color: {{ addbtn_text }};
+    border-color: {{ addbtn_bg }};
+  }
+
+  /* Sort dropdown -> footer beige */
+  .sorting-filter__options,
+  .sorting-filter__options-inner {
+    background-color: {{ dropdown_bg }};
+  }
+
+  /* Remove the "Best seller" (best-selling) option from the sort menu */
+  label[for^="sort-option-best-selling-"],
+  label:has(input[value="best-selling"]) {
+    display: none !important;
+  }
+  .sorting-filter__select option[value="best-selling"] {
+    display: none !important;
+  }
+
+  @media screen and (max-width: 749px) {
+    /* Center the collection title + subtitle on mobile.
+       Scoped to #MainContent so the footer (also a .section-wrapper) is NOT affected. */
+    #MainContent .section-wrapper [class*="layout-panel-flex"] {
+      align-items: center !important;
+    }
+    #MainContent .section-wrapper .text-block {
+      align-items: center !important;
+    }
+    #MainContent .section-wrapper .text-block > * {
+      text-align: center !important;
+      margin-inline: auto !important;
+    }
+
+    /* Title ("La collezione Alma") 25% smaller on mobile: 36px -> 27px */
+    #MainContent .section-wrapper .custom-typography,
+    #MainContent .section-wrapper .custom-typography > * {
+      font-size: 1.6875rem !important;
+    }
+
+    /* Show the active add-to-cart (quick add) button on mobile. Only the button
+       matching the product's mode (add vs choose) so we don't reveal both. */
+    .quick-add[data-quick-add-button='add'] .quick-add__button--add,
+    .quick-add[data-quick-add-button='choose'] .quick-add__button--choose {
+      display: flex !important;
+      opacity: 1 !important;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Collection style",
+  "tag": "section",
+  "settings": [
+    { "type": "paragraph", "content": "Stili applicati solo alla pagina collezione." },
+    { "type": "color", "id": "badge_bg", "label": "Sfondo targhetta offerta", "default": "#c98c85" },
+    { "type": "color", "id": "badge_text", "label": "Testo targhetta offerta", "default": "#fbf6f3" },
+    { "type": "color", "id": "sale_color", "label": "Colore prezzo scontato", "default": "#c98c85" },
+    { "type": "color", "id": "dropdown_bg", "label": "Sfondo menu a tendina (ordina)", "default": "#f1ebe6" },
+    { "type": "color", "id": "addbtn_bg", "label": "Sfondo pulsante Aggiungi", "default": "#eacbc8" },
+    { "type": "color", "id": "addbtn_text", "label": "Testo pulsante Aggiungi", "default": "#6e5f59" }
+  ],
+  "enabled_on": { "templates": ["collection"] }
+}
+{% endschema %}

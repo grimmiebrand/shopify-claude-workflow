@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "grimmie-404-page",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

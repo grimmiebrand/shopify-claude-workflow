@@ -1,0 +1,233 @@
+{%- comment -%}
+  Grimmie tracker skin.
+  Detects when the visitor is on the ParcelPanel hosted page
+  (/apps/parcelpanel) and injects scoped CSS so the headings and form
+  controls there match the Grimmie scale instead of inheriting Tinker's
+  huge default heading sizes.
+
+  This section has no visible output. Add it once to the header
+  section group (already done via header-group.json) so it loads on
+  every page.
+{%- endcomment -%}
+
+{%- liquid
+  assign text_color  = section.settings.text_color  | default: '#6E5F59'
+  assign accent      = section.settings.accent      | default: '#C99696'
+  assign btn_bg      = section.settings.btn_bg      | default: '#EACBC8'
+  assign btn_text    = section.settings.btn_text    | default: '#6E5F59'
+  assign btn_hover   = section.settings.btn_hover   | default: '#DFAFB3'
+  assign border      = section.settings.border      | default: '#DDD2CA'
+  assign h1_max      = section.settings.h1_max      | default: 28
+  assign h_max       = section.settings.h_max       | default: 18
+  assign body_size   = section.settings.body_size   | default: 14
+  assign masked_path = section.settings.masked_path | default: '/pages/traccia-il-tuo-ordine'
+  assign mask_url    = section.settings.mask_url
+  assign pp_path     = section.settings.pp_path     | default: '/tools/tracking'
+-%}
+
+<script>
+(function(){
+  var TRACK_PATH = {{ pp_path | json }};
+  function mark(){
+    var p = window.location.pathname || '';
+    if (TRACK_PATH && p.indexOf(TRACK_PATH) === 0) {
+      document.documentElement.classList.add('grimmie-pp-page');
+      if (document.body) document.body.classList.add('grimmie-pp-page');
+
+      {%- if mask_url -%}
+      try {
+        if (window.history && window.history.replaceState) {
+          var pretty = {{ masked_path | json }};
+          window.history.replaceState(null, '', pretty + window.location.search + window.location.hash);
+        }
+      } catch(e) {}
+      {%- endif -%}
+    }
+  }
+  mark();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mark, { once: true });
+  }
+})();
+</script>
+
+<style data-grimmie-tracker-skin>
+  /* Scoped to /apps/parcelpanel only */
+  html.grimmie-pp-page h1,
+  body.grimmie-pp-page h1 {
+    font-family: var(--font-heading--family) !important;
+    font-style: var(--font-heading--style) !important;
+    font-weight: var(--font-heading--weight) !important;
+    font-size: clamp(22px, 2vw, {{ h1_max }}px) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.01em !important;
+    text-transform: none !important;
+    margin: 0.4em 0 !important;
+    color: {{ text_color }} !important;
+  }
+  html.grimmie-pp-page h2,
+  html.grimmie-pp-page h3,
+  html.grimmie-pp-page h4,
+  html.grimmie-pp-page h5,
+  html.grimmie-pp-page h6,
+  body.grimmie-pp-page h2,
+  body.grimmie-pp-page h3,
+  body.grimmie-pp-page h4,
+  body.grimmie-pp-page h5,
+  body.grimmie-pp-page h6 {
+    font-family: var(--font-heading--family) !important;
+    font-style: var(--font-heading--style) !important;
+    font-weight: 500 !important;
+    font-size: clamp(15px, 1.4vw, {{ h_max }}px) !important;
+    line-height: 1.25 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    margin: 0.5em 0 !important;
+    color: {{ text_color }} !important;
+  }
+
+  /* Aggressive fallback: also style ParcelPanel containers by their class names. */
+  [class*='ParcelPanel'] h1,
+  [class*='parcelpanel'] h1,
+  [id*='parcelpanel'] h1,
+  [class*='pp-tracking'] h1,
+  [class*='pp-app'] h1 {
+    font-family: var(--font-heading--family) !important;
+    font-style: var(--font-heading--style) !important;
+    font-weight: var(--font-heading--weight) !important;
+    font-size: clamp(22px, 2vw, {{ h1_max }}px) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.01em !important;
+    text-transform: none !important;
+    color: {{ text_color }} !important;
+  }
+  [class*='ParcelPanel'] h2,
+  [class*='ParcelPanel'] h3,
+  [class*='ParcelPanel'] h4,
+  [class*='parcelpanel'] h2,
+  [class*='parcelpanel'] h3,
+  [class*='parcelpanel'] h4,
+  [id*='parcelpanel'] h2,
+  [id*='parcelpanel'] h3,
+  [class*='pp-tracking'] h2,
+  [class*='pp-tracking'] h3,
+  [class*='pp-app'] h2,
+  [class*='pp-app'] h3 {
+    font-family: var(--font-heading--family) !important;
+    font-weight: 500 !important;
+    font-size: clamp(15px, 1.4vw, {{ h_max }}px) !important;
+    line-height: 1.25 !important;
+    text-transform: none !important;
+    color: {{ text_color }} !important;
+  }
+
+  html.grimmie-pp-page p,
+  html.grimmie-pp-page span,
+  html.grimmie-pp-page label,
+  html.grimmie-pp-page input,
+  html.grimmie-pp-page select,
+  html.grimmie-pp-page textarea,
+  html.grimmie-pp-page button,
+  html.grimmie-pp-page a,
+  body.grimmie-pp-page p,
+  body.grimmie-pp-page span,
+  body.grimmie-pp-page label,
+  body.grimmie-pp-page input,
+  body.grimmie-pp-page select,
+  body.grimmie-pp-page textarea,
+  body.grimmie-pp-page button,
+  body.grimmie-pp-page a {
+    font-size: {{ body_size }}px !important;
+    line-height: 1.5 !important;
+    letter-spacing: 0.02em !important;
+    font-family: var(--font-body--family) !important;
+  }
+
+  /* Submit / primary buttons inside the ParcelPanel UI */
+  html.grimmie-pp-page button[type='submit'],
+  html.grimmie-pp-page input[type='submit'],
+  html.grimmie-pp-page .pp-button,
+  body.grimmie-pp-page button[type='submit'],
+  body.grimmie-pp-page input[type='submit'],
+  body.grimmie-pp-page .pp-button {
+    background-color: {{ btn_bg }} !important;
+    color: {{ btn_text }} !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 14px 24px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.18em !important;
+    font-weight: 500 !important;
+    min-height: 48px !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s ease !important;
+  }
+  html.grimmie-pp-page button[type='submit']:hover,
+  html.grimmie-pp-page input[type='submit']:hover,
+  html.grimmie-pp-page .pp-button:hover,
+  body.grimmie-pp-page button[type='submit']:hover,
+  body.grimmie-pp-page input[type='submit']:hover,
+  body.grimmie-pp-page .pp-button:hover {
+    background-color: {{ btn_hover }} !important;
+  }
+
+  /* Inputs */
+  html.grimmie-pp-page input[type='text'],
+  html.grimmie-pp-page input[type='email'],
+  html.grimmie-pp-page input[type='search'],
+  body.grimmie-pp-page input[type='text'],
+  body.grimmie-pp-page input[type='email'],
+  body.grimmie-pp-page input[type='search'] {
+    border: 1px solid {{ border }} !important;
+    border-radius: 8px !important;
+    padding: 12px 14px !important;
+    min-height: 46px !important;
+    color: {{ text_color }} !important;
+  }
+
+  /* Mobile: extra small clamp for headings to avoid wrapping nightmares */
+  @media (max-width: 480px) {
+    html.grimmie-pp-page h1,
+    body.grimmie-pp-page h1,
+    [class*='ParcelPanel'] h1,
+    [class*='parcelpanel'] h1 { font-size: 22px !important; }
+    html.grimmie-pp-page h2,
+    html.grimmie-pp-page h3,
+    body.grimmie-pp-page h2,
+    body.grimmie-pp-page h3,
+    [class*='ParcelPanel'] h2,
+    [class*='ParcelPanel'] h3 { font-size: 16px !important; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Grimmie tracker skin",
+  "settings": [
+    { "type": "paragraph", "content": "Forces sane heading and form sizes on the hosted ParcelPanel tracking page. Add once to the header section group; no visible output." },
+
+    { "type": "header", "content": "Tracking page URL" },
+    { "type": "text", "id": "pp_path", "label": "ParcelPanel proxy path", "default": "/tools/tracking", "info": "Where the ParcelPanel tracking page lives (set this in ParcelPanel admin + Shopify Apps proxy settings). The skin script applies the styling when the customer is on this path." },
+
+    { "type": "header", "content": "URL masking" },
+    { "type": "checkbox", "id": "mask_url",    "label": "Hide /apps/parcelpanel in the URL bar", "info": "Replaces the URL with the branded path below using history.replaceState. Reloading the page lands the customer back on the branded Grimmie page (with the CTA).", "default": true },
+    { "type": "text",     "id": "masked_path", "label": "Branded path",                          "default": "/pages/traccia-il-tuo-ordine" },
+
+    { "type": "header", "content": "Sizes" },
+    { "type": "range", "id": "h1_max",    "label": "H1 max size",   "min": 18, "max": 48, "step": 1, "unit": "px", "default": 28 },
+    { "type": "range", "id": "h_max",     "label": "H2–H6 max size","min": 14, "max": 28, "step": 1, "unit": "px", "default": 18 },
+    { "type": "range", "id": "body_size", "label": "Body text size","min": 12, "max": 18, "step": 1, "unit": "px", "default": 14 },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "text_color", "label": "Body / heading text",   "default": "#6E5F59" },
+    { "type": "color", "id": "border",     "label": "Input borders",         "default": "#DDD2CA" },
+    { "type": "color", "id": "accent",     "label": "Accent",                "default": "#C99696" },
+    { "type": "color", "id": "btn_bg",     "label": "Primary button bg",     "default": "#EACBC8" },
+    { "type": "color", "id": "btn_text",   "label": "Primary button text",   "default": "#6E5F59" },
+    { "type": "color", "id": "btn_hover",  "label": "Primary button hover",  "default": "#DFAFB3" }
+  ],
+  "presets": [
+    { "name": "Grimmie tracker skin", "category": "Grimmie" }
+  ]
+}
+{% endschema %}

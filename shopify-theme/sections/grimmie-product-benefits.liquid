@@ -1,0 +1,192 @@
+{%- liquid
+  assign sid = section.id
+  assign s = section.settings
+-%}
+
+<style>
+  .gpb-{{ sid }} {
+    --gpb-bg: {{ s.background_color }};
+    --gpb-heading: {{ s.heading_color }};
+    --gpb-text: {{ s.text_color }};
+    --gpb-accent: {{ s.accent_color }};
+    --gpb-border: {{ s.border_color }};
+    background-color: var(--gpb-bg);
+    color: var(--gpb-text);
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font-body--family);
+    padding: {{ s.padding_top }}px 0 {{ s.padding_bottom }}px;
+  }
+  .gpb-{{ sid }} * { box-sizing: border-box; }
+  .gpb-{{ sid }}__inner { max-width: 1180px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 56px); }
+  .gpb-{{ sid }}__title {
+    text-align: center;
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    color: var(--gpb-heading);
+    font-size: clamp(22px, 2.6vw, 32px);
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    margin: 0 0 clamp(18px, 2.4vw, 30px);
+  }
+  .gpb-{{ sid }}__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .gpb-{{ sid }}__item {
+    text-align: center;
+    padding: 4px clamp(14px, 1.6vw, 24px);
+    border-left: 1px solid var(--gpb-border);
+  }
+  .gpb-{{ sid }}__item:first-child { border-left: 0; }
+  .gpb-{{ sid }}__icon {
+    width: 26px;
+    height: 26px;
+    margin: 0 auto 12px;
+    color: var(--gpb-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .gpb-{{ sid }}__icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .gpb-{{ sid }}__icon img { width: 100%; height: 100%; object-fit: contain; }
+  .gpb-{{ sid }}__item-title {
+    font-family: var(--font-body--family);
+    font-weight: 500;
+    color: var(--gpb-heading);
+    font-size: clamp(11px, 0.95vw, 13px);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1.3;
+    margin: 0 0 8px;
+  }
+  .gpb-{{ sid }}__item-text {
+    font-size: clamp(13px, 0.95vw, 14.5px);
+    line-height: 1.55;
+    color: var(--gpb-text);
+    margin: 0;
+    max-width: 24ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (max-width: 749px) {
+    .gpb-{{ sid }}__grid { grid-template-columns: 1fr 1fr; gap: clamp(28px, 6vw, 36px) 0; }
+    .gpb-{{ sid }}__item { padding: 0 16px; border-left: 1px solid var(--gpb-border); }
+    .gpb-{{ sid }}__item:nth-child(odd) { border-left: 0; }
+  }
+</style>
+
+<section class="gpb-{{ sid }}" aria-label="{{ s.title | default: 'Benefici' | escape }}">
+  <div class="gpb-{{ sid }}__inner">
+    {%- if s.title != blank -%}<h2 class="gpb-{{ sid }}__title">{{ s.title | escape }}</h2>{%- endif -%}
+    <div class="gpb-{{ sid }}__grid">
+      {%- for block in section.blocks -%}
+        <div class="gpb-{{ sid }}__item" {{ block.shopify_attributes }}>
+          <span class="gpb-{{ sid }}__icon"{% if block.settings.icon_image == blank %} aria-hidden="true"{% endif %}>
+            {%- if block.settings.icon_image != blank -%}
+              {{ block.settings.icon_image | image_url: width: 120 | image_tag: alt: block.settings.icon_alt, loading: 'lazy', widths: '44,88,120' }}
+            {%- else -%}
+            {%- case block.settings.icon -%}
+              {%- when 'order' -%}
+                <svg viewBox="0 0 24 24"><rect x="3.8" y="5" width="16.4" height="14" rx="2.4"/><path d="M3.8 11.4h16.4"/><path d="M12 5v6.4"/><path d="M9 11.4v7.6"/><path d="M15 11.4v7.6"/></svg>
+              {%- when 'pouch' -%}
+                <svg viewBox="0 0 24 24"><path d="M5 9.4C7.5 7 16.5 7 19 9.4l-.8 7A2.4 2.4 0 0 1 15.8 18.5H8.2A2.4 2.4 0 0 1 5.8 16.4z"/><path d="M5 9.4c3 1.6 11 1.6 14 0"/><path d="M18.9 9.5 20.1 8.3"/></svg>
+              {%- when 'bag' -%}
+                <svg viewBox="0 0 24 24"><path d="M5.5 9h13l-1 9.4A1.9 1.9 0 0 1 15.6 20H8.4A1.9 1.9 0 0 1 6.5 18.4z"/><path d="M9 9V7.4a3 3 0 0 1 6 0V9"/></svg>
+              {%- when 'droplet' -%}
+                <svg viewBox="0 0 24 24"><path d="M12 3.6c3.1 3.8 4.9 6.6 4.9 9.2a4.9 4.9 0 0 1-9.8 0c0-2.6 1.8-5.4 4.9-9.2z"/><path d="M9.5 12.9a2.6 2.6 0 0 0 1.8 2.4"/></svg>
+              {%- when 'suitcase' -%}
+                <svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="2.2"/><path d="M9 8V6.5A1.5 1.5 0 0 1 10.5 5h3A1.5 1.5 0 0 1 15 6.5V8"/><path d="M9.6 8.4v10.2"/><path d="M14.4 8.4v10.2"/></svg>
+              {%- when 'airplane' -%}
+                <svg viewBox="0 0 24 24"><path d="M20.4 3.6 3 10.2a.4.4 0 0 0 0 .75l6.1 2.2 2.2 6.1a.4.4 0 0 0 .75 0z"/><path d="M20.4 3.6 9.1 13.15"/></svg>
+              {%- when 'sparkle' -%}
+                <svg viewBox="0 0 24 24"><path d="M12 4c.6 5.8 2.2 7.4 8 8-5.8.6-7.4 2.2-8 8-.6-5.8-2.2-7.4-8-8 5.8-.6 7.4-2.2 8-8z"/><path d="M18.5 4.6c.2 1.3.6 1.7 1.9 1.9-1.3.2-1.7.6-1.9 1.9-.2-1.3-.6-1.7-1.9-1.9 1.3-.2 1.7-.6 1.9-1.9z"/></svg>
+              {%- when 'flower' -%}
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.3"/><circle cx="12" cy="6.6" r="2.3"/><circle cx="16.7" cy="9.3" r="2.3"/><circle cx="16.7" cy="14.7" r="2.3"/><circle cx="12" cy="17.4" r="2.3"/><circle cx="7.3" cy="14.7" r="2.3"/><circle cx="7.3" cy="9.3" r="2.3"/></svg>
+              {%- when 'bottle' -%}
+                <svg viewBox="0 0 24 24"><path d="M10 4h4"/><path d="M10.5 4v1.8"/><path d="M13.5 4v1.8"/><path d="M9.6 5.8h4.8v1.4c0 .6.3 1.1.8 1.5A3.8 3.8 0 0 1 16.6 13v5.2A1.6 1.6 0 0 1 15 19.8H9A1.6 1.6 0 0 1 7.4 18.2V13a3.8 3.8 0 0 1 1.4-3.3c.5-.4.8-.9.8-1.5z"/></svg>
+              {%- when 'mirror' -%}
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4.8"/><path d="M12 13.3V20"/><path d="M9.4 20h5.2"/></svg>
+              {%- when 'leaf' -%}
+                <svg viewBox="0 0 24 24"><path d="M11 20C5.5 20 3.5 15.2 3.5 10.5 9.2 10.5 11 5.8 20.5 4.8c0 8-3.8 15.2-9.5 15.2z"/><path d="M7 16.5C12 11.5 14 9.6 18 7.8"/></svg>
+              {%- when 'heart' -%}
+                <svg viewBox="0 0 24 24"><path d="M12 19C12 19 5.8 14.6 5.8 10A3.1 3.1 0 0 1 12 8.5 3.1 3.1 0 0 1 18.2 10C18.2 14.6 12 19 12 19z"/></svg>
+              {%- when 'shield' -%}
+                <svg viewBox="0 0 24 24"><path d="M12 3.5l7.5 2.8v5.6c0 4.7-3.3 7.5-7.5 8.4-4.2-.9-7.5-3.7-7.5-8.4V6.3z"/><path d="m9 12 2 2 4-4"/></svg>
+              {%- else -%}
+                <svg viewBox="0 0 24 24"><path d="M12 4c.6 5.8 2.2 7.4 8 8-5.8.6-7.4 2.2-8 8-.6-5.8-2.2-7.4-8-8 5.8-.6 7.4-2.2 8-8z"/></svg>
+            {%- endcase -%}
+            {%- endif -%}
+          </span>
+          {%- if block.settings.title != blank -%}<h3 class="gpb-{{ sid }}__item-title">{{ block.settings.title | escape }}</h3>{%- endif -%}
+          {%- if block.settings.text != blank -%}<p class="gpb-{{ sid }}__item-text">{{ block.settings.text | escape }}</p>{%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Grimmie benefits",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Section title", "default": "Perché scegliere Alma" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#F1EBE6" },
+    { "type": "color", "id": "heading_color", "label": "Heading", "default": "#6E5F59" },
+    { "type": "color", "id": "text_color", "label": "Body text", "default": "#6E5F59" },
+    { "type": "color", "id": "accent_color", "label": "Icon color", "default": "#C99696" },
+    { "type": "color", "id": "border_color", "label": "Divider", "default": "#DDD2CA" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 44 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 44 }
+  ],
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "select", "id": "icon", "label": "Icon", "default": "order",
+          "options": [
+            { "value": "order", "label": "Organizer (order)" },
+            { "value": "pouch", "label": "Trousse / pouch" },
+            { "value": "bag", "label": "Bag" },
+            { "value": "droplet", "label": "Droplet" },
+            { "value": "suitcase", "label": "Suitcase" },
+            { "value": "airplane", "label": "Airplane" },
+            { "value": "sparkle", "label": "Sparkle" },
+            { "value": "flower", "label": "Flower" },
+            { "value": "bottle", "label": "Bottle" },
+            { "value": "mirror", "label": "Mirror" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "shield", "label": "Shield" }
+          ],
+          "info": "Used only if no custom icon image is uploaded below."
+        },
+        { "type": "image_picker", "id": "icon_image", "label": "Custom icon (optional)", "info": "Upload your own icon. Replaces the icon above. Use a small square PNG/SVG." },
+        { "type": "text", "id": "icon_alt", "label": "Custom icon alt text" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Ordine quotidiano" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Tutto al suo posto, ogni giorno." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grimmie benefits",
+      "category": "Grimmie",
+      "blocks": [
+        { "type": "benefit", "settings": { "icon": "order", "title": "Ordine quotidiano", "text": "Tutto al suo posto, ogni giorno." } },
+        { "type": "benefit", "settings": { "icon": "droplet", "title": "Materiali lavabili", "text": "Interno facile da pulire, sempre impeccabile." } },
+        { "type": "benefit", "settings": { "icon": "suitcase", "title": "Perfette in viaggio", "text": "Leggere, resistenti e salvaspazio." } },
+        { "type": "benefit", "settings": { "icon": "sparkle", "title": "Set coordinato", "text": "Due misure, un solo stile senza tempo." } }
+      ]
+    }
+  ],
+  "enabled_on": { "templates": ["product"] }
+}
+{% endschema %}

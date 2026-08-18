@@ -1,0 +1,365 @@
+{%- liquid
+  assign sid = section.id
+  assign s = section.settings
+-%}
+
+<style>
+  .grimmie-trk-{{ sid }} {
+    --gtrk-bg: {{ s.background_color }};
+    --gtrk-bg2: {{ s.hero_bg_color }};
+    --gtrk-blush: {{ s.blush_color }};
+    --gtrk-blush-light: {{ s.blush_light_color }};
+    --gtrk-heading: {{ s.heading_color }};
+    --gtrk-text: {{ s.text_color }};
+    --gtrk-border: {{ s.border_color }};
+    --gtrk-accent: {{ s.accent_color }};
+    --gtrk-btn-bg: {{ s.button_background_color }};
+    --gtrk-btn-text: {{ s.button_text_color }};
+    --gtrk-btn-hover: {{ s.button_hover_background_color }};
+
+    background-color: var(--gtrk-bg);
+    color: var(--gtrk-text);
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    font-family: var(--font-body--family);
+  }
+  .grimmie-trk-{{ sid }} * { box-sizing: border-box; }
+  .grimmie-trk-{{ sid }} [hidden] { display: none !important; }
+
+  .grimmie-trk-{{ sid }}__inner { max-width: 1180px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 56px); }
+
+  /* Hero */
+  .grimmie-trk-{{ sid }}__hero {
+    position: relative;
+    width: 100%;
+    min-height: clamp(280px, 30vw, 420px);
+    background-color: var(--gtrk-bg2);
+    overflow: hidden;
+    display: flex;
+  }
+  .grimmie-trk-{{ sid }}__hero-image { position: absolute; inset: 0; z-index: 0; }
+  .grimmie-trk-{{ sid }}__hero-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .grimmie-trk-{{ sid }}__hero-image svg.placeholder { width: 100%; height: 100%; color: var(--gtrk-blush); opacity: 0.4; }
+  .grimmie-trk-{{ sid }}__hero-content {
+    position: relative; z-index: 1; width: 100%; max-width: 1180px;
+    margin: 0 auto; padding: clamp(40px, 7vw, 80px) clamp(20px, 5vw, 56px);
+    display: flex; align-items: center; justify-content: flex-end;
+  }
+  .grimmie-trk-{{ sid }}__hero-text {
+    max-width: 520px;
+    display: flex; flex-direction: column; gap: clamp(10px, 1.4vw, 16px);
+    text-align: right;
+  }
+  .grimmie-trk-{{ sid }}__title {
+    font-family: var(--font-heading--family); font-style: var(--font-heading--style); font-weight: var(--font-heading--weight);
+    color: var(--gtrk-heading);
+    font-size: clamp(28px, 4vw, 52px);
+    line-height: 1.05; letter-spacing: -0.01em; margin: 0;
+  }
+  .grimmie-trk-{{ sid }}__lead {
+    font-size: clamp(13px, 1vw, 15px); line-height: 1.6;
+    color: var(--gtrk-text); margin: 0; max-width: 46ch;
+  }
+
+  /* Body */
+  .grimmie-trk-{{ sid }}__body { padding: clamp(40px, 5vw, 64px) 0; display: flex; flex-direction: column; gap: clamp(20px, 2.4vw, 28px); }
+
+  /* Card */
+  .grimmie-trk-{{ sid }}__card {
+    background-color: var(--gtrk-bg);
+    border: 1px solid var(--gtrk-border);
+    border-radius: 12px;
+    padding: clamp(24px, 3vw, 40px);
+  }
+
+  /* Help card */
+  .grimmie-trk-{{ sid }}__help {
+    display: flex; align-items: center; gap: clamp(16px, 2vw, 28px); flex-wrap: wrap;
+  }
+  .grimmie-trk-{{ sid }}__help-icon {
+    flex: 0 0 auto; width: 52px; height: 52px; border-radius: 50%;
+    background-color: var(--gtrk-blush-light);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gtrk-accent);
+  }
+  .grimmie-trk-{{ sid }}__help-icon svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .grimmie-trk-{{ sid }}__help-text { flex: 1 1 240px; min-width: 0; }
+  .grimmie-trk-{{ sid }}__help-title { margin: 0 0 4px; font-family: var(--font-heading--family); font-style: var(--font-heading--style); font-weight: var(--font-heading--weight); color: var(--gtrk-heading); font-size: clamp(16px, 1.4vw, 20px); }
+  .grimmie-trk-{{ sid }}__help-desc { margin: 0; font-size: clamp(13px, 0.95vw, 14.5px); line-height: 1.55; color: var(--gtrk-text); }
+  .grimmie-trk-{{ sid }}__help-cta {
+    flex: 0 0 auto; color: var(--gtrk-accent); text-decoration: underline;
+    text-underline-offset: 4px; text-decoration-thickness: 1px;
+    font-size: clamp(13px, 0.95vw, 14.5px); font-weight: 500; letter-spacing: 0.04em;
+  }
+  .grimmie-trk-{{ sid }}__help-cta:hover { color: var(--gtrk-btn-hover); }
+
+  /* ParcelPanel widget styling overrides — scoped to this section */
+  .grimmie-trk-{{ sid }} .pp-tracking-page,
+  .grimmie-trk-{{ sid }} .parcelpanel-tracking,
+  .grimmie-trk-{{ sid }} [class*="parcelpanel"] {
+    --pp-primary-color: var(--gtrk-blush);
+    --pp-accent-color: var(--gtrk-accent);
+    font-family: var(--font-body--family) !important;
+    color: var(--gtrk-text);
+  }
+  .grimmie-trk-{{ sid }} .pp-button,
+  .grimmie-trk-{{ sid }} [class*="parcelpanel"] button[type="submit"] {
+    background-color: var(--gtrk-btn-bg) !important;
+    color: var(--gtrk-btn-text) !important;
+    border-radius: 8px !important;
+    border: none !important;
+    padding: 14px 24px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+  }
+  .grimmie-trk-{{ sid }} .pp-button:hover,
+  .grimmie-trk-{{ sid }} [class*="parcelpanel"] button[type="submit"]:hover {
+    background-color: var(--gtrk-btn-hover) !important;
+  }
+
+  /* CTA card (default) */
+  .grimmie-trk-{{ sid }}__cta-card {
+    background-color: var(--gtrk-bg);
+    border: 1px solid var(--gtrk-border);
+    border-radius: 12px;
+    padding: clamp(28px, 4vw, 48px) clamp(20px, 3vw, 40px);
+    text-align: center;
+  }
+  .grimmie-trk-{{ sid }}__cta-eyebrow {
+    margin: 0 0 6px;
+    font-family: var(--font-body--family);
+    font-size: clamp(11px, 0.85vw, 13px); font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gtrk-accent);
+  }
+  .grimmie-trk-{{ sid }}__cta-title {
+    margin: 0 0 8px;
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style); font-weight: var(--font-heading--weight);
+    color: var(--gtrk-heading);
+    font-size: clamp(22px, 2.4vw, 30px); line-height: 1.15; letter-spacing: -0.005em;
+  }
+  .grimmie-trk-{{ sid }}__cta-text {
+    margin: 0 auto 22px; max-width: 56ch;
+    font-size: clamp(13px, 0.95vw, 14.5px); line-height: 1.55;
+    color: var(--gtrk-text);
+  }
+  .grimmie-trk-{{ sid }}__cta-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    background-color: var(--gtrk-btn-bg);
+    color: var(--gtrk-btn-text);
+    font-family: var(--font-body--family);
+    font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 16px clamp(28px, 4vw, 44px);
+    border-radius: 8px; text-decoration: none; border: none; cursor: pointer;
+    min-height: 50px; line-height: 1; transition: background-color 0.2s ease;
+    width: fit-content;
+  }
+  .grimmie-trk-{{ sid }}__cta-btn:hover { background-color: var(--gtrk-btn-hover); }
+  .grimmie-trk-{{ sid }}__cta-meta {
+    margin: 16px 0 0; font-size: clamp(12px, 0.85vw, 13.5px);
+    color: var(--gtrk-text); opacity: 0.75;
+  }
+
+  /* Embedded ParcelPanel proxy iframe (opt-in mode) */
+  .grimmie-trk-{{ sid }}__frame-wrap {
+    position: relative;
+    width: 100%;
+    background-color: var(--gtrk-bg);
+    border: 1px solid var(--gtrk-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .grimmie-trk-{{ sid }}__frame {
+    width: 100%;
+    min-height: {{ s.iframe_min_height | default: 1100 }}px;
+    height: {{ s.iframe_min_height | default: 1100 }}px;
+    border: 0;
+    display: block;
+    background-color: var(--gtrk-bg);
+  }
+  .grimmie-trk-{{ sid }}__frame-loading {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gtrk-text); font-size: clamp(13px, 1vw, 14.5px);
+    background-color: var(--gtrk-bg);
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  .grimmie-trk-{{ sid }}__frame-loading.is-hidden { opacity: 0; }
+
+  /* Empty-state when no widget is configured */
+  .grimmie-trk-{{ sid }}__placeholder {
+    border: 1px dashed var(--gtrk-border);
+    border-radius: 12px;
+    padding: clamp(32px, 4vw, 56px) clamp(24px, 3vw, 40px);
+    text-align: center;
+    color: var(--gtrk-text);
+    background-color: var(--gtrk-bg);
+  }
+  .grimmie-trk-{{ sid }}__placeholder p { margin: 0 0 8px; }
+  .grimmie-trk-{{ sid }}__placeholder strong { color: var(--gtrk-heading); }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .grimmie-trk-{{ sid }}__hero { min-height: clamp(240px, 60vw, 360px); align-items: flex-end; }
+    .grimmie-trk-{{ sid }}__hero-content { padding: 24px 20px; justify-content: flex-start; }
+    .grimmie-trk-{{ sid }}__hero-text { text-align: left; max-width: 100%; }
+    .grimmie-trk-{{ sid }}__help { gap: 14px; }
+    .grimmie-trk-{{ sid }}__help-cta { flex: 1 1 100%; text-align: left; }
+  }
+</style>
+
+<section class="grimmie-trk-{{ sid }}" aria-label="Traccia il tuo ordine">
+
+  {%- if s.show_hero -%}
+    <div class="grimmie-trk-{{ sid }}__hero">
+      <div class="grimmie-trk-{{ sid }}__hero-image">
+        {%- if s.hero_image != blank -%}
+          {{ s.hero_image | image_url: width: 2400 | image_tag: alt: s.hero_image_alt, loading: 'eager', widths: '720,960,1200,1600,2000,2400', sizes: '100vw' }}
+        {%- else -%}
+          <svg class="placeholder" viewBox="0 0 160 60" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="160" height="60" fill="currentColor" opacity="0.4"/></svg>
+        {%- endif -%}
+      </div>
+      <div class="grimmie-trk-{{ sid }}__hero-content">
+        <div class="grimmie-trk-{{ sid }}__hero-text">
+          {%- if s.hero_title != blank -%}<h1 class="grimmie-trk-{{ sid }}__title">{{ s.hero_title | escape }}</h1>{%- endif -%}
+          {%- if s.hero_subtitle != blank -%}<p class="grimmie-trk-{{ sid }}__lead">{{ s.hero_subtitle | escape }}</p>{%- endif -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="grimmie-trk-{{ sid }}__inner">
+    <div class="grimmie-trk-{{ sid }}__body">
+
+      {%- comment -%}
+        Tracking widget. Priority:
+        1) An app block added in the editor (preferred — fully native styling).
+        2) Iframe embed (opt-in via 'use_iframe' setting — only works if ParcelPanel allows framing).
+        3) CTA card linking to the ParcelPanel proxy URL (default — robust, no embed issues).
+      {%- endcomment -%}
+      {%- assign has_app_block = false -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}
+          {%- assign has_app_block = true -%}
+          <div class="grimmie-trk-{{ sid }}__card" {{ block.shopify_attributes }}>
+            {% render block %}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if has_app_block == false -%}
+        {%- if s.use_iframe and s.embed_url != blank -%}
+          <div class="grimmie-trk-{{ sid }}__frame-wrap">
+            <p class="grimmie-trk-{{ sid }}__frame-loading" data-gtrk-frame-loading>Caricamento tracciamento…</p>
+            <iframe
+              class="grimmie-trk-{{ sid }}__frame"
+              src="{{ s.embed_url }}"
+              title="Tracciamento ordine"
+              loading="lazy"
+              referrerpolicy="same-origin"
+              data-gtrk-frame
+            ></iframe>
+          </div>
+        {%- elsif s.embed_url != blank -%}
+          <div class="grimmie-trk-{{ sid }}__cta-card">
+            {%- if s.cta_eyebrow != blank -%}<p class="grimmie-trk-{{ sid }}__cta-eyebrow">{{ s.cta_eyebrow | escape }}</p>{%- endif -%}
+            {%- if s.cta_title != blank -%}<h2 class="grimmie-trk-{{ sid }}__cta-title">{{ s.cta_title | escape }}</h2>{%- endif -%}
+            {%- if s.cta_text != blank -%}<p class="grimmie-trk-{{ sid }}__cta-text">{{ s.cta_text | escape }}</p>{%- endif -%}
+            <a class="grimmie-trk-{{ sid }}__cta-btn" href="{{ s.embed_url }}">{{ s.cta_button_text | default: 'Traccia spedizione' | escape }}</a>
+            {%- if s.cta_meta != blank -%}<p class="grimmie-trk-{{ sid }}__cta-meta">{{ s.cta_meta | escape }}</p>{%- endif -%}
+          </div>
+        {%- else -%}
+          <div class="grimmie-trk-{{ sid }}__placeholder">
+            <p><strong>Aggiungi il widget di tracking</strong></p>
+            <p>Apri il Theme Editor su questa pagina e aggiungi il blocco app <em>ParcelPanel</em> alla section, oppure inserisci l'URL del widget nel campo <em>Embed URL</em>.</p>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if s.show_help_card -%}
+        <div class="grimmie-trk-{{ sid }}__card grimmie-trk-{{ sid }}__help">
+          <span class="grimmie-trk-{{ sid }}__help-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 14 V11 a8 8 0 0 1 16 0 V14"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/><path d="M17 20 a4 4 0 0 1 -4 4 h-1"/></svg>
+          </span>
+          <div class="grimmie-trk-{{ sid }}__help-text">
+            <p class="grimmie-trk-{{ sid }}__help-title">{{ s.help_title | escape }}</p>
+            <p class="grimmie-trk-{{ sid }}__help-desc">{{ s.help_text | escape }}</p>
+          </div>
+          <a class="grimmie-trk-{{ sid }}__help-cta" href="{{ s.help_cta_link }}">{{ s.help_cta_text | escape }}</a>
+        </div>
+      {%- endif -%}
+
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var root = document.currentScript.previousElementSibling;
+  if (!root) return;
+  var frame = root.querySelector('[data-gtrk-frame]');
+  var loader = root.querySelector('[data-gtrk-frame-loading]');
+  if (frame && loader) {
+    var hide = function(){ loader.classList.add('is-hidden'); setTimeout(function(){ loader.style.display = 'none'; }, 400); };
+    if (frame.contentDocument && frame.contentDocument.readyState === 'complete') hide();
+    frame.addEventListener('load', hide, { once: true });
+    // Failsafe: hide loader after 6s even if load event doesn't fire
+    setTimeout(hide, 6000);
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Grimmie order tracking",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "checkbox",     "id": "show_hero",      "label": "Show hero",                     "default": true },
+    { "type": "image_picker", "id": "hero_image",     "label": "Hero image" },
+    { "type": "text",         "id": "hero_image_alt", "label": "Hero image alt text",           "default": "Grimmie Alma pouches" },
+    { "type": "text",         "id": "hero_title",     "label": "Hero title",                    "default": "Traccia il tuo ordine" },
+    { "type": "text",         "id": "hero_subtitle",  "label": "Hero subtitle",                 "default": "Segui il percorso del tuo pacco, fino a destinazione." },
+
+    { "type": "header", "content": "Tracking widget" },
+    { "type": "text",     "id": "embed_url",         "label": "ParcelPanel URL", "default": "/apps/parcelpanel", "info": "Where the 'Track' button leads. Leave empty to hide the CTA card and use an app block instead." },
+    { "type": "text",     "id": "cta_eyebrow",       "label": "Eyebrow",                       "default": "Tracciamento" },
+    { "type": "text",     "id": "cta_title",         "label": "Title",                         "default": "Dove si trova il mio ordine?" },
+    { "type": "textarea", "id": "cta_text",          "label": "Subtext",                       "default": "Clicca qui sotto per aprire il tracker e seguire il percorso del tuo pacco, fino a destinazione." },
+    { "type": "text",     "id": "cta_button_text",   "label": "Button text",                   "default": "Traccia spedizione" },
+    { "type": "text",     "id": "cta_meta",          "label": "Footnote (optional)",           "default": "Servirà il numero ordine e l'email utilizzati al momento dell'acquisto." },
+    { "type": "checkbox", "id": "use_iframe",        "label": "Try to embed inline (iframe)",  "info": "Off by default — most tracking apps refuse iframes for security. Turn on only if your ParcelPanel plan supports embedding.", "default": false },
+    { "type": "range",    "id": "iframe_min_height", "label": "Iframe min height",             "min": 600, "max": 1600, "step": 50, "unit": "px", "default": 1100 },
+
+    { "type": "header", "content": "Help card" },
+    { "type": "checkbox", "id": "show_help_card",  "label": "Show help card",          "default": true },
+    { "type": "text",     "id": "help_title",      "label": "Title",                   "default": "Hai bisogno di aiuto?" },
+    { "type": "textarea", "id": "help_text",       "label": "Text",                    "default": "Il nostro servizio clienti è disponibile dal lunedì al venerdì, dalle 9:00 alle 18:00." },
+    { "type": "text",     "id": "help_cta_text",   "label": "CTA text",                "default": "Contattaci" },
+    { "type": "text",     "id": "help_cta_link",   "label": "CTA link (URL, mailto: o tel:)", "default": "mailto:info@grimmie.co" },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color",        "label": "Page background",         "default": "#F7F1EE" },
+    { "type": "color", "id": "hero_bg_color",           "label": "Hero background",         "default": "#F1EBE6" },
+    { "type": "color", "id": "blush_color",             "label": "Blush",                   "default": "#EACBC8" },
+    { "type": "color", "id": "blush_light_color",       "label": "Soft blush",              "default": "#F7EDEB" },
+    { "type": "color", "id": "heading_color",           "label": "Heading",                 "default": "#6E5F59" },
+    { "type": "color", "id": "text_color",              "label": "Body text",               "default": "#6E5F59" },
+    { "type": "color", "id": "border_color",            "label": "Borders",                 "default": "#DDD2CA" },
+    { "type": "color", "id": "accent_color",            "label": "Accent",                  "default": "#C99696" },
+    { "type": "color", "id": "button_background_color", "label": "Widget button bg",        "default": "#EACBC8" },
+    { "type": "color", "id": "button_text_color",       "label": "Widget button text",      "default": "#6E5F59" },
+    { "type": "color", "id": "button_hover_background_color", "label": "Widget button hover", "default": "#DFAFB3" }
+  ],
+  "blocks": [
+    { "type": "@app" }
+  ],
+  "presets": [
+    { "name": "Grimmie order tracking", "category": "Grimmie" }
+  ]
+}
+{% endschema %}

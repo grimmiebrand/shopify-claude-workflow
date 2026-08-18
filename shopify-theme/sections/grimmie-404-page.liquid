@@ -1,0 +1,466 @@
+{%- doc -%}
+  Grimmie - dedicated 404 page section.
+  Premium, editorial empty state. Header / announcement bar / footer / trust strip
+  remain global (rendered by the theme layout) around this content.
+  Everything below is editable from the Theme Editor (no code needed).
+{%- enddoc -%}
+
+{%- liquid
+  assign align = section.settings.alignment | default: 'center'
+  assign align_items = 'center'
+  if align == 'left'
+    assign align_items = 'flex-start'
+  elsif align == 'right'
+    assign align_items = 'flex-end'
+  endif
+  assign btn_link = section.settings.button_link | default: routes.root_url
+-%}
+
+{%- capture sparkle_svg -%}
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 0c.7 6.3 5.4 11 12 12-6.6 1-11.3 5.7-12 12-.7-6.3-5.4-11-12-12C6.6 11 11.3 6.3 12 0Z"/></svg>
+{%- endcapture -%}
+
+<div
+  class="grimmie-404"
+  style="
+    --g404-bg: {{ section.settings.bg_color }};
+    --g404-number-color: {{ section.settings.number_color }};
+    --g404-title-color: {{ section.settings.title_color }};
+    --g404-text-color: {{ section.settings.text_color }};
+    --g404-btn-bg: {{ section.settings.button_bg }};
+    --g404-btn-text: {{ section.settings.button_text_color }};
+    --g404-btn-hover: {{ section.settings.button_hover_bg }};
+    --g404-sparkle-color: {{ section.settings.sparkle_color }};
+    --g404-sparkle-size: {{ section.settings.sparkle_size }}px;
+    --g404-maxw: {{ section.settings.content_max_width }}px;
+    --g404-minh: {{ section.settings.min_height }}vh;
+    --g404-gap: {{ section.settings.gap }}px;
+    --g404-pt: {{ section.settings.padding_top }}px;
+    --g404-pb: {{ section.settings.padding_bottom }}px;
+    --g404-num-d: {{ section.settings.number_size_desktop }}px;
+    --g404-num-m: {{ section.settings.number_size_mobile }}px;
+    --g404-title-d: {{ section.settings.title_size_desktop }}px;
+    --g404-title-m: {{ section.settings.title_size_mobile }}px;
+    --g404-body: {{ section.settings.body_size }}px;
+    --g404-btn-size: {{ section.settings.button_text_size }}px;
+    --g404-align: {{ align }};
+    --g404-align-items: {{ align_items }};
+  "
+>
+  <div class="g404-inner">
+    <div class="g404-top">
+      {%- if section.settings.show_sparkles -%}
+        <span class="g404-sparkle g404-sparkle--1">{{ sparkle_svg }}</span>
+        <span class="g404-sparkle g404-sparkle--2">{{ sparkle_svg }}</span>
+        <span class="g404-sparkle g404-sparkle--3">{{ sparkle_svg }}</span>
+      {%- endif -%}
+      <div class="g404-number">{{ section.settings.number_text }}</div>
+    </div>
+
+    {%- if section.settings.title != blank -%}
+      <h1 class="g404-title">{{ section.settings.title }}</h1>
+    {%- endif -%}
+
+    {%- if section.settings.body_text != blank -%}
+      <div class="g404-text">{{ section.settings.body_text }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank -%}
+      <a class="g404-btn" href="{{ btn_link }}">{{ section.settings.button_label }}</a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .grimmie-404 {
+    background: var(--g404-bg);
+    min-height: var(--g404-minh);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--g404-pt) var(--page-margin, 20px) var(--g404-pb);
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .g404-inner {
+    width: 100%;
+    max-width: var(--g404-maxw);
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: var(--g404-align-items);
+    text-align: var(--g404-align);
+    gap: var(--g404-gap);
+  }
+
+  .g404-top {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .g404-number {
+    font-family: var(--font-heading--family) !important;
+    font-weight: var(--font-heading--weight);
+    color: var(--g404-number-color);
+    font-size: var(--g404-num-d);
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+
+  .g404-title {
+    font-family: var(--font-heading--family) !important;
+    font-weight: var(--font-heading--weight);
+    color: var(--g404-title-color);
+    font-size: var(--g404-title-d);
+    line-height: 1.15;
+    text-transform: none;
+    letter-spacing: 0;
+    margin: 0;
+    max-width: 18ch;
+  }
+
+  .g404-text {
+    font-family: var(--font-body--family);
+    color: var(--g404-text-color);
+    font-size: var(--g404-body);
+    line-height: 1.6;
+    max-width: 48ch;
+  }
+
+  .g404-text p {
+    margin: 0;
+  }
+
+  .g404-text p + p {
+    margin-top: 0.25em;
+  }
+
+  .g404-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    max-width: 100%;
+    min-height: 54px;
+    margin-top: 8px;
+    padding: 0 32px;
+    font-family: var(--font-body--family);
+    font-size: var(--g404-btn-size);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--g404-btn-text);
+    background: var(--g404-btn-bg);
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .g404-btn:hover {
+    background: var(--g404-btn-hover);
+    color: #6e5f59;
+  }
+
+  .g404-btn:focus-visible {
+    outline: 2px solid #6e5f59;
+    outline-offset: 3px;
+  }
+
+  /* Decorative sparkles around the number */
+  .g404-sparkle {
+    position: absolute;
+    width: var(--g404-sparkle-size);
+    height: var(--g404-sparkle-size);
+    color: var(--g404-sparkle-color);
+    pointer-events: none;
+  }
+
+  .g404-sparkle svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .g404-sparkle--1 {
+    left: -10%;
+    top: 8%;
+    transform: scale(0.6);
+  }
+
+  .g404-sparkle--2 {
+    left: -4%;
+    bottom: 4%;
+    transform: scale(0.95);
+  }
+
+  .g404-sparkle--3 {
+    right: -8%;
+    top: 24%;
+    transform: scale(0.78);
+  }
+
+  @media screen and (max-width: 749px) {
+    .g404-number {
+      font-size: var(--g404-num-m);
+    }
+
+    .g404-title {
+      font-size: var(--g404-title-m);
+    }
+
+    .g404-btn {
+      width: 100%;
+    }
+
+    .g404-sparkle--1 {
+      left: -2%;
+    }
+
+    .g404-sparkle--3 {
+      right: -2%;
+    }
+  }
+
+  @media screen and (max-width: 389px) {
+    .g404-sparkle {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "404",
+  "tag": "section",
+  "class": "grimmie-404-section",
+  "enabled_on": { "templates": ["404"] },
+  "settings": [
+    { "type": "header", "content": "Contenuto" },
+    {
+      "type": "text",
+      "id": "number_text",
+      "label": "Numero errore",
+      "default": "404"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titolo",
+      "default": "Questa pagina è andata in vacanza."
+    },
+    {
+      "type": "richtext",
+      "id": "body_text",
+      "label": "Testo",
+      "default": "<p>Non preoccuparti, capita anche alle cose più belle.<br>Ritorniamo con te alla tua routine.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Testo pulsante",
+      "default": "TORNA ALLA HOME"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link pulsante",
+      "info": "Lascia vuoto per puntare alla home."
+    },
+    { "type": "header", "content": "Decorazioni" },
+    {
+      "type": "checkbox",
+      "id": "show_sparkles",
+      "label": "Mostra decorazioni",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "sparkle_color",
+      "label": "Colore decorazioni",
+      "default": "#EACBC8"
+    },
+    {
+      "type": "range",
+      "id": "sparkle_size",
+      "label": "Dimensione decorazioni",
+      "min": 12,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 34
+    },
+    { "type": "header", "content": "Colori" },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Colore sfondo",
+      "default": "#F7F1EE"
+    },
+    {
+      "type": "color",
+      "id": "number_color",
+      "label": "Colore numero",
+      "default": "#6E5F59"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Colore titolo",
+      "default": "#6E5F59"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Colore testo",
+      "default": "#6E5F59"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Colore sfondo pulsante",
+      "default": "#EACBC8"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg",
+      "label": "Colore pulsante (hover)",
+      "default": "#DFAFB3"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Colore testo pulsante",
+      "default": "#6E5F59"
+    },
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Allineamento",
+      "options": [
+        { "value": "left", "label": "Sinistra" },
+        { "value": "center", "label": "Centro" },
+        { "value": "right", "label": "Destra" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Larghezza contenuto",
+      "min": 400,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "default": 720
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "label": "Altezza minima sezione",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Spaziatura tra gli elementi",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Spaziatura superiore",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Spaziatura inferiore",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    { "type": "header", "content": "Tipografia" },
+    {
+      "type": "range",
+      "id": "number_size_desktop",
+      "label": "Dimensione numero (desktop)",
+      "min": 80,
+      "max": 220,
+      "step": 2,
+      "unit": "px",
+      "default": 172
+    },
+    {
+      "type": "range",
+      "id": "number_size_mobile",
+      "label": "Dimensione numero (mobile)",
+      "min": 60,
+      "max": 140,
+      "step": 2,
+      "unit": "px",
+      "default": 108
+    },
+    {
+      "type": "range",
+      "id": "title_size_desktop",
+      "label": "Dimensione titolo (desktop)",
+      "min": 24,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Dimensione titolo (mobile)",
+      "min": 14,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Dimensione testo",
+      "min": 9,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "label": "Dimensione testo pulsante",
+      "min": 11,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    }
+  ],
+  "presets": [
+    { "name": "404" }
+  ]
+}
+{% endschema %}
